@@ -3,8 +3,8 @@ document.addEventListener('click', event => {
 	if(href && href.substr(0, 4) === 'http' || href.substr(0, 4) === '//')
 	{
 		window.open(href);
+		event.preventDefault();
 	}
-	event.preventDefault();
 });
 
 document.addEventListener('DOMContentLoaded', event => {
