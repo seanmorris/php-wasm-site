@@ -1,3 +1,10 @@
+function flicker(element, timeout)
+{
+	if(element.classList.contains('flickering')) return;
+	element.classList.add('flickering');
+	setTimeout(() => element.classList.remove('flickering'), timeout)
+}
+
 document.addEventListener('click', event => {
 	let target = event.target;
 	let href;
@@ -6,16 +13,31 @@ document.addEventListener('click', event => {
 	{
 		href = target.getAttribute('href');
 
-		if(href && (href.substr(0, 4) === 'http' || href.substr(0, 4) === '//'))
+		if(href)
 		{
-			window.open(href);
-			event.preventDefault();
+			const url = new URL(href, location);
+
+			if((href.substr(0, 4) === 'http' || href.substr(0, 4) === '//'))
+			{
+				window.open(href);
+				event.preventDefault();
+				return;
+			}
+
+			if(url.hash)
+			{
+				const element = document.getElementById(url.hash.substr(1));
+
+				if(element)
+				{
+					flicker(element, 200);
+				}
+			}
 		}
 
 		target = target.parentNode;
 
 	} while(target && target.getAttribute && !href);
-
 });
 
 document.addEventListener('DOMContentLoaded', event => {

@@ -77,28 +77,25 @@ $endif$
 	</section>
 
 	<footer class="footer">
-		<div class="container">
-			<div class="row">
-			<div class="col-md-6">
-				<h3>About PHP WASM</h3>
-			</div>
-			<div class="col-md-3">
-				<h3>Resources</h3>
-				<ul>
-					<li><a href="https://github.com/seanmorris/php-wasm/issues">Issue Tracker</a></li>
-				<li><a href="https://github.com/seanmorris/php-wasm/discussions">GitHub Discussions</a></li>
-				</ul>
-			</div>
-			<div class="col-md-3">
-				<h3>Contact</h3>
-				<p><a href="https://discord.com/invite/j8VZzju7gJ">discord</a>|<a href="https://github.com/seanmorris/php-wasm">github</a></p>
-			</div>
-			</div>
-			<div class="row">
-			<div class="col-md-12">
-				<p>&copy; 2024 Sean Morris</p>
-			</div>
-			</div>
-		</div>
+		<h3>PHP WASM</h3>
+
+		<h4>Resources</h4>
+		<ul>
+			<li><a href="https://github.com/seanmorris/php-wasm/issues">Issue Tracker</a></li>
+			<li><a href="https://github.com/seanmorris/php-wasm/discussions">GitHub Discussions</a></li>
+		</ul>
+
+		<h4>Contact</h4>
+		<ul>
+			<li><a href = "https://github.com/sponsors/seanmorris">Sponsor</a></li>
+			<li><a href="https://github.com/seanmorris/php-wasm">Github</a></li>
+			<li><a href="https://discord.com/invite/j8VZzju7gJ">Discord</a></li>
+		</ul>
+
+		<h4>About</h4>
+		<p><a href="http://localhost:8081/LICENSE.html">License</a></p>
+		<p>&copy; 2024 Sean Morris</p>
+		<p>This site is rendered with PHP, Pandoc, & Bash.</p>
+
 	</footer>
 </body>

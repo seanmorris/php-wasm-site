@@ -51,25 +51,12 @@ ul, strong {
 
 h1 {
 	font-size: 36pt;
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
 }
 
 article > h1:first-child {
 	margin-top: 0;
-}
-
-.hero h1 {
-	font-family: 'Corbel';
-	font-weight: bold;
-	font-size: 68pt;
-	margin-top: 4rem;
-	margin-bottom: 2rem;
-}
-
-.hero p {
-	margin: 1rem;
-	max-width: 35rem;
-	text-align: center;
-	font-weight: bold;
 }
 
 a.button {
@@ -79,26 +66,6 @@ a.button {
 	width: 8rem;
 	text-align: center;
 	margin: 1rem;
-}
-
-.hero a.cta.button {
-	background: linear-gradient(0.15turn, #3601a9, #8216de);
-	padding: 1.25rem;
-	font-weight: bold;
-}
-
-.sub-hero {
-	max-width: 50%;
-}
-
-.sub-hero ul {
-	list-style: none;
-	padding: 0;
-}
-
-.sub-hero ul li:before {
-	content: "\B7";
-	padding-right: 0.75rem;
 }
 
 a {
@@ -125,4 +92,13 @@ aside img.downstream-logo {
 
 .centered {
 	text-align: center;
+}
+
+.flickering {
+	animation: flicker 50ms linear infinite;
+}
+
+@keyframes flicker {
+	0% { opacity: 1; }
+	100% { opacity: 0; }
 }

@@ -43,7 +43,7 @@ function loop($name)
 			continue;
 		}
 
-		?><li><a href = "<?=preg_replace(['/^.\/pages/', '/md$/'], ['', 'html'], $pathname);?>"><?=$title?></a></li>
+		?><li><a href = "<?=preg_replace(['/^.\/pages/', '/\.\w+$/'], ['', '.html'], $pathname);?>"><?=$title?></a></li>
 <?php
 
 	} ?></ul></details><?php
@@ -91,7 +91,7 @@ foreach(new \DirectoryIterator('./pages') as $entry)
 		continue;
 	}
 
-	?><li><a href = "<?=preg_replace(['/^.\/pages/', '/md$/'], ['', 'html'], $pathname);?>"><?=$title?></a></li>
+	?><li><a href = "<?=preg_replace(['/^.\/pages/', '/\.\w+$/'], ['', '.html'], $pathname);?>"><?=$title?></a></li>
 <?php
 }
 ?></ul>
