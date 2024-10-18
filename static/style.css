@@ -5,6 +5,7 @@ html, body {
 
 html {
 	height: 100%;
+	overflow-y: scroll;
 }
 
 body {
@@ -101,7 +102,12 @@ a.button {
 }
 
 a {
+	color: #cc5de3;
 	color: #CAC;
+}
+
+a:hover {
+	color: #FFF;
 }
 
 div.sourceCode {

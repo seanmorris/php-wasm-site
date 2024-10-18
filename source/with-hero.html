@@ -7,6 +7,33 @@
 	<style>@import url('/style.css'); </style>
 	<style>@import url('/article.css'); </style>
 	<style>@import url('/pandoc.css'); </style>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+$for(author-meta)$
+	<meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+	<meta name="dcterms.date" content="$date-meta$" />
+$endif$
+$if(keywords)$
+	<meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+$endif$
+$if(description-meta)$
+	<meta name="description" content="$description-meta$" />
+$endif$
+	<title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+	<style>
+		$styles.html()$
+	</style>
+$for(css)$
+	<link rel="stylesheet" href="$css$" />
+$endfor$
+$for(header-includes)$
+	$header-includes$
+$endfor$
+$if(math)$
+	$math$
+$endif$
 </head>
 
 <body>
@@ -27,55 +54,67 @@
 					<li><a href = "https://github.com/sponsors/seanmorris" class = "cta button">Donate</a></li>
 				</ul>
 			</nav>
-			<div class = "page-rule">
-				<div class = "hero">
-					<h1>Deploy in One Click.</h1>
-					<p>Deploy PHP apps client-side in one click, run PHP in cloudflare with full access to D1 SQL, or write desktop apps with GTK.</p>
-					<a href = "/getting-started/README.html" class = "cta button">Learn More</a>
-				</div>
-
-				<div class = "sub-hero">
-					<strong>Php-Wasm runs anywhere Javascript+WASM is supported.</strong>
-
-					<ul>
-						<li>Supports NodeJS & Browsers.</li>
-						<li>Full access to Javascript APIs from PHP</li>
-						<li>Works with with Node GTK.</li>
-						<li>Supports SQLite & PostgreSQL.</li>
-						<li>Powerful enough to run Drupal, Laravel & WordPress.</li>
-						<li>Works with CloudFlare & D1 SQL via PDO.</li>
-					</ul>
-
-					<p>Php-Wasm is currently powering cutting-edge client side php apps like wordpress-playground, drupal-playground & playwithlaravel.</p>
-				</div>
+			
+			<div class = "hero">
+				<h1>Deploy in One Click.</h1>
+				<p>Deploy PHP apps client-side in one click, run PHP in cloudflare with full access to D1 SQL, or write desktop apps with GTK.</p>
+				<a href = "/getting-started/README.html" class = "cta button">Learn More</a>
 			</div>
+
+			<div class = "sub-hero">
+				<strong>Php-Wasm runs anywhere Javascript+WASM is supported.</strong>
+
+				<ul>
+					<li>Supports NodeJS & Browsers.</li>
+					<li>Full access to Javascript APIs from PHP</li>
+					<li>Works with with Node GTK.</li>
+					<li>Supports SQLite & PostgreSQL.</li>
+					<li>Powerful enough to run Drupal, Laravel & WordPress.</li>
+					<li>Works with CloudFlare & D1 SQL via PDO.</li>
+				</ul>
+
+				<p>Php-Wasm is currently powering cutting-edge client side php apps like wordpress-playground, drupal-playground & playwithlaravel.</p>
+			</div>
+
 		</div>
 	</section>
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-			<article>$body$</article>
+						<article>$body$</article>
+			$if(toc)$
+			<nav class = "table-of-contents">
+				<span>on this page:</span>
+				${toc}
+				<span><a href = "#">top</a></span>
+			</nav>
+			$endif$
 		</div>
 	</section>
 
-	<footer>
-		<div>
-			<a href = "#">link</a><br />
-			<a href = "#">link</a><br />
-			<a href = "#">link</a><br />
-			<a href = "#">link</a><br />
-		</div>
-		<div>
-			<a href = "#">link</a><br />
-			<a href = "#">link</a><br />
-			<a href = "#">link</a><br />
-			<a href = "#">link</a><br />
-		</div>
-		<div>
-			<a href = "#">link</a><br />
-			<a href = "#">link</a><br />
-			<img src = "/sean-icon.png"><br />
-			Design &copy; 2024 Sean Morris<br />
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+			<div class="col-md-6">
+				<h3>About PHP WASM</h3>
+			</div>
+			<div class="col-md-3">
+				<h3>Resources</h3>
+				<ul>
+					<li><a href="https://github.com/seanmorris/php-wasm/issues">Issue Tracker</a></li>
+				<li><a href="https://github.com/seanmorris/php-wasm/discussions">GitHub Discussions</a></li>
+				</ul>
+			</div>
+			<div class="col-md-3">
+				<h3>Contact</h3>
+				<p><a href="https://discord.com/invite/j8VZzju7gJ">discord</a>|<a href="https://github.com/seanmorris/php-wasm">github</a></p>
+			</div>
+			</div>
+			<div class="row">
+			<div class="col-md-12">
+				<p>&copy; 2024 Sean Morris</p>
+			</div>
+			</div>
 		</div>
 	</footer>
 </body>
