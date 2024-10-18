@@ -109,3 +109,14 @@ div.sourceCode {
 	padding: 1rem;
 	margin-bottom: 2rem !important;
 }
+
+aside img.downstream-logo {
+	display: block;
+	height: 12rem;
+	max-width: 9rem;
+	margin: auto;
+}
+
+.centered {
+	text-align: center;
+}

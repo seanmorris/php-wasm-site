@@ -19,7 +19,7 @@
 				<ul class = "links">
 					<li><a href = "/index.html">Home</a></li>
 					<li><a href = "/getting-started/README.html">Docs</a></li>
-					<li><a href = "#">Contact</a></li>
+					<li><a href = "/contact.html">Contact</a></li>
 					<li>
 						<a href = "https://github.com/seanmorris/php-wasm">Github</a>
 						<a href = "https://github.com/seanmorris/php-wasm"><img src = "/github-icon.png"></a>
