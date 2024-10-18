@@ -1,0 +1,111 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	color: white;
+	background-color: #00081d;
+	font-family: 'Noto Sans';
+	font-size: 1.125rem;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+iframe.video {
+	width: 100%;
+	min-height: 32rem;
+}
+
+div.page-rule {
+	max-width: 1400px;
+	margin: auto;
+}
+
+div.wide-rule {
+	max-width: 1600px;
+	margin: auto;
+}
+
+div.narrow-rule {
+	max-width: 1200px;
+	margin: auto;
+}
+
+p {
+	margin-block-start: 0.5rem;
+	margin-block-end: 0.5rem;
+}
+
+ul, strong {
+	display: block;
+	margin-block-start: 1rem;
+	margin-block-end: 0.5rem;
+}
+
+h1 {
+	font-size: 36pt;
+}
+
+article > h1:first-child {
+	margin-top: 0;
+}
+
+.hero h1 {
+	font-family: 'Corbel';
+	font-weight: bold;
+	font-size: 68pt;
+	margin-top: 4rem;
+	margin-bottom: 2rem;
+}
+
+.hero p {
+	margin: 1rem;
+	max-width: 35rem;
+	text-align: center;
+	font-weight: bold;
+}
+
+a.button {
+	color: inherit;
+	text-decoration: inherit;
+	border-radius: 50px;
+	width: 8rem;
+	text-align: center;
+	margin: 1rem;
+}
+
+.hero a.cta.button {
+	background: linear-gradient(0.15turn, #3601a9, #8216de);
+	padding: 1.25rem;
+	font-weight: bold;
+}
+
+.sub-hero {
+	max-width: 50%;
+}
+
+.sub-hero ul {
+	list-style: none;
+	padding: 0;
+}
+
+.sub-hero ul li:before {
+	content: "\B7";
+	padding-right: 0.75rem;
+}
+
+a {
+	color: #CAC;
+}
+
+div.sourceCode {
+	border-radius: 5px;
+	padding: 1rem;
+	margin-bottom: 2rem !important;
+}

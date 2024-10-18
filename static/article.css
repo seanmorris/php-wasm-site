@@ -1,0 +1,149 @@
+section.below-fold {
+	flex: 1;
+}
+
+section.below-fold div.page-rule {
+	padding: 2rem;
+	display: flex;
+	flex-direction: row;
+}
+section.below-fold div.page-rule > article {
+	flex: 1 1 0;
+    min-width: 0;
+}
+
+section.below-fold a {
+	text-decoration: none;
+}
+
+section.below-fold nav {
+	position: sticky;
+	align-self: flex-start;
+	height: auto;
+	max-height: 100vh;
+	overflow-y: auto;
+	top: 10px;
+	box-sizing: border-box;
+	padding: 0rem;
+	padding-bottom: 2rem;
+	font-size: 0.8rem;
+	width: 10rem;
+}
+
+section.below-fold nav::-webkit-scrollbar {
+	display: none;
+}
+
+section.below-fold nav.main {
+	margin-right: 1rem;
+	border-right: 1px solid #FFFFFF50;
+	padding-right: 0.5rem;
+}
+
+section.below-fold nav.table-of-contents {
+	margin-left: 1rem;
+	border-left: 1px solid #FFFFFF50;
+}
+
+section.below-fold nav > span {
+	padding: 0.25rem;
+	padding-left: 0.5rem;
+	display: block;
+	color: #FFFFFF80;
+}
+
+section.below-fold nav summary a,
+section.below-fold nav.table-of-contents a {
+	color: #FFFFFFA0;
+	/* padding-left: 0.5em; */
+}
+
+section.below-fold nav a:hover,
+section.below-fold nav summary:hover {
+	color: #FFFFFFFF;
+}
+
+section.below-fold nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+section.below-fold nav.main > ul {
+	margin-left: 0 !important;
+}
+
+section.below-fold nav ul ul {
+	border-left: 1px solid #FFFFFF40;
+	padding-left: 0.25rem;
+}
+
+section.below-fold nav summary,
+section.below-fold nav ul li a {
+	display: block;
+	padding: 0;
+	padding: 0.25rem;
+}
+
+section.below-fold nav.main ul,
+section.below-fold nav.table-of-contents ul {
+	margin-left: 0.25rem;
+}
+
+section.below-fold details > summary {
+	user-select: none;
+}
+
+section.below-fold aside {
+	/* width: 40%; */
+	padding-left: 0.5rem;
+	margin-left: 0.5rem;
+	float: right;
+	color: white;
+}
+
+section.below-fold p {
+	margin-block-end: 1.5rem;
+}
+
+section.below-fold aside p {
+	color: #cc5de3;
+}
+
+section.below-fold aside ul {
+	font-style: italic;
+	list-style: none;
+	padding: 0;
+}
+
+section.below-fold aside ul li::before {
+	content: "\2713";
+	padding-right: 0.75rem;
+	color: #ebadf8;
+}
+
+footer {
+	width: 66%;
+	margin-left: auto;
+	margin-right: 0;
+	background-color: white;
+	color: #444;
+	display: flex;
+	flex-direction: row;
+	font-size: 0.9rem;
+	text-align: right;
+}
+
+footer > * {
+	flex: 1;
+	padding: 1rem;
+}
+
+footer a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+nav.main a.current {
+	box-shadow: 1px 1px 1px #FFF8;
+}

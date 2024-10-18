@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+
+<head>
+	<title>${title}</title>
+	<style>@import url('/heading.css'); </style>
+	<style>@import url('/style.css'); </style>
+	<style>@import url('/article.css'); </style>
+	<style>@import url('/pandoc.css'); </style>
+</head>
+
+<body>
+	<section class = "heading">
+		<div class = "page-rule">
+			<nav>
+				<div class = "logo">
+					<a href = "/index.html"><img src = "/logo-80.png"></a>
+				</div>
+				<ul class = "links">
+					<li><a href = "/index.html">Home</a></li>
+					<li><a href = "/getting-started/README.html">Docs</a></li>
+					<li><a href = "#">Contact</a></li>
+					<li><a href = "#">Team</a></li>
+					<li>
+						<a href = "#">Github</a>
+						<a href = "#"><img src = "/github-icon.png"></a>
+					</li>
+					<li><a href = "#" class = "cta button">Donate</a></li>
+				</ul>
+			</nav>
+			$hero$
+		</div>
+	</section>
+
+	<section class = "below-fold">
+		<div class = "page-rule">
+			<article>$body$</article>
+		</div>
+	</section>
+</body>

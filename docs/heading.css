@@ -1,0 +1,98 @@
+section.heading {
+	background-image: url('/splash.jpg');
+	background-size: cover;
+	background-position: center top;
+	padding: 2rem;
+}
+
+section.heading div.hero {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+section.heading nav {
+	justify-content: space-between;
+	max-width: 1800px;
+	margin: auto;
+}
+
+section.heading nav,
+section.heading nav ul {
+	display: flex;
+	flex-direction: row;
+}
+
+section.heading nav ul {
+	align-items: center;
+	list-style: none;
+	margin: 0;
+}
+
+section.heading nav ul li {
+	min-height: 80px;
+	display: flex;
+	align-items: center;
+}
+
+section.heading nav ul a {
+	padding: 1rem;
+	display: inline-block;
+	color: inherit;
+	text-decoration: inherit;
+	font-weight: bold;
+}
+
+section.heading nav ul a img {
+	display: inline;
+	vertical-align: middle;
+}
+
+section.heading nav ul {
+	align-items: center;
+	list-style: none;
+	margin: 0;
+}
+
+section.heading nav ul li {
+	min-height: 80px;
+	display: flex;
+	align-items: center;
+}
+
+section.heading nav ul a {
+	padding: 1rem;
+	display: inline-block;
+	color: inherit;
+	text-decoration: inherit;
+	font-weight: bold;
+}
+
+section.heading nav ul a img {
+	display: inline;
+	vertical-align: middle;
+}
+
+
+section.heading nav a.cta.button {
+	border-width: 1px;
+	border-style: solid;
+	border-color: white;
+	box-shadow: 0 0 0.5rem 0.25rem #3601a9;
+	font-style: italic;
+	min-width: 5rem;
+	display: inline-block;
+	padding: 0.75rem;
+	padding-left: 0rem;
+	padding-right: 0rem;
+}
+
+section.heading nav,
+section.heading nav ul {
+	display: flex;
+	flex-direction: row;
+}
+
+div.hero a.button {
+	margin: 2rem;
+}
