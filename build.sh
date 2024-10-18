@@ -30,7 +30,7 @@ find ./pages -type f | while read FILENAME; do {
 
 	mkdir -p ./docs${DIR#./pages};
 
-	TEMPLATE=`yq --front-matter=extract '.template' ${DIR}/${FILENAME}.${EXT}`;
+	TEMPLATE=`yq --front-matter=extract '.template' ${DIR}/${FILENAME}.${EXT} || echo ""`;
 	if [ "${TEMPLATE}" == "null" ] || [ "${TEMPLATE}" == "" ]; then
 		TEMPLATE=source/template.html
 		if [ -f "source/${EXT}-template.html" ]; then
@@ -39,7 +39,7 @@ find ./pages -type f | while read FILENAME; do {
 	fi
 
 	TOC_FLAG=
-	TOC=`yq --front-matter=extract '.TOC' ${DIR}/${FILENAME}.${EXT}`;
+	TOC=`yq --front-matter=extract '.TOC' ${DIR}/${FILENAME}.${EXT} || echo ""`;
 	if [ "${TOC}" == "null" ] || [ "${TOC}" == "" ] || [ "${TOC}" == "true" ]; then
 		TOC_FLAG=--toc
 	fi

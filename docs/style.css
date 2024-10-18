@@ -43,10 +43,17 @@ p {
 	margin-block-end: 0.5rem;
 }
 
+p.strong {
+	font-weight: bold;
+}
+
 ul, strong {
-	display: block;
 	margin-block-start: 1rem;
 	margin-block-end: 0.5rem;
+}
+
+ul {
+	display: block;
 }
 
 h1 {

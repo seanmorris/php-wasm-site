@@ -34,7 +34,7 @@ function loop($name)
 			continue;
 		}
 
-		$frontmatter = yaml_parse(`yq --front-matter=extract $pathname`) ?? [];
+		$frontmatter = yaml_parse(`yq --front-matter=extract $pathname || echo ""`) ?? [];
 		$title = $frontmatter['title'] ?? ucwords(preg_replace(['/\.md$/', '/-/'], ['',  ' '], $filename));
 		$leftbar = $frontmatter['leftbar'] ?? true;
 
@@ -82,7 +82,7 @@ foreach(new \DirectoryIterator('./pages') as $entry)
 		continue;
 	}
 
-	$frontmatter = yaml_parse(`yq --front-matter=extract $pathname`) ?? [];
+	$frontmatter = yaml_parse(`yq --front-matter=extract $pathname || echo ""`) ?? [];
 	$title = $frontmatter['title'] ?? ucwords(preg_replace(['/\.md$/', '/-/'], ['',  ' '], $filename));
 	$leftbar = $frontmatter['leftbar'] ?? true;
 

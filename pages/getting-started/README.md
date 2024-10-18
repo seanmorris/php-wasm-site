@@ -10,8 +10,6 @@ title: ReadMe
 
 _PHP in WebAssembly, npm not required._
 
-## [npm](https://npmjs.com/package/php-wasm) | [github](https://github.com/seanmorris/php-wasm) | [unpkg](https://unpkg.com/browse/php-wasm/) | [reddit](https://www.reddit.com/r/phpwasm) | [discord](https://discord.gg/j8VZzju7gJ)
-
 ## 🌟 v0.0.9-alpha - Aiming for the (GitHub) Stars
 
 * Adding PHP-CGI support!
@@ -50,8 +48,6 @@ $ npm i php-wasm-builder@alpha
 ```
 
 ## ☀️ Examples
-
-### [[React + php-web/php-cgi-worker demo](https://seanmorris.github.io/php-wasm/)]
 
 <table>
 	<tr>

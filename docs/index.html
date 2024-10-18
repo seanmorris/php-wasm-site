@@ -67,12 +67,12 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<article><strong>Maecenas ut venenatis turpis.</strong>
-<p>
-Suspendisse facilisis egestas erat a mattis. Nunc tempus orci non
-dapibus aliquet. Sed posuere tellus a dapibus efficitur. Nunc venenatis
-pretium libero, ut faucibus augue luctus at.
+						<article><p class="strong">
+Php Wasm puts PHP right in the browser.
 </p>
+<p>PHP can now run in the browser as a counterpart to Javascript, either
+in a page with full access to JS &amp; DOM APIs, or in a service worker,
+where it mimics a CGI webserver like Apache or nginx.</p>
 <aside>
 <ul>
 <li>
@@ -92,24 +92,26 @@ Commodo ornare ut et dolor
 Vivamus eu tincidunt velit.
 </p>
 </aside>
-<strong>Cras eu placerat mi, nec volutpat felis.</strong>
-<p>
-Cras eu placerat mi, nec volutpat felis. Aliquam semper feugiat dui,
-vitae maximus eros. Proin vulputate pellentesque commodo. Maecenas in
-urna orci. Aliquam fermentum velit libero, eget feugiat nunc consequat
-sit amet. Aenean luctus efficitur nulla.
+<p class="strong">
+Standard PDO Database Connectors.
 </p>
-<strong>Rhoncus varius eros rhoncus amorbi</strong>
-<p>
-Volutpat enim turpis, nec commodo mauris elementum ac. Suspendisse
-aliquet aliquet lorem, a accumsan risus laoreet a. Class aptent taciti
-sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-Phasellus elementum quam vel lorem volutpat, sed pretium est dapibus.
-Vestibulum aliquam nec leo et ultricies. Nullam a felis aliquet,
-faucibus tellus malesuada, venenatis enim. Fusce convallis non tortor id
-euismod. Donec mi tellus, mollis at tortor vitae, posuere tincidunt
-nulla.
+<p>Php Wasm supports Sqlite, PostgreSQL, and CloudFlare’s D1 SQL, all
+via PDO, so you can query your database just like you’ve always done
+it.</p>
+<p class="strong">
+A Full Bridge To Javascript Code
 </p>
+<p>The Vrzno extension allows PHP to gain access to any APIs available
+to Javascript. Objects, functions, and even classes can be imported from
+Javascript and used in PHP as if they were native code. That opens up
+things like DOM APIs, or anything else the browser expose to Javascript.
+On the desktop, NodeJS packages like NodeGTK can be used to build
+desktop applications in PHP.</p>
+<p>You can see a simple demo of the Curvature framework being used to
+generate some dynamic html <a
+href="https://seanmorris.github.io/php-wasm/?demo=curvature.php">here</a>,
+or a node-based version that allows PHP to access GTK <a
+href="https://github.com/seanmorris/php-gtk">here</a>.</p>
 <aside class="centered">
 <a target = "_blank" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">
 <img class = "downstream-logo" src = "drupal-logo.svg" /></a>
@@ -124,37 +126,27 @@ Playground</a>
 Playground</a>
 </p>
 </aside>
-<p><strong>Aenean at turpis justo.</strong></p>
-<p>
-Integer congue aliquam tincidunt. Morbi lobortis ultrices ipsum, ac
-varius ex tincidunt non. Morbi volutpat tincidunt nisi, non viverra erat
-facilisis nec. Donec fermentum magna diam, et malesuada lacus luctus sit
-amet. Morbi malesuada, leo eget viverra dignissim, massa enim hendrerit
-quam, sed lobortis enim lectus a tortor. Nunc congue tellus a gravida
-aliquam. Morbi eu nisi ultricies, pulvinar est vitae, interdum leo.
-Vestibulum lacinia aliquet elit, quis commodo est egestas id. Nulla
-ultrices mi felis. Nunc velit purus, interdum ac laoreet in, elementum
-sed ipsum.
+<p class="strong">
+Field Tested.
 </p>
-<p><strong>Vestibulum risus leo, ornare ac ligula nec.</strong></p>
-<p>
-Pellentesque vehicula, dui ut porttitor ornare, dui ligula congue purus,
-non porta libero quam a libero. Aliquam imperdiet elementum ante, sed
-consectetur urna fermentum ornare. Nunc blandit risus ut eros tristique,
-nec porttitor nibh semper. Nullam eu erat ut sem tincidunt laoreet ac id
-ex. Nulla commodo feugiat tellus in efficitur. Nunc luctus pellentesque
-odio.
+<p>Php Wasm is already powering cutting-edge frontend PHP applications
+like WordPress-Playground, Drupal-Playground, and PlayWithLaravel.</p>
+<p class="strong">
+Fully Loaded with Batteries Included.
 </p>
-<p><strong>Proin quis nunc sed ex viverra sagittis.</strong></p>
-<p>Nulla a ante arcu. Pellentesque ornare, lorem at maximus dictum,
-purus erat auctor elit, quis hendrerit magna eros pulvinar quam. Donec
-sed orci nulla. Aliquam tristique est sed lectus volutpat dapibus.
-Phasellus eget ante vitae nisl luctus placerat in at augue. Etiam at dui
-maximus, pretium purus quis, malesuada justo. Sed in blandit neque.
-Pellentesque cursus, dui a mattis cursus, mauris nisl ultricies nisi,
-varius tempus tortor dui ac lorem. Fusce aliquet id magna vel
-porttitor.</p>
-<p><strong>Aliquam at pellentesque justo.</strong></p>
+<p>Php Wasm comes with support for <strong>17</strong> of the most
+commonly used PHP extensions, like LibXML, OpenSSL, Intl, GD, MBString,
+&amp; zLib. Most of them can be loaded dynamically as shared objects, or
+compiled statically if your use case requires it. You can view the whole
+list <a
+href="http://localhost:8081/getting-started/README.html#extensions">here</a>.</p>
+<p>Extensions can even be loaded in from a CDN like jsdelivr or unpkg,
+since they’re wrapped in JS modules. You can read more about that in the
+<a
+href="http://localhost:8081/getting-started/README.html#loading-dynamic-extensions-as-js-modules">docs</a>.</p>
+<p class="strong">
+Aliquam at pellentesque justo.
+</p>
 <p>Sed a ligula posuere, viverra diam eu, posuere metus. Vestibulum ante
 ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
 Etiam et vestibulum metus, at interdum justo. Suspendisse in congue
@@ -162,6 +154,9 @@ massa, vitae ornare sem. Donec ullamcorper libero non dictum imperdiet.
 Vivamus eleifend sagittis lectus non placerat. Pellentesque habitant
 morbi tristique senectus et netus et malesuada fames ac turpis egestas.
 Donec sit amet neque nisi.</p>
+<p class="strong">
+Proin quis nunc sed ex viverra sagittis.
+</p>
 <p>Pellentesque ipsum nibh, tristique dignissim ultrices ut, finibus vel
 orci. Morbi eget nibh et tellus fermentum hendrerit et vel orci.
 Pellentesque viverra nunc vitae diam blandit, sed molestie ex rutrum.
