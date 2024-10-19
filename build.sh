@@ -45,8 +45,13 @@ find ./pages -type f | while read FILENAME; do {
 	fi
 
 	pandoc --data-dir=. -s -f markdown+autolink_bare_uris -t html \
-		-css ${HIGHLIGHT_STYLE} ${TOC_FLAG} \
+		${HIGHLIGHT_STYLE} ${TOC_FLAG} \
 		--template=${TEMPLATE} -o ${DEST} \
+		--css "/heading.css" \
+		--css "/style.css" \
+		--css "/article.css" \
+		--css "/pandoc.css" \
+		--css "/fonts.css" \
 		${DIR}/${FILENAME}.${EXT};
 
 }; done;

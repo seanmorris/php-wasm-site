@@ -1,15 +1,19 @@
 <!DOCTYPE HTML>
 
 <head>
-	<title>php-wasm</title>
+	<title>php-wasm project home</title>
 	<script src = "/main.js"></script>
-	<style>@import url('/heading.css'); </style>
-	<style>@import url('/style.css'); </style>
-	<style>@import url('/article.css'); </style>
-	<style>@import url('/pandoc.css'); </style>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-	<title>php-wasm</title>
+	<title>php-wasm project home</title>
+	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2">
+	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
+	<link rel="dns-prefetch" href="https://playground.wordpress.net/" />
+	<link rel="dns-prefetch" href="https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/" />
+	<link rel="dns-prefetch" href="https://github.com/" />
+	<link rel="dns-prefetch" href="https://seanmorris.github.io/" />
 	<style>
 		code{white-space: pre-wrap;}
   span.smallcaps{font-variant: small-caps;}
@@ -19,7 +23,11 @@
   ul.task-list{list-style: none;}
   .display.math{display: block; text-align: center; margin: 0.5rem auto;}
 	</style>
-	<link rel="stylesheet" href="ss" />
+	<link rel="stylesheet" href="/heading.css" />
+	<link rel="stylesheet" href="/style.css" />
+	<link rel="stylesheet" href="/article.css" />
+	<link rel="stylesheet" href="/pandoc.css" />
+	<link rel="stylesheet" href="/fonts.css" />
 </head>
 
 <body>
@@ -31,7 +39,7 @@
 				</div>
 				<ul class = "links">
 					<li><a href = "/index.html">Home</a></li>
-					<li><a href = "/getting-started/README.html">Docs</a></li>
+					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
 						<a href = "https://github.com/seanmorris/php-wasm">Github</a>
@@ -43,8 +51,8 @@
 			
 			<div class = "hero">
 				<h1>Deploy in One Click.</h1>
-				<p>Deploy PHP 8 apps client-side in one click, run PHP in cloudflare with full access to D1 SQL, or write desktop apps with GTK.</p>
-				<a href = "/getting-started/README.html" class = "cta button">Learn More</a>
+				<p>Deploy PHP 8 apps client-side in one click, run PHP in cloudflare with full access to D1 SQL, or write PHP desktop apps with GTK.</p>
+				<a href = "/getting-started/home.html" class = "cta button">Learn More</a>
 			</div>
 
 			<div class = "sub-hero">
@@ -70,26 +78,28 @@
 						<article><p class="strong">
 Php Wasm puts PHP right in the browser.
 </p>
-<p>PHP can now run in the browser as a counterpart to Javascript, either
-in a page with full access to JS &amp; DOM APIs, or in a service worker,
-where it mimics a CGI webserver like Apache or nginx.</p>
+<p>PHP can now run in the browser as a counterpart to Javascript, and
+can either be invoked from Javascript code or static HTML, where it’s
+got full access to JS APIs as well as the DOM. Or, it can run a service
+worker, where it mimics a CGI webserver like Apache or nginx. And yea,
+it can serve whole websites.</p>
 <aside>
 <ul>
 <li>
-Donec felis lacus
+Embeds directly in HTML.
 </li>
 <li>
-Quisque egestas, magna.
+Full Access to JS APIs.
 </li>
 <li>
-Praesent sem dolor,
+Runs in the Browser, Node, &amp; CloudFlare.
 </li>
 <li>
-Commodo ornare ut et dolor
+Supports 17 of the top PHP Extensions.
 </li>
 </ul>
 <p>
-Vivamus eu tincidunt velit.
+Why even write Javascript anymore?
 </p>
 </aside>
 <p class="strong">
@@ -130,41 +140,42 @@ Playground</a>
 Field Tested.
 </p>
 <p>Php Wasm is already powering cutting-edge frontend PHP applications
-like WordPress-Playground, Drupal-Playground, and PlayWithLaravel.</p>
+like WordPress-Playground, Drupal-Playground, and PlayWithLaravel. You
+can also find it featured on <a
+href="https://3v4l.org">3v4l.org</a>.</p>
 <p class="strong">
 Fully Loaded with Batteries Included.
 </p>
 <p>Php Wasm comes with support for <strong>17</strong> of the most
 commonly used PHP extensions, like LibXML, OpenSSL, Intl, ICU, GD,
-MBString, &amp; zLib. Most of them can be loaded dynamically as shared
-objects, or compiled statically if your use case requires it. You can
-view the whole list <a
+mbString + oniguruma, &amp; zLib. Most of them can be loaded dynamically
+as shared objects, or compiled statically if your use case requires it.
+You can view the whole list <a
 href="http://localhost:8081/getting-started/README.html#extensions">here</a>.</p>
 <p>Extensions can even be loaded in from a CDN like jsdelivr or unpkg,
-since they’re wrapped in JS modules. You can read more about that in the
-<a
+since they’re wrapped in JS modules. You can learn how to do all that
+and more in the <a
 href="http://localhost:8081/getting-started/README.html#loading-dynamic-extensions-as-js-modules">docs</a>.</p>
 <p class="strong">
-Aliquam at pellentesque justo.
+Isomorphic PHP.
 </p>
-<p>Sed a ligula posuere, viverra diam eu, posuere metus. Vestibulum ante
-ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
-Etiam et vestibulum metus, at interdum justo. Suspendisse in congue
-massa, vitae ornare sem. Donec ullamcorper libero non dictum imperdiet.
-Vivamus eleifend sagittis lectus non placerat. Pellentesque habitant
-morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-Donec sit amet neque nisi.</p>
+<p>Write code that runs on the backend, the frontend, the edge and the
+service worker. You can even include classes directly from Packagist
+with a cloud-based autoloader.</p>
 <p class="strong">
-Proin quis nunc sed ex viverra sagittis.
+And, of course, its Open Source.
 </p>
-<p>Pellentesque ipsum nibh, tristique dignissim ultrices ut, finibus vel
-orci. Morbi eget nibh et tellus fermentum hendrerit et vel orci.
-Pellentesque viverra nunc vitae diam blandit, sed molestie ex rutrum.
-Sed lacinia nisl sed ligula porttitor volutpat. Vestibulum ut interdum
-neque, vel luctus sem. Nulla dignissim lobortis nisi, vitae gravida nisl
-pretium id. Aliquam vel lectus a augue vulputate commodo eget sed nulla.
-Cras in pellentesque diam. Etiam blandit est eget sapien porta, eu
-facilisis urna lacinia.</p></article>
+<p>Php Wasm is published 100% for free under the Apache License, Version
+2.0. This means Php Wasm is and always will be 100% free. Php Wasm is
+committed to maintaining the free and open nature of the web, and all
+the tools the project is based on.</p>
+<p class="strong">
+Want to Reach Out?
+</p>
+<p>If you’d like to get involved and contribute code or sponsorship,
+head over to the <a href="https://github.com/seanmorris/php-wasm">GitHub
+repo</a>, and don’t hesitate to say hi on <a
+href="https://discord.com/invite/j8VZzju7gJ">Discord</a>!</p></article>
 					</div>
 	</section>
 

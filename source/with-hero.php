@@ -2,8 +2,8 @@
 
 			<div class = "hero">
 				<h1>Deploy in One Click.</h1>
-				<p>Deploy PHP 8 apps client-side in one click, run PHP in cloudflare with full access to D1 SQL, or write desktop apps with GTK.</p>
-				<a href = "/getting-started/README.html" class = "cta button">Learn More</a>
+				<p>Deploy PHP 8 apps client-side in one click, run PHP in cloudflare with full access to D1 SQL, or write PHP desktop apps with GTK.</p>
+				<a href = "/getting-started/home.html" class = "cta button">Learn More</a>
 			</div>
 
 			<div class = "sub-hero">

@@ -11,7 +11,7 @@ html {
 body {
 	color: white;
 	background-color: #00081d;
-	font-family: 'Noto Sans';
+	font-family: 'NotoSans';
 	font-size: 1.125rem;
 	display: flex;
 	flex-direction: column;
@@ -57,7 +57,7 @@ ul {
 }
 
 h1 {
-	font-size: 36pt;
+	font-size: 28pt;
 	margin-bottom: 0.5em;
 	margin-top: 0.5em;
 }
@@ -84,12 +84,6 @@ a:hover {
 	color: #FFF;
 }
 
-div.sourceCode {
-	border-radius: 5px;
-	padding: 1rem;
-	margin-bottom: 2rem !important;
-}
-
 aside img.downstream-logo {
 	display: block;
 	height: 12rem;
@@ -108,4 +102,79 @@ aside img.downstream-logo {
 @keyframes flicker {
 	0% { opacity: 1; }
 	100% { opacity: 0; }
+}
+
+code {
+	background-color: #303030;
+	color: #FFF;
+}
+
+pre > code {
+	display: block;
+	border-radius: 5px;
+	padding: 1rem;
+	counter-set: line-number var(--startFrom, 0);
+}
+
+div.sourceCode {
+	border-radius: 5px;
+	margin-bottom: 2rem !important;
+
+}
+
+div.sourceCode pre > code {
+	padding: 1rem 0;
+}
+
+div.sourceCode[data-numbers="true"] code > span::before {
+	display: inline-block;
+	counter-increment: line-number;
+	content: var(--icon, "") ' ' counter(line-number);
+	margin-right: 1rem;
+	opacity: 0.5;
+	text-align: right;
+	min-width: 1.5rem;
+	margin-left: -1rem;
+}
+
+div.sourceCode:not([data-numbers="true"]) code > span {
+	padding-left: 1rem;
+}
+
+div.sourceCode pre, div.sourceCode pre > code {
+	width: 100%;
+	display: block;
+}
+
+code, pre {
+	font-family: 'Anonymous Pro', monospace;
+}
+
+code > span {
+	box-sizing: border-box;
+	padding: 0 1rem;
+	display: inline-block;
+	min-width: 100%;
+}
+
+code > span.highlight {
+	background-color: #222;
+}
+
+code > span.add {
+	background-color: #140;
+	--icon: '+';
+}
+
+code > span.remove {
+	background-color: #510;
+	--icon: '-';
+}
+
+code > span.add + span.remove {
+	counter-increment: line-number -1;
+}
+
+code > span:hover {
+	background-color: #455888;
 }
