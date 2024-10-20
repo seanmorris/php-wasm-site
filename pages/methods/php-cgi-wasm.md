@@ -61,6 +61,10 @@ const php = new PhpCgiWorker({
 });
 ```
 
+### locateFile
+
+*function*
+
 ```javascript
 const result = await sendMessage('hello', 'person');
 ```
@@ -156,7 +160,7 @@ const php = new PhpCgiWorker({
 In service workers, this hooks into the `install` event. This should be set up as follows:
 
 ```javascript
-self.addEventListener('install',  event => php.handleInstallEvent(event));
+self.addEventListener('install', event => php.handleInstallEvent(event));
 ```
 
 In service workers, this hooks into the `activate` event. This should be set up as follows:
@@ -172,7 +176,7 @@ In service workers, this hooks into the `message` event. This should be set up a
 ## handleMessageEvent
 
 ```javascript
-self.addEventListener('message',  event => php.handleMessageEvent(event));
+self.addEventListener('message', event => php.handleMessageEvent(event));
 ```
 
 In service workers, this hooks into the `fetch` event, and will call the `request` method in service workers.
@@ -182,7 +186,7 @@ This should be set up as follows:
 ## handleFetchEvent
 
 ```javascript
-self.addEventListener('fetch',    event => php.handleFetchEvent(event));
+self.addEventListener('fetch', event => php.handleFetchEvent(event));
 ```
 
 ## request

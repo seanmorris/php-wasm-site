@@ -7,11 +7,11 @@ weight: -1000
 
 ## Getting Started
 
-If you'd like to install php-wasm with npm, see [INSTALLING](/getting-started/install-and-include.html).
+To install php-wasm with npm, see [INSTALLING](/getting-started/install-and-include.html).
 
-If you'd like to use PHP inside of JS scripts, see [PHP In Javascript](/getting-started/php-in-js.html).
+For instructions on using PHP inside of JS scripts, see [PHP In Javascript](/getting-started/php-in-js.html).
 
-If you'd write pure frontend PHP and skip the JS entirely, see [PHP In Static HTML](/getting-started/php-in-static-html.html).
+If you want to write pure frontend PHP and skip the JS entirely, see [PHP In Static HTML](/getting-started/php-in-static-html.html).
 
 If you'd like to spin up a webserver right in your browser, see [PHP-CGI In Service Workers](/getting-started/cgi-service-worker.html).
 

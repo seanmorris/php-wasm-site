@@ -33,7 +33,7 @@ $ php-wasm-builder clean
 
 ## php-wasm-builder commands
 
-### php-wasm-builder build
+### build
 
 Use this to build custom version of php-wasm. Its recommended to build this to an empty directory using a `.php-wasm-rc` file.
 
@@ -41,7 +41,7 @@ Use this to build custom version of php-wasm. Its recommended to build this to a
 npx php-wasm-builder build
 ```
 
-### php-wasm-builder image
+### image
 
 This will build the docker container used to build php-wasm.
 
@@ -49,7 +49,7 @@ This will build the docker container used to build php-wasm.
 npx php-wasm-builder image
 ```
 
-### php-wasm-builder copy-assets
+### copy-assets
 
 This will scan the current package's node_modules directory for shared libraries & supporting files, and copy them to `PHP_ASSET_DIR`.
 
@@ -59,7 +59,7 @@ You can use this with `.php-wasm-rc` to copy assets even if you're not using a c
 npx php-wasm-builder copy-assets
 ```
 
-### php-wasm-builder build-assets
+### build-assets
 
 Similar to `copy-assets`, but will actually compile the shared libaries, then copy them to `PHP_ASSET_DIR`.
 
@@ -69,7 +69,7 @@ You can use this with `.php-wasm-rc` to copy assets even if you're not using a c
 npx php-wasm-builder build-assets
 ```
 
-### php-wasm-builder clean
+### clean
 
 Clear cached build resources.
 
@@ -77,7 +77,7 @@ Clear cached build resources.
 npx php-wasm-builder clean
 ```
 
-### php-wasm-builder deep-clean
+### deep-clean
 
 Clear out all downloaded dependencies and start from scratch.
 
@@ -85,7 +85,7 @@ Clear out all downloaded dependencies and start from scratch.
 npx php-wasm-builder deep-clean
 ```
 
-### php-wasm-builder help
+### help
 
 Print the help text for a given command
 

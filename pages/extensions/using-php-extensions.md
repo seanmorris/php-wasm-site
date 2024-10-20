@@ -91,18 +91,60 @@ Sadly, this notation is not available for Service Workers, since they do not yet
 
 The following extensions may be loaded at runtime. This allows the shared extension & their dependencies to be cached, re-used, and selected a-la-carte for each application.
 
-* gd (https://www.npmjs.com/package/php-wasm-gd)
-* iconv  (https://www.npmjs.com/package/php-wasm-iconv)
-* intl (https://www.npmjs.com/package/php-wasm-intl)
-* xml (https://www.npmjs.com/package/php-wasm-libxml)
-* dom (https://www.npmjs.com/package/php-wasm-libxml)
-* simplexml (https://www.npmjs.com/package/php-wasm-libxml)
-* yaml (https://www.npmjs.com/package/php-wasm-libyaml)
-* zip (https://www.npmjs.com/package/php-wasm-libzip)
-* mbstring (https://www.npmjs.com/package/php-wasm-mbstring)
-* openssl (https://www.npmjs.com/package/php-wasm-openssl)
-* phar (https://www.npmjs.com/package/php-wasm-phar)
-* sqlite (https://www.npmjs.com/package/php-wasm-sqlite)
-* pdo-sqlite (https://www.npmjs.com/package/php-wasm-sqlite)
-* zlib (https://www.npmjs.com/package/php-wasm-zlib)
+### gd
+
+<https://www.npmjs.com/package/php-wasm-gd>
+
+### iconv
+
+<https://www.npmjs.com/package/php-wasm-iconv>
+
+### intl
+
+<https://www.npmjs.com/package/php-wasm-intl>
+
+### xml
+
+<https://www.npmjs.com/package/php-wasm-libxml>
+
+### dom
+
+<https://www.npmjs.com/package/php-wasm-libxml>
+
+### simplexml
+
+<https://www.npmjs.com/package/php-wasm-libxml>
+
+### yaml
+
+<https://www.npmjs.com/package/php-wasm-libyaml>
+
+### zip
+
+<https://www.npmjs.com/package/php-wasm-libzip>
+
+### mbstring
+
+<https://www.npmjs.com/package/php-wasm-mbstring>
+
+### openssl
+
+<https://www.npmjs.com/package/php-wasm-openssl>
+
+### phar
+
+<https://www.npmjs.com/package/php-wasm-phar>
+
+### sqlite
+
+<https://www.npmjs.com/package/php-wasm-sqlite>
+
+### pdo-sqlite
+
+<https://www.npmjs.com/package/php-wasm-sqlite>
+
+### zlib
+
+<https://www.npmjs.com/package/php-wasm-zlib>
+
 

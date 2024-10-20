@@ -23,8 +23,8 @@ Will return a non-zero value in case of error. You'll need to use [event listene
 php.run(`<?php
     $time = strtotime('8:00pm 2 days ago');
     $date = date('Y-m-d H:i:s', $time);
-    echo $date;
-`);
+    echo $date;`
+);
 ```
 
 ## php.exec
@@ -36,13 +36,11 @@ The return value of the PHP statement will be the return value of `php.exec`. If
 To run multiple commands in a single statement, use an [IIFE](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression).
 
 ```javascript
-php.exec(`
-    (function() {
-        $time = strtotime('8:00pm 2 days ago');
-        $date = date('Y-m-d H:i:s', $time);
-        return $date;
-    })();
-`);
+php.exec(`(function() {
+    $time = strtotime('8:00pm 2 days ago');
+    $date = date('Y-m-d H:i:s', $time);
+    return $date;
+})();`);
 ```
 
 ## php.r
@@ -52,11 +50,10 @@ Tagged template function companion to `php.run()`. If Vrzno is enabled, allows r
 Just like `php.run()`, this will return a non-zero value in case of error.
 
 ```javascript
-php.r`
+php.r`<?php
     $time = strtotime('8:00pm 2 days ago');
     $date = date('Y-m-d H:i:s', $time);
-    echo $date;
-`;
+    echo $date;`;
 ```
 
 ## php.x
@@ -66,13 +63,11 @@ Tagged template function companion to `php.exec()`. If Vrzno is enabled, allows 
 Just like `php.exec()` this value may only run a single PHP statement at a time and returns the JS value directly to PHP.
 
 ```javascript
-const date = php.x`<?php
-        (function() {
-        $time = strtotime('8:00pm 2 days ago');
-        $date = date('Y-m-d H:i:s', $time);
-        return $date;
-    })();
-`;
+const date = php.x`(function() {
+    $time = strtotime('8:00pm 2 days ago');
+    $date = date('Y-m-d H:i:s', $time);
+    return $date;
+})();`;
 ```
 
 ## php.refresh

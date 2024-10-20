@@ -25,6 +25,7 @@ $endif$
 $if(description-meta)$
 	<meta name="description" content="$description-meta$" />
 $endif$
+	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
@@ -114,10 +115,6 @@ $endif$
 		<h4>About</h4>
 		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<p>
-			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
-			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
-			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
-		</p>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
 	</footer>
 </body>

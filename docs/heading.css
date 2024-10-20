@@ -79,6 +79,11 @@ section.heading nav a.cta.button {
 	padding: 0.75rem;
 	padding-left: 0rem;
 	padding-right: 0rem;
+	transition: box-shadow 0.25s ease-in;
+}
+
+section.heading nav a.cta.button:hover {
+	box-shadow: 0 0 0.25rem 0.125rem #8216de;
 }
 
 section.heading nav,
@@ -118,6 +123,10 @@ div.hero a.button {
 	background: linear-gradient(0.15turn, #3601a9, #8216de);
 	padding: 1.25rem;
 	font-weight: bold;
+}
+
+.hero a.cta.button:hover {
+	background: linear-gradient(0.10turn, #3601a9, #8216de);
 }
 
 .sub-hero {

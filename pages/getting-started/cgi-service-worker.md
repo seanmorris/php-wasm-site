@@ -12,7 +12,7 @@ Version 0.0.9 adds `php-cgi-wasm` to the mix. This allows you to run php in web-
 $ npm install php-cgi-wasm
 ```
 
-### Example Service Worker:
+### Example Service Worker
 
 ```  { .javascript numbers="true" }
 import { PhpCgiWorker } from "php-cgi-wasm/PhpCgiWorker";

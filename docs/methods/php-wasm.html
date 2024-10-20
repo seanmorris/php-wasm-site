@@ -5,6 +5,7 @@
 			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
@@ -206,8 +207,8 @@
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;`</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
       <h2 id="php.exec">php.exec</h2>
       <p>Similar to <code>php.run()</code>, but executes a single PHP
       <em>statement</em> rather than an entire script. Code should
@@ -221,13 +222,11 @@
       <p>To run multiple commands in a single statement, use an <a
       href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">IIFE</a>.</p>
       <div class="sourceCode" id="cb2"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">exec</span>(<span class="vs">`</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    (function() {</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="vs">        $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">        $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">        return $date;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="vs">    })();</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">exec</span>(<span class="vs">`(function() {</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    return $date;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">})();`</span>)<span class="op">;</span></span></code></pre></div>
       <h2 id="php.r">php.r</h2>
       <p>Tagged template function companion to <code>php.run()</code>.
       If Vrzno is enabled, allows rich JS values to be interpolated into
@@ -235,11 +234,10 @@
       <p>Just like <code>php.run()</code>, this will return a non-zero
       value in case of error.</p>
       <div class="sourceCode" id="cb3"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">r</span><span class="vs">`</span></span>
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">r</span><span class="vs">`&lt;?php</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span><span class="op">;</span></span></code></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;`</span><span class="op">;</span></span></code></pre></div>
       <h2 id="php.x">php.x</h2>
       <p>Tagged template function companion to <code>php.exec()</code>.
       If Vrzno is enabled, allows rich JS values to be interpolated into
@@ -248,13 +246,11 @@
       single PHP statement at a time and returns the JS value directly
       to PHP.</p>
       <div class="sourceCode" id="cb4"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> date <span class="op">=</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`&lt;?php</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="vs">        (function() {</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="vs">        $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="vs">        $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="vs">        return $date;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="vs">    })();</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span><span class="op">;</span></span></code></pre></div>
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> date <span class="op">=</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`(function() {</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    return $date;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="vs">})();`</span><span class="op">;</span></span></code></pre></div>
       <h2 id="php.refresh">php.refresh</h2>
       <p>Clears the memory. If any objects, arrays or functions have
       been returned to JS, these will become invalid when php is
@@ -299,10 +295,6 @@
 		<h4>About</h4>
 		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<p>
-			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
-			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
-			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
-		</p>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
 	</footer>
 </body>

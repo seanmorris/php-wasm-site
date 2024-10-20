@@ -5,6 +5,7 @@
 			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
@@ -190,13 +191,12 @@
 				LICENSE			</a>
 		</li></ul>			</nav>
 						<article >
-						<h1 id="loading-files">📦 Loading Files</h1>
-      <h3 id="loading-single-files-at-runtime">Loading single files at
-      runtime</h3>
-      <p>When spawning a new instance of PHP, a <code>files</code> array
-      can be provided to be loaded into the filesystem. For example, the
-      <code>php-intl</code> extension requires us to load
-      <code>icudt72l.dat</code> into the <code>/preload</code>
+						<h1 id="loading-files">Loading Files</h1>
+      <h3 id="loading-single-files">Loading Single Files</h3>
+      <p>The constructor method of the php-wasm objects accepts a
+      <code>files</code> parameter to load files into the filesystem by
+      URL. For example, the <code>php-intl</code> extension requires us
+      to load <code>icudt72l.dat</code> into the <code>/preload</code>
       directory.</p>
       <div class="sourceCode" id="cb1"><pre
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> sharedLibs <span class="op">=</span> [<span class="vs">`https://unpkg.com/php-wasm-intl/php</span><span class="sc">\$</span><span class="vs">{PHP_VERSION}-intl.so`</span>]<span class="op">;</span></span>
@@ -214,16 +214,9 @@
       <p>Use the <code>PRELOAD_ASSETS</code> key in your
       <code>.php-wasm-rc</code> file to define a list of files and
       directories to include by default.</p>
-      <p>The files and directories will be collected into a single
-      directory. Individual files &amp; directories will appear in the
-      top level, while directories will maintain their internal
-      structure.</p>
-      <p>These files &amp; directories will be available under
-      <code>/preload</code> in the final package, packaged into the
-      <code>.data</code> file that is built along with the
-      <code>.wasm</code> file.</p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">PRELOAD_ASSETS</span><span class="op">=</span><span class="st">&#39;/path/to/file.txt /some/directory /path/to/other_file.txt /some/other/directory&#39;</span></span></code></pre></div>
+      <p>See <a
+      href="/compiling/php-wasm-rc.html#preload_assets">compiling/php-wasm-rc.html#preload_assets</a>
+      for more information.</p>
       <h3 id="locatefile">locateFile</h3>
       <p>You can provide the <code>locateFile</code> option to php-wasm
       as a callback to map the names of files to URLs where they’re
@@ -234,19 +227,18 @@
       <p>This applies to <code>.wasm</code> files, shared libraries,
       single files and preloaded FS packages in <code>.data</code>
       files.</p>
-      <div class="sourceCode" id="cb3"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">locateFile</span><span class="op">:</span> filename <span class="kw">=&gt;</span> <span class="vs">`/my/static/path/</span><span class="sc">${</span>filename<span class="sc">}</span><span class="vs">`</span>})<span class="op">;</span></span></code></pre></div>
-      <h2 id="persistent-storage-idbfs-nodefs">💾 Persistent Storage
-      (IDBFS &amp; NodeFS)</h2>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">locateFile</span><span class="op">:</span> filename <span class="kw">=&gt;</span> <span class="vs">`/my/static/path/</span><span class="sc">${</span>filename<span class="sc">}</span><span class="vs">`</span>})<span class="op">;</span></span></code></pre></div>
+      <h2 id="persistent-storage">Persistent Storage</h2>
       <h3 id="idbfs-web-worker">IDBFS (Web &amp; Worker)</h3>
       <p>To use IDBFS in PhpWeb, pass a <code>persist</code> object with
       a <code>mountPath</code> key.</p>
       <p><code>mountPath</code> will be used as the path to the
       persistent directory within the PHP environment.</p>
-      <div class="sourceCode" id="cb4"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">persist</span><span class="op">:</span> {<span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span>}})<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">persist</span><span class="op">:</span> {<span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span>}})<span class="op">;</span></span></code></pre></div>
       <h3 id="nodefs-nodejs-only">NodeFS (NodeJS Only)</h3>
       <p>To use NodeFS in PhpWeb, pass a <code>persist</code> object
       with <code>mountPath</code> &amp; <code>localPath</code> keys.</p>
@@ -254,22 +246,20 @@
       directory to expose to PHP. <code>mountPath</code> will be used as
       the path to the persistent directory within the PHP
       environment.</p>
-      <div class="sourceCode" id="cb5"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpNode } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpNode.mjs&#39;</span>)<span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpNode</span>({<span class="dt">persist</span><span class="op">:</span> {<span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span><span class="op">,</span> <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;~/your-files&#39;</span>}})<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpNode } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpNode.mjs&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpNode</span>({<span class="dt">persist</span><span class="op">:</span> {<span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span><span class="op">,</span> <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;~/your-files&#39;</span>}})<span class="op">;</span></span></code></pre></div>
 			</article>
 						<nav class = "table-of-contents">
 				<span>on this page:</span>
 				<ul>
-    <li><a href="#loading-files">📦 Loading Files</a>
+    <li><a href="#loading-files">Loading Files</a>
     <ul>
-    <li><a href="#loading-single-files-at-runtime">Loading single files
-    at runtime</a></li>
+    <li><a href="#loading-single-files">Loading Single Files</a></li>
     <li><a href="#preloaded-fs">Preloaded FS</a></li>
     <li><a href="#locatefile">locateFile</a></li>
-    <li><a href="#persistent-storage-idbfs-nodefs">💾 Persistent Storage
-    (IDBFS &amp; NodeFS)</a>
+    <li><a href="#persistent-storage">Persistent Storage</a>
     <ul>
     <li><a href="#idbfs-web-worker">IDBFS (Web &amp; Worker)</a></li>
     <li><a href="#nodefs-nodejs-only">NodeFS (NodeJS Only)</a></li>
@@ -300,10 +290,6 @@
 		<h4>About</h4>
 		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<p>
-			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
-			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
-			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
-		</p>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
 	</footer>
 </body>

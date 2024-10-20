@@ -1,7 +1,7 @@
 ---
 title: .php-wasm-rc
 ---
-## .php-wasm-rc
+# .php-wasm-rc
 
 You can also create a `.php-wasm-rc` file in this directory to customize the build.
 
@@ -42,31 +42,41 @@ WITH_LIBJPEG=1
 WITH_FREETYPE=1
 ```
 
-#### Options
+## Options
 
 The following options may appear in `.php-wasm-rc`.
 
----
+### PRELOAD_ASSETS
 
-##### PHP_VERSION
+Use the `PRELOAD_ASSETS` key in your `.php-wasm-rc` file to define a list of files and directories to include by default.
+
+The files and directories will be collected into a single directory. Individual files & directories will appear in the top level, while directories will maintain their internal structure.
+
+These files & directories will be available under `/preload` in the final package, packaged into the `.data` file that is built along with the `.wasm` file.
+
+```bash
+PRELOAD_ASSETS='/path/to/file.txt /some/directory /path/to/other_file.txt /some/other/directory'
+```
+
+### PHP_VERSION
 
 8.0|8.1|8.2|**8.3**
 
 ---
 
-##### PHP_DIST_DIR
+### PHP_DIST_DIR
 
 This is the directory where javascript & wasm files will be built to, *relative to the current directory.*
 
 ---
 
-##### PHP_ASSET_DIR
+### PHP_ASSET_DIR
 
 This is the directory where shared libs, extension, `.data` files & other supporting files will be built to, *relative to the current directory.* Defaults to `PHP_DIST_DIR`.
 
 ---
 
-##### OPTIMIZE
+### OPTIMIZE
 
 0|1|2|**3**
 
@@ -74,19 +84,13 @@ The optimization level to use while compiling.
 
 ---
 
-##### SUBOPTIMIZE
+### SUBOPTIMIZE
 
 The optimization level to use while compiling libraries. Defaults to `OPTIMIZE`.
 
 ---
 
-##### PRELOAD_ASSETS
-
-A list of **absolute paths** to files & directories to build to the `/preload` directory. Will produce a `.data` file.
-
----
-
-##### ASSERTIONS
+### ASSERTIONS
 
 0|**1**
 
@@ -94,15 +98,13 @@ Build with/without assertions.
 
 ---
 
-### Compiling extensions
+## Extension Flags
 
 Extensions may be compiled as `dynamic`, `shared`, or `static`. See `Custom Builds` for more information on compiling php-wasm.
 
 * dynamic - these extensions may be loaded selectively at runtime.
 * shared - these extensions will always be loaded at startup and can be cached and reused.
 * static - these extensions will be built directly into the main wasm binary (may cause a huge filesize).
-
-#### Extension Flags
 
 As stated above, extensions may be compiled as `dynamic`, `shared`, or `static`.
 
@@ -150,7 +152,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]
 
 ---
 
-##### WITH_PHAR
+### WITH_PHAR
 
 static|**dynamic**
 
@@ -158,7 +160,7 @@ When compiled as a `dynamic` extension, this will produce the extension file `ph
 
 ---
 
-##### WITH_LIBXML
+### WITH_LIBXML
 
 static|**shared**
 
@@ -168,7 +170,7 @@ When compiled as a `shared` library, it will produce the library `libxml.so`.
 
 ---
 
-##### WITH_LIBZIP
+### WITH_LIBZIP
 
 static|shared|**dynamic**
 
@@ -180,7 +182,7 @@ This extension depends on `zlib`.
 
 ---
 
-##### WITH_ICONV
+### WITH_ICONV
 
 static|shared|**dynamic**
 
@@ -190,7 +192,7 @@ When compiled as a `dynamic` or `shared` extension, it will produce the library 
 
 ---
 
-##### WITH_SQLITE
+### WITH_SQLITE
 
 static|shared|**dynamic**
 
@@ -200,7 +202,7 @@ When compiled as a `dynamic` or `shared` extension, it will produce the library 
 
 ---
 
-##### WITH_GD
+### WITH_GD
 
 static|**dynamic**
 
@@ -208,7 +210,9 @@ This extenstion makes use of `freetype`, `libjpeg`, `libpng`, & `zlib`.
 
 When compiled as a `dynamic` extension, this will produce the extension `php-8.x-gd.so`.
 
-###### WITH_LIBPNG
+---
+
+#### WITH_LIBPNG
 
 static|**shared**
 
@@ -216,7 +220,9 @@ When compiled as a `shared` library, this will produce the library `libpng.so`.
 
 If WITH_GD is dynamic, then loading will be deferred until after gd is loaded.
 
-###### WITH_FREETYPE
+---
+
+#### WITH_FREETYPE
 
 static|**shared**
 
@@ -224,7 +230,9 @@ When compiled as a `shared` library, this will produce the library `libfreetype.
 
 If WITH_GD is dynamic, then loading will be deferred until after gd is loaded.
 
-###### WITH_LIBJPEG
+---
+
+#### WITH_LIBJPEG
 
 static|**shared**
 
@@ -234,7 +242,7 @@ If WITH_GD is dynamic, then loading will be deferred until after gd is loaded.
 
 ---
 
-##### WITH_ZLIB
+### WITH_ZLIB
 
 static|shared|**dynamic**
 
@@ -244,7 +252,7 @@ When compiled as a `dynamic` or `shared` extension, it will produce the library 
 
 ---
 
-##### WITH_YAML
+### WITH_YAML
 
 static|shared|**dynamic**
 
@@ -254,7 +262,7 @@ When compiled as a `dynamic` or `shared` extension, it will produce the library 
 
 ---
 
-##### WITH_TIDY
+### WITH_TIDY
 
 static|shared|**dynamic**
 
@@ -264,7 +272,7 @@ When compiled as a `dynamic` or `shared` extension, it will produce the library 
 
 ---
 
-##### WITH_MBSTRING
+### WITH_MBSTRING
 
 static|**dynamic**
 
@@ -272,7 +280,7 @@ When compiled as a `dynamic` extension, this will produce the extension `php-8.x
 
 ---
 
-##### WITH_ONIGURUMA
+### WITH_ONIGURUMA
 
 static|shared|**dynamic**
 
@@ -284,7 +292,7 @@ If `WITH_MBSTRING` is `dynamic`, then loading will be deferred until after `mbst
 
 ---
 
-##### WITH_OPENSSL
+### WITH_OPENSSL
 
 shared|**dynamic**
 
@@ -292,7 +300,9 @@ When compiled as a `dynamic` extension, this will produce the extension `php-8.x
 
 When compiled as a `dynamic` or `shared` extension, it will produce the libraries `libssl.so` &  `libcrypto.so`.
 
-##### WITH_INTL
+---
+
+### WITH_INTL
 
 static|shared|**dynamic**
 
@@ -305,4 +315,3 @@ When compiled as a `dynamic`, or `shared` extension, this will produce the exten
 * libicui18n.so
 * libicudata.so
 * icudt72l.dat
----

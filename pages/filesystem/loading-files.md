@@ -1,11 +1,11 @@
 ---
 title: Loading Files
 ---
-# 📦 Loading Files
+# Loading Files
 
-### Loading single files at runtime
+### Loading Single Files
 
-When spawning a new instance of PHP, a `files` array can be provided to be loaded into the filesystem. For example, the `php-intl` extension requires us to load `icudt72l.dat` into the  `/preload` directory.
+The constructor method of the php-wasm objects accepts a `files` parameter to load files into the filesystem by URL. For example, the `php-intl` extension requires us to load `icudt72l.dat` into the  `/preload` directory.
 
 ```javascript
 const sharedLibs = [`https://unpkg.com/php-wasm-intl/php\${PHP_VERSION}-intl.so`];
@@ -20,17 +20,12 @@ const files = [
 
 const php = new PhpWeb({sharedLibs, files});
 ```
+
 ### Preloaded FS
 
 Use the `PRELOAD_ASSETS` key in your `.php-wasm-rc` file to define a list of files and directories to include by default.
 
-The files and directories will be collected into a single directory. Individual files & directories will appear in the top level, while directories will maintain their internal structure.
-
-These files & directories will be available under `/preload` in the final package, packaged into the `.data` file that is built along with the `.wasm` file.
-
-```bash
-PRELOAD_ASSETS='/path/to/file.txt /some/directory /path/to/other_file.txt /some/other/directory'
-```
+See [compiling/php-wasm-rc.html#preload_assets](/compiling/php-wasm-rc.html#preload_assets) for more information.
 
 ### locateFile
 
@@ -44,7 +39,7 @@ This applies to `.wasm` files, shared libraries, single files and preloaded FS p
 const php = new PhpWeb({locateFile: filename => `/my/static/path/${filename}`});
 ```
 
-## 💾 Persistent Storage (IDBFS & NodeFS)
+## Persistent Storage
 
 ### IDBFS (Web & Worker)
 

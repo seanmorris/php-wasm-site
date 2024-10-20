@@ -5,6 +5,7 @@
 			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
@@ -270,24 +271,48 @@
       <p>The following extensions may be loaded at runtime. This allows
       the shared extension &amp; their dependencies to be cached,
       re-used, and selected a-la-carte for each application.</p>
-      <ul>
-      <li>gd (https://www.npmjs.com/package/php-wasm-gd)</li>
-      <li>iconv (https://www.npmjs.com/package/php-wasm-iconv)</li>
-      <li>intl (https://www.npmjs.com/package/php-wasm-intl)</li>
-      <li>xml (https://www.npmjs.com/package/php-wasm-libxml)</li>
-      <li>dom (https://www.npmjs.com/package/php-wasm-libxml)</li>
-      <li>simplexml (https://www.npmjs.com/package/php-wasm-libxml)</li>
-      <li>yaml (https://www.npmjs.com/package/php-wasm-libyaml)</li>
-      <li>zip (https://www.npmjs.com/package/php-wasm-libzip)</li>
-      <li>mbstring
-      (https://www.npmjs.com/package/php-wasm-mbstring)</li>
-      <li>openssl (https://www.npmjs.com/package/php-wasm-openssl)</li>
-      <li>phar (https://www.npmjs.com/package/php-wasm-phar)</li>
-      <li>sqlite (https://www.npmjs.com/package/php-wasm-sqlite)</li>
-      <li>pdo-sqlite
-      (https://www.npmjs.com/package/php-wasm-sqlite)</li>
-      <li>zlib (https://www.npmjs.com/package/php-wasm-zlib)</li>
-      </ul>
+      <h3 id="gd">gd</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-gd"
+      class="uri">https://www.npmjs.com/package/php-wasm-gd</a></p>
+      <h3 id="iconv">iconv</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-iconv"
+      class="uri">https://www.npmjs.com/package/php-wasm-iconv</a></p>
+      <h3 id="intl">intl</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-intl"
+      class="uri">https://www.npmjs.com/package/php-wasm-intl</a></p>
+      <h3 id="xml">xml</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-libxml"
+      class="uri">https://www.npmjs.com/package/php-wasm-libxml</a></p>
+      <h3 id="dom">dom</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-libxml"
+      class="uri">https://www.npmjs.com/package/php-wasm-libxml</a></p>
+      <h3 id="simplexml">simplexml</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-libxml"
+      class="uri">https://www.npmjs.com/package/php-wasm-libxml</a></p>
+      <h3 id="yaml">yaml</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-libyaml"
+      class="uri">https://www.npmjs.com/package/php-wasm-libyaml</a></p>
+      <h3 id="zip">zip</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-libzip"
+      class="uri">https://www.npmjs.com/package/php-wasm-libzip</a></p>
+      <h3 id="mbstring">mbstring</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-mbstring"
+      class="uri">https://www.npmjs.com/package/php-wasm-mbstring</a></p>
+      <h3 id="openssl">openssl</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-openssl"
+      class="uri">https://www.npmjs.com/package/php-wasm-openssl</a></p>
+      <h3 id="phar">phar</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-phar"
+      class="uri">https://www.npmjs.com/package/php-wasm-phar</a></p>
+      <h3 id="sqlite">sqlite</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-sqlite"
+      class="uri">https://www.npmjs.com/package/php-wasm-sqlite</a></p>
+      <h3 id="pdo-sqlite">pdo-sqlite</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-sqlite"
+      class="uri">https://www.npmjs.com/package/php-wasm-sqlite</a></p>
+      <h3 id="zlib">zlib</h3>
+      <p><a href="https://www.npmjs.com/package/php-wasm-zlib"
+      class="uri">https://www.npmjs.com/package/php-wasm-zlib</a></p>
 			</article>
 						<nav class = "table-of-contents">
 				<span>on this page:</span>
@@ -298,7 +323,23 @@
     Extensions from Remote Servers:</a></li>
     <li><a href="#loading-dynamic-extensions-as-js-modules">Loading
     Dynamic Extensions as JS Modules:</a></li>
-    <li><a href="#extension-list">Extension List</a></li>
+    <li><a href="#extension-list">Extension List</a>
+    <ul>
+    <li><a href="#gd">gd</a></li>
+    <li><a href="#iconv">iconv</a></li>
+    <li><a href="#intl">intl</a></li>
+    <li><a href="#xml">xml</a></li>
+    <li><a href="#dom">dom</a></li>
+    <li><a href="#simplexml">simplexml</a></li>
+    <li><a href="#yaml">yaml</a></li>
+    <li><a href="#zip">zip</a></li>
+    <li><a href="#mbstring">mbstring</a></li>
+    <li><a href="#openssl">openssl</a></li>
+    <li><a href="#phar">phar</a></li>
+    <li><a href="#sqlite">sqlite</a></li>
+    <li><a href="#pdo-sqlite">pdo-sqlite</a></li>
+    <li><a href="#zlib">zlib</a></li>
+    </ul></li>
     </ul></li>
     </ul>
 				<span><a href = "#">top</a></span>
@@ -325,10 +366,6 @@
 		<h4>About</h4>
 		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<p>
-			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
-			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
-			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
-		</p>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
 	</footer>
 </body>
