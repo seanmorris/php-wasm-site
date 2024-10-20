@@ -1,15 +1,17 @@
 <!DOCTYPE HTML>
 
 <head>
-	<title>.php-wasm-rc</title>
-	<script src = "/main.js"></script>
+			<title>php-wasm | .php-wasm-rc</title>
+			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-	<title>.php-wasm-rc</title>
-	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-italic.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
+	<link rel="dns-prefetch" href="https://discord.gg/" />
+	<link rel="dns-prefetch" href="https://discord.com/" />
 	<link rel="dns-prefetch" href="https://playground.wordpress.net/" />
 	<link rel="dns-prefetch" href="https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/" />
 	<link rel="dns-prefetch" href="https://github.com/" />
@@ -54,31 +56,82 @@
 	<section class = "below-fold">
 		<div class = "page-rule">
 						<nav class = "main">
-				<ul><details open><summary>Getting Started</summary><ul><li><a href = "/getting-started/php.ini.html">php.ini</a></li>
-<li><a href = "/getting-started/php-in-js.html">PHP in Javascript</a></li>
-<li><a href = "/getting-started/php-in-static-html.html">PHP in Static HTML</a></li>
-<li><a href = "/getting-started/home.html">Home</a></li>
-<li><a href = "/getting-started/cgi-in-nodeJs.html">PHP-CGI in NodeJs</a></li>
-<li><a href = "/getting-started/cgi-service-worker.html">PHP-CGI in Service Workers</a></li>
-<li><a href = "/getting-started/install-and-include.html">Install & Import</a></li>
-</ul></details><details open><summary>Extensions</summary><ul><li><a href = "/extensions/using-php-extensions.html">Using Php Extensions</a></li>
-<li><a href = "/extensions/pdo-pglite.html">pdo-pglite</a></li>
-<li><a href = "/extensions/vrzno.html">Vrzno</a></li>
-<li><a href = "/extensions/pdo-cfd1.html">pdo-cfd1</a></li>
-</ul></details><details open><summary>Compiling</summary><ul><li><a href = "/compiling/custom-builds.html">Custom Builds</a></li>
-<li><a href = "/compiling/php-wasm-rc.html">.php-wasm-rc</a></li>
-</ul></details><details open><summary>Filesystem</summary><ul><li><a href = "/filesystem/fs-operations.html">FS Operations</a></li>
-<li><a href = "/filesystem/loading-files.html">Loading Files</a></li>
-<li><a href = "/filesystem/transactions.html">Transactions</a></li>
-</ul></details><li><a href = "/CHANGELOG.html">CHANGELOG</a></li>
-<li><a href = "/TEST.html">TEST</a></li>
-<li><a href = "/LICENSE.html">LICENSE</a></li>
-</ul>
-			</nav>
-						<article><h2 id="php-wasm-rc">.php-wasm-rc</h2>
-<p>You can also create a <code>.php-wasm-rc</code> file in this
-directory to customize the build.</p>
-<pre class="make"><code># Select a PHP version
+				<ul><details open>
+			<summary>Getting Started</summary>
+			<ul><li>
+			<a href = "/getting-started/home.html">
+				Home			</a>
+		</li><li>
+			<a href = "/getting-started/install-and-include.html">
+				Install & Import			</a>
+		</li><li>
+			<a href = "/getting-started/php.ini.html">
+				php.ini			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-js.html">
+				PHP in Javascript			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-static-html.html">
+				PHP in Static HTML			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-service-worker.html">
+				PHP-CGI in Service Workers			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-in-nodeJs.html">
+				PHP-CGI in NodeJs			</a>
+		</li></ul>		</details><details open>
+			<summary>Methods</summary>
+			<ul><li>
+			<a href = "/methods/php-wasm.html">
+				Php Wasm			</a>
+		</li><li>
+			<a href = "/methods/php-cgi-wasm.html">
+				Php Cgi Wasm			</a>
+		</li></ul>		</details><details open>
+			<summary>Extensions</summary>
+			<ul><li>
+			<a href = "/extensions/using-php-extensions.html">
+				Using PHP Extensions			</a>
+		</li><li>
+			<a href = "/extensions/pdo-cfd1.html">
+				pdo-cfd1			</a>
+		</li><li>
+			<a href = "/extensions/pdo-pglite.html">
+				pdo-pglite			</a>
+		</li><li>
+			<a href = "/extensions/vrzno.html">
+				Vrzno			</a>
+		</li></ul>		</details><details open>
+			<summary>Filesystem</summary>
+			<ul><li>
+			<a href = "/filesystem/fs-operations.html">
+				FS Operations			</a>
+		</li><li>
+			<a href = "/filesystem/loading-files.html">
+				Loading Files			</a>
+		</li><li>
+			<a href = "/filesystem/transactions.html">
+				Transactions			</a>
+		</li></ul>		</details><details open>
+			<summary>Compiling</summary>
+			<ul><li>
+			<a href = "/compiling/custom-builds.html">
+				Custom Builds			</a>
+		</li><li>
+			<a href = "/compiling/php-wasm-rc.html">
+				.php-wasm-rc			</a>
+		</li></ul>		</details><li>
+			<a href = "/CHANGELOG.html">
+				CHANGELOG			</a>
+		</li><li>
+			<a href = "/LICENSE.html">
+				LICENSE			</a>
+		</li></ul>			</nav>
+						<article >
+						<h2 id="php-wasm-rc">.php-wasm-rc</h2>
+      <p>You can also create a <code>.php-wasm-rc</code> file in this
+      directory to customize the build.</p>
+      <pre class="make"><code># Select a PHP version
 PHP_VERSION=8.3
 
 # Build the package to a directory other than the current one (RELATIVE path)
@@ -112,76 +165,78 @@ WITH_GD=1
 WITH_LIBPNG=1
 WITH_LIBJPEG=1
 WITH_FREETYPE=1</code></pre>
-<h4 id="options">Options</h4>
-<p>The following options may appear in <code>.php-wasm-rc</code>.</p>
-<hr />
-<h5 id="php_version">PHP_VERSION</h5>
-<p>8.0|8.1|8.2|<strong>8.3</strong></p>
-<hr />
-<h5 id="php_dist_dir">PHP_DIST_DIR</h5>
-<p>This is the directory where javascript &amp; wasm files will be built
-to, <em>relative to the current directory.</em></p>
-<hr />
-<h5 id="php_asset_dir">PHP_ASSET_DIR</h5>
-<p>This is the directory where shared libs, extension,
-<code>.data</code> files &amp; other supporting files will be built to,
-<em>relative to the current directory.</em> Defaults to
-<code>PHP_DIST_DIR</code>.</p>
-<hr />
-<h5 id="optimize">OPTIMIZE</h5>
-<p>0|1|2|<strong>3</strong></p>
-<p>The optimization level to use while compiling.</p>
-<hr />
-<h5 id="suboptimize">SUBOPTIMIZE</h5>
-<p>The optimization level to use while compiling libraries. Defaults to
-<code>OPTIMIZE</code>.</p>
-<hr />
-<h5 id="preload_assets">PRELOAD_ASSETS</h5>
-<p>A list of <strong>absolute paths</strong> to files &amp; directories
-to build to the <code>/preload</code> directory. Will produce a
-<code>.data</code> file.</p>
-<hr />
-<h5 id="assertions">ASSERTIONS</h5>
-<p>0|<strong>1</strong></p>
-<p>Build with/without assertions.</p>
-<hr />
-<h3 id="compiling-extensions">Compiling extensions</h3>
-<p>Extensions may be compiled as <code>dynamic</code>,
-<code>shared</code>, or <code>static</code>. See
-<code>Custom Builds</code> for more information on compiling
-php-wasm.</p>
-<ul>
-<li>dynamic - these extensions may be loaded selectively at
-runtime.</li>
-<li>shared - these extensions will always be loaded at startup and can
-be cached and reused.</li>
-<li>static - these extensions will be built directly into the main wasm
-binary (may cause a huge filesize).</li>
-</ul>
-<h4 id="extension-flags">Extension Flags</h4>
-<p>As stated above, extensions may be compiled as <code>dynamic</code>,
-<code>shared</code>, or <code>static</code>.</p>
-<ul>
-<li>dynamic - these extensions may be loaded selectively at
-runtime.</li>
-<li>shared - these extensions will always be loaded at startup and can
-be cached and reused.</li>
-<li>static - these extensions will be built directly into the main wasm
-binary (may cause a huge filesize).</li>
-</ul>
-<p>(defaults provided below in <strong>bold</strong>)</p>
-<p>The following options are availavle for building static PHP
-extensions:</p>
-<pre><code>WITH_BCMATH    # [0, 1] Enabled by default
+      <h4 id="options">Options</h4>
+      <p>The following options may appear in
+      <code>.php-wasm-rc</code>.</p>
+      <hr />
+      <h5 id="php_version">PHP_VERSION</h5>
+      <p>8.0|8.1|8.2|<strong>8.3</strong></p>
+      <hr />
+      <h5 id="php_dist_dir">PHP_DIST_DIR</h5>
+      <p>This is the directory where javascript &amp; wasm files will be
+      built to, <em>relative to the current directory.</em></p>
+      <hr />
+      <h5 id="php_asset_dir">PHP_ASSET_DIR</h5>
+      <p>This is the directory where shared libs, extension,
+      <code>.data</code> files &amp; other supporting files will be
+      built to, <em>relative to the current directory.</em> Defaults to
+      <code>PHP_DIST_DIR</code>.</p>
+      <hr />
+      <h5 id="optimize">OPTIMIZE</h5>
+      <p>0|1|2|<strong>3</strong></p>
+      <p>The optimization level to use while compiling.</p>
+      <hr />
+      <h5 id="suboptimize">SUBOPTIMIZE</h5>
+      <p>The optimization level to use while compiling libraries.
+      Defaults to <code>OPTIMIZE</code>.</p>
+      <hr />
+      <h5 id="preload_assets">PRELOAD_ASSETS</h5>
+      <p>A list of <strong>absolute paths</strong> to files &amp;
+      directories to build to the <code>/preload</code> directory. Will
+      produce a <code>.data</code> file.</p>
+      <hr />
+      <h5 id="assertions">ASSERTIONS</h5>
+      <p>0|<strong>1</strong></p>
+      <p>Build with/without assertions.</p>
+      <hr />
+      <h3 id="compiling-extensions">Compiling extensions</h3>
+      <p>Extensions may be compiled as <code>dynamic</code>,
+      <code>shared</code>, or <code>static</code>. See
+      <code>Custom Builds</code> for more information on compiling
+      php-wasm.</p>
+      <ul>
+      <li>dynamic - these extensions may be loaded selectively at
+      runtime.</li>
+      <li>shared - these extensions will always be loaded at startup and
+      can be cached and reused.</li>
+      <li>static - these extensions will be built directly into the main
+      wasm binary (may cause a huge filesize).</li>
+      </ul>
+      <h4 id="extension-flags">Extension Flags</h4>
+      <p>As stated above, extensions may be compiled as
+      <code>dynamic</code>, <code>shared</code>, or
+      <code>static</code>.</p>
+      <ul>
+      <li>dynamic - these extensions may be loaded selectively at
+      runtime.</li>
+      <li>shared - these extensions will always be loaded at startup and
+      can be cached and reused.</li>
+      <li>static - these extensions will be built directly into the main
+      wasm binary (may cause a huge filesize).</li>
+      </ul>
+      <p>(defaults provided below in <strong>bold</strong>)</p>
+      <p>The following options are availavle for building static PHP
+      extensions:</p>
+      <pre><code>WITH_BCMATH    # [0, 1] Enabled by default
 WITH_CALENDAR  # [0, 1] Enabled by default
 WITH_CTYPE     # [0, 1] Enabled by default
 WITH_EXIF      # [0, 1] Enabled by default
 WITH_FILTER    # [0, 1] Enabled by default
 WITH_TOKENIZER # [0, 1] Enabled by default
 WITH_VRZNO     # [0, 1] Enabled by default</code></pre>
-<p>The following extension may be compiled as static, shared or
-dynamic:</p>
-<pre><code>WITH_PHAR      # [0, 1, static, dynamic]
+      <p>The following extension may be compiled as static, shared or
+      dynamic:</p>
+      <pre><code>WITH_PHAR      # [0, 1, static, dynamic]
 WITH_LIBXML    # [0, 1, static, shared]
 WITH_ICONV     # [0, 1, static, shared, dynamic]
 WITH_SQLITE    # [0, 1, static, shared, dynamic]
@@ -200,123 +255,131 @@ WITH_MBSTRING  # [0, 1, static, dynamic]
 WITH_ONIGURUMA # [0, 1, static, shared]
 WITH_OPENSSL   # [0, 1, shared, dynamic]
 WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
-<hr />
-<h5 id="with_phar">WITH_PHAR</h5>
-<p>static|<strong>dynamic</strong></p>
-<p>When compiled as a <code>dynamic</code> extension, this will produce
-the extension file <code>php8.x-phar.so</code>.</p>
-<hr />
-<h5 id="with_libxml">WITH_LIBXML</h5>
-<p>static|<strong>shared</strong></p>
-<p>This actual <code>php-libxml</code> extension must be statically
-compiled, but <code>libxml</code> itself may be loaded as a shared
-library.</p>
-<p>When compiled as a <code>shared</code> library, it will produce the
-library <code>libxml.so</code>.</p>
-<hr />
-<h5 id="with_libzip">WITH_LIBZIP</h5>
-<p>static|shared|<strong>dynamic</strong></p>
-<p>When compiled as a <code>dynamic</code> extension, this will produce
-the extension <code>php-8.x-zip.so</code>.</p>
-<p>When compiled as a <code>dynamic</code> or <code>shared</code>
-extension, it will produce the library <code>libzip.so</code>.</p>
-<p>This extension depends on <code>zlib</code>.</p>
-<hr />
-<h5 id="with_iconv">WITH_ICONV</h5>
-<p>static|shared|<strong>dynamic</strong></p>
-<p>When compiled as a <code>dynamic</code> extension, this will produce
-the extension <code>php-8.x-iconv.so</code>.</p>
-<p>When compiled as a <code>dynamic</code> or <code>shared</code>
-extension, it will produce the library <code>libiconv.so</code>.</p>
-<hr />
-<h5 id="with_sqlite">WITH_SQLITE</h5>
-<p>static|shared|<strong>dynamic</strong></p>
-<p>When compiled as a <code>dynamic</code> extension, this will produce
-the extensions <code>php-8.x-sqlite.so</code>, &amp;
-<code>php-8.x-pdo-sqlite.so</code>.</p>
-<p>When compiled as a <code>dynamic</code> or <code>shared</code>
-extension, it will produce the library <code>libsqlite3.so</code>.</p>
-<hr />
-<h5 id="with_gd">WITH_GD</h5>
-<p>static|<strong>dynamic</strong></p>
-<p>This extenstion makes use of <code>freetype</code>,
-<code>libjpeg</code>, <code>libpng</code>, &amp; <code>zlib</code>.</p>
-<p>When compiled as a <code>dynamic</code> extension, this will produce
-the extension <code>php-8.x-gd.so</code>.</p>
-<h6 id="with_libpng">WITH_LIBPNG</h6>
-<p>static|<strong>shared</strong></p>
-<p>When compiled as a <code>shared</code> library, this will produce the
-library <code>libpng.so</code>.</p>
-<p>If WITH_GD is dynamic, then loading will be deferred until after gd
-is loaded.</p>
-<h6 id="with_freetype">WITH_FREETYPE</h6>
-<p>static|<strong>shared</strong></p>
-<p>When compiled as a <code>shared</code> library, this will produce the
-library <code>libfreetype.so</code>.</p>
-<p>If WITH_GD is dynamic, then loading will be deferred until after gd
-is loaded.</p>
-<h6 id="with_libjpeg">WITH_LIBJPEG</h6>
-<p>static|<strong>shared</strong></p>
-<p>When compiled as a <code>shared</code> library, this will produce the
-library <code>libjpeg.so</code>.</p>
-<p>If WITH_GD is dynamic, then loading will be deferred until after gd
-is loaded.</p>
-<hr />
-<h5 id="with_zlib">WITH_ZLIB</h5>
-<p>static|shared|<strong>dynamic</strong></p>
-<p>When compiled as a <code>dynamic</code> extension, this will produce
-the extension <code>php-8.x-zlib.so</code>.</p>
-<p>When compiled as a <code>dynamic</code> or <code>shared</code>
-extension, it will produce the library <code>libz.so</code>.</p>
-<hr />
-<h5 id="with_yaml">WITH_YAML</h5>
-<p>static|shared|<strong>dynamic</strong></p>
-<p>When compiled as a <code>dynamic</code> extension, this will produce
-the extension <code>php-8.x-yaml.so</code>.</p>
-<p>When compiled as a <code>dynamic</code> or <code>shared</code>
-extension, it will produce the library <code>libyaml.so</code>.</p>
-<hr />
-<h5 id="with_tidy">WITH_TIDY</h5>
-<p>static|shared|<strong>dynamic</strong></p>
-<p>When compiled as a <code>dynamic</code> extension, this will produce
-the extension <code>php-8.x-tidy.so</code>.</p>
-<p>When compiled as a <code>dynamic</code> or <code>shared</code>
-extension, it will produce the library <code>libtidy.so</code>.</p>
-<hr />
-<h5 id="with_mbstring">WITH_MBSTRING</h5>
-<p>static|<strong>dynamic</strong></p>
-<p>When compiled as a <code>dynamic</code> extension, this will produce
-the extension <code>php-8.x-mbstring.so</code>.</p>
-<hr />
-<h5 id="with_oniguruma">WITH_ONIGURUMA</h5>
-<p>static|shared|<strong>dynamic</strong></p>
-<p>Support library for <code>mbstring</code>.</p>
-<p>When compiled as a <code>dynamic</code> or <code>shared</code>
-library, this will produce the library <code>libonig.so</code>.</p>
-<p>If <code>WITH_MBSTRING</code> is <code>dynamic</code>, then loading
-will be deferred until after <code>mbstring</code> is loaded.</p>
-<hr />
-<h5 id="with_openssl">WITH_OPENSSL</h5>
-<p>shared|<strong>dynamic</strong></p>
-<p>When compiled as a <code>dynamic</code> extension, this will produce
-the extension <code>php-8.x-openssl</code>.</p>
-<p>When compiled as a <code>dynamic</code> or <code>shared</code>
-extension, it will produce the libraries <code>libssl.so</code> &amp;
-<code>libcrypto.so</code>.</p>
-<h5 id="with_intl">WITH_INTL</h5>
-<p>static|shared|<strong>dynamic</strong></p>
-<p>When compiled as a <code>dynamic</code>, or <code>shared</code>
-extension, this will produce the extension <code>php-8.x-intl.so</code>
-&amp; the following libraries:</p>
-<ul>
-<li>libicuuc.so</li>
-<li>libicutu.so</li>
-<li>libicutest.so</li>
-<li>libicuio.so</li>
-<li>libicui18n.so</li>
-<li>libicudata.so</li>
-<li><h2 id="icudt72l.dat">icudt72l.dat</h2></li>
-</ul></article>
+      <hr />
+      <h5 id="with_phar">WITH_PHAR</h5>
+      <p>static|<strong>dynamic</strong></p>
+      <p>When compiled as a <code>dynamic</code> extension, this will
+      produce the extension file <code>php8.x-phar.so</code>.</p>
+      <hr />
+      <h5 id="with_libxml">WITH_LIBXML</h5>
+      <p>static|<strong>shared</strong></p>
+      <p>This actual <code>php-libxml</code> extension must be
+      statically compiled, but <code>libxml</code> itself may be loaded
+      as a shared library.</p>
+      <p>When compiled as a <code>shared</code> library, it will produce
+      the library <code>libxml.so</code>.</p>
+      <hr />
+      <h5 id="with_libzip">WITH_LIBZIP</h5>
+      <p>static|shared|<strong>dynamic</strong></p>
+      <p>When compiled as a <code>dynamic</code> extension, this will
+      produce the extension <code>php-8.x-zip.so</code>.</p>
+      <p>When compiled as a <code>dynamic</code> or <code>shared</code>
+      extension, it will produce the library <code>libzip.so</code>.</p>
+      <p>This extension depends on <code>zlib</code>.</p>
+      <hr />
+      <h5 id="with_iconv">WITH_ICONV</h5>
+      <p>static|shared|<strong>dynamic</strong></p>
+      <p>When compiled as a <code>dynamic</code> extension, this will
+      produce the extension <code>php-8.x-iconv.so</code>.</p>
+      <p>When compiled as a <code>dynamic</code> or <code>shared</code>
+      extension, it will produce the library
+      <code>libiconv.so</code>.</p>
+      <hr />
+      <h5 id="with_sqlite">WITH_SQLITE</h5>
+      <p>static|shared|<strong>dynamic</strong></p>
+      <p>When compiled as a <code>dynamic</code> extension, this will
+      produce the extensions <code>php-8.x-sqlite.so</code>, &amp;
+      <code>php-8.x-pdo-sqlite.so</code>.</p>
+      <p>When compiled as a <code>dynamic</code> or <code>shared</code>
+      extension, it will produce the library
+      <code>libsqlite3.so</code>.</p>
+      <hr />
+      <h5 id="with_gd">WITH_GD</h5>
+      <p>static|<strong>dynamic</strong></p>
+      <p>This extenstion makes use of <code>freetype</code>,
+      <code>libjpeg</code>, <code>libpng</code>, &amp;
+      <code>zlib</code>.</p>
+      <p>When compiled as a <code>dynamic</code> extension, this will
+      produce the extension <code>php-8.x-gd.so</code>.</p>
+      <h6 id="with_libpng">WITH_LIBPNG</h6>
+      <p>static|<strong>shared</strong></p>
+      <p>When compiled as a <code>shared</code> library, this will
+      produce the library <code>libpng.so</code>.</p>
+      <p>If WITH_GD is dynamic, then loading will be deferred until
+      after gd is loaded.</p>
+      <h6 id="with_freetype">WITH_FREETYPE</h6>
+      <p>static|<strong>shared</strong></p>
+      <p>When compiled as a <code>shared</code> library, this will
+      produce the library <code>libfreetype.so</code>.</p>
+      <p>If WITH_GD is dynamic, then loading will be deferred until
+      after gd is loaded.</p>
+      <h6 id="with_libjpeg">WITH_LIBJPEG</h6>
+      <p>static|<strong>shared</strong></p>
+      <p>When compiled as a <code>shared</code> library, this will
+      produce the library <code>libjpeg.so</code>.</p>
+      <p>If WITH_GD is dynamic, then loading will be deferred until
+      after gd is loaded.</p>
+      <hr />
+      <h5 id="with_zlib">WITH_ZLIB</h5>
+      <p>static|shared|<strong>dynamic</strong></p>
+      <p>When compiled as a <code>dynamic</code> extension, this will
+      produce the extension <code>php-8.x-zlib.so</code>.</p>
+      <p>When compiled as a <code>dynamic</code> or <code>shared</code>
+      extension, it will produce the library <code>libz.so</code>.</p>
+      <hr />
+      <h5 id="with_yaml">WITH_YAML</h5>
+      <p>static|shared|<strong>dynamic</strong></p>
+      <p>When compiled as a <code>dynamic</code> extension, this will
+      produce the extension <code>php-8.x-yaml.so</code>.</p>
+      <p>When compiled as a <code>dynamic</code> or <code>shared</code>
+      extension, it will produce the library
+      <code>libyaml.so</code>.</p>
+      <hr />
+      <h5 id="with_tidy">WITH_TIDY</h5>
+      <p>static|shared|<strong>dynamic</strong></p>
+      <p>When compiled as a <code>dynamic</code> extension, this will
+      produce the extension <code>php-8.x-tidy.so</code>.</p>
+      <p>When compiled as a <code>dynamic</code> or <code>shared</code>
+      extension, it will produce the library
+      <code>libtidy.so</code>.</p>
+      <hr />
+      <h5 id="with_mbstring">WITH_MBSTRING</h5>
+      <p>static|<strong>dynamic</strong></p>
+      <p>When compiled as a <code>dynamic</code> extension, this will
+      produce the extension <code>php-8.x-mbstring.so</code>.</p>
+      <hr />
+      <h5 id="with_oniguruma">WITH_ONIGURUMA</h5>
+      <p>static|shared|<strong>dynamic</strong></p>
+      <p>Support library for <code>mbstring</code>.</p>
+      <p>When compiled as a <code>dynamic</code> or <code>shared</code>
+      library, this will produce the library
+      <code>libonig.so</code>.</p>
+      <p>If <code>WITH_MBSTRING</code> is <code>dynamic</code>, then
+      loading will be deferred until after <code>mbstring</code> is
+      loaded.</p>
+      <hr />
+      <h5 id="with_openssl">WITH_OPENSSL</h5>
+      <p>shared|<strong>dynamic</strong></p>
+      <p>When compiled as a <code>dynamic</code> extension, this will
+      produce the extension <code>php-8.x-openssl</code>.</p>
+      <p>When compiled as a <code>dynamic</code> or <code>shared</code>
+      extension, it will produce the libraries <code>libssl.so</code>
+      &amp; <code>libcrypto.so</code>.</p>
+      <h5 id="with_intl">WITH_INTL</h5>
+      <p>static|shared|<strong>dynamic</strong></p>
+      <p>When compiled as a <code>dynamic</code>, or <code>shared</code>
+      extension, this will produce the extension
+      <code>php-8.x-intl.so</code> &amp; the following libraries:</p>
+      <ul>
+      <li>libicuuc.so</li>
+      <li>libicutu.so</li>
+      <li>libicutest.so</li>
+      <li>libicuio.so</li>
+      <li>libicui18n.so</li>
+      <li>libicudata.so</li>
+      <li><h2 id="icudt72l.dat">icudt72l.dat</h2></li>
+      </ul>
+			</article>
 						<nav class = "table-of-contents">
 				<span>on this page:</span>
 				<ul>
@@ -347,9 +410,12 @@ extension, this will produce the extension <code>php-8.x-intl.so</code>
 		</ul>
 
 		<h4>About</h4>
-		<p><a href="http://localhost:8081/LICENSE.html">License</a></p>
-		<p>&copy; 2024 Sean Morris</p>
+		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-
+		<p>
+			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
+			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
+			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
+		</p>
 	</footer>
 </body>

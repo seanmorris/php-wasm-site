@@ -1,97 +1,94 @@
 <?php
 
-function loop($name)
+function makeNavBar($name)
 {
-	$displayName = ucwords(trim(str_replace('-', ' ', basename($name))));
+	$directories = [];
+	$files = [];
 
-	?><details open><summary><?=$displayName;?></summary><ul><?php
-
+	?><ul><?php
 	$dir = new \DirectoryIterator($name);
-
 	foreach($dir as $entry)
 	{
 		$filename = $entry->getFilename();
 		$pathname = $entry->getPathname();
 
-		if($filename === '.' || $filename === '..')
+		if($filename[0] === '.')
 		{
 			continue;
 		}
 
 		if(is_dir($pathname))
 		{
-			loop($pathname);
+			$frontmatter = yaml_parse(`yq --front-matter=extract $pathname/.fm.yaml 2>/dev/null|| echo ""`) ?? [];
+			$directories[] = (object)[ 'filename' => $filename, 'pathname' => $pathname, 'frontmatter' => $frontmatter ];
+			continue;
 		}
+
+		$frontmatter = yaml_parse(`yq --front-matter=extract $pathname 2>/dev/null|| echo ""`) ?? [];
+
+		if(!($frontmatter['leftbar'] ?? true))
+		{
+			continue;
+		}
+
+		$files[] = (object)[ 'filename' => $filename, 'pathname' => $pathname, 'frontmatter' => $frontmatter];
 	}
 
-	foreach($dir as $entry)
-	{
-		$filename = $entry->getFilename();
-		$pathname = $entry->getPathname();
+	usort($directories, function($a, $b){
+		$wa = (float) ($a->frontmatter['weight'] ?? 0);
+		$wb = (float) ($b->frontmatter['weight'] ?? 0);
 
-		if(is_dir($pathname))
+		if($wa === $wb)
 		{
-			continue;
+			return strcmp($a->filename, $b->filename);
 		}
 
-		$frontmatter = yaml_parse(`yq --front-matter=extract $pathname || echo ""`) ?? [];
+		return $wa - $wb;
+	});
+
+	usort($files, function($a, $b){
+		$wa = (float) ($a->frontmatter['weight'] ?? 0);
+		$wb = (float) ($b->frontmatter['weight'] ?? 0);
+
+		if($wa === $wb)
+		{
+			return strcmp($a->filename, $b->filename);
+		}
+
+		return $wa - $wb;
+		return strcmp($a->filename, $b->filename);
+	});
+
+	foreach($directories as $entry)
+	{
+		$filename = $entry->filename;
+		$pathname = $entry->pathname;
+
+		$displayName = ucwords(trim(str_replace('-', ' ', basename($filename))));
+
+		?><details open>
+			<summary><?=$displayName;?></summary>
+			<?=makeNavBar($pathname);?>
+		</details><?php
+	}
+
+	foreach($files as $entry)
+	{
+		$filename = $entry->filename;
+		$pathname = $entry->pathname;
+		$frontmatter = $entry->frontmatter;
+
 		$title = $frontmatter['title'] ?? ucwords(preg_replace(['/\.md$/', '/-/'], ['',  ' '], $filename));
 		$leftbar = $frontmatter['leftbar'] ?? true;
 
-		if(!$leftbar)
-		{
-			continue;
-		}
+		?><li>
+			<a href = "<?=preg_replace(['/^.\/pages/', '/\.\w+$/'], ['', '.html'], $pathname);?>">
+				<?=$title?>
+			</a>
+		</li><?php
+	}
 
-		?><li><a href = "<?=preg_replace(['/^.\/pages/', '/\.\w+$/'], ['', '.html'], $pathname);?>"><?=$title?></a></li>
-<?php
-
-	} ?></ul></details><?php
+	?></ul><?php
 }
 
-?><ul><?php
-
-foreach(new \DirectoryIterator('./pages') as $entry)
-{
-	$filename = $entry->getFilename();
-	$pathname = $entry->getPathname();
-
-	if($filename === '.' || $filename === '..')
-	{
-		continue;
-	}
-
-	if(is_dir($pathname))
-	{
-		loop($entry->getPathName());
-	}
-}
-
-foreach(new \DirectoryIterator('./pages') as $entry)
-{
-	$filename = $entry->getFilename();
-	$pathname = $entry->getPathname();
-
-	if($filename === '.' || $filename === '..')
-	{
-		continue;
-	}
-
-	if(is_dir($pathname))
-	{
-		continue;
-	}
-
-	$frontmatter = yaml_parse(`yq --front-matter=extract $pathname || echo ""`) ?? [];
-	$title = $frontmatter['title'] ?? ucwords(preg_replace(['/\.md$/', '/-/'], ['',  ' '], $filename));
-	$leftbar = $frontmatter['leftbar'] ?? true;
-
-	if(!$leftbar)
-	{
-		continue;
-	}
-
-	?><li><a href = "<?=preg_replace(['/^.\/pages/', '/\.\w+$/'], ['', '.html'], $pathname);?>"><?=$title?></a></li>
-<?php
-}
-?></ul>
+makeNavBar('./pages');

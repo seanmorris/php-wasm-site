@@ -1,15 +1,17 @@
 <!DOCTYPE HTML>
 
 <head>
-	<title>pdo-pglite</title>
-	<script src = "/main.js"></script>
+			<title>php-wasm | pdo-pglite</title>
+			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-	<title>pdo-pglite</title>
-	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-italic.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
+	<link rel="dns-prefetch" href="https://discord.gg/" />
+	<link rel="dns-prefetch" href="https://discord.com/" />
 	<link rel="dns-prefetch" href="https://playground.wordpress.net/" />
 	<link rel="dns-prefetch" href="https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/" />
 	<link rel="dns-prefetch" href="https://github.com/" />
@@ -21,6 +23,68 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
+  pre > code.sourceCode { white-space: pre; position: relative; }
+  pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+  pre > code.sourceCode > span:empty { height: 1.2em; }
+  .sourceCode { overflow: visible; }
+  code.sourceCode > span { color: inherit; text-decoration: inherit; }
+  div.sourceCode { margin: 1em 0; }
+  pre.sourceCode { margin: 0; }
+  @media screen {
+  div.sourceCode { overflow: auto; }
+  }
+  @media print {
+  pre > code.sourceCode { white-space: pre-wrap; }
+  pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+  }
+  pre.numberSource code
+    { counter-reset: source-line 0; }
+  pre.numberSource code > span
+    { position: relative; left: -4em; counter-increment: source-line; }
+  pre.numberSource code > span > a:first-child::before
+    { content: counter(source-line);
+      position: relative; left: -1em; text-align: right; vertical-align: baseline;
+      border: none; display: inline-block;
+      -webkit-touch-callout: none; -webkit-user-select: none;
+      -khtml-user-select: none; -moz-user-select: none;
+      -ms-user-select: none; user-select: none;
+      padding: 0 4px; width: 4em;
+    }
+  pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+  div.sourceCode
+    { color: #cccccc; background-color: #303030; }
+  @media screen {
+  pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+  }
+  code span.al { color: #ffcfaf; } /* Alert */
+  code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+  code span.at { } /* Attribute */
+  code span.bn { color: #dca3a3; } /* BaseN */
+  code span.bu { } /* BuiltIn */
+  code span.cf { color: #f0dfaf; } /* ControlFlow */
+  code span.ch { color: #dca3a3; } /* Char */
+  code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+  code span.co { color: #7f9f7f; } /* Comment */
+  code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+  code span.do { color: #7f9f7f; } /* Documentation */
+  code span.dt { color: #dfdfbf; } /* DataType */
+  code span.dv { color: #dcdccc; } /* DecVal */
+  code span.er { color: #c3bf9f; } /* Error */
+  code span.ex { } /* Extension */
+  code span.fl { color: #c0bed1; } /* Float */
+  code span.fu { color: #efef8f; } /* Function */
+  code span.im { } /* Import */
+  code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+  code span.kw { color: #f0dfaf; } /* Keyword */
+  code span.op { color: #f0efd0; } /* Operator */
+  code span.ot { color: #efef8f; } /* Other */
+  code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+  code span.sc { color: #dca3a3; } /* SpecialChar */
+  code span.ss { color: #cc9393; } /* SpecialString */
+  code span.st { color: #cc9393; } /* String */
+  code span.va { } /* Variable */
+  code span.vs { color: #cc9393; } /* VerbatimString */
+  code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
   .display.math{display: block; text-align: center; margin: 0.5rem auto;}
 	</style>
 	<link rel="stylesheet" href="/heading.css" />
@@ -54,32 +118,191 @@
 	<section class = "below-fold">
 		<div class = "page-rule">
 						<nav class = "main">
-				<ul><details open><summary>Getting Started</summary><ul><li><a href = "/getting-started/php.ini.html">php.ini</a></li>
-<li><a href = "/getting-started/php-in-js.html">PHP in Javascript</a></li>
-<li><a href = "/getting-started/php-in-static-html.html">PHP in Static HTML</a></li>
-<li><a href = "/getting-started/home.html">Home</a></li>
-<li><a href = "/getting-started/cgi-in-nodeJs.html">PHP-CGI in NodeJs</a></li>
-<li><a href = "/getting-started/cgi-service-worker.html">PHP-CGI in Service Workers</a></li>
-<li><a href = "/getting-started/install-and-include.html">Install & Import</a></li>
-</ul></details><details open><summary>Extensions</summary><ul><li><a href = "/extensions/using-php-extensions.html">Using Php Extensions</a></li>
-<li><a href = "/extensions/pdo-pglite.html">pdo-pglite</a></li>
-<li><a href = "/extensions/vrzno.html">Vrzno</a></li>
-<li><a href = "/extensions/pdo-cfd1.html">pdo-cfd1</a></li>
-</ul></details><details open><summary>Compiling</summary><ul><li><a href = "/compiling/custom-builds.html">Custom Builds</a></li>
-<li><a href = "/compiling/php-wasm-rc.html">.php-wasm-rc</a></li>
-</ul></details><details open><summary>Filesystem</summary><ul><li><a href = "/filesystem/fs-operations.html">FS Operations</a></li>
-<li><a href = "/filesystem/loading-files.html">Loading Files</a></li>
-<li><a href = "/filesystem/transactions.html">Transactions</a></li>
-</ul></details><li><a href = "/CHANGELOG.html">CHANGELOG</a></li>
-<li><a href = "/TEST.html">TEST</a></li>
-<li><a href = "/LICENSE.html">LICENSE</a></li>
-</ul>
-			</nav>
-						<article><h1 id="pdo-pglite">pdo-pglite</h1></article>
+				<ul><details open>
+			<summary>Getting Started</summary>
+			<ul><li>
+			<a href = "/getting-started/home.html">
+				Home			</a>
+		</li><li>
+			<a href = "/getting-started/install-and-include.html">
+				Install & Import			</a>
+		</li><li>
+			<a href = "/getting-started/php.ini.html">
+				php.ini			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-js.html">
+				PHP in Javascript			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-static-html.html">
+				PHP in Static HTML			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-service-worker.html">
+				PHP-CGI in Service Workers			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-in-nodeJs.html">
+				PHP-CGI in NodeJs			</a>
+		</li></ul>		</details><details open>
+			<summary>Methods</summary>
+			<ul><li>
+			<a href = "/methods/php-wasm.html">
+				Php Wasm			</a>
+		</li><li>
+			<a href = "/methods/php-cgi-wasm.html">
+				Php Cgi Wasm			</a>
+		</li></ul>		</details><details open>
+			<summary>Extensions</summary>
+			<ul><li>
+			<a href = "/extensions/using-php-extensions.html">
+				Using PHP Extensions			</a>
+		</li><li>
+			<a href = "/extensions/pdo-cfd1.html">
+				pdo-cfd1			</a>
+		</li><li>
+			<a href = "/extensions/pdo-pglite.html">
+				pdo-pglite			</a>
+		</li><li>
+			<a href = "/extensions/vrzno.html">
+				Vrzno			</a>
+		</li></ul>		</details><details open>
+			<summary>Filesystem</summary>
+			<ul><li>
+			<a href = "/filesystem/fs-operations.html">
+				FS Operations			</a>
+		</li><li>
+			<a href = "/filesystem/loading-files.html">
+				Loading Files			</a>
+		</li><li>
+			<a href = "/filesystem/transactions.html">
+				Transactions			</a>
+		</li></ul>		</details><details open>
+			<summary>Compiling</summary>
+			<ul><li>
+			<a href = "/compiling/custom-builds.html">
+				Custom Builds			</a>
+		</li><li>
+			<a href = "/compiling/php-wasm-rc.html">
+				.php-wasm-rc			</a>
+		</li></ul>		</details><li>
+			<a href = "/CHANGELOG.html">
+				CHANGELOG			</a>
+		</li><li>
+			<a href = "/LICENSE.html">
+				LICENSE			</a>
+		</li></ul>			</nav>
+						<article >
+						<h1 id="pdo-pglite">pdo-pglite</h1>
+      <p><em>pdo driver for pglite &amp; php-wasm</em></p>
+      <p><a href="https://www.reddit.com/r/phpwasm/"><img
+      src="https://img.shields.io/badge/reddit-always%20online-336699?style=for-the-badge&amp;logo=reddit"
+      alt="Static Badge" /></a> <a
+      href="https://discord.gg/j8VZzju7gJ"><img
+      src="https://img.shields.io/discord/1199824765666463835?style=for-the-badge&amp;logo=discord&amp;link=https%3A%2F%2Fdiscord.gg%2Fj8VZzju7gJ"
+      alt="Discord" /></a></p>
+      <h3 id="join-the-community-reddit-discord-php-wasm">Join the
+      community: <a href="https://www.reddit.com/r/phpwasm/">reddit</a>
+      | <a href="https://discord.gg/j8VZzju7gJ">discord</a> | <a
+      href="https://github.com/seanmorris/php-wasm">php-wasm</a></h3>
+      <p>pdo_pglite requires PHP 8.1+</p>
+      <p>Simply pass the PGlite object into the php-wasm constructor to
+      enable pdo_pglite support:</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;@electric-sql/pglite&#39;</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({PGlite})<span class="op">;</span></span></code></pre></div>
+      <p>You can even load PGlite from a CDN:</p>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&#39;</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({PGlite})<span class="op">;</span></span></code></pre></div>
+      <h2 id="connect-configure">Connect &amp; Configure</h2>
+      <p>Once PGlite is passed in, <code>pgsql:</code> will be available
+      as a PDO driver.</p>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&#39;</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({PGlite})<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="vs">    $pdo = new PDO(&#39;pgsql:idb-storage&#39;);</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+      <h2 id="usage">Usage</h2>
+      <p>Use pdo-pglite like you’d use any other PDO connector. Prepared
+      statements, as well as positional &amp; named placeholders are
+      supported.</p>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;@electric-sql/pglite&#39;</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({PGlite})<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="vs">    $pdo = new PDO(&#39;pgsql:idb-storage&#39;);</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="vs">    $stm = $pdo-&gt;prepare(</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="vs">        &#39;SELECT * FROM pg_catalog.pg_tables WHERE schemaname = :schema&#39;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="vs">    );</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="vs">    $out = fopen(&#39;php://stdout&#39;, &#39;w&#39;);</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="vs">    $stm-&gt;execute([</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="vs">        &#39;schema&#39; =&gt; &#39;pg_catalog&#39;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="vs">    ]);</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="vs">    $headers = false;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="vs">    while ($row = $stm-&gt;fetch(PDO::FETCH_ASSOC)) {</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="vs">        if (!$headers) {</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="vs">            fputcsv($out, array_keys($row));</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="vs">            $headers = true;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="vs">        }</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="vs">        fputcsv($out, $row);</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="vs">    }</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+      <p>PGlite can also be used right from static HTML. Just pass it in
+      the <code>data-imports</code> attribute on the php script tag:</p>
+      <div class="sourceCode" id="cb5"><pre
+      class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;module&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;./php-tags.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span> <span class="er">data-stderr</span> <span class="ot">=</span> <span class="st">&quot;#error&quot;</span> <span class="er">data-imports</span> <span class="ot">=</span> <span class="st">&#39;{</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">        &quot;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&quot;: [&quot;PGlite&quot;]</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">    }&#39;</span><span class="kw">&gt;</span><span class="op">&lt;?</span>php</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        $pdo <span class="op">=</span> <span class="kw">new</span> <span class="fu">PDO</span>(<span class="st">&#39;pgsql:idb-storage&#39;</span>)<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        $stm <span class="op">=</span> $pdo<span class="op">-&gt;</span><span class="fu">prepare</span>(</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;SELECT * FROM pg_catalog.pg_tables WHERE schemaname = :schema&#39;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        )<span class="op">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        $out <span class="op">=</span> <span class="fu">fopen</span>(<span class="st">&#39;php://stdout&#39;</span><span class="op">,</span> <span class="st">&#39;w&#39;</span>)<span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        $stm<span class="op">-&gt;</span><span class="fu">execute</span>([</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;schema&#39;</span> <span class="kw">=&gt;</span> <span class="st">&#39;pg_catalog&#39;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        ])<span class="op">;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        $headers <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> ($row <span class="op">=</span> $stm<span class="op">-&gt;</span><span class="fu">fetch</span>(PDO<span class="op">::</span>FETCH_ASSOC)) {</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (<span class="op">!</span>$headers) {</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                <span class="fu">fputcsv</span>($out<span class="op">,</span> <span class="fu">array_keys</span>($row))<span class="op">;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                $headers <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">fputcsv</span>($out<span class="op">,</span> $row)<span class="op">;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/script&gt;</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;pre</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;output&quot;</span><span class="kw">&gt;&lt;/pre&gt;</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;pre</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;error&quot;</span><span class="kw">&gt;&lt;/pre&gt;</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+      <h2 id="electric-sqlpglite"><span class="citation"
+      data-cites="electric-sql/pglite">@electric-sql/pglite</span></h2>
+      <p><code>pdo_pglite</code> is powered by <a
+      href="https://electric-sql.com/"><span class="citation"
+      data-cites="electric-sql/pglite">@electric-sql/pglite</span></a>.</p>
+      <p>https://github.com/electric-sql/pglite</p>
+      <p>https://electric-sql.com/</p>
+			</article>
 						<nav class = "table-of-contents">
 				<span>on this page:</span>
 				<ul>
-    <li><a href="#pdo-pglite">pdo-pglite</a></li>
+    <li><a href="#pdo-pglite">pdo-pglite</a>
+    <ul>
+    <li><a href="#join-the-community-reddit-discord-php-wasm">Join the
+    community: <span>reddit</span> | <span>discord</span> |
+    <span>php-wasm</span></a></li>
+    <li><a href="#connect-configure">Connect &amp; Configure</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#electric-sqlpglite"><span class="citation"
+    data-cites="electric-sql/pglite">@electric-sql/pglite</span></a></li>
+    </ul></li>
     </ul>
 				<span><a href = "#">top</a></span>
 			</nav>
@@ -103,9 +326,12 @@
 		</ul>
 
 		<h4>About</h4>
-		<p><a href="http://localhost:8081/LICENSE.html">License</a></p>
-		<p>&copy; 2024 Sean Morris</p>
+		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-
+		<p>
+			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
+			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
+			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
+		</p>
 	</footer>
 </body>

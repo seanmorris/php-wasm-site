@@ -1,15 +1,17 @@
 <!DOCTYPE HTML>
 
 <head>
-	<title>PHP in Static HTML</title>
-	<script src = "/main.js"></script>
+			<title>php-wasm | PHP in Static HTML</title>
+			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-	<title>PHP in Static HTML</title>
-	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-italic.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
+	<link rel="dns-prefetch" href="https://discord.gg/" />
+	<link rel="dns-prefetch" href="https://discord.com/" />
 	<link rel="dns-prefetch" href="https://playground.wordpress.net/" />
 	<link rel="dns-prefetch" href="https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/" />
 	<link rel="dns-prefetch" href="https://github.com/" />
@@ -116,51 +118,101 @@
 	<section class = "below-fold">
 		<div class = "page-rule">
 						<nav class = "main">
-				<ul><details open><summary>Getting Started</summary><ul><li><a href = "/getting-started/php.ini.html">php.ini</a></li>
-<li><a href = "/getting-started/php-in-js.html">PHP in Javascript</a></li>
-<li><a href = "/getting-started/php-in-static-html.html">PHP in Static HTML</a></li>
-<li><a href = "/getting-started/home.html">Home</a></li>
-<li><a href = "/getting-started/cgi-in-nodeJs.html">PHP-CGI in NodeJs</a></li>
-<li><a href = "/getting-started/cgi-service-worker.html">PHP-CGI in Service Workers</a></li>
-<li><a href = "/getting-started/install-and-include.html">Install & Import</a></li>
-</ul></details><details open><summary>Extensions</summary><ul><li><a href = "/extensions/using-php-extensions.html">Using Php Extensions</a></li>
-<li><a href = "/extensions/pdo-pglite.html">pdo-pglite</a></li>
-<li><a href = "/extensions/vrzno.html">Vrzno</a></li>
-<li><a href = "/extensions/pdo-cfd1.html">pdo-cfd1</a></li>
-</ul></details><details open><summary>Compiling</summary><ul><li><a href = "/compiling/custom-builds.html">Custom Builds</a></li>
-<li><a href = "/compiling/php-wasm-rc.html">.php-wasm-rc</a></li>
-</ul></details><details open><summary>Filesystem</summary><ul><li><a href = "/filesystem/fs-operations.html">FS Operations</a></li>
-<li><a href = "/filesystem/loading-files.html">Loading Files</a></li>
-<li><a href = "/filesystem/transactions.html">Transactions</a></li>
-</ul></details><li><a href = "/CHANGELOG.html">CHANGELOG</a></li>
-<li><a href = "/TEST.html">TEST</a></li>
-<li><a href = "/LICENSE.html">LICENSE</a></li>
-</ul>
-			</nav>
-						<article><h1 id="php-wasm-in-static-html">php-wasm in Static
-HTML</h1>
-<p>PHP can be included in static HTML pages that are served with no
-dynamic processing on the backend whatsoever. Just use the
-<code>php-tags.js</code> script from a CDN in your page:</p>
-<p><strong>JSDelivr</strong></p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm/php-tags.jsdelivr.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
-<p><strong>Unpkg</strong></p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://www.unpkg.com/php-wasm/php-tags.unpkg.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
-<p>Once you’ve included that, you can start writing php within
-<code>&lt;script type = "text/php"&gt;</code> tags:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span><span class="kw">&gt;</span></span>
+				<ul><details open>
+			<summary>Getting Started</summary>
+			<ul><li>
+			<a href = "/getting-started/home.html">
+				Home			</a>
+		</li><li>
+			<a href = "/getting-started/install-and-include.html">
+				Install & Import			</a>
+		</li><li>
+			<a href = "/getting-started/php.ini.html">
+				php.ini			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-js.html">
+				PHP in Javascript			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-static-html.html">
+				PHP in Static HTML			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-service-worker.html">
+				PHP-CGI in Service Workers			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-in-nodeJs.html">
+				PHP-CGI in NodeJs			</a>
+		</li></ul>		</details><details open>
+			<summary>Methods</summary>
+			<ul><li>
+			<a href = "/methods/php-wasm.html">
+				Php Wasm			</a>
+		</li><li>
+			<a href = "/methods/php-cgi-wasm.html">
+				Php Cgi Wasm			</a>
+		</li></ul>		</details><details open>
+			<summary>Extensions</summary>
+			<ul><li>
+			<a href = "/extensions/using-php-extensions.html">
+				Using PHP Extensions			</a>
+		</li><li>
+			<a href = "/extensions/pdo-cfd1.html">
+				pdo-cfd1			</a>
+		</li><li>
+			<a href = "/extensions/pdo-pglite.html">
+				pdo-pglite			</a>
+		</li><li>
+			<a href = "/extensions/vrzno.html">
+				Vrzno			</a>
+		</li></ul>		</details><details open>
+			<summary>Filesystem</summary>
+			<ul><li>
+			<a href = "/filesystem/fs-operations.html">
+				FS Operations			</a>
+		</li><li>
+			<a href = "/filesystem/loading-files.html">
+				Loading Files			</a>
+		</li><li>
+			<a href = "/filesystem/transactions.html">
+				Transactions			</a>
+		</li></ul>		</details><details open>
+			<summary>Compiling</summary>
+			<ul><li>
+			<a href = "/compiling/custom-builds.html">
+				Custom Builds			</a>
+		</li><li>
+			<a href = "/compiling/php-wasm-rc.html">
+				.php-wasm-rc			</a>
+		</li></ul>		</details><li>
+			<a href = "/CHANGELOG.html">
+				CHANGELOG			</a>
+		</li><li>
+			<a href = "/LICENSE.html">
+				LICENSE			</a>
+		</li></ul>			</nav>
+						<article >
+						<h1 id="php-wasm-in-static-html">php-wasm in Static HTML</h1>
+      <p>PHP can be included in static HTML pages that are served with
+      no dynamic processing on the backend whatsoever. Just use the
+      <code>php-tags.js</code> script from a CDN in your page:</p>
+      <p><strong>JSDelivr</strong></p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm/php-tags.jsdelivr.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
+      <p><strong>Unpkg</strong></p>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://www.unpkg.com/php-wasm/php-tags.unpkg.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
+      <p>Once you’ve included that, you can start writing php within
+      <code>&lt;script type = "text/php"&gt;</code> tags:</p>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;?</span>php <span class="fu">phpinfo</span>()<span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;output&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span></code></pre></div>
-<p>Inline php can use standard input, output and error with
-<code>data-</code> attributes. Just set the value of the attribute to a
-selector that will match that tag.</p>
-<div class="sourceCode" id="cb4" data-highlight="4"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm/php-tags.jsdelivr.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+      <p>Inline php can use standard input, output and error with
+      <code>data-</code> attributes. Just set the value of the attribute
+      to a selector that will match that tag.</p>
+      <div class="sourceCode" id="cb4" data-highlight="5"><pre
+      class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm/php-tags.jsdelivr.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;input&quot;</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/plain&quot;</span><span class="kw">&gt;</span>Hello<span class="op">,</span> world<span class="op">!</span><span class="kw">&lt;/script&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -170,13 +222,13 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;output&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;error&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span></code></pre></div>
-<p>The <code>src</code> attribute can be used on
-<code>&lt;script type = "text/php"&gt;</code> tags, as well as their
-input elements. For example:</p>
-<div class="sourceCode" id="cb5" data-highlight="3,4"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+      <p>The <code>src</code> attribute can be used on
+      <code>&lt;script type = "text/php"&gt;</code> tags, as well as
+      their input elements. For example:</p>
+      <div class="sourceCode" id="cb5" data-highlight="4,5"><pre
+      class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;head&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm/php-tags.jsdelivr.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;module&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/php-tags.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;script</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;input&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;/test-input.json&quot;</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/json&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;/test.php&quot;</span> <span class="er">data-stdin</span> <span class="ot">=</span> <span class="st">&quot;#input&quot;</span> <span class="er">data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span> <span class="er">data-stderr</span> <span class="ot">=</span> <span class="st">&quot;#error&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/head&gt;</span></span>
@@ -185,18 +237,74 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;error&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/body&gt;</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
-<h2 id="dynamic-extensions-in-static-pages">Dynamic Extensions in Static
-Pages</h2>
-<p>Dynamic extensions can be loaded in static webpages like so:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;module&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-12/php-tags.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span> <span class="er">data-stderr</span> <span class="ot">=</span> <span class="st">&quot;#error&quot;</span> <span class="er">data-libs</span> <span class="ot">=</span> <span class="st">&#39;[</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">  {&quot;url&quot;: &quot;https://unpkg.com/php-wasm-yaml/php8.3-yaml.so&quot;, &quot;ini&quot;: true},</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">  {&quot;url&quot;: &quot;https://unpkg.com/php-wasm-yaml/libyaml.so&quot;, &quot;ini&quot;: false}</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">]&#39;</span><span class="kw">&gt;</span><span class="op">&lt;?</span>php</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  print <span class="fu">yaml_emit</span>([<span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">,</span><span class="st">&quot;string&quot;</span><span class="op">,</span>[<span class="st">&quot;k1&quot;</span> <span class="kw">=&gt;</span> <span class="st">&quot;value&quot;</span><span class="op">,</span> <span class="st">&quot;k2&quot;</span> <span class="kw">=&gt;</span> <span class="st">&quot;value2&quot;</span><span class="op">,</span> <span class="st">&quot;k3&quot;</span> <span class="kw">=&gt;</span> <span class="st">&quot;value3&quot;</span>]<span class="op">,</span><span class="st">&quot;now&quot;</span> <span class="kw">=&gt;</span> <span class="fu">date</span>(<span class="st">&quot;Y-m-d h:i:s&quot;</span>)])<span class="op">;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span></code></pre></div></article>
+      <h2 id="dynamic-extensions-in-static-pages">Dynamic Extensions in
+      Static Pages</h2>
+      <p>Dynamic extensions can be loaded in static webpages like
+      so:</p>
+      <div class="sourceCode" id="cb6" data-numbers="true"
+      data-highlight="4-6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ot">    data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ot">    data-stderr</span> <span class="ot">=</span> <span class="st">&quot;#error&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ot">    data-libs</span> <span class="ot">=</span> <span class="st">&#39;[</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">        {&quot;url&quot;: &quot;https://unpkg.com/php-wasm-yaml/php8.3-yaml.so&quot;, &quot;ini&quot;: true},</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">        {&quot;url&quot;: &quot;https://unpkg.com/php-wasm-yaml/libyaml.so&quot;, &quot;ini&quot;: false}]&#39;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&gt;</span><span class="op">&lt;?</span>php</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  print <span class="fu">yaml_emit</span>([<span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">,</span><span class="st">&quot;string&quot;</span><span class="op">,</span>[<span class="st">&quot;k1&quot;</span> <span class="kw">=&gt;</span> <span class="st">&quot;value&quot;</span><span class="op">,</span> <span class="st">&quot;k2&quot;</span> <span class="kw">=&gt;</span> <span class="st">&quot;value2&quot;</span><span class="op">,</span> <span class="st">&quot;k3&quot;</span> <span class="kw">=&gt;</span> <span class="st">&quot;value3&quot;</span>]<span class="op">,</span><span class="st">&quot;now&quot;</span> <span class="kw">=&gt;</span> <span class="fu">date</span>(<span class="st">&quot;Y-m-d h:i:s&quot;</span>)])<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span></code></pre></div>
+      <p>You can find the full list of extensions here: <a
+      href="/extensions/using-php-extensions.html#extension-list">extensions/using-php-extensions.html#extension-list</a></p>
+      <p>Here is a less-than-trivial example that loads zlib, gd,
+      libwebp &amp; others:</p>
+      <p>https://codepen.io/SeanMorris227/pen/Yzbbrre</p>
+      <div class="sourceCode" id="cb7"><pre
+      class="sourceCode html"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">target</span> <span class="ot">=</span> <span class="st">&quot;_blank&quot;</span> <span class="er">href</span> <span class="ot">=</span> <span class="st">&quot;https://github.com/seanmorris/php-wasm&quot;</span><span class="kw">&gt;</span>https://github.com/seanmorris/php-wasm<span class="kw">&lt;/a&gt;&lt;hr</span> <span class="kw">/&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;module&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/php-tags.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ot">  type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-stdout</span> <span class="ot">=</span> <span class="st">&quot;div#output&quot;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-stderr</span> <span class="ot">=</span> <span class="st">&quot;pre#error&quot;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-libs</span>   <span class="ot">=</span> <span class="st">&#39;[</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="st">    {&quot;url&quot;: &quot;https://unpkg.com/php-wasm-zlib/php8.3-zlib.so&quot;, &quot;ini&quot;: true},</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">    {&quot;url&quot;: &quot;https://unpkg.com/php-wasm-zlib/libz.so&quot;,        &quot;ini&quot;: false},</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">    {&quot;url&quot;: &quot;https://unpkg.com/php-wasm-gd/php8.3-gd.so&quot;,     &quot;ini&quot;: true},</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="st">    {&quot;url&quot;: &quot;https://unpkg.com/php-wasm-gd/libpng.so&quot;,        &quot;ini&quot;: false},</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="st">    {&quot;url&quot;: &quot;https://unpkg.com/php-wasm-gd/libjpeg.so&quot;,       &quot;ini&quot;: false},</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="st">    {&quot;url&quot;: &quot;https://unpkg.com/php-wasm-gd/libwebp.so&quot;,       &quot;ini&quot;: false},</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="st">    {&quot;url&quot;: &quot;https://unpkg.com/php-wasm-gd/libfreetype.so&quot;,   &quot;ini&quot;: false}</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="st">  ]&#39;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="ot">  data-files</span>  <span class="ot">=</span> <span class="st">&#39;[{</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;name&quot;: &quot;Montserrat-Regular.ttf&quot;,</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;parent&quot;: &quot;/preload/&quot;,</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;url&quot;: &quot;https://cdn.jsdelivr.net/npm/pstpn-webfont-montserrat@0.0.5/fonts/Regular/Montserrat-Regular.ttf&quot;</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="st">  }]&#39;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="kw">&gt;</span><span class="op">&lt;?</span>php</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  $text <span class="op">=</span> <span class="st">&#39;Hello, webp!&#39;</span><span class="op">;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  $quality <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  $quality <span class="op">=</span> <span class="dv">1000</span><span class="op">;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Draw an image:</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  $image    <span class="op">=</span> <span class="fu">imageCreate</span>(<span class="dv">600</span><span class="op">,</span><span class="dv">400</span>)<span class="op">;</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">imagepalettetotruecolor</span>($image)<span class="op">;</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  $colorOne <span class="op">=</span> <span class="fu">imageColorAllocate</span>($image<span class="op">,</span> <span class="bn">0xFF</span><span class="op">,</span> <span class="bn">0x00</span><span class="op">,</span> <span class="bn">0xFF</span>)<span class="op">;</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  $colorTwo <span class="op">=</span> <span class="fu">imageColorAllocate</span>($image<span class="op">,</span> <span class="bn">0x00</span><span class="op">,</span> <span class="bn">0xFF</span><span class="op">,</span> <span class="bn">0x80</span>)<span class="op">;</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">imageFilledRectangle</span>($image<span class="op">,</span> <span class="dv">0</span><span class="op">,</span>  <span class="dv">0</span><span class="op">,</span>  <span class="dv">600</span><span class="op">,</span> <span class="dv">400</span><span class="op">,</span> $colorOne)<span class="op">;</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">imageFilledRectangle</span>($image<span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">550</span><span class="op">,</span> <span class="dv">350</span><span class="op">,</span> $colorTwo)<span class="op">;</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">imagettftext</span>($image<span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">95</span><span class="op">,</span> <span class="dv">212</span><span class="op">,</span> $colorOne<span class="op">,</span> <span class="st">&#39;/preload/Montserrat-Regular.ttf&#39;</span><span class="op">,</span> $text)<span class="op">;</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Render it as a JPEG:</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ob_start</span>()<span class="op">;</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">imageWebp</span>($image<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> $quality)<span class="op">;</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>  $webp <span class="op">=</span> <span class="fu">ob_get_contents</span>()<span class="op">;</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">imageDestroy</span>($image)<span class="op">;</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ob_end_clean</span>()<span class="op">;</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Print it in an IMG tag as a data uri:</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>  echo <span class="st">&#39;&lt;img src = &quot;data:image/webp;base64,&#39;</span><span class="op">.</span> <span class="fu">base64_encode</span>($webp) <span class="op">.</span> <span class="st">&#39;&quot;&gt;&#39;</span><span class="op">;</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="op">?&gt;</span><span class="kw">&lt;/script&gt;</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;output&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;pre</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;error&quot;</span><span class="kw">&gt;&lt;/pre&gt;</span></span></code></pre></div>
+			</article>
 						<nav class = "table-of-contents">
 				<span>on this page:</span>
 				<ul>
@@ -228,9 +336,12 @@ class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="
 		</ul>
 
 		<h4>About</h4>
-		<p><a href="http://localhost:8081/LICENSE.html">License</a></p>
-		<p>&copy; 2024 Sean Morris</p>
+		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-
+		<p>
+			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
+			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
+			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
+		</p>
 	</footer>
 </body>

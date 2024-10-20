@@ -1,15 +1,17 @@
 <!DOCTYPE HTML>
 
 <head>
-	<title>PHP-CGI in NodeJs</title>
-	<script src = "/main.js"></script>
+			<title>php-wasm | PHP-CGI in NodeJs</title>
+			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-	<title>PHP-CGI in NodeJs</title>
-	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-italic.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
+	<link rel="dns-prefetch" href="https://discord.gg/" />
+	<link rel="dns-prefetch" href="https://discord.com/" />
 	<link rel="dns-prefetch" href="https://playground.wordpress.net/" />
 	<link rel="dns-prefetch" href="https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/" />
 	<link rel="dns-prefetch" href="https://github.com/" />
@@ -21,6 +23,68 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
+  pre > code.sourceCode { white-space: pre; position: relative; }
+  pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+  pre > code.sourceCode > span:empty { height: 1.2em; }
+  .sourceCode { overflow: visible; }
+  code.sourceCode > span { color: inherit; text-decoration: inherit; }
+  div.sourceCode { margin: 1em 0; }
+  pre.sourceCode { margin: 0; }
+  @media screen {
+  div.sourceCode { overflow: auto; }
+  }
+  @media print {
+  pre > code.sourceCode { white-space: pre-wrap; }
+  pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+  }
+  pre.numberSource code
+    { counter-reset: source-line 0; }
+  pre.numberSource code > span
+    { position: relative; left: -4em; counter-increment: source-line; }
+  pre.numberSource code > span > a:first-child::before
+    { content: counter(source-line);
+      position: relative; left: -1em; text-align: right; vertical-align: baseline;
+      border: none; display: inline-block;
+      -webkit-touch-callout: none; -webkit-user-select: none;
+      -khtml-user-select: none; -moz-user-select: none;
+      -ms-user-select: none; user-select: none;
+      padding: 0 4px; width: 4em;
+    }
+  pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+  div.sourceCode
+    { color: #cccccc; background-color: #303030; }
+  @media screen {
+  pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+  }
+  code span.al { color: #ffcfaf; } /* Alert */
+  code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+  code span.at { } /* Attribute */
+  code span.bn { color: #dca3a3; } /* BaseN */
+  code span.bu { } /* BuiltIn */
+  code span.cf { color: #f0dfaf; } /* ControlFlow */
+  code span.ch { color: #dca3a3; } /* Char */
+  code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+  code span.co { color: #7f9f7f; } /* Comment */
+  code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+  code span.do { color: #7f9f7f; } /* Documentation */
+  code span.dt { color: #dfdfbf; } /* DataType */
+  code span.dv { color: #dcdccc; } /* DecVal */
+  code span.er { color: #c3bf9f; } /* Error */
+  code span.ex { } /* Extension */
+  code span.fl { color: #c0bed1; } /* Float */
+  code span.fu { color: #efef8f; } /* Function */
+  code span.im { } /* Import */
+  code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+  code span.kw { color: #f0dfaf; } /* Keyword */
+  code span.op { color: #f0efd0; } /* Operator */
+  code span.ot { color: #efef8f; } /* Other */
+  code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+  code span.sc { color: #dca3a3; } /* SpecialChar */
+  code span.ss { color: #cc9393; } /* SpecialString */
+  code span.st { color: #cc9393; } /* String */
+  code span.va { } /* Variable */
+  code span.vs { color: #cc9393; } /* VerbatimString */
+  code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
   .display.math{display: block; text-align: center; margin: 0.5rem auto;}
 	</style>
 	<link rel="stylesheet" href="/heading.css" />
@@ -54,29 +118,134 @@
 	<section class = "below-fold">
 		<div class = "page-rule">
 						<nav class = "main">
-				<ul><details open><summary>Getting Started</summary><ul><li><a href = "/getting-started/php.ini.html">php.ini</a></li>
-<li><a href = "/getting-started/php-in-js.html">PHP in Javascript</a></li>
-<li><a href = "/getting-started/php-in-static-html.html">PHP in Static HTML</a></li>
-<li><a href = "/getting-started/home.html">Home</a></li>
-<li><a href = "/getting-started/cgi-in-nodeJs.html">PHP-CGI in NodeJs</a></li>
-<li><a href = "/getting-started/cgi-service-worker.html">PHP-CGI in Service Workers</a></li>
-<li><a href = "/getting-started/install-and-include.html">Install & Import</a></li>
-</ul></details><details open><summary>Extensions</summary><ul><li><a href = "/extensions/using-php-extensions.html">Using Php Extensions</a></li>
-<li><a href = "/extensions/pdo-pglite.html">pdo-pglite</a></li>
-<li><a href = "/extensions/vrzno.html">Vrzno</a></li>
-<li><a href = "/extensions/pdo-cfd1.html">pdo-cfd1</a></li>
-</ul></details><details open><summary>Compiling</summary><ul><li><a href = "/compiling/custom-builds.html">Custom Builds</a></li>
-<li><a href = "/compiling/php-wasm-rc.html">.php-wasm-rc</a></li>
-</ul></details><details open><summary>Filesystem</summary><ul><li><a href = "/filesystem/fs-operations.html">FS Operations</a></li>
-<li><a href = "/filesystem/loading-files.html">Loading Files</a></li>
-<li><a href = "/filesystem/transactions.html">Transactions</a></li>
-</ul></details><li><a href = "/CHANGELOG.html">CHANGELOG</a></li>
-<li><a href = "/TEST.html">TEST</a></li>
-<li><a href = "/LICENSE.html">LICENSE</a></li>
-</ul>
-			</nav>
-						<article><h1 id="php-cgi-wasm-for-nodejs">php-cgi-wasm for
-nodejs</h1></article>
+				<ul><details open>
+			<summary>Getting Started</summary>
+			<ul><li>
+			<a href = "/getting-started/home.html">
+				Home			</a>
+		</li><li>
+			<a href = "/getting-started/install-and-include.html">
+				Install & Import			</a>
+		</li><li>
+			<a href = "/getting-started/php.ini.html">
+				php.ini			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-js.html">
+				PHP in Javascript			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-static-html.html">
+				PHP in Static HTML			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-service-worker.html">
+				PHP-CGI in Service Workers			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-in-nodeJs.html">
+				PHP-CGI in NodeJs			</a>
+		</li></ul>		</details><details open>
+			<summary>Methods</summary>
+			<ul><li>
+			<a href = "/methods/php-wasm.html">
+				Php Wasm			</a>
+		</li><li>
+			<a href = "/methods/php-cgi-wasm.html">
+				Php Cgi Wasm			</a>
+		</li></ul>		</details><details open>
+			<summary>Extensions</summary>
+			<ul><li>
+			<a href = "/extensions/using-php-extensions.html">
+				Using PHP Extensions			</a>
+		</li><li>
+			<a href = "/extensions/pdo-cfd1.html">
+				pdo-cfd1			</a>
+		</li><li>
+			<a href = "/extensions/pdo-pglite.html">
+				pdo-pglite			</a>
+		</li><li>
+			<a href = "/extensions/vrzno.html">
+				Vrzno			</a>
+		</li></ul>		</details><details open>
+			<summary>Filesystem</summary>
+			<ul><li>
+			<a href = "/filesystem/fs-operations.html">
+				FS Operations			</a>
+		</li><li>
+			<a href = "/filesystem/loading-files.html">
+				Loading Files			</a>
+		</li><li>
+			<a href = "/filesystem/transactions.html">
+				Transactions			</a>
+		</li></ul>		</details><details open>
+			<summary>Compiling</summary>
+			<ul><li>
+			<a href = "/compiling/custom-builds.html">
+				Custom Builds			</a>
+		</li><li>
+			<a href = "/compiling/php-wasm-rc.html">
+				.php-wasm-rc			</a>
+		</li></ul>		</details><li>
+			<a href = "/CHANGELOG.html">
+				CHANGELOG			</a>
+		</li><li>
+			<a href = "/LICENSE.html">
+				LICENSE			</a>
+		</li></ul>			</nav>
+						<article >
+						<h1 id="php-cgi-wasm-for-nodejs">php-cgi-wasm for nodejs</h1>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> http <span class="im">from</span> <span class="st">&#39;http&#39;</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpCgiNode } <span class="im">from</span> <span class="st">&#39;php-cgi-wasm/PhpCgiNode.mjs&#39;</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiNode</span>({</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">prefix</span><span class="op">:</span> <span class="st">&#39;/php-wasm/cgi-bin/&#39;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">,</span> <span class="dt">docroot</span><span class="op">:</span> <span class="st">&#39;/persist/www&#39;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">,</span> <span class="dt">persist</span><span class="op">:</span> [</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        {<span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span> <span class="op">,</span> <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;./persist&#39;</span>}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> {<span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/config&#39;</span> <span class="op">,</span> <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;./config&#39;</span>}</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">,</span> <span class="dt">sharedLibs</span><span class="op">:</span> [</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-intl&#39;</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-libxml&#39;</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-phar&#39;</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-mbstring&#39;</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-openssl&#39;</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-dom&#39;</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-xml&#39;</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-simplexml&#39;</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-sqlite&#39;</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-zlib&#39;</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-gd&#39;</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">,</span> <span class="dt">types</span><span class="op">:</span> {</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">jpeg</span><span class="op">:</span> <span class="st">&#39;image/jpeg&#39;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="dt">jpg</span><span class="op">:</span> <span class="st">&#39;image/jpeg&#39;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="dt">gif</span><span class="op">:</span> <span class="st">&#39;image/gif&#39;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="dt">png</span><span class="op">:</span> <span class="st">&#39;image/png&#39;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="dt">svg</span><span class="op">:</span> <span class="st">&#39;image/svg+xml&#39;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">&#39;Open &quot;</span><span class="sc">\x1b</span><span class="st">[33mhttp://localhost:3003/php-wasm/cgi-bin</span><span class="sc">\x1b</span><span class="st">[0m&quot; in your browser...&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> server <span class="op">=</span> http<span class="op">.</span><span class="fu">createServer</span>(<span class="kw">async</span> (request<span class="op">,</span> response) <span class="kw">=&gt;</span> {</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">request</span>(request)<span class="op">;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> reader <span class="op">=</span> result<span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="fu">getReader</span>()<span class="op">;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    response<span class="op">.</span><span class="fu">writeHead</span>(result<span class="op">.</span><span class="at">status</span><span class="op">,</span> [<span class="op">...</span>result<span class="op">.</span><span class="at">headers</span><span class="op">.</span><span class="fu">entries</span>()]<span class="op">.</span><span class="fu">flat</span>())<span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> done <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (<span class="op">!</span>done)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> chunk <span class="op">=</span> <span class="cf">await</span> reader<span class="op">.</span><span class="fu">read</span>()<span class="op">;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        done <span class="op">=</span> chunk<span class="op">.</span><span class="at">done</span><span class="op">;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        chunk<span class="op">.</span><span class="at">value</span> <span class="op">&amp;&amp;</span> response<span class="op">.</span><span class="fu">write</span>(chunk<span class="op">.</span><span class="at">value</span>)<span class="op">;</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    response<span class="op">.</span><span class="fu">end</span>()<span class="op">;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>server<span class="op">.</span><span class="fu">listen</span>(<span class="dv">3003</span>)<span class="op">;</span></span></code></pre></div>
+			</article>
 						<nav class = "table-of-contents">
 				<span>on this page:</span>
 				<ul>
@@ -105,9 +274,12 @@ nodejs</h1></article>
 		</ul>
 
 		<h4>About</h4>
-		<p><a href="http://localhost:8081/LICENSE.html">License</a></p>
-		<p>&copy; 2024 Sean Morris</p>
+		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-
+		<p>
+			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
+			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
+			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
+		</p>
 	</footer>
 </body>

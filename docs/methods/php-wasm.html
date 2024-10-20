@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+
+<head>
+			<title>php-wasm | php-wasm methods</title>
+			<script src = "/main.js"></script>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-italic.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
+	<link rel="dns-prefetch" href="https://discord.gg/" />
+	<link rel="dns-prefetch" href="https://discord.com/" />
+	<link rel="dns-prefetch" href="https://playground.wordpress.net/" />
+	<link rel="dns-prefetch" href="https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/" />
+	<link rel="dns-prefetch" href="https://github.com/" />
+	<link rel="dns-prefetch" href="https://seanmorris.github.io/" />
+	<style>
+		code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+  pre > code.sourceCode { white-space: pre; position: relative; }
+  pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+  pre > code.sourceCode > span:empty { height: 1.2em; }
+  .sourceCode { overflow: visible; }
+  code.sourceCode > span { color: inherit; text-decoration: inherit; }
+  div.sourceCode { margin: 1em 0; }
+  pre.sourceCode { margin: 0; }
+  @media screen {
+  div.sourceCode { overflow: auto; }
+  }
+  @media print {
+  pre > code.sourceCode { white-space: pre-wrap; }
+  pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+  }
+  pre.numberSource code
+    { counter-reset: source-line 0; }
+  pre.numberSource code > span
+    { position: relative; left: -4em; counter-increment: source-line; }
+  pre.numberSource code > span > a:first-child::before
+    { content: counter(source-line);
+      position: relative; left: -1em; text-align: right; vertical-align: baseline;
+      border: none; display: inline-block;
+      -webkit-touch-callout: none; -webkit-user-select: none;
+      -khtml-user-select: none; -moz-user-select: none;
+      -ms-user-select: none; user-select: none;
+      padding: 0 4px; width: 4em;
+    }
+  pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+  div.sourceCode
+    { color: #cccccc; background-color: #303030; }
+  @media screen {
+  pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+  }
+  code span.al { color: #ffcfaf; } /* Alert */
+  code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+  code span.at { } /* Attribute */
+  code span.bn { color: #dca3a3; } /* BaseN */
+  code span.bu { } /* BuiltIn */
+  code span.cf { color: #f0dfaf; } /* ControlFlow */
+  code span.ch { color: #dca3a3; } /* Char */
+  code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+  code span.co { color: #7f9f7f; } /* Comment */
+  code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+  code span.do { color: #7f9f7f; } /* Documentation */
+  code span.dt { color: #dfdfbf; } /* DataType */
+  code span.dv { color: #dcdccc; } /* DecVal */
+  code span.er { color: #c3bf9f; } /* Error */
+  code span.ex { } /* Extension */
+  code span.fl { color: #c0bed1; } /* Float */
+  code span.fu { color: #efef8f; } /* Function */
+  code span.im { } /* Import */
+  code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+  code span.kw { color: #f0dfaf; } /* Keyword */
+  code span.op { color: #f0efd0; } /* Operator */
+  code span.ot { color: #efef8f; } /* Other */
+  code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+  code span.sc { color: #dca3a3; } /* SpecialChar */
+  code span.ss { color: #cc9393; } /* SpecialString */
+  code span.st { color: #cc9393; } /* String */
+  code span.va { } /* Variable */
+  code span.vs { color: #cc9393; } /* VerbatimString */
+  code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+  .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+	</style>
+	<link rel="stylesheet" href="/heading.css" />
+	<link rel="stylesheet" href="/style.css" />
+	<link rel="stylesheet" href="/article.css" />
+	<link rel="stylesheet" href="/pandoc.css" />
+	<link rel="stylesheet" href="/fonts.css" />
+</head>
+
+<body>
+	<section class = "heading">
+		<div class = "page-rule">
+			<nav>
+				<div class = "logo">
+					<a href = "/index.html"><img src = "/logo-80.png"></a>
+				</div>
+				<ul class = "links">
+					<li><a href = "/index.html">Home</a></li>
+					<li><a href = "/getting-started/home.html">Docs</a></li>
+					<li><a href = "/contact.html">Contact</a></li>
+					<li>
+						<a href = "https://github.com/seanmorris/php-wasm">Github</a>
+						<a href = "https://github.com/seanmorris/php-wasm"><img src = "/github-icon.png"></a>
+					</li>
+					<li><a href = "https://github.com/sponsors/seanmorris" class = "cta button">Donate</a></li>
+				</ul>
+			</nav>
+					</div>
+	</section>
+
+	<section class = "below-fold">
+		<div class = "page-rule">
+						<nav class = "main">
+				<ul><details open>
+			<summary>Getting Started</summary>
+			<ul><li>
+			<a href = "/getting-started/home.html">
+				Home			</a>
+		</li><li>
+			<a href = "/getting-started/install-and-include.html">
+				Install & Import			</a>
+		</li><li>
+			<a href = "/getting-started/php.ini.html">
+				php.ini			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-js.html">
+				PHP in Javascript			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-static-html.html">
+				PHP in Static HTML			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-service-worker.html">
+				PHP-CGI in Service Workers			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-in-nodeJs.html">
+				PHP-CGI in NodeJs			</a>
+		</li></ul>		</details><details open>
+			<summary>Methods</summary>
+			<ul><li>
+			<a href = "/methods/php-wasm.html">
+				Php Wasm			</a>
+		</li><li>
+			<a href = "/methods/php-cgi-wasm.html">
+				Php Cgi Wasm			</a>
+		</li></ul>		</details><details open>
+			<summary>Extensions</summary>
+			<ul><li>
+			<a href = "/extensions/using-php-extensions.html">
+				Using PHP Extensions			</a>
+		</li><li>
+			<a href = "/extensions/pdo-cfd1.html">
+				pdo-cfd1			</a>
+		</li><li>
+			<a href = "/extensions/pdo-pglite.html">
+				pdo-pglite			</a>
+		</li><li>
+			<a href = "/extensions/vrzno.html">
+				Vrzno			</a>
+		</li></ul>		</details><details open>
+			<summary>Filesystem</summary>
+			<ul><li>
+			<a href = "/filesystem/fs-operations.html">
+				FS Operations			</a>
+		</li><li>
+			<a href = "/filesystem/loading-files.html">
+				Loading Files			</a>
+		</li><li>
+			<a href = "/filesystem/transactions.html">
+				Transactions			</a>
+		</li></ul>		</details><details open>
+			<summary>Compiling</summary>
+			<ul><li>
+			<a href = "/compiling/custom-builds.html">
+				Custom Builds			</a>
+		</li><li>
+			<a href = "/compiling/php-wasm-rc.html">
+				.php-wasm-rc			</a>
+		</li></ul>		</details><li>
+			<a href = "/CHANGELOG.html">
+				CHANGELOG			</a>
+		</li><li>
+			<a href = "/LICENSE.html">
+				LICENSE			</a>
+		</li></ul>			</nav>
+						<article  itemscope itemtype = "https://schema.org/Class" >
+						<meta itemprop = "alternateName" content = "PhpWeb" />
+						<meta itemprop = "name" content = "PhpWasm" />
+						<h1 id="php-wasm-methods">php-wasm methods</h1>
+      <h2 id="constructor">constructor</h2>
+      <h2 id="php.run">php.run</h2>
+      <p>Run a php script. Code should start with the opening
+      <code>&lt;?php</code> tag and may optionally close with
+      <code>?&gt;</code> to allow for HTML interpolation.</p>
+      <p>Will return a non-zero value in case of error. You’ll need to
+      use <a
+      href="http://localhost:8081/getting-started/php-in-js.html#running-php-taking-output">event
+      listeners</a> to get output.</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+      <h2 id="php.exec">php.exec</h2>
+      <p>Similar to <code>php.run()</code>, but executes a single PHP
+      <em>statement</em> rather than an entire script. Code should
+      <strong><em>not</em></strong> start with a <code>&lt;?php</code>
+      tag and should <strong><em>not</em></strong> end in a
+      semicolon.</p>
+      <p>The return value of the PHP statement will be the return value
+      of <code>php.exec</code>. If Vrzno is enabled and a function or
+      object is returned, the value will be marshalled to
+      Javascript.</p>
+      <p>To run multiple commands in a single statement, use an <a
+      href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">IIFE</a>.</p>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">exec</span>(<span class="vs">`</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    (function() {</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="vs">        $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">        $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">        return $date;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="vs">    })();</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+      <h2 id="php.r">php.r</h2>
+      <p>Tagged template function companion to <code>php.run()</code>.
+      If Vrzno is enabled, allows rich JS values to be interpolated into
+      PHP code.</p>
+      <p>Just like <code>php.run()</code>, this will return a non-zero
+      value in case of error.</p>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">r</span><span class="vs">`</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span><span class="op">;</span></span></code></pre></div>
+      <h2 id="php.x">php.x</h2>
+      <p>Tagged template function companion to <code>php.exec()</code>.
+      If Vrzno is enabled, allows rich JS values to be interpolated into
+      PHP code.</p>
+      <p>Just like <code>php.exec()</code> this value may only run a
+      single PHP statement at a time and returns the JS value directly
+      to PHP.</p>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> date <span class="op">=</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`&lt;?php</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="vs">        (function() {</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="vs">        $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="vs">        $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="vs">        return $date;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="vs">    })();</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span><span class="op">;</span></span></code></pre></div>
+      <h2 id="php.refresh">php.refresh</h2>
+      <p>Clears the memory. If any objects, arrays or functions have
+      been returned to JS, these will become invalid when php is
+      refreshed.</p>
+      <div class="sourceCode" id="cb5"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">refresh</span>()<span class="op">;</span></span></code></pre></div>
+			</article>
+						<nav class = "table-of-contents">
+				<span>on this page:</span>
+				<ul>
+    <li><a href="#php-wasm-methods">php-wasm methods</a>
+    <ul>
+    <li><a href="#constructor">constructor</a></li>
+    <li><a href="#php.run">php.run</a></li>
+    <li><a href="#php.exec">php.exec</a></li>
+    <li><a href="#php.r">php.r</a></li>
+    <li><a href="#php.x">php.x</a></li>
+    <li><a href="#php.refresh">php.refresh</a></li>
+    </ul></li>
+    </ul>
+				<span><a href = "#">top</a></span>
+			</nav>
+					</div>
+	</section>
+
+	<footer class="footer">
+		<h3>PHP WASM</h3>
+
+		<h4>Resources</h4>
+		<ul>
+			<li><a href="https://github.com/seanmorris/php-wasm/issues">Issue Tracker</a></li>
+			<li><a href="https://github.com/seanmorris/php-wasm/discussions">GitHub Discussions</a></li>
+		</ul>
+
+		<h4>Contact</h4>
+		<ul>
+			<li><a href = "https://github.com/sponsors/seanmorris">Sponsor</a></li>
+			<li><a href="https://github.com/seanmorris/php-wasm">Github</a></li>
+			<li><a href="https://discord.com/invite/j8VZzju7gJ">Discord</a></li>
+		</ul>
+
+		<h4>About</h4>
+		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
+		<p>This site is rendered with PHP + Pandoc.</p>
+		<p>
+			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
+			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
+			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
+		</p>
+	</footer>
+</body>

@@ -1,7 +1,27 @@
 ---
-title: php-wasm project home
+title: php-wasm by Sean Morris
+noprefix: true
 template: source/with-hero.html
 leftbar: false
+itemtype: schema.org/SoftwareSourceCode
+microdata:
+    name: php-wasm
+    description: php-wasm is an implementation of PHP running in Web Assembly.
+    alternateName: php-cgi-wasm
+    programmingLanguage: php, javascript, webassembly
+    runtimePlatform: webassembly
+    codeRepository: https://github.com/seanmorris/php-wasm
+    copyrightHolder: Sean Morris
+    copyrightYear: 2020-2024
+    countryOfOrigin: USA
+    headline: PHP powered by WebAssembly.
+    isAccessibleForFree: true
+    isBasedOn: php
+    isFamilyFriendly: true
+    keywords: php, javascript, webassembly
+    license: https://www.apache.org/licenses/LICENSE-2.0.txt
+    maintainer: Sean Morris
+    additionalType: https://schema.org/ComputerLanguage
 ---
 <p class = "strong">Php Wasm puts PHP right in the browser.</p>
 PHP can now run in the browser as a counterpart to Javascript, and can either be invoked from Javascript code or static HTML, where it's got full access to JS APIs as well as the DOM. Or, it can run a service worker, where it mimics a CGI webserver like Apache or nginx. And yea, it can serve whole websites.
@@ -25,10 +45,10 @@ The Vrzno extension allows PHP to gain access to any APIs available to Javascrip
 You can see a simple demo of the Curvature framework being used to generate some dynamic html [here](https://seanmorris.github.io/php-wasm/?demo=curvature.php), or a node-based version that allows PHP to access GTK [here](https://github.com/seanmorris/php-gtk).
 
 <aside class = "centered">
-	<a target = "_blank" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">
+	<a target = "_blank" alt = "Drupal Logo" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">
 		<img class = "downstream-logo" src = "drupal-logo.svg" /></a>
 	<p>
-		<a target = "_blank" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">Drupal Playground</a>
+		<a target = "_blank" alt = "WordPress Logo" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">Drupal Playground</a>
 	</p>
 	<a target = "_blank" href = "https://playground.wordpress.net/">
 		<img class = "downstream-logo" src = "wordpress-logo.svg" />

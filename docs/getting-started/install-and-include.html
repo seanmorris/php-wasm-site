@@ -1,15 +1,17 @@
 <!DOCTYPE HTML>
 
 <head>
-	<title>Install &amp; Import</title>
-	<script src = "/main.js"></script>
+			<title>php-wasm | Install &amp; Import</title>
+			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-	<title>Install &amp; Import</title>
-	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-italic.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
+	<link rel="dns-prefetch" href="https://discord.gg/" />
+	<link rel="dns-prefetch" href="https://discord.com/" />
 	<link rel="dns-prefetch" href="https://playground.wordpress.net/" />
 	<link rel="dns-prefetch" href="https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/" />
 	<link rel="dns-prefetch" href="https://github.com/" />
@@ -116,68 +118,120 @@
 	<section class = "below-fold">
 		<div class = "page-rule">
 						<nav class = "main">
-				<ul><details open><summary>Getting Started</summary><ul><li><a href = "/getting-started/php.ini.html">php.ini</a></li>
-<li><a href = "/getting-started/php-in-js.html">PHP in Javascript</a></li>
-<li><a href = "/getting-started/php-in-static-html.html">PHP in Static HTML</a></li>
-<li><a href = "/getting-started/home.html">Home</a></li>
-<li><a href = "/getting-started/cgi-in-nodeJs.html">PHP-CGI in NodeJs</a></li>
-<li><a href = "/getting-started/cgi-service-worker.html">PHP-CGI in Service Workers</a></li>
-<li><a href = "/getting-started/install-and-include.html">Install & Import</a></li>
-</ul></details><details open><summary>Extensions</summary><ul><li><a href = "/extensions/using-php-extensions.html">Using Php Extensions</a></li>
-<li><a href = "/extensions/pdo-pglite.html">pdo-pglite</a></li>
-<li><a href = "/extensions/vrzno.html">Vrzno</a></li>
-<li><a href = "/extensions/pdo-cfd1.html">pdo-cfd1</a></li>
-</ul></details><details open><summary>Compiling</summary><ul><li><a href = "/compiling/custom-builds.html">Custom Builds</a></li>
-<li><a href = "/compiling/php-wasm-rc.html">.php-wasm-rc</a></li>
-</ul></details><details open><summary>Filesystem</summary><ul><li><a href = "/filesystem/fs-operations.html">FS Operations</a></li>
-<li><a href = "/filesystem/loading-files.html">Loading Files</a></li>
-<li><a href = "/filesystem/transactions.html">Transactions</a></li>
-</ul></details><li><a href = "/CHANGELOG.html">CHANGELOG</a></li>
-<li><a href = "/TEST.html">TEST</a></li>
-<li><a href = "/LICENSE.html">LICENSE</a></li>
-</ul>
-			</nav>
-						<article><h1 id="install-import-php-wasm">Install &amp; Import
-php-wasm</h1>
-<p>Include the module in your preferred format:</p>
-<h2 id="from-a-cdn">from a cdn</h2>
-<p><strong><em>Note: This does not require npm.</em></strong></p>
-<h3 id="jsdelivr">jsdelivr</h3>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
+				<ul><details open>
+			<summary>Getting Started</summary>
+			<ul><li>
+			<a href = "/getting-started/home.html">
+				Home			</a>
+		</li><li>
+			<a href = "/getting-started/install-and-include.html">
+				Install & Import			</a>
+		</li><li>
+			<a href = "/getting-started/php.ini.html">
+				php.ini			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-js.html">
+				PHP in Javascript			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-static-html.html">
+				PHP in Static HTML			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-service-worker.html">
+				PHP-CGI in Service Workers			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-in-nodeJs.html">
+				PHP-CGI in NodeJs			</a>
+		</li></ul>		</details><details open>
+			<summary>Methods</summary>
+			<ul><li>
+			<a href = "/methods/php-wasm.html">
+				Php Wasm			</a>
+		</li><li>
+			<a href = "/methods/php-cgi-wasm.html">
+				Php Cgi Wasm			</a>
+		</li></ul>		</details><details open>
+			<summary>Extensions</summary>
+			<ul><li>
+			<a href = "/extensions/using-php-extensions.html">
+				Using PHP Extensions			</a>
+		</li><li>
+			<a href = "/extensions/pdo-cfd1.html">
+				pdo-cfd1			</a>
+		</li><li>
+			<a href = "/extensions/pdo-pglite.html">
+				pdo-pglite			</a>
+		</li><li>
+			<a href = "/extensions/vrzno.html">
+				Vrzno			</a>
+		</li></ul>		</details><details open>
+			<summary>Filesystem</summary>
+			<ul><li>
+			<a href = "/filesystem/fs-operations.html">
+				FS Operations			</a>
+		</li><li>
+			<a href = "/filesystem/loading-files.html">
+				Loading Files			</a>
+		</li><li>
+			<a href = "/filesystem/transactions.html">
+				Transactions			</a>
+		</li></ul>		</details><details open>
+			<summary>Compiling</summary>
+			<ul><li>
+			<a href = "/compiling/custom-builds.html">
+				Custom Builds			</a>
+		</li><li>
+			<a href = "/compiling/php-wasm-rc.html">
+				.php-wasm-rc			</a>
+		</li></ul>		</details><li>
+			<a href = "/CHANGELOG.html">
+				CHANGELOG			</a>
+		</li><li>
+			<a href = "/LICENSE.html">
+				LICENSE			</a>
+		</li></ul>			</nav>
+						<article >
+						<h1 id="install-import-php-wasm">Install &amp; Import
+      php-wasm</h1>
+      <p>Include the module in your preferred format:</p>
+      <h2 id="from-a-cdn">from a cdn</h2>
+      <p>Using ESM modules, you can import php-wasm directly from a
+      cdn:</p>
+      <h3 id="jsdelivr">jsdelivr</h3>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
-<h3 id="unpkg">unpkg</h3>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://www.unpkg.com/php-wasm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
+      <h3 id="unpkg">unpkg</h3>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://www.unpkg.com/php-wasm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
-<h2 id="installing-with-npm">Installing with npm</h2>
-<h3 id="latest-alpha">Latest Alpha</h3>
-<p>Installing the latest php-wasm alpha with npm:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-wasm@alpha</span></code></pre></div>
-<p>Installing php-cgi-wasm:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-cgi-wasm@alpha</span></code></pre></div>
-<h3 id="latest-stable">Latest Stable</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-wasm</span></code></pre></div>
-<p>Installing php-cgi-wasm:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-cgi-wasm</span></code></pre></div>
-<h4 id="pre-packaged-static-assets">Pre-Packaged Static Assets:</h4>
-<p>If you’re using a bundler, use the vendor’s documentation to learn
-how to move the files matching the following pattern to your public
-directory:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/php-wasm/php-web.mjs.wasm</span></span></code></pre></div>
-<p>For php-cgi-wasm:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/php-cgi-wasm/php-cgi-worker.mjs.wasm</span></span></code></pre></div>
-<h2 id="importing-the-module">Importing the module</h2>
-<h3 id="esm">ESM</h3>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpWeb } <span class="im">from</span> <span class="st">&#39;php-wasm/PhpWeb.mjs&#39;</span><span class="op">;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
-<h3 id="cjs">CJS</h3>
-<div class="sourceCode" id="cb10" data-numbers="true"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;php-wasm/PhpWeb.js&#39;</span>)<span class="op">;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div></article>
+      <h2 id="installing-with-npm">Installing with npm</h2>
+      <p>You can also install php-wasm with npm.</p>
+      <h3 id="latest-alpha">Latest Alpha</h3>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-wasm@alpha</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-cgi-wasm@alpha</span></code></pre></div>
+      <h3 id="latest-stable">Latest Stable</h3>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-wasm</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-cgi-wasm</span></code></pre></div>
+      <h4 id="pre-packaged-static-assets">Pre-Packaged Static
+      Assets:</h4>
+      <p>If you’re using a bundler, use the vendor’s documentation to
+      learn how to move the files matching the following pattern to your
+      public directory:</p>
+      <div class="sourceCode" id="cb5"><pre
+      class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/php-wasm/php-web.mjs.wasm</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/php-cgi-wasm/php-cgi-worker.mjs.wasm</span></span></code></pre></div>
+      <h2 id="importing-the-module">Importing the module</h2>
+      <h3 id="esm">ESM</h3>
+      <div class="sourceCode" id="cb6"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpWeb } <span class="im">from</span> <span class="st">&#39;php-wasm/PhpWeb.mjs&#39;</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
+      <h3 id="cjs">CJS</h3>
+      <div class="sourceCode" id="cb7" data-numbers="true"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;php-wasm/PhpWeb.js&#39;</span>)<span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
+			</article>
 						<nav class = "table-of-contents">
 				<span>on this page:</span>
 				<ul>
@@ -223,9 +277,12 @@ class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10
 		</ul>
 
 		<h4>About</h4>
-		<p><a href="http://localhost:8081/LICENSE.html">License</a></p>
-		<p>&copy; 2024 Sean Morris</p>
+		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-
+		<p>
+			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
+			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
+			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
+		</p>
 	</footer>
 </body>

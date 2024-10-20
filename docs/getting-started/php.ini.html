@@ -1,15 +1,17 @@
 <!DOCTYPE HTML>
 
 <head>
-	<title>php.ini</title>
-	<script src = "/main.js"></script>
+			<title>php-wasm | php.ini</title>
+			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-	<title>php.ini</title>
-	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-italic.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
+	<link rel="dns-prefetch" href="https://discord.gg/" />
+	<link rel="dns-prefetch" href="https://discord.com/" />
 	<link rel="dns-prefetch" href="https://playground.wordpress.net/" />
 	<link rel="dns-prefetch" href="https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/" />
 	<link rel="dns-prefetch" href="https://github.com/" />
@@ -116,72 +118,125 @@
 	<section class = "below-fold">
 		<div class = "page-rule">
 						<nav class = "main">
-				<ul><details open><summary>Getting Started</summary><ul><li><a href = "/getting-started/php.ini.html">php.ini</a></li>
-<li><a href = "/getting-started/php-in-js.html">PHP in Javascript</a></li>
-<li><a href = "/getting-started/php-in-static-html.html">PHP in Static HTML</a></li>
-<li><a href = "/getting-started/home.html">Home</a></li>
-<li><a href = "/getting-started/cgi-in-nodeJs.html">PHP-CGI in NodeJs</a></li>
-<li><a href = "/getting-started/cgi-service-worker.html">PHP-CGI in Service Workers</a></li>
-<li><a href = "/getting-started/install-and-include.html">Install & Import</a></li>
-</ul></details><details open><summary>Extensions</summary><ul><li><a href = "/extensions/using-php-extensions.html">Using Php Extensions</a></li>
-<li><a href = "/extensions/pdo-pglite.html">pdo-pglite</a></li>
-<li><a href = "/extensions/vrzno.html">Vrzno</a></li>
-<li><a href = "/extensions/pdo-cfd1.html">pdo-cfd1</a></li>
-</ul></details><details open><summary>Compiling</summary><ul><li><a href = "/compiling/custom-builds.html">Custom Builds</a></li>
-<li><a href = "/compiling/php-wasm-rc.html">.php-wasm-rc</a></li>
-</ul></details><details open><summary>Filesystem</summary><ul><li><a href = "/filesystem/fs-operations.html">FS Operations</a></li>
-<li><a href = "/filesystem/loading-files.html">Loading Files</a></li>
-<li><a href = "/filesystem/transactions.html">Transactions</a></li>
-</ul></details><li><a href = "/CHANGELOG.html">CHANGELOG</a></li>
-<li><a href = "/TEST.html">TEST</a></li>
-<li><a href = "/LICENSE.html">LICENSE</a></li>
-</ul>
-			</nav>
-						<article><h1 id="php.ini">php.ini</h1>
-<p>The php.ini files in php-wasm work exactly the same as in normal php.
-See the <a href="https://www.php.net/manual/en/ini.list.php">PHP
-docs</a> for the full list of ini settings.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode ini"><code class="sourceCode ini"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[php]</span></span>
+				<ul><details open>
+			<summary>Getting Started</summary>
+			<ul><li>
+			<a href = "/getting-started/home.html">
+				Home			</a>
+		</li><li>
+			<a href = "/getting-started/install-and-include.html">
+				Install & Import			</a>
+		</li><li>
+			<a href = "/getting-started/php.ini.html">
+				php.ini			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-js.html">
+				PHP in Javascript			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-static-html.html">
+				PHP in Static HTML			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-service-worker.html">
+				PHP-CGI in Service Workers			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-in-nodeJs.html">
+				PHP-CGI in NodeJs			</a>
+		</li></ul>		</details><details open>
+			<summary>Methods</summary>
+			<ul><li>
+			<a href = "/methods/php-wasm.html">
+				Php Wasm			</a>
+		</li><li>
+			<a href = "/methods/php-cgi-wasm.html">
+				Php Cgi Wasm			</a>
+		</li></ul>		</details><details open>
+			<summary>Extensions</summary>
+			<ul><li>
+			<a href = "/extensions/using-php-extensions.html">
+				Using PHP Extensions			</a>
+		</li><li>
+			<a href = "/extensions/pdo-cfd1.html">
+				pdo-cfd1			</a>
+		</li><li>
+			<a href = "/extensions/pdo-pglite.html">
+				pdo-pglite			</a>
+		</li><li>
+			<a href = "/extensions/vrzno.html">
+				Vrzno			</a>
+		</li></ul>		</details><details open>
+			<summary>Filesystem</summary>
+			<ul><li>
+			<a href = "/filesystem/fs-operations.html">
+				FS Operations			</a>
+		</li><li>
+			<a href = "/filesystem/loading-files.html">
+				Loading Files			</a>
+		</li><li>
+			<a href = "/filesystem/transactions.html">
+				Transactions			</a>
+		</li></ul>		</details><details open>
+			<summary>Compiling</summary>
+			<ul><li>
+			<a href = "/compiling/custom-builds.html">
+				Custom Builds			</a>
+		</li><li>
+			<a href = "/compiling/php-wasm-rc.html">
+				.php-wasm-rc			</a>
+		</li></ul>		</details><li>
+			<a href = "/CHANGELOG.html">
+				CHANGELOG			</a>
+		</li><li>
+			<a href = "/LICENSE.html">
+				LICENSE			</a>
+		</li></ul>			</nav>
+						<article >
+						<h1 id="php.ini">php.ini</h1>
+      <p>The php.ini files in php-wasm work exactly the same as in
+      normal php. See the <a
+      href="https://www.php.net/manual/en/ini.list.php">PHP docs</a> for
+      the full list of ini settings.</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode ini"><code class="sourceCode ini"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[php]</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">date.timezone</span><span class="ot">=</span><span class="st">UTC</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">tidy.clean_output</span><span class="ot">=</span><span class="dv">1</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">expose_php</span><span class="ot">=</span><span class="dv">0</span></span></code></pre></div>
-<h2 id="setting-up-php.ini-at-runtime">Setting up php.ini at
-Runtime</h2>
-<p>You can pass in the <code>ini</code> property to the constructor to
-add lines to <code>/php.ini</code>:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">ini</span><span class="op">:</span> <span class="vs">`</span></span>
+      <h2 id="setting-up-php.ini-at-runtime">Setting up php.ini at
+      Runtime</h2>
+      <p>You can pass in the <code>ini</code> property to the
+      constructor to add lines to <code>/php.ini</code>:</p>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">ini</span><span class="op">:</span> <span class="vs">`</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    date.timezone=</span><span class="sc">${</span><span class="bu">Intl</span><span class="op">.</span><span class="fu">DateTimeFormat</span>()<span class="op">.</span><span class="fu">resolvedOptions</span>()<span class="op">.</span><span class="at">timeZone</span><span class="sc">}</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    tidy.clean_output=1</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    expose_php=0</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>})<span class="op">;</span></span></code></pre></div>
-<h2 id="filesystem-locations">Filesystem Locations</h2>
-<p>The <code>/config/php.ini</code> and <code>/preload/php.ini</code>
-files will also be loaded, if they exist. Neither of these files will be
-created if they do not exist. They’re left completely up to the
-programmer to create &amp; populate.</p>
-<h2 id="writing-an-ini-for-multiple-php-versions">Writing an INI for
-multiple PHP versions</h2>
-<p>PHP will replace strings in INI files in the form
-<code>${ENVIRONMENT_VARIABLE}</code> with the env value of
-<code>ENVIRONMENT_VARIABLE</code>. The <code>PHP_VERSION</code>
-environment variable is available to allow loading of the extension
-compatible with the currently running version of PHP:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode ini"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[php]</span></span>
+      <h2 id="fs-locations">FS Locations</h2>
+      <p>If present, The <code>/config/php.ini</code> and
+      <code>/preload/php.ini</code> files will also be loaded. You can
+      learn how to populate the filesystem in <a
+      href="/filesystem/loading-files.html">Loading Files</a>.</p>
+      <h2 id="loading-extensions-by-php-version">Loading Extensions by
+      PHP Version</h2>
+      <p>PHP allows for <code>${ENVIRONMENT_VARIABLES}</code> to be used
+      inside ini files. The <code>PHP_VERSION</code> environment
+      variable is provided to allow loading of the extension compatible
+      with the currently running version of PHP.</p>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode ini"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[php]</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">extension</span><span class="ot">=</span><span class="st">php${PHP_VERSION}-phar.so</span></span></code></pre></div>
-<p>Remember to correctly escape the <code>$</code> if you’re supplying
-the INI from Javascript with `<code>backtics</code>`:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">ini</span><span class="op">:</span> <span class="vs">`</span></span>
+      <p>Remember to correctly escape the <code>$</code> if you’re
+      supplying the INI from Javascript with
+      <code>՝backtics՝</code>.</p>
+      <div class="sourceCode" id="cb4" data-highlight="2"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">ini</span><span class="op">:</span> <span class="vs">`</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    extension=php</span><span class="sc">\$</span><span class="vs">{PHP_VERSION}-phar.so</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    date.timezone=</span><span class="sc">${</span><span class="bu">Intl</span><span class="op">.</span><span class="fu">DateTimeFormat</span>()<span class="op">.</span><span class="fu">resolvedOptions</span>()<span class="op">.</span><span class="at">timeZone</span><span class="sc">}</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>})<span class="op">;</span></span></code></pre></div>
-<h2 id="cgi-configuration">CGI Configuration</h2>
-<p>When running in CGI mode, php will look for a <code>php.ini</code>
-file in the document root directory, and load it along with the files
-listed above.</p></article>
+      <h2 id="cgi-configuration">CGI Configuration</h2>
+      <p>When running in CGI mode, php will look for a
+      <code>php.ini</code> file in the document root directory, and load
+      it along with the files listed above.</p>
+			</article>
 						<nav class = "table-of-contents">
 				<span>on this page:</span>
 				<ul>
@@ -189,9 +244,9 @@ listed above.</p></article>
     <ul>
     <li><a href="#setting-up-php.ini-at-runtime">Setting up php.ini at
     Runtime</a></li>
-    <li><a href="#filesystem-locations">Filesystem Locations</a></li>
-    <li><a href="#writing-an-ini-for-multiple-php-versions">Writing an
-    INI for multiple PHP versions</a></li>
+    <li><a href="#fs-locations">FS Locations</a></li>
+    <li><a href="#loading-extensions-by-php-version">Loading Extensions
+    by PHP Version</a></li>
     <li><a href="#cgi-configuration">CGI Configuration</a></li>
     </ul></li>
     </ul>
@@ -217,9 +272,12 @@ listed above.</p></article>
 		</ul>
 
 		<h4>About</h4>
-		<p><a href="http://localhost:8081/LICENSE.html">License</a></p>
-		<p>&copy; 2024 Sean Morris</p>
+		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-
+		<p>
+			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
+			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
+			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
+		</p>
 	</footer>
 </body>

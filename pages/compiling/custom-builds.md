@@ -1,3 +1,6 @@
+---
+pagetitle: Custom Builds with php-wasm-builder
+---
 # Custom Builds with php-wasm-builder
 
 The `php-wasm-builder` *package* is the set of source files needed to build php-wasm & php-cgi-wasm.

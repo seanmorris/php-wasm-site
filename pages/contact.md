@@ -1,11 +1,18 @@
 ---
+itemtype: https://schema.org/ContactPage
+microdata:
+    mainContentOfPage: true
+    significantLink: https://github.com/seanmorris/php-wasm/issues
+    relatedLink: https://discord.gg/j8VZzju7gJ
 leftbar: false
 ---
 # Contact
 
 ## Live Chat
 
-You can find the developers on [discord](https://discord.com/invite/j8VZzju7gJ). Come say hi!
+You can find the developers on [Discord](https://discord.com/invite/j8VZzju7gJ). Come say hi!
+
+[![Discord](https://img.shields.io/discord/1199824765666463835?style=for-the-badge&logo=discord&link=https%3A%2F%2Fdiscord.gg%2Fj8VZzju7gJ)](https://discord.gg/j8VZzju7gJ)
 
 ## Issues
 

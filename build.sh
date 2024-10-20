@@ -44,9 +44,10 @@ find ./pages -type f | while read FILENAME; do {
 		TOC_FLAG=--toc
 	fi
 
-	pandoc --data-dir=. -s -f markdown+autolink_bare_uris -t html \
+	pandoc --data-dir=. -s -f markdown -t html \
 		${HIGHLIGHT_STYLE} ${TOC_FLAG} \
 		--template=${TEMPLATE} -o ${DEST} \
+		--title-prefix="php-wasm" \
 		--css "/heading.css" \
 		--css "/style.css" \
 		--css "/article.css" \
@@ -57,3 +58,5 @@ find ./pages -type f | while read FILENAME; do {
 }; done;
 
 cp -rfv static/* docs/;
+
+php source/sitemap.php > docs/sitemap.xml;

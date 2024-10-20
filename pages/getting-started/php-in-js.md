@@ -1,32 +1,27 @@
 ---
 title: PHP in Javascript
+weight: -800
 ---
-# PHP in Javascript
+# php-wasm in Javascript
 
-## 🥤 Running PHP & Taking Output
+## Running PHP & Taking Output
 
-Create a PHP instance:
+First, import the module and create an instance of  PHP:
 
 ```javascript
 const { PhpWeb } = await import('https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs');
 const php = new PhpWeb;
 ```
 
-Add your output listeners:
+Add some event listeners to get ahold of the output:
 
 ```javascript
-// Listen to STDOUT
-php.addEventListener('output', (event) => {
-	console.log(event.detail);
-});
-
-// Listen to STDERR
-php.addEventListener('error', (event) => {
-	console.log(event.detail);
-});
+// Listen to STDOUT & STDERR
+php.addEventListener('output', (event) => console.log(event.detail));
+php.addEventListener('error',  (event) => console.log(event.detail));
 ```
 
-Provide some input data on STDIN if you need to:
+Pass some data on STDIN if required:
 
 ```javascript
 php.inputString('This is a string of data provided on STDIN.');
@@ -36,4 +31,73 @@ php.inputString('This is a string of data provided on STDIN.');
 
 ```javascript
 const exitCode = await php.run('<?php echo "Hello, world!";');
+```
+
+## Exporting PHP functions to Javascript
+
+With Vrzno enabled, the `php.x՝...՝` [tagged template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates) enables you to export almost any PHP value directly to Javascript. This includes arrays, object, and even functions:
+
+```javascript
+const phpStrtotime = await php.x`strtotime(...)`;
+const phpDate = await php.x`date(...)`;
+
+const formatTime = (format, time) => phpDate(format, phpStrtotime(time));
+```
+
+You can see this working live on CodePen:
+
+https://codepen.io/SeanMorris227/pen/gONmKqL?editors=1111
+
+```javascript
+(async () => {
+  const { PhpWeb } = await import('https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/PhpWeb.mjs');
+  const php = new PhpWeb;
+  const input  = document.querySelector('#date-input');
+  const format = document.querySelector('#date-format');
+  const output = document.querySelector('#date-output');
+
+  // Return an actual PHP function to Javascript:
+  const phpStrtotime = await php.x`strtotime(...)`;
+  const phpDate = await php.x`date(...)`;
+
+  const formatTime = (format, time) => phpDate(format, phpStrtotime(time));
+
+  input.addEventListener('input', () => output.innerText = formatTime(format.value, input.value));
+  format.addEventListener('input', () => output.innerText = formatTime(format.value, input.value));
+
+  format.value = 'Y-m-d H:i:s';
+  input.value = '8:00pm 2 days ago';
+
+  output.innerText = formatTime(format.value, input.value);
+})();
+```
+
+## Importing Javascript Values into PHP
+
+The `php.x՝...՝` & `php.r՝...՝` functions allow for Javascript to be interpolated into PHP code with the  `${𝒆𝒙𝒑𝒓𝒆𝒔𝒔𝒊𝒐𝒏}` notation that Javascript `՝backtick՝` interpolation normally allows for. Any Javascript values can be interpolated, and PHP will treat them as normal, native objects.
+
+You can see this working live on CodePen:
+
+https://codepen.io/SeanMorris227/pen/wvLJXEJ?editors=0011
+
+```{ .javascript highlight="10-12" }
+(async () => {
+  const { PhpWeb } = await import('https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/PhpWeb.mjs');
+
+  const php = new PhpWeb;
+
+  const phpCallback = await php.x` function(){
+
+    $phpString = "PHP String";
+
+    $jsCallback = ${function() {
+        return "JS String: " + window.prompt("Provide some input, please.");
+    }};
+
+    return sprintf("%s and %s", $phpString, $jsCallback());
+  }`;
+
+  document.write(phpCallback());
+
+})();
 ```

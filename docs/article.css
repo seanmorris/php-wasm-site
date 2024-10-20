@@ -36,13 +36,12 @@ section.below-fold nav::-webkit-scrollbar {
 
 section.below-fold nav.main {
 	margin-right: 1rem;
-	border-right: 1px solid #FFFFFF50;
+	border-right: 1px solid #FFFFFF40;
 	padding-right: 0.5rem;
 }
 
 section.below-fold nav.table-of-contents {
-	margin-left: 1rem;
-	border-left: 1px solid #FFFFFF50;
+	margin-left: 0.5rem;
 }
 
 section.below-fold nav > span {
@@ -171,3 +170,6 @@ footer a {
 	text-decoration: none;
 }
 
+p > img:first-child:last-child {
+	width: 100%;
+}

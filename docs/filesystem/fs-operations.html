@@ -1,15 +1,17 @@
 <!DOCTYPE HTML>
 
 <head>
-	<title>FS Operations</title>
-	<script src = "/main.js"></script>
+			<title>php-wasm | FS Operations</title>
+			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-	<title>FS Operations</title>
-	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2">
+	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/notosans-italic.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
+	<link rel="dns-prefetch" href="https://discord.gg/" />
+	<link rel="dns-prefetch" href="https://discord.com/" />
 	<link rel="dns-prefetch" href="https://playground.wordpress.net/" />
 	<link rel="dns-prefetch" href="https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/" />
 	<link rel="dns-prefetch" href="https://github.com/" />
@@ -116,80 +118,133 @@
 	<section class = "below-fold">
 		<div class = "page-rule">
 						<nav class = "main">
-				<ul><details open><summary>Getting Started</summary><ul><li><a href = "/getting-started/php.ini.html">php.ini</a></li>
-<li><a href = "/getting-started/php-in-js.html">PHP in Javascript</a></li>
-<li><a href = "/getting-started/php-in-static-html.html">PHP in Static HTML</a></li>
-<li><a href = "/getting-started/home.html">Home</a></li>
-<li><a href = "/getting-started/cgi-in-nodeJs.html">PHP-CGI in NodeJs</a></li>
-<li><a href = "/getting-started/cgi-service-worker.html">PHP-CGI in Service Workers</a></li>
-<li><a href = "/getting-started/install-and-include.html">Install & Import</a></li>
-</ul></details><details open><summary>Extensions</summary><ul><li><a href = "/extensions/using-php-extensions.html">Using Php Extensions</a></li>
-<li><a href = "/extensions/pdo-pglite.html">pdo-pglite</a></li>
-<li><a href = "/extensions/vrzno.html">Vrzno</a></li>
-<li><a href = "/extensions/pdo-cfd1.html">pdo-cfd1</a></li>
-</ul></details><details open><summary>Compiling</summary><ul><li><a href = "/compiling/custom-builds.html">Custom Builds</a></li>
-<li><a href = "/compiling/php-wasm-rc.html">.php-wasm-rc</a></li>
-</ul></details><details open><summary>Filesystem</summary><ul><li><a href = "/filesystem/fs-operations.html">FS Operations</a></li>
-<li><a href = "/filesystem/loading-files.html">Loading Files</a></li>
-<li><a href = "/filesystem/transactions.html">Transactions</a></li>
-</ul></details><li><a href = "/CHANGELOG.html">CHANGELOG</a></li>
-<li><a href = "/TEST.html">TEST</a></li>
-<li><a href = "/LICENSE.html">LICENSE</a></li>
-</ul>
-			</nav>
-						<article><h1 id="filesystem-operations">Filesystem Operations</h1>
-<h3 id="filesystem-methods">Filesystem Methods</h3>
-<p>The following EmscriptenFS methods are exposed via the php
-object:</p>
-<p><strong><em>Note:</em></strong> If you’re using php-web in
-conjunction with php-cgi-worker to work on the filesystem, you’ll need
-to <code>refresh</code> the filesystem in the worker. You can do that
-with the following call using <code>msg-bus</code> (see below).</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Tell the worker that the FS has been updated</span></span>
+				<ul><details open>
+			<summary>Getting Started</summary>
+			<ul><li>
+			<a href = "/getting-started/home.html">
+				Home			</a>
+		</li><li>
+			<a href = "/getting-started/install-and-include.html">
+				Install & Import			</a>
+		</li><li>
+			<a href = "/getting-started/php.ini.html">
+				php.ini			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-js.html">
+				PHP in Javascript			</a>
+		</li><li>
+			<a href = "/getting-started/php-in-static-html.html">
+				PHP in Static HTML			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-service-worker.html">
+				PHP-CGI in Service Workers			</a>
+		</li><li>
+			<a href = "/getting-started/cgi-in-nodeJs.html">
+				PHP-CGI in NodeJs			</a>
+		</li></ul>		</details><details open>
+			<summary>Methods</summary>
+			<ul><li>
+			<a href = "/methods/php-wasm.html">
+				Php Wasm			</a>
+		</li><li>
+			<a href = "/methods/php-cgi-wasm.html">
+				Php Cgi Wasm			</a>
+		</li></ul>		</details><details open>
+			<summary>Extensions</summary>
+			<ul><li>
+			<a href = "/extensions/using-php-extensions.html">
+				Using PHP Extensions			</a>
+		</li><li>
+			<a href = "/extensions/pdo-cfd1.html">
+				pdo-cfd1			</a>
+		</li><li>
+			<a href = "/extensions/pdo-pglite.html">
+				pdo-pglite			</a>
+		</li><li>
+			<a href = "/extensions/vrzno.html">
+				Vrzno			</a>
+		</li></ul>		</details><details open>
+			<summary>Filesystem</summary>
+			<ul><li>
+			<a href = "/filesystem/fs-operations.html">
+				FS Operations			</a>
+		</li><li>
+			<a href = "/filesystem/loading-files.html">
+				Loading Files			</a>
+		</li><li>
+			<a href = "/filesystem/transactions.html">
+				Transactions			</a>
+		</li></ul>		</details><details open>
+			<summary>Compiling</summary>
+			<ul><li>
+			<a href = "/compiling/custom-builds.html">
+				Custom Builds			</a>
+		</li><li>
+			<a href = "/compiling/php-wasm-rc.html">
+				.php-wasm-rc			</a>
+		</li></ul>		</details><li>
+			<a href = "/CHANGELOG.html">
+				CHANGELOG			</a>
+		</li><li>
+			<a href = "/LICENSE.html">
+				LICENSE			</a>
+		</li></ul>			</nav>
+						<article >
+						<h1 id="filesystem-operations">Filesystem Operations</h1>
+      <h3 id="filesystem-methods">Filesystem Methods</h3>
+      <p>The following EmscriptenFS methods are exposed via the php
+      object:</p>
+      <p><strong><em>Note:</em></strong> If you’re using php-web in
+      conjunction with php-cgi-worker to work on the filesystem, you’ll
+      need to <code>refresh</code> the filesystem in the worker. You can
+      do that with the following call using <code>msg-bus</code> (see
+      below).</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Tell the worker that the FS has been updated</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> <span class="fu">sendMessage</span>(<span class="st">&#39;refresh&#39;</span>)<span class="op">;</span></span></code></pre></div>
-<h4 id="php.analyzepath">php.analyzePath</h4>
-<p>Get information about a file or directory.</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">analyzePath</span>(path)<span class="op">;</span></span></code></pre></div>
-<h4 id="php.readdir">php.readdir</h4>
-<p>Get a list of files and folders in or directory.</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">readdir</span>(path)<span class="op">;</span></span></code></pre></div>
-<h4 id="php.readfile">php.readFile</h4>
-<p>Get the content of a file as a <code>Uint8Array</code> by default, or
-optionally as utf-8.</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">readFile</span>(path)<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">readFile</span>(path<span class="op">,</span> {<span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span>})<span class="op">;</span></span></code></pre></div>
-<h4 id="php.stat">php.stat</h4>
-<p>Get information about a file or directory.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">stat</span>(path)<span class="op">;</span></span></code></pre></div>
-<h4 id="php.mkdir">php.mkdir</h4>
-<p>Create a directory.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">mkdir</span>(path)<span class="op">;</span></span></code></pre></div>
-<h4 id="php.rmdir">php.rmdir</h4>
-<p>Delete a directory (must be empty).</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">rmdir</span>(path)<span class="op">;</span></span></code></pre></div>
-<h4 id="php.unlink">php.unlink</h4>
-<p>Delete a file.</p>
-<div class="sourceCode" id="cb9"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">rmdir</span>(path)<span class="op">;</span></span></code></pre></div>
-<h4 id="php.rename">php.rename</h4>
-<p>Rename a file or directory.</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">rename</span>(path<span class="op">,</span> newPath)<span class="op">;</span></span></code></pre></div>
-<h4 id="php.writefile">php.writeFile</h4>
-<p>Create a new file. Content should be supplied as a
-<code>Uint8Array</code>, or optionally as a string of text.</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">writeFile</span>(path<span class="op">,</span> data)<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">writeFile</span>(path<span class="op">,</span> data<span class="op">,</span> {<span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span>})<span class="op">;</span></span></code></pre></div></article>
+      <h4 id="php.analyzepath">php.analyzePath</h4>
+      <p>Get information about a file or directory.</p>
+      <div class="sourceCode" id="cb2"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">analyzePath</span>(path)<span class="op">;</span></span></code></pre></div>
+      <h4 id="php.readdir">php.readdir</h4>
+      <p>Get a list of files and folders in or directory.</p>
+      <div class="sourceCode" id="cb3"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">readdir</span>(path)<span class="op">;</span></span></code></pre></div>
+      <h4 id="php.readfile">php.readFile</h4>
+      <p>Get the content of a file as a <code>Uint8Array</code> by
+      default, or optionally as utf-8.</p>
+      <div class="sourceCode" id="cb4"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">readFile</span>(path)<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb5"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">readFile</span>(path<span class="op">,</span> {<span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span>})<span class="op">;</span></span></code></pre></div>
+      <h4 id="php.stat">php.stat</h4>
+      <p>Get information about a file or directory.</p>
+      <div class="sourceCode" id="cb6"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">stat</span>(path)<span class="op">;</span></span></code></pre></div>
+      <h4 id="php.mkdir">php.mkdir</h4>
+      <p>Create a directory.</p>
+      <div class="sourceCode" id="cb7"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">mkdir</span>(path)<span class="op">;</span></span></code></pre></div>
+      <h4 id="php.rmdir">php.rmdir</h4>
+      <p>Delete a directory (must be empty).</p>
+      <div class="sourceCode" id="cb8"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">rmdir</span>(path)<span class="op">;</span></span></code></pre></div>
+      <h4 id="php.unlink">php.unlink</h4>
+      <p>Delete a file.</p>
+      <div class="sourceCode" id="cb9"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">rmdir</span>(path)<span class="op">;</span></span></code></pre></div>
+      <h4 id="php.rename">php.rename</h4>
+      <p>Rename a file or directory.</p>
+      <div class="sourceCode" id="cb10"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">rename</span>(path<span class="op">,</span> newPath)<span class="op">;</span></span></code></pre></div>
+      <h4 id="php.writefile">php.writeFile</h4>
+      <p>Create a new file. Content should be supplied as a
+      <code>Uint8Array</code>, or optionally as a string of text.</p>
+      <div class="sourceCode" id="cb11"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">writeFile</span>(path<span class="op">,</span> data)<span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb12"><pre
+      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">writeFile</span>(path<span class="op">,</span> data<span class="op">,</span> {<span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span>})<span class="op">;</span></span></code></pre></div>
+			</article>
 						<nav class = "table-of-contents">
 				<span>on this page:</span>
 				<ul>
@@ -220,9 +275,12 @@ class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12
 		</ul>
 
 		<h4>About</h4>
-		<p><a href="http://localhost:8081/LICENSE.html">License</a></p>
-		<p>&copy; 2024 Sean Morris</p>
+		<p>&copy; 2024 Sean Morris | <a href="http://localhost:8081/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-
+		<p>
+			<!-- <img src = "/php-powered.png" alt = "php powered"> -->
+			<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
+			<!-- <img src = "/c-badge.png" alt = "code in c"> -->
+		</p>
 	</footer>
 </body>

@@ -1,3 +1,8 @@
+---
+title: Using PHP Extensions
+weight: -1000
+---
+
 # Using PHP Extensions
 
 There are two ways to load extensions at runtime, using the `dl()` function or `php.ini`. The following code will attempt to load the .so files from the same directory the main WASM binary was loaded from, unless further configuration is provided.

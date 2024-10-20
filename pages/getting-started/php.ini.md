@@ -1,5 +1,6 @@
 ---
 title: php.ini
+weight: -850
 ---
 # php.ini
 
@@ -24,22 +25,22 @@ const php = new PhpWeb({ini: `
 `});
 ```
 
-## Filesystem Locations
+## FS Locations
 
-The `/config/php.ini` and `/preload/php.ini` files will also be loaded, if they exist. Neither of these files will be created if they do not exist. They're left completely up to the programmer to create & populate.
+If present, The `/config/php.ini` and `/preload/php.ini` files will also be loaded. You can learn how to populate the filesystem in [Loading Files](/filesystem/loading-files.html).
 
-## Writing an INI for multiple PHP versions
+## Loading Extensions by PHP Version
 
-PHP will replace strings in INI files in the form `${ENVIRONMENT_VARIABLE}` with the env value of `ENVIRONMENT_VARIABLE`. The `PHP_VERSION` environment variable is available to allow loading of the extension compatible with the currently running version of PHP:
+PHP allows for `${ENVIRONMENT_VARIABLES}` to be used inside ini files. The `PHP_VERSION` environment variable is provided to allow loading of the extension compatible with the currently running version of PHP.
 
 ```ini
 [php]
 extension=php${PHP_VERSION}-phar.so
 ```
 
-Remember to correctly escape the `$` if you're supplying the INI from Javascript with &#96;`backtics`&#96;:
+Remember to correctly escape the `$` if you're supplying the INI from Javascript with `՝backtics՝`.
 
-```javascript
+```{ .javascript highlight="2" }
 const php = new PhpWeb({ini: `
 	extension=php\${PHP_VERSION}-phar.so
 	date.timezone=${Intl.DateTimeFormat().resolvedOptions().timeZone}

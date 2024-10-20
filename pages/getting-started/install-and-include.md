@@ -1,5 +1,6 @@
 ---
 title: Install & Import
+weight: -900
 ---
 # Install & Import php-wasm
 
@@ -7,7 +8,7 @@ Include the module in your preferred format:
 
 ## from a cdn
 
-***Note: This does not require npm.***
+Using ESM modules, you can import php-wasm directly from a cdn:
 
 ### jsdelivr
 
@@ -25,17 +26,12 @@ const php = new PhpWeb;
 
 ## Installing with npm
 
-### Latest Alpha
+You can also install php-wasm with npm.
 
-Installing the latest php-wasm alpha with npm:
+### Latest Alpha
 
 ```sh
 $ npm i php-wasm@alpha
-```
-
-Installing php-cgi-wasm:
-
-```sh
 $ npm i php-cgi-wasm@alpha
 ```
 
@@ -43,11 +39,6 @@ $ npm i php-cgi-wasm@alpha
 
 ```sh
 $ npm i php-wasm
-```
-
-Installing php-cgi-wasm:
-
-```sh
 $ npm i php-cgi-wasm
 ```
 
@@ -57,10 +48,6 @@ If you're using a bundler, use the vendor's documentation to learn how to move t
 
 ```bash
 node_modules/php-wasm/php-web.mjs.wasm
-```
-
-For php-cgi-wasm:
-```bash
 node_modules/php-cgi-wasm/php-cgi-worker.mjs.wasm
 ```
 

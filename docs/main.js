@@ -1,3 +1,29 @@
+function resolveLines(...args)
+{
+	const lines = [];
+	for(const arg of args)
+	{
+		if(typeof arg === 'number')
+			{
+				lines.push(arg);
+			}
+
+			if(typeof arg === 'string' && arg.match(/^\d+$/))
+		{
+			lines.push(arg);
+		}
+
+		if(typeof arg === 'string' && arg.match(/^\d+-\d+$/))
+		{
+			const [start, end] = arg.split('-').map(Number);
+			const range = Array(1 + -start + end).fill(0).map((_,i) => i + start);
+			lines.push(...range);
+		}
+	}
+
+	return lines.map(x => String(-1 + Number(x)));
+}
+
 function flicker(element, timeout)
 {
 	if(element.classList.contains('flickering')) return;
@@ -9,7 +35,7 @@ document.addEventListener('click', event => {
 	let target = event.target;
 	let href;
 
-	do
+	while(target && target.getAttribute && !href)
 	{
 		href = target.getAttribute('href');
 
@@ -27,17 +53,12 @@ document.addEventListener('click', event => {
 			if(url.hash)
 			{
 				const element = document.getElementById(url.hash.substr(1));
-
-				if(element)
-				{
-					flicker(element, 200);
-				}
+				if(element) flicker(element, 200);
 			}
 		}
 
 		target = target.parentNode;
-
-	} while(target && target.getAttribute && !href);
+	}
 });
 
 document.addEventListener('mouseover', event => {
@@ -50,12 +71,40 @@ document.addEventListener('mouseover', event => {
 
 	const url = new URL(href, location);
 
+	if(url.pathname === location.pathname)
+	{
+		return;
+	}
+
 	if(url.origin !== location.origin)
 	{
 		return;
 	}
 
 	fetch(href);
+});
+
+document.addEventListener('mousedown', event => {
+	if(event.buttons !== 0x1)
+	{
+		return;
+	}
+	let target = event.target;
+	let href;
+
+	while(target && target.getAttribute && !href)
+	{
+		href = target.getAttribute('href');
+
+		if(href)
+		{
+			event.preventDefault();
+			event.target.click();
+			return;
+		}
+
+		target = target.parentNode;
+	}
 });
 
 document.addEventListener('DOMContentLoaded', event => {
@@ -77,7 +126,7 @@ document.addEventListener('DOMContentLoaded', event => {
 		const highlight = codeBlock.getAttribute('data-highlight');
 		if(highlight)
 		{
-			const numbers = highlight.split(',').map(n => n.trim());
+			const numbers = resolveLines(...highlight.split(',').map(n => n.trim()));
 
 			for(const number of numbers)
 			{
@@ -99,7 +148,7 @@ document.addEventListener('DOMContentLoaded', event => {
 			{
 				const suffix = attribute.substring(prefix.length);
 
-				const numbers = codeBlock.getAttribute(attribute).split(',').map(n => n.trim());
+				const numbers = resolveLines(...codeBlock.getAttribute(attribute).split(',').map(n => n.trim()));
 
 				for(const number of numbers)
 				{
