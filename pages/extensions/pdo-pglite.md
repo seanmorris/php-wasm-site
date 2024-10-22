@@ -5,20 +5,16 @@ title: pdo-pglite
 
 *pdo driver for pglite & php-wasm*
 
-[![Static Badge](https://img.shields.io/badge/reddit-always%20online-336699?style=for-the-badge&logo=reddit)](https://www.reddit.com/r/phpwasm/) [![Discord](https://img.shields.io/discord/1199824765666463835?style=for-the-badge&logo=discord&link=https%3A%2F%2Fdiscord.gg%2Fj8VZzju7gJ)](https://discord.gg/j8VZzju7gJ)
+pdo_pglite requires PHP 8.1+.
 
-### Join the community: [reddit](https://www.reddit.com/r/phpwasm/) | [discord](https://discord.gg/j8VZzju7gJ) | [php-wasm](https://github.com/seanmorris/php-wasm)
-
-pdo_pglite requires PHP 8.1+
-
-Simply pass the PGlite object into the php-wasm constructor to enable pdo_pglite support:
+Pass the PGlite object into the php-wasm constructor to enable pdo_pglite support:
 
 ```javascript
 import { PGlite } from '@electric-sql/pglite';
 const php = new PhpWeb({PGlite});
 ```
 
-You can even load PGlite from a CDN:
+You can also load PGlite from a CDN:
 
 ```javascript
 import { PGlite } from 'https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js';
@@ -68,7 +64,19 @@ php.run(`<?php
 `);
 ```
 
-PGlite can also be used right from static HTML. Just pass it in the `data-imports` attribute on the php script tag:
+### PHP/PostgreSQL in Static HTML
+
+PGlite can also be used right from static HTML. Just pass it in the `data-imports` attribute on the php script tag, with the URL of the module as the key, where the value lists the imports from that module as an array.
+
+```html
+<script type = "text/php" data-imports = '{
+    "https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js": ["PGlite"]
+}'>
+```
+
+You can see an example of this running in codepen:
+
+<https://codepen.io/SeanMorris227/pen/GRVqYzR?editors=1000>
 
 ```html
 <html>
@@ -106,9 +114,9 @@ PGlite can also be used right from static HTML. Just pass it in the `data-import
 
 `pdo_pglite` is powered by [@electric-sql/pglite](https://electric-sql.com/).
 
-https://github.com/electric-sql/pglite
+<https://github.com/electric-sql/pglite>
 
-https://electric-sql.com/
+<https://electric-sql.com/>
 
 
 

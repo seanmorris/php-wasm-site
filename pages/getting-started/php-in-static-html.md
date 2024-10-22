@@ -2,7 +2,7 @@
 title: PHP in Static HTML
 weight: -700
 ---
-# php-wasm in Static HTML
+# Php-Wasm in Static HTML
 
 PHP can be included in static HTML pages that are served with no dynamic processing on the backend whatsoever. Just use the `php-tags.js` script from a CDN in your page:
 
@@ -79,7 +79,7 @@ You can find the full list of extensions here: [extensions/using-php-extensions.
 
 Here is a less-than-trivial example that loads zlib, gd, libwebp & others:
 
-https://codepen.io/SeanMorris227/pen/Yzbbrre
+<https://codepen.io/SeanMorris227/pen/Yzbbrre>
 
 ```html
 <a target = "_blank" href = "https://github.com/seanmorris/php-wasm">https://github.com/seanmorris/php-wasm</a><hr />

@@ -5,13 +5,20 @@ pagetitle: Custom Builds with php-wasm-builder
 
 The `php-wasm-builder` *package* is the set of source files needed to build php-wasm & php-cgi-wasm.
 
-The `php-wasm-builder` *command* is a wrapper script for the build process that allows the user to easily configure the underlying build process & drop the build assets wherever is necesary.
+The `php-wasm-builder` *command* is a wrapper script for the build process that allows the user to easily configure the underlying build process & drop the build assets wherever is necessary.
+
+You can use [.php-wasm-rc](/compiling/php-wasm-rc.html) to customize your build.
 
 ## Installing php-wasm-builder
 
 Install `php-wasm-builder` globally:
 
-***Requires docker, docker-compose, coreutils, wget, & make.***
+***Requires:***
+* Docker
+* Docker Compose
+* Coreutils
+* Wget
+* Make
 
 ```sh
 $ npm install -g php-wasm-builder
@@ -35,7 +42,7 @@ $ php-wasm-builder clean
 
 ### build
 
-Use this to build custom version of php-wasm. Its recommended to build this to an empty directory using a `.php-wasm-rc` file.
+Use this to build custom version of php-wasm. It's recommended to build this to an empty directory using a `.php-wasm-rc` file.
 
 ```bash
 npx php-wasm-builder build
@@ -61,7 +68,7 @@ npx php-wasm-builder copy-assets
 
 ### build-assets
 
-Similar to `copy-assets`, but will actually compile the shared libaries, then copy them to `PHP_ASSET_DIR`.
+While `copy-assets` moves existing shared libraries, the `build-assets` command compiles them first, then moves them to PHP_ASSET_DIR.
 
 You can use this with `.php-wasm-rc` to copy assets even if you're not using a custom build.
 
@@ -101,8 +108,8 @@ Then navigate to the directory you want the files to be built in, and run `php-w
 ```sh
 $ cd ~/my-project
 $ php-wasm-builder build
+# "web" is the default:
 # php-wasm-builder build web
-#  "web" is the default here
 ```
 
 ## Build for node
@@ -129,6 +136,7 @@ Build CGI modules with:
 $ php-wasm-builder build web cgi mjs
 $ php-wasm-builder build worker cgi mjs
 ```
+## PHP_DIST_DIR
 
-This will build the package inside of the current directory (or in `PHP_DIST_DIR`, *see below for more info.*)
+This will build the package inside of the current directory (or in `PHP_DIST_DIR`, *see [.php-wasm-rc](/compiling/php-wasm-rc.html) for more info.*)
 

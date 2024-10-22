@@ -1,5 +1,5 @@
 ---
-pagetitle: php-wasm methods
+pagetitle: Php-Wasm Methods
 weight: -1000
 itemtype: schema.org/Class
 microdata:
@@ -9,9 +9,11 @@ microdata:
     alternateName: PhpNode
     alternateName: PhpWeb
 ---
-# php-wasm methods
+# Php-Wasm Methods
 
 ## constructor
+
+<span class = "highlight">@todo</span> Document constructor options object.
 
 ## php.run
 

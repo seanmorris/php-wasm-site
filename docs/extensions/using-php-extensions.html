@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 
 <head>
-			<title>php-wasm | Using PHP Extensions</title>
+			<title>Php-Wasm | Using PHP Extensions</title>
 			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<meta name="title" content="Using PHP Extensions">
 	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -141,7 +142,7 @@
 				PHP-CGI in Service Workers			</a>
 		</li><li>
 			<a href = "/getting-started/cgi-in-nodeJs.html">
-				PHP-CGI in NodeJs			</a>
+				PHP-CGI for Node.js			</a>
 		</li></ul>		</details><details open>
 			<summary>Methods</summary>
 			<ul><li>
@@ -202,8 +203,8 @@
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dl</span>(<span class="st">&#39;php-8.3-xml.so&#39;</span>)<span class="ot">;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dl</span>(<span class="st">&#39;php-8.3-dom.so&#39;</span>)<span class="ot">;</span></span></code></pre></div>
       <p>You can also pass an array as the <code>extensions</code>
-      argument to the constructor from Javascript to auto-generate an
-      ini file that loads your extensions.</p>
+      argument to the constructor from Javascript to automatically
+      generate an ini file that loads your extensions.</p>
       <div class="sourceCode" id="cb2"><pre
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`php8.3-xml.so`</span><span class="op">,</span></span>
@@ -218,11 +219,11 @@
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`php</span><span class="sc">${</span>PhpWeb<span class="op">.</span><span class="at">phpVersion</span><span class="sc">}</span><span class="vs">-dom.so`</span><span class="op">,</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
       <h2 id="dynamic-extensions-from-remote-servers">Dynamic Extensions
-      from Remote Servers:</h2>
+      from Remote Servers</h2>
       <p>You can also load extensions from remote servers with URLs:</p>
       <div class="sourceCode" id="cb4"><pre
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [<span class="vs">`https://unpkg.com/php-wasm-phar/php8.3-phar.so`</span>]})<span class="op">;</span></span></code></pre></div>
-      <p>The above is actually shorthand for the following code. Passing
+      <p>The above is shorthand for the following code. Passing
       <code>ini: true</code> will automatically load the extension via
       <code>/php.ini</code>, passing <code>ini: false</code> will wait
       for a call to <code>dl()</code> to do the lookup.</p>
@@ -253,10 +254,10 @@
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
       <h2 id="loading-dynamic-extensions-as-js-modules">Loading Dynamic
       Extensions as JS Modules:</h2>
-      <p>Dynamic extensions can be loaded as modules: So long as the
-      main file of the module defines the <code>getLibs</code> and
-      <code>getFiles</code> methods, extensions may be loaded like
-      so:</p>
+      <p>Dynamic extensions can be loaded as modules.</p>
+      <p>So long as the main file of the module defines the
+      <code>getLibs</code> and <code>getFiles</code> methods, extensions
+      may be loaded like so:</p>
       <div class="sourceCode" id="cb8"><pre
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">new</span> <span class="fu">PhpNode</span>({<span class="dt">sharedLibs</span><span class="op">:</span>[ <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-intl&#39;</span>) ]})</span></code></pre></div>
       <p>Dynamic extensions can also be loaded as modules from any
@@ -264,13 +265,13 @@
       <div class="sourceCode" id="cb9"><pre
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This will load both sqlite.so &amp; php8.x-sqlite.so:</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [ <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm-sqlite&#39;</span>) ]})<span class="op">;</span></span></code></pre></div>
-      <p>Sadly, this notation is not available for Service Workers,
-      since they do not yet support dynamic <code>imports()</code>.
-      Hopefully this will change soon.</p>
+      <p>Unfortunately, this notation is not available for Service
+      Workers, as they do not yet support dynamic
+      <code>imports()</code>. Hopefully this will change soon.</p>
       <h2 id="extension-list">Extension List</h2>
       <p>The following extensions may be loaded at runtime. This allows
-      the shared extension &amp; their dependencies to be cached,
-      re-used, and selected a-la-carte for each application.</p>
+      the shared extensions and their dependencies to be cached, reused,
+      and selected à la carte for each application</p>
       <h3 id="gd">gd</h3>
       <p><a href="https://www.npmjs.com/package/php-wasm-gd"
       class="uri">https://www.npmjs.com/package/php-wasm-gd</a></p>
@@ -320,7 +321,7 @@
     <li><a href="#using-php-extensions">Using PHP Extensions</a>
     <ul>
     <li><a href="#dynamic-extensions-from-remote-servers">Dynamic
-    Extensions from Remote Servers:</a></li>
+    Extensions from Remote Servers</a></li>
     <li><a href="#loading-dynamic-extensions-as-js-modules">Loading
     Dynamic Extensions as JS Modules:</a></li>
     <li><a href="#extension-list">Extension List</a>

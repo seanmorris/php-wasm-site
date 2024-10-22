@@ -3,43 +3,16 @@ title: Vrzno
 ---
 # Vrzno
 
-VRZNO is a bridge between Javascript & PHP in an extremely nontraditional sense. It lets you pass objects, arrays, callbacks, and classes between PHP & Javascript, as well as scalar values.
+*Vrzno requires PHP 8.1+*
 
-Vrzno requires PHP 8.1+
-
-*NOTE: The PDO Connectors have been moved into their own extensions:*
-
-* CloudFlare D1: https://github.com/seanmorris/pdo-cfd1
-* PGLite pgSQL: https://github.com/seanmorris/pdo-pglite
-
-## Contents
-
-* [new Vrzno](#new-vrzno)
-* [PHP Functions](#php-functions)
-* [Javascript Object and Classes](#javascript-object-and-classes)
-* [Callbacks](#callbacks)
-* [Arrays](#arrays)
-* [toString & __toString](#tostring--__tostring)
-* [URL fopen](#url-fopen)
-* [Limitations](#limitations)
+VRZNO is the first PHP extension built for php-wasm. Once it's compiled with PHP, it can be served to any browser and executed client side. It can also run in NodeJS and CloudFlare workers.
 
 ## How is this possible?
-VRZNO is the first PHP extension built for php-wasm. Once its compiled with PHP, it can be served to any browser and executed client side. It can also run in NodeJS and CloudFlare workers.
 
-https://github.com/seanmorris/php-wasm
-
-![](https://github.com/seanmorris/vrzno/blob/master/banner.jpg?raw=true)
-
-### new Vrzno
-Creates a new `Vrzno` object that holds a reference to Javascript's `globalThis` object. In the browser this corresponds to `window`.
-
-```php
-<?php
-$window = new Vrzno;
-```
+VRZNO is a bridge between Javascript and PHP in an extremely nontraditional sense. It lets you pass objects, arrays, callbacks, and classes between PHP & Javascript, as well as scalar values.
 ## PHP Functions
 
-### `vrzno_await($promise)`
+### vrzno_await($promise)
 Wait on a Promise-like object to resolve within PHP before proceeding with the script. This will pause execution of PHP in the same way the `await` keyword does when used in Javascript.
 
 ```php
@@ -51,7 +24,7 @@ $json = vrzno_await($response->json());
 var_dump($json);
 ```
 
-### `vrzno_import($module_url)`
+### vrzno_import($module_url)
 Import a javascript library asynchronously. This is the PHP equivalent of Javascript's dynamic `import()`.
 
 See a demo: https://codepen.io/SeanMorris227/pen/LYqNNrE
@@ -61,7 +34,7 @@ See a demo: https://codepen.io/SeanMorris227/pen/LYqNNrE
 $import = vrzno_import('https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm');
 ```
 
-### `vrzno_env($name)`
+### vrzno_env($name)
 Takes a string, and returns a value passed into the PHP Object's constructor.
 
 For example, if you invoke `PhpNode` like this in Javascript:
@@ -84,7 +57,7 @@ $Gtk = vrzno_env('Gtk');
 $WebKit2 = vrzno_env('WebKit2');
 ```
 
-### `vrzno_target($vrzno)`
+### vrzno_target($vrzno)
 Get the `targetId` as an integer from a `Vrzno` object.
 
 ## Javascript Object and Classes
@@ -101,7 +74,7 @@ $Date = $window->Date;
 var_dump($Date->now());
 ```
 
-Since the `Date` object is also technically a class in Javascript, we can create a new instance in PHP with the `new` operator, and call the instance method, `toISOString`:
+Since the `Date` object is also technically a class in Javascript, we can create a new instance in PHP using the `new` operator, and call the instance method, `toISOString`:
 
 ```php
 <?php
@@ -113,12 +86,19 @@ $d = new $Date;
 var_dump($d, $d->toISOString());
 ```
 
+### new Vrzno
+Creates a new `Vrzno` object that holds a reference to Javascript's `globalThis` object. In the browser this corresponds to `window`.
+
+```php
+<?php
+$window = new Vrzno;
+```
+
 ## Callbacks
 
 Functions are fully marshalled as well. In this example, we'll create an anonymous PHP callback that calls the Javascript function `window.alert()`, and then pass the PHP callback to Javascript's `setTimeout()` function, which will call it after 1 second.
 
 As you can see, functions from **both** languages are crossing the boundary here:
-
 
 ```php
 <?php
@@ -127,7 +107,7 @@ $window = new Vrzno;
 $window->setTimeout( fn() => $window->alert('Done!'), 1000);
 ```
 
-Since we can create new objects from classes, we can even use this to create promises:
+Since we can create new objects from classes, we can even use this to create Promises:
 
 ```php
 <?php
@@ -151,7 +131,7 @@ The Javascript `.toString` method and the PHP `->__toString` method are proxied 
 
 ## URL fopen
 
-Vrzno implements a fetch-backend for the `http` and `https` stream wrappers, which respects the `allow_url_fopen` ini directive.
+Vrzno implements a fetch-backend for the `http` and `https` stream wrappers, which respects the `allow_url_fopen` INI directive.
 
 ```php
 <?php
@@ -174,7 +154,7 @@ var_dump(
 );
 ```
 
-Currently the following context options are implemented:
+Currently, the following context options are implemented:
 
 * method
 * content
@@ -183,14 +163,14 @@ Currently the following context options are implemented:
 
 More information on HTTP context options can be found here:
 
-https://www.php.net/manual/en/context.http.php
+<https://www.php.net/manual/en/context.http.php>
 
 ## Limitations
 
-* The Javascript object model places properties and methods in the same namespace. PHP however uses separate namespaces for properties and methods. This means an object in PHP can have a property `$x->y` as well as a method `$x->y()`. However if a Javascript object has a method `x.y()`, then the property `x.y` must resolve to the same callback as the method.
+* The Javascript object model places properties and methods in the same namespace. PHP however uses separate namespaces for properties and methods. This means an object in PHP can have a property `$x->y` as well as a method `$x->y()`. However, if a Javascript object has a method `x.y()`, then the property `x.y` must resolve to the same callback as the method.
 
   Currently, when a PHP object is passed into a Javascript execution environment, method names take precedence over property names. This means if a PHP object has both a method `$x->y()`, and a property `$x->y`, then the property will be inaccessible from Javascript.
 
-* PHP Classes are not **yet** accessible from Javascript. I.e. there is no way to pass a class out of PHP and call `new` on it from Javascript.
+* PHP Classes are not **yet** accessible from Javascript. i.e. there is no way to pass a class out of PHP and call `new` on it from Javascript.
 
-* Static methods are not yet proxied.
+* Static methods are not yet proxied from PHP.

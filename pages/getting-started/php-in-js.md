@@ -2,7 +2,7 @@
 title: PHP in Javascript
 weight: -800
 ---
-# php-wasm in Javascript
+# Php-Wasm in Javascript
 
 ## Running PHP & Taking Output
 
@@ -46,7 +46,7 @@ const formatTime = (format, time) => phpDate(format, phpStrtotime(time));
 
 You can see this working live on CodePen:
 
-https://codepen.io/SeanMorris227/pen/gONmKqL?editors=1111
+<https://codepen.io/SeanMorris227/pen/gONmKqL?editors=1111>
 
 ```javascript
 (async () => {
@@ -78,7 +78,7 @@ The `php.x՝...՝` & `php.r՝...՝` functions allow for Javascript to be interpo
 
 You can see this working live on CodePen:
 
-https://codepen.io/SeanMorris227/pen/wvLJXEJ?editors=0011
+<https://codepen.io/SeanMorris227/pen/wvLJXEJ?editors=0011>
 
 ```{ .javascript highlight="10-12" }
 (async () => {

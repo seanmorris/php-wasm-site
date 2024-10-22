@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 
 <head>
-			<title>php-wasm | PHP in Javascript</title>
+			<title>Php-Wasm | PHP in Javascript</title>
 			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<meta name="title" content="PHP in Javascript">
 	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -141,7 +142,7 @@
 				PHP-CGI in Service Workers			</a>
 		</li><li>
 			<a href = "/getting-started/cgi-in-nodeJs.html">
-				PHP-CGI in NodeJs			</a>
+				PHP-CGI for Node.js			</a>
 		</li></ul>		</details><details open>
 			<summary>Methods</summary>
 			<ul><li>
@@ -191,7 +192,7 @@
 				LICENSE			</a>
 		</li></ul>			</nav>
 						<article >
-						<h1 id="php-wasm-in-javascript">php-wasm in Javascript</h1>
+						<h1 id="php-wasm-in-javascript">Php-Wasm in Javascript</h1>
       <h2 id="running-php-taking-output">Running PHP &amp; Taking
       Output</h2>
       <p>First, import the module and create an instance of PHP:</p>
@@ -222,7 +223,9 @@
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> formatTime <span class="op">=</span> (format<span class="op">,</span> time) <span class="kw">=&gt;</span> <span class="fu">phpDate</span>(format<span class="op">,</span> <span class="fu">phpStrtotime</span>(time))<span class="op">;</span></span></code></pre></div>
       <p>You can see this working live on CodePen:</p>
-      <p>https://codepen.io/SeanMorris227/pen/gONmKqL?editors=1111</p>
+      <p><a
+      href="https://codepen.io/SeanMorris227/pen/gONmKqL?editors=1111"
+      class="uri">https://codepen.io/SeanMorris227/pen/gONmKqL?editors=1111</a></p>
       <div class="sourceCode" id="cb6"><pre
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
@@ -254,7 +257,9 @@
       Javascript values can be interpolated, and PHP will treat them as
       normal, native objects.</p>
       <p>You can see this working live on CodePen:</p>
-      <p>https://codepen.io/SeanMorris227/pen/wvLJXEJ?editors=0011</p>
+      <p><a
+      href="https://codepen.io/SeanMorris227/pen/wvLJXEJ?editors=0011"
+      class="uri">https://codepen.io/SeanMorris227/pen/wvLJXEJ?editors=0011</a></p>
       <div class="sourceCode" id="cb7" data-highlight="10-12"><pre
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
@@ -279,7 +284,7 @@
 						<nav class = "table-of-contents">
 				<span>on this page:</span>
 				<ul>
-    <li><a href="#php-wasm-in-javascript">php-wasm in Javascript</a>
+    <li><a href="#php-wasm-in-javascript">Php-Wasm in Javascript</a>
     <ul>
     <li><a href="#running-php-taking-output">Running PHP &amp; Taking
     Output</a></li>

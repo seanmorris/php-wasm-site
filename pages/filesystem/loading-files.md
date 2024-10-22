@@ -29,11 +29,9 @@ See [compiling/php-wasm-rc.html#preload_assets](/compiling/php-wasm-rc.html#prel
 
 ### locateFile
 
-You can provide the `locateFile` option to php-wasm as a callback to map the names of files to URLs where they're loaded from. `undefined` can be returned as a fallback to default.
+You can provide the `locateFile` option to php-wasm as a callback to map the names of files to URLs where they're loaded from. Returning `undefined` will fallback to the default behavior.
 
-You can use this if your static assets are served from a different directory than your javascript.
-
-This applies to `.wasm` files, shared libraries, single files and preloaded FS packages in `.data` files.
+This option is useful if your static assets are served from a different directory than your JavaScript files. It applies to .wasm files, shared libraries, single files, and preloaded FS packages in .data files.
 
 ```javascript
 const php = new PhpWeb({locateFile: filename => `/my/static/path/${filename}`});
@@ -43,9 +41,7 @@ const php = new PhpWeb({locateFile: filename => `/my/static/path/${filename}`});
 
 ### IDBFS (Web & Worker)
 
-To use IDBFS in PhpWeb, pass a `persist` object with a `mountPath` key.
-
-`mountPath` will be used as the path to the persistent directory within the PHP environment.
+To use IDBFS in PhpWeb, pass a `persist` object with a `mountPath` key. The value of `mountPath` will be used as the path to the persistent directory within the PHP environment.
 
 ```javascript
 const { PhpWeb } = await import('https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs');

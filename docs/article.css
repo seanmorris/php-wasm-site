@@ -127,7 +127,7 @@ nav.main a.current {
 }
 
 footer {
-	min-width: 33%;
+	min-width: 22rem;
 	margin-left: auto;
 	margin-right: 0;
 	background-color: white;
@@ -172,4 +172,11 @@ footer a {
 
 p > img:first-child:last-child {
 	width: 100%;
+}
+
+span.higlight {
+	background-color: white;
+	color: #00081d;
+	border-radius: 3px;
+	font-weight: bold;
 }

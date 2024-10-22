@@ -182,4 +182,5 @@ code > span:hover {
 footer img {
 	margin-top: 1rem;
 	display: inline-block;
+	image-rendering: pixelated;
 }

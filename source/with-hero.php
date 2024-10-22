@@ -15,7 +15,7 @@
 					<li>Works with with Node GTK.</li>
 					<li>Supports SQLite & PostgreSQL.</li>
 					<li>Powerful enough to run Drupal, Laravel & WordPress.</li>
-					<li>Works with CloudFlare & D1 SQL via PDO.</li>
+					<li>Runs in CloudFlare with D1 SQL via PDO.</li>
 				</ul>
 
 				<p>Php-Wasm is currently powering cutting-edge client side php apps like wordpress-playground, drupal-playground & playwithlaravel.</p>

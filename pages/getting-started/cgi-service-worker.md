@@ -2,7 +2,7 @@
 title: PHP-CGI in Service Workers
 weight: -600
 ---
-# php-cgi-wasm for Service Workers
+# Php-Cgi-Wasm for Service Workers
 
 Version 0.0.9 adds `php-cgi-wasm` to the mix. This allows you to run php in web-server mode, similar to how it runs under apache or nginx. Running within a Service Worker, it can intercept and respond to HTTP requests just like a normal webserver. This means the browser can simply navigate to a URL, and PHP will generate the page, and everything will work as-normal, AJAX and all. From the perspective of the webpage, its just making HTTP requests. Its not worried about whether the PHP runs on the server or in a Service Worker.
 

@@ -1,4 +1,5 @@
 ---
+title: Contact
 itemtype: https://schema.org/ContactPage
 microdata:
     mainContentOfPage: true

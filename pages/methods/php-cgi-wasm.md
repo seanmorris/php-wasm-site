@@ -1,5 +1,5 @@
 ---
-pagetitle: php-cgi-wasm methods
+pagetitle: Php-Cgi-Wasm Methods
 itemtype: schema.org/Class
 microdata:
     name: PhpCgiWasm
@@ -8,9 +8,11 @@ microdata:
     alternateName: PhpCgiNode
     alternateName: PhpCgiWorker
 ---
-# php-cgi-wasm methods
+# Php-Cgi-Wasm Methods
 
 ## constructor
+
+<span class = "highlight">@todo</span> Finish documenting constructor options object.
 
 The php-cgi-wasm constructor takes an options bucket object as its single parameter. The keys are outlined below.
 

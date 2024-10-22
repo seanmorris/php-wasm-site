@@ -5,23 +5,22 @@ title: pdo-cfd1
 
 *pdo driver for CloudFlare D1 & php-wasm*
 
-[![Static Badge](https://img.shields.io/badge/reddit-always%20online-336699?style=for-the-badge&logo=reddit)](https://www.reddit.com/r/phpwasm/) [![Discord](https://img.shields.io/discord/1199824765666463835?style=for-the-badge&logo=discord&link=https%3A%2F%2Fdiscord.gg%2Fj8VZzju7gJ)](https://discord.gg/j8VZzju7gJ)
+<span class = "highlight">@todo:</span> Walkthrough on compiling php-wasm for cloudflare.
 
-### Join the community: [reddit](https://www.reddit.com/r/phpwasm/) | [discord](https://discord.gg/j8VZzju7gJ) | [php-wasm](https://github.com/seanmorris/php-wasm)
-
-### Coming Soon! Tutorial on getting php-wasm running in CloudFlare.
-
-pdo_cfd1 requires PHP 8.1+
+pdo_cfd1 requires PHP 8.1+.
 
 ## Connect & Configure
 
-Simply pass the D1 object into the php-wasm constructor as `cfd1` to enable pdo_cfd1 support. Once D1 is passed in, `cfd1:` will be available as a PDO driver.
+Pass the D1 object into the php-wasm constructor as a key to the `cfd1` object to enable pdo_cfd1 support.
+
+`cfd1:` will become available as a PDO driver:
 
 ```javascript
 export async function onRequest(event)
 {
-    const mainDb = event.env.mainDb;
-    const php = new PhpWorker({ cfd1: { mainDb } });
+    const php = new PhpWorker({
+        cfd1: { mainDb: event.env.mainDb }
+    });
 
     php.run(`<?php $pdo = new PDO('cfd1:mainDb');`);
 }
@@ -36,8 +35,9 @@ PDO can be used with D1 just like any other SQL server:
 ```javascript
 export async function onRequest(event)
 {
-    const mainDb = event.env.mainDb;
-    const php = new PhpWorker({ cfd1: { mainDb } });
+    const php = new PhpWorker({
+        cfd1: { mainDb: event.env.mainDb }
+    });
 
     php.run(`<?php
         $pdo = new PDO('cfd1:main');
@@ -53,10 +53,10 @@ export async function onRequest(event)
 ## Todo
 
 * *Named replacement tokens* - Currently only positional tokens are supported.
-* *Error handling* - Error handling is currently very rudimentary and does not propagage messages.
+* *Error handling* - Error handling is currently very rudimentary and does not propagate messages.
 
 ## CloudFlare D1
 
 `pdo_cfd1` is powered by [CloudFlare D1](https://developers.cloudflare.com/d1/).
 
-https://developers.cloudflare.com/d1/
+<https://developers.cloudflare.com/d1/>

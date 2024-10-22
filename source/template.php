@@ -25,6 +25,7 @@ $endif$
 $if(description-meta)$
 	<meta name="description" content="$description-meta$" />
 $endif$
+	<meta name="title" content="$if(pagetitle)$${pagetitle}$else$${title}$endif$">
 	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>

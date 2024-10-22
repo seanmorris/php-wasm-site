@@ -1,12 +1,12 @@
 ---
-title: php-wasm by Sean Morris
+title: Php-Wasm by Sean Morris
 noprefix: true
 template: source/with-hero.html
 leftbar: false
 itemtype: schema.org/SoftwareSourceCode
 microdata:
     name: php-wasm
-    description: php-wasm is an implementation of PHP running in Web Assembly.
+    description: Php-Wasm is an implementation of PHP running in Web Assembly.
     alternateName: php-cgi-wasm
     programmingLanguage: php, javascript, webassembly
     runtimePlatform: webassembly

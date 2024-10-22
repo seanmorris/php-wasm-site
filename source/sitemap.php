@@ -1,6 +1,6 @@
 <?php
 
-$domain = 'http://localhost:8081';
+$domain = $argv[1];
 $rootPath = './docs';
 
 $directory = new \RecursiveIteratorIterator(

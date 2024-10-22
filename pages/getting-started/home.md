@@ -5,6 +5,10 @@ weight: -1000
 ---
 # Home
 
+[![Static Badge](https://img.shields.io/badge/reddit-always%20online-336699?style=for-the-badge&logo=reddit)](https://www.reddit.com/r/phpwasm/) [![Discord](https://img.shields.io/discord/1199824765666463835?style=for-the-badge&logo=discord&link=https%3A%2F%2Fdiscord.gg%2Fj8VZzju7gJ)](https://discord.gg/j8VZzju7gJ)
+
+<span style = "font-size:larger">Join the community: [reddit](https://www.reddit.com/r/phpwasm/) | [discord](https://discord.gg/j8VZzju7gJ)</span>
+
 ## Getting Started
 
 To install php-wasm with npm, see [INSTALLING](/getting-started/install-and-include.html).
@@ -15,7 +19,7 @@ If you want to write pure frontend PHP and skip the JS entirely, see [PHP In Sta
 
 If you'd like to spin up a webserver right in your browser, see [PHP-CGI In Service Workers](/getting-started/cgi-service-worker.html).
 
-If you'd like to serve websites from Node, see [PHP-CGI In NodeJs](/getting-started/cgi-in-nodeJs.html).
+If you'd like to serve websites with Node.js [PHP-CGI In NodeJs](/getting-started/cgi-in-nodeJs.html).
 
 ## Demo
 

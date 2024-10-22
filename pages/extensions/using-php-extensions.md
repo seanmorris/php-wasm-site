@@ -13,7 +13,7 @@ dl('php-8.3-xml.so');
 dl('php-8.3-dom.so');
 ```
 
-You can also pass an array as the `extensions` argument to the constructor from Javascript to auto-generate an ini file that loads your extensions.
+You can also pass an array as the `extensions` argument to the constructor from Javascript to automatically generate an ini file that loads your extensions.
 
 ```javascript
 const php = new PhpWeb({sharedLibs: [
@@ -31,7 +31,7 @@ const php = new PhpWeb({sharedLibs: [
 ]});
 ```
 
-## Dynamic Extensions from Remote Servers:
+## Dynamic Extensions from Remote Servers
 
 You can also load extensions from remote servers with URLs:
 
@@ -39,7 +39,7 @@ You can also load extensions from remote servers with URLs:
 const php = new PhpWeb({sharedLibs: [`https://unpkg.com/php-wasm-phar/php8.3-phar.so`]});
 ```
 
-The above is actually shorthand for the following code. Passing `ini: true` will automatically load the extension via `/php.ini`, passing `ini: false` will wait for a call to `dl()` to do the lookup.
+The above is shorthand for the following code. Passing `ini: true` will automatically load the extension via `/php.ini`, passing `ini: false` will wait for a call to `dl()` to do the lookup.
 
 ```javascript
 const php = new PhpWeb({sharedLibs: [
@@ -72,7 +72,9 @@ const php = new PhpWeb({sharedLibs: [
 
 ## Loading Dynamic Extensions as JS Modules:
 
-Dynamic extensions can be loaded as modules: So long as the main file of the module defines the `getLibs` and `getFiles` methods, extensions may be loaded like so:
+Dynamic extensions can be loaded as modules.
+
+So long as the main file of the module defines the `getLibs` and `getFiles` methods, extensions may be loaded like so:
 
 ```javascript
 new PhpNode({sharedLibs:[ await import('php-wasm-intl') ]})
@@ -85,11 +87,11 @@ Dynamic extensions can also be loaded as modules from any static HTTP server wit
 const php = new PhpWeb({sharedLibs: [ await import('https://cdn.jsdelivr.net/npm/php-wasm-sqlite') ]});
 ```
 
-Sadly, this notation is not available for Service Workers, since they do not yet support dynamic `imports()`. Hopefully this will change soon.
+Unfortunately, this notation is not available for Service Workers, as they do not yet support dynamic `imports()`. Hopefully this will change soon.
 
 ## Extension List
 
-The following extensions may be loaded at runtime. This allows the shared extension & their dependencies to be cached, re-used, and selected a-la-carte for each application.
+The following extensions may be loaded at runtime. This allows the shared extensions and their dependencies to be cached, reused, and selected à la carte for each application
 
 ### gd
 

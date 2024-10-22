@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+TITLE_PREFIX=Php-Wasm
 HIGHLIGHT_STYLE=
 
 # HIGHLIGHT_STYLE=pygments;
@@ -28,6 +29,10 @@ find ./pages -type f | while read FILENAME; do {
 	FILENAME="${BASE%.*}"
 	DEST=./docs${DIR#./pages}/${FILENAME}.html
 
+	if [ "${FILENAME}.${EXT}" == ".fm.yaml" ]; then
+		continue;
+	fi
+
 	mkdir -p ./docs${DIR#./pages};
 
 	TEMPLATE=`yq --front-matter=extract '.template' ${DIR}/${FILENAME}.${EXT} || echo ""`;
@@ -47,7 +52,7 @@ find ./pages -type f | while read FILENAME; do {
 	pandoc --data-dir=. -s -f markdown -t html \
 		${HIGHLIGHT_STYLE} ${TOC_FLAG} \
 		--template=${TEMPLATE} -o ${DEST} \
-		--title-prefix="php-wasm" \
+		--title-prefix="${TITLE_PREFIX}" \
 		--css "/heading.css" \
 		--css "/style.css" \
 		--css "/article.css" \
@@ -59,4 +64,4 @@ find ./pages -type f | while read FILENAME; do {
 
 cp -rfv static/* docs/;
 
-php source/sitemap.php > docs/sitemap.xml;
+php source/sitemap.php https://php-wasm.seanmorr.is > docs/sitemap.xml;

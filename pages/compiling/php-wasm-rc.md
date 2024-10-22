@@ -3,7 +3,9 @@ title: .php-wasm-rc
 ---
 # .php-wasm-rc
 
-You can also create a `.php-wasm-rc` file in this directory to customize the build.
+The `.php-wasm-rc` file is a configuration file that allows you to specify custom build options for php-wasm. When placed in the same directory as your project, the `php-wasm-builder` tool will use it to customize the build process.
+
+Example `.php-wasm-rc` file:
 
 ```make
 # Select a PHP version
@@ -24,7 +26,7 @@ PHP_CGI_ASSET_DIR=./public
 
 # Space separated list of files/directories (ABSOLUTE paths)
 # to be included under the /preload directory in the final build.
-PRELOAD_ASSETS=~/my-project/php-scripts ~/other-dir/example.php
+PRELOAD_ASSETS=~/path/to/file/php-scripts ~/other-dir/example.php
 
 # Memory to start the instance with, before growth
 INITIAL_MEMORY=2048MB
@@ -100,13 +102,7 @@ Build with/without assertions.
 
 ## Extension Flags
 
-Extensions may be compiled as `dynamic`, `shared`, or `static`. See `Custom Builds` for more information on compiling php-wasm.
-
-* dynamic - these extensions may be loaded selectively at runtime.
-* shared - these extensions will always be loaded at startup and can be cached and reused.
-* static - these extensions will be built directly into the main wasm binary (may cause a huge filesize).
-
-As stated above, extensions may be compiled as `dynamic`, `shared`, or `static`.
+Extensions may be compiled as `dynamic`, `shared`, or `static`.
 
 * dynamic - these extensions may be loaded selectively at runtime.
 * shared - these extensions will always be loaded at startup and can be cached and reused.
@@ -114,7 +110,7 @@ As stated above, extensions may be compiled as `dynamic`, `shared`, or `static`.
 
 (defaults provided below in **bold**)
 
-The following options are availavle for building static PHP extensions:
+The following options are available for building static PHP extensions:
 
 ```
 WITH_BCMATH    # [0, 1] Enabled by default
@@ -206,7 +202,7 @@ When compiled as a `dynamic` or `shared` extension, it will produce the library 
 
 static|**dynamic**
 
-This extenstion makes use of `freetype`, `libjpeg`, `libpng`, & `zlib`.
+If WITH_GD is set to dynamic, then libpng, libjpeg, and freetype will load after GD is loaded.
 
 When compiled as a `dynamic` extension, this will produce the extension `php-8.x-gd.so`.
 

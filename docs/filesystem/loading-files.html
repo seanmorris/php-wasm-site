@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 
 <head>
-			<title>php-wasm | Loading Files</title>
+			<title>Php-Wasm | Loading Files</title>
 			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<meta name="title" content="Loading Files">
 	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -141,7 +142,7 @@
 				PHP-CGI in Service Workers			</a>
 		</li><li>
 			<a href = "/getting-started/cgi-in-nodeJs.html">
-				PHP-CGI in NodeJs			</a>
+				PHP-CGI for Node.js			</a>
 		</li></ul>		</details><details open>
 			<summary>Methods</summary>
 			<ul><li>
@@ -220,21 +221,20 @@
       <h3 id="locatefile">locateFile</h3>
       <p>You can provide the <code>locateFile</code> option to php-wasm
       as a callback to map the names of files to URLs where they’re
-      loaded from. <code>undefined</code> can be returned as a fallback
-      to default.</p>
-      <p>You can use this if your static assets are served from a
-      different directory than your javascript.</p>
-      <p>This applies to <code>.wasm</code> files, shared libraries,
-      single files and preloaded FS packages in <code>.data</code>
-      files.</p>
+      loaded from. Returning <code>undefined</code> will fallback to the
+      default behavior.</p>
+      <p>This option is useful if your static assets are served from a
+      different directory than your JavaScript files. It applies to
+      .wasm files, shared libraries, single files, and preloaded FS
+      packages in .data files.</p>
       <div class="sourceCode" id="cb2"><pre
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">locateFile</span><span class="op">:</span> filename <span class="kw">=&gt;</span> <span class="vs">`/my/static/path/</span><span class="sc">${</span>filename<span class="sc">}</span><span class="vs">`</span>})<span class="op">;</span></span></code></pre></div>
       <h2 id="persistent-storage">Persistent Storage</h2>
       <h3 id="idbfs-web-worker">IDBFS (Web &amp; Worker)</h3>
       <p>To use IDBFS in PhpWeb, pass a <code>persist</code> object with
-      a <code>mountPath</code> key.</p>
-      <p><code>mountPath</code> will be used as the path to the
-      persistent directory within the PHP environment.</p>
+      a <code>mountPath</code> key. The value of <code>mountPath</code>
+      will be used as the path to the persistent directory within the
+      PHP environment.</p>
       <div class="sourceCode" id="cb3"><pre
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>

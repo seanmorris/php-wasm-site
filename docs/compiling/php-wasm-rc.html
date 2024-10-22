@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 
 <head>
-			<title>php-wasm | .php-wasm-rc</title>
+			<title>Php-Wasm | .php-wasm-rc</title>
 			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<meta name="title" content=".php-wasm-rc">
 	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -141,7 +142,7 @@
 				PHP-CGI in Service Workers			</a>
 		</li><li>
 			<a href = "/getting-started/cgi-in-nodeJs.html">
-				PHP-CGI in NodeJs			</a>
+				PHP-CGI for Node.js			</a>
 		</li></ul>		</details><details open>
 			<summary>Methods</summary>
 			<ul><li>
@@ -192,8 +193,12 @@
 		</li></ul>			</nav>
 						<article >
 						<h1 id="php-wasm-rc">.php-wasm-rc</h1>
-      <p>You can also create a <code>.php-wasm-rc</code> file in this
-      directory to customize the build.</p>
+      <p>The <code>.php-wasm-rc</code> file is a configuration file that
+      allows you to specify custom build options for php-wasm. When
+      placed in the same directory as your project, the
+      <code>php-wasm-builder</code> tool will use it to customize the
+      build process.</p>
+      <p>Example <code>.php-wasm-rc</code> file:</p>
       <pre class="make"><code># Select a PHP version
 PHP_VERSION=8.3
 
@@ -212,7 +217,7 @@ PHP_CGI_ASSET_DIR=./public
 
 # Space separated list of files/directories (ABSOLUTE paths)
 # to be included under the /preload directory in the final build.
-PRELOAD_ASSETS=~/my-project/php-scripts ~/other-dir/example.php
+PRELOAD_ASSETS=~/path/to/file/php-scripts ~/other-dir/example.php
 
 # Memory to start the instance with, before growth
 INITIAL_MEMORY=2048MB
@@ -272,20 +277,7 @@ WITH_FREETYPE=1</code></pre>
       <hr />
       <h2 id="extension-flags">Extension Flags</h2>
       <p>Extensions may be compiled as <code>dynamic</code>,
-      <code>shared</code>, or <code>static</code>. See
-      <code>Custom Builds</code> for more information on compiling
-      php-wasm.</p>
-      <ul>
-      <li>dynamic - these extensions may be loaded selectively at
-      runtime.</li>
-      <li>shared - these extensions will always be loaded at startup and
-      can be cached and reused.</li>
-      <li>static - these extensions will be built directly into the main
-      wasm binary (may cause a huge filesize).</li>
-      </ul>
-      <p>As stated above, extensions may be compiled as
-      <code>dynamic</code>, <code>shared</code>, or
-      <code>static</code>.</p>
+      <code>shared</code>, or <code>static</code>.</p>
       <ul>
       <li>dynamic - these extensions may be loaded selectively at
       runtime.</li>
@@ -295,7 +287,7 @@ WITH_FREETYPE=1</code></pre>
       wasm binary (may cause a huge filesize).</li>
       </ul>
       <p>(defaults provided below in <strong>bold</strong>)</p>
-      <p>The following options are availavle for building static PHP
+      <p>The following options are available for building static PHP
       extensions:</p>
       <pre><code>WITH_BCMATH    # [0, 1] Enabled by default
 WITH_CALENDAR  # [0, 1] Enabled by default
@@ -366,9 +358,8 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
       <hr />
       <h3 id="with_gd">WITH_GD</h3>
       <p>static|<strong>dynamic</strong></p>
-      <p>This extenstion makes use of <code>freetype</code>,
-      <code>libjpeg</code>, <code>libpng</code>, &amp;
-      <code>zlib</code>.</p>
+      <p>If WITH_GD is set to dynamic, then libpng, libjpeg, and
+      freetype will load after GD is loaded.</p>
       <p>When compiled as a <code>dynamic</code> extension, this will
       produce the extension <code>php-8.x-gd.so</code>.</p>
       <hr />

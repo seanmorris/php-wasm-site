@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 
 <head>
-			<title>php-wasm | pdo-pglite</title>
+			<title>Php-Wasm | pdo-pglite</title>
 			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+	<meta name="title" content="pdo-pglite">
 	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -141,7 +142,7 @@
 				PHP-CGI in Service Workers			</a>
 		</li><li>
 			<a href = "/getting-started/cgi-in-nodeJs.html">
-				PHP-CGI in NodeJs			</a>
+				PHP-CGI for Node.js			</a>
 		</li></ul>		</details><details open>
 			<summary>Methods</summary>
 			<ul><li>
@@ -193,23 +194,13 @@
 						<article >
 						<h1 id="pdo-pglite">pdo-pglite</h1>
       <p><em>pdo driver for pglite &amp; php-wasm</em></p>
-      <p><a href="https://www.reddit.com/r/phpwasm/"><img
-      src="https://img.shields.io/badge/reddit-always%20online-336699?style=for-the-badge&amp;logo=reddit"
-      alt="Static Badge" /></a> <a
-      href="https://discord.gg/j8VZzju7gJ"><img
-      src="https://img.shields.io/discord/1199824765666463835?style=for-the-badge&amp;logo=discord&amp;link=https%3A%2F%2Fdiscord.gg%2Fj8VZzju7gJ"
-      alt="Discord" /></a></p>
-      <h3 id="join-the-community-reddit-discord-php-wasm">Join the
-      community: <a href="https://www.reddit.com/r/phpwasm/">reddit</a>
-      | <a href="https://discord.gg/j8VZzju7gJ">discord</a> | <a
-      href="https://github.com/seanmorris/php-wasm">php-wasm</a></h3>
-      <p>pdo_pglite requires PHP 8.1+</p>
-      <p>Simply pass the PGlite object into the php-wasm constructor to
-      enable pdo_pglite support:</p>
+      <p>pdo_pglite requires PHP 8.1+.</p>
+      <p>Pass the PGlite object into the php-wasm constructor to enable
+      pdo_pglite support:</p>
       <div class="sourceCode" id="cb1"><pre
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;@electric-sql/pglite&#39;</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({PGlite})<span class="op">;</span></span></code></pre></div>
-      <p>You can even load PGlite from a CDN:</p>
+      <p>You can also load PGlite from a CDN:</p>
       <div class="sourceCode" id="cb2"><pre
       class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&#39;</span><span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({PGlite})<span class="op">;</span></span></code></pre></div>
@@ -251,56 +242,71 @@
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="vs">        fputcsv($out, $row);</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="vs">    }</span></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+      <h3 id="phppostgresql-in-static-html">PHP/PostgreSQL in Static
+      HTML</h3>
       <p>PGlite can also be used right from static HTML. Just pass it in
-      the <code>data-imports</code> attribute on the php script tag:</p>
+      the <code>data-imports</code> attribute on the php script tag,
+      with the URL of the module as the key, where the value lists the
+      imports from that module as an array.</p>
       <div class="sourceCode" id="cb5"><pre
-      class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;module&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;./php-tags.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span> <span class="er">data-stderr</span> <span class="ot">=</span> <span class="st">&quot;#error&quot;</span> <span class="er">data-imports</span> <span class="ot">=</span> <span class="st">&#39;{</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">        &quot;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&quot;: [&quot;PGlite&quot;]</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">    }&#39;</span><span class="kw">&gt;</span><span class="op">&lt;?</span>php</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        $pdo <span class="op">=</span> <span class="kw">new</span> <span class="fu">PDO</span>(<span class="st">&#39;pgsql:idb-storage&#39;</span>)<span class="op">;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        $stm <span class="op">=</span> $pdo<span class="op">-&gt;</span><span class="fu">prepare</span>(</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;SELECT * FROM pg_catalog.pg_tables WHERE schemaname = :schema&#39;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        )<span class="op">;</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        $out <span class="op">=</span> <span class="fu">fopen</span>(<span class="st">&#39;php://stdout&#39;</span><span class="op">,</span> <span class="st">&#39;w&#39;</span>)<span class="op">;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        $stm<span class="op">-&gt;</span><span class="fu">execute</span>([</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;schema&#39;</span> <span class="kw">=&gt;</span> <span class="st">&#39;pg_catalog&#39;</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        ])<span class="op">;</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        $headers <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> ($row <span class="op">=</span> $stm<span class="op">-&gt;</span><span class="fu">fetch</span>(PDO<span class="op">::</span>FETCH_ASSOC)) {</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (<span class="op">!</span>$headers) {</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                <span class="fu">fputcsv</span>($out<span class="op">,</span> <span class="fu">array_keys</span>($row))<span class="op">;</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                $headers <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>            }</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">fputcsv</span>($out<span class="op">,</span> $row)<span class="op">;</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/script&gt;</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;pre</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;output&quot;</span><span class="kw">&gt;&lt;/pre&gt;</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;pre</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;error&quot;</span><span class="kw">&gt;&lt;/pre&gt;</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
+      class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-imports</span> <span class="ot">=</span> <span class="st">&#39;{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&quot;: [&quot;PGlite&quot;]</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">}&#39;</span><span class="kw">&gt;</span></span></code></pre></div>
+      <p>You can see an example of this running in codepen:</p>
+      <p><a
+      href="https://codepen.io/SeanMorris227/pen/GRVqYzR?editors=1000"
+      class="uri">https://codepen.io/SeanMorris227/pen/GRVqYzR?editors=1000</a></p>
+      <div class="sourceCode" id="cb6"><pre
+      class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;module&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;./php-tags.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span> <span class="er">data-stderr</span> <span class="ot">=</span> <span class="st">&quot;#error&quot;</span> <span class="er">data-imports</span> <span class="ot">=</span> <span class="st">&#39;{</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">        &quot;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&quot;: [&quot;PGlite&quot;]</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">    }&#39;</span><span class="kw">&gt;</span><span class="op">&lt;?</span>php</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        $pdo <span class="op">=</span> <span class="kw">new</span> <span class="fu">PDO</span>(<span class="st">&#39;pgsql:idb-storage&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        $stm <span class="op">=</span> $pdo<span class="op">-&gt;</span><span class="fu">prepare</span>(</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;SELECT * FROM pg_catalog.pg_tables WHERE schemaname = :schema&#39;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        )<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        $out <span class="op">=</span> <span class="fu">fopen</span>(<span class="st">&#39;php://stdout&#39;</span><span class="op">,</span> <span class="st">&#39;w&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        $stm<span class="op">-&gt;</span><span class="fu">execute</span>([</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;schema&#39;</span> <span class="kw">=&gt;</span> <span class="st">&#39;pg_catalog&#39;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        ])<span class="op">;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        $headers <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> ($row <span class="op">=</span> $stm<span class="op">-&gt;</span><span class="fu">fetch</span>(PDO<span class="op">::</span>FETCH_ASSOC)) {</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> (<span class="op">!</span>$headers) {</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                <span class="fu">fputcsv</span>($out<span class="op">,</span> <span class="fu">array_keys</span>($row))<span class="op">;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                $headers <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>            }</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">fputcsv</span>($out<span class="op">,</span> $row)<span class="op">;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/script&gt;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;pre</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;output&quot;</span><span class="kw">&gt;&lt;/pre&gt;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;pre</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;error&quot;</span><span class="kw">&gt;&lt;/pre&gt;</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
       <h2 id="electric-sqlpglite"><span class="citation"
       data-cites="electric-sql/pglite">@electric-sql/pglite</span></h2>
       <p><code>pdo_pglite</code> is powered by <a
       href="https://electric-sql.com/"><span class="citation"
       data-cites="electric-sql/pglite">@electric-sql/pglite</span></a>.</p>
-      <p>https://github.com/electric-sql/pglite</p>
-      <p>https://electric-sql.com/</p>
+      <p><a href="https://github.com/electric-sql/pglite"
+      class="uri">https://github.com/electric-sql/pglite</a></p>
+      <p><a href="https://electric-sql.com/"
+      class="uri">https://electric-sql.com/</a></p>
 			</article>
 						<nav class = "table-of-contents">
 				<span>on this page:</span>
 				<ul>
     <li><a href="#pdo-pglite">pdo-pglite</a>
     <ul>
-    <li><a href="#join-the-community-reddit-discord-php-wasm">Join the
-    community: <span>reddit</span> | <span>discord</span> |
-    <span>php-wasm</span></a></li>
     <li><a href="#connect-configure">Connect &amp; Configure</a></li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#usage">Usage</a>
+    <ul>
+    <li><a href="#phppostgresql-in-static-html">PHP/PostgreSQL in Static
+    HTML</a></li>
+    </ul></li>
     <li><a href="#electric-sqlpglite"><span class="citation"
     data-cites="electric-sql/pglite">@electric-sql/pglite</span></a></li>
     </ul></li>

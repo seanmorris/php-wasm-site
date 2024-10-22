@@ -3,18 +3,11 @@ title: FS Operations
 ---
 # Filesystem Operations
 
-### Filesystem Methods
+## Filesystem Methods
 
 The following EmscriptenFS methods are exposed via the php object:
 
-***Note:*** If you're using php-web in conjunction with php-cgi-worker to work on the filesystem, you'll need to `refresh` the filesystem in the worker. You can do that with the following call using `msg-bus` (see below).
-
-```javascript
-// Tell the worker that the FS has been updated
-await sendMessage('refresh');
-```
-
-#### php.analyzePath
+### php.analyzePath
 
 Get information about a file or directory.
 
@@ -22,17 +15,17 @@ Get information about a file or directory.
 await php.analyzePath(path);
 ```
 
-#### php.readdir
+### php.readdir
 
-Get a list of files and folders in or directory.
+Get a list of files and folders in a directory.
 
 ```javascript
 await php.readdir(path);
 ```
 
-#### php.readFile
+### php.readFile
 
-Get the content of a file as a `Uint8Array` by default, or optionally as utf-8.
+Get the contents of a file as a `Uint8Array` by default, or optionally as utf-8.
 
 ```javascript
 await php.readFile(path);
@@ -42,7 +35,7 @@ await php.readFile(path);
 await php.readFile(path, {encoding: 'utf8'});
 ```
 
-#### php.stat
+### php.stat
 
 Get information about a file or directory.
 
@@ -50,7 +43,7 @@ Get information about a file or directory.
 await php.stat(path);
 ```
 
-#### php.mkdir
+### php.mkdir
 
 Create a directory.
 
@@ -58,7 +51,7 @@ Create a directory.
 await php.mkdir(path);
 ```
 
-#### php.rmdir
+### php.rmdir
 
 Delete a directory (must be empty).
 
@@ -66,15 +59,15 @@ Delete a directory (must be empty).
 await php.rmdir(path);
 ```
 
-#### php.unlink
+### php.unlink
 
 Delete a file.
 
 ```javascript
-await php.rmdir(path);
+await php.unlink(path);
 ```
 
-#### php.rename
+### php.rename
 
 Rename a file or directory.
 
@@ -82,7 +75,7 @@ Rename a file or directory.
 await php.rename(path, newPath);
 ```
 
-#### php.writeFile
+### php.writeFile
 
 Create a new file. Content should be supplied as a `Uint8Array`, or optionally as a string of text.
 
@@ -92,4 +85,23 @@ await php.writeFile(path, data);
 
 ```javascript
 await php.writeFile(path, data, {encoding: 'utf8'});
+```
+
+## Accessing the FileSystem of a Service Worker
+
+***Note:*** If you're using php-web in conjunction with php-cgi-worker to work on the filesystem, you'll need to `refresh` the filesystem in the worker. You can do that with the following call using `msg-bus` (as shown below).
+
+```javascript
+// Write a file
+await sendMessage('writeFile', ['/path/to/your/file', 'contents', {encoding: 'utf8'}]);
+
+// Check the path
+const result = await sendMessage('analyzePath', ['/path/to/your/file']);
+```
+
+If you modify the filesystem outside of the service worker, you can refresh its filesystem with a call to `refresh`.
+
+```javascript
+// Tell the worker that the FS has been updated
+await sendMessage('refresh');
 ```

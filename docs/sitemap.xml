@@ -1,87 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
-		<loc>http://localhost:8081/contact.html</loc>
+		<loc>https://php-wasm.seanmorr.is/contact.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/404.html</loc>
+		<loc>https://php-wasm.seanmorr.is/404.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/getting-started/cgi-service-worker.html</loc>
+		<loc>https://php-wasm.seanmorr.is/getting-started/cgi-service-worker.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/getting-started/php-in-static-html.html</loc>
+		<loc>https://php-wasm.seanmorr.is/getting-started/php-in-static-html.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/getting-started/home.html</loc>
+		<loc>https://php-wasm.seanmorr.is/getting-started/home.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/getting-started/php-in-js.html</loc>
+		<loc>https://php-wasm.seanmorr.is/getting-started/php-in-js.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/getting-started/php.ini.html</loc>
+		<loc>https://php-wasm.seanmorr.is/getting-started/php.ini.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/getting-started/.fm.html</loc>
+		<loc>https://php-wasm.seanmorr.is/getting-started/install-and-include.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/getting-started/install-and-include.html</loc>
+		<loc>https://php-wasm.seanmorr.is/getting-started/cgi-in-nodeJs.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/getting-started/cgi-in-nodeJs.html</loc>
+		<loc>https://php-wasm.seanmorr.is/extensions/using-php-extensions.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/extensions/using-php-extensions.html</loc>
+		<loc>https://php-wasm.seanmorr.is/extensions/pdo-pglite.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/extensions/pdo-pglite.html</loc>
+		<loc>https://php-wasm.seanmorr.is/extensions/vrzno.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/extensions/.fm.html</loc>
+		<loc>https://php-wasm.seanmorr.is/extensions/pdo-cfd1.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/extensions/vrzno.html</loc>
+		<loc>https://php-wasm.seanmorr.is/compiling/custom-builds.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/extensions/pdo-cfd1.html</loc>
+		<loc>https://php-wasm.seanmorr.is/compiling/php-wasm-rc.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/compiling/custom-builds.html</loc>
+		<loc>https://php-wasm.seanmorr.is/CHANGELOG.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/compiling/php-wasm-rc.html</loc>
+		<loc>https://php-wasm.seanmorr.is/filesystem/loading-files.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/compiling/.fm.html</loc>
+		<loc>https://php-wasm.seanmorr.is/filesystem/transactions.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/CHANGELOG.html</loc>
+		<loc>https://php-wasm.seanmorr.is/filesystem/fs-operations.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/filesystem/loading-files.html</loc>
+		<loc>https://php-wasm.seanmorr.is/methods/php-wasm.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/filesystem/.fm.html</loc>
+		<loc>https://php-wasm.seanmorr.is/methods/php-cgi-wasm.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/filesystem/transactions.html</loc>
+		<loc>https://php-wasm.seanmorr.is/index.html</loc>
 	</url>
 	<url>
-		<loc>http://localhost:8081/filesystem/fs-operations.html</loc>
-	</url>
-	<url>
-		<loc>http://localhost:8081/methods/php-wasm.html</loc>
-	</url>
-	<url>
-		<loc>http://localhost:8081/methods/php-cgi-wasm.html</loc>
-	</url>
-	<url>
-		<loc>http://localhost:8081/methods/.fm.html</loc>
-	</url>
-	<url>
-		<loc>http://localhost:8081/index.html</loc>
-	</url>
-	<url>
-		<loc>http://localhost:8081/LICENSE.html</loc>
+		<loc>https://php-wasm.seanmorr.is/LICENSE.html</loc>
 	</url>
 </urlset>
