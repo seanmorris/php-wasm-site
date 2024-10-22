@@ -14,7 +14,7 @@ foreach($directory as $entry)
 {
 	$pathname = $entry->getPathname();
 
-	if(substr($pathname, -4) !== 'html')
+	if(substr($pathname, -4) !== 'html' || substr($pathname, -8) === '404.html')
 	{
 		continue;
 	}
