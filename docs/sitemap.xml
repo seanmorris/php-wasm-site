@@ -64,6 +64,9 @@
 		<loc>https://php-wasm.seanmorr.is/index.html</loc>
 	</url>
 	<url>
+		<loc>https://php-wasm.seanmorr.is/demos.html</loc>
+	</url>
+	<url>
 		<loc>https://php-wasm.seanmorr.is/LICENSE.html</loc>
 	</url>
 </urlset>

@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | PHP in Static HTML</title>
 			<script src = "/main.js"></script>
@@ -95,7 +94,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -106,6 +104,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -125,8 +124,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -196,31 +194,32 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article >
-						<h1 id="php-wasm-in-static-html">Php-Wasm in Static HTML</h1>
-      <p>PHP can be included in static HTML pages that are served with
-      no dynamic processing on the backend whatsoever. Just use the
-      <code>php-tags.js</code> script from a CDN in your page:</p>
-      <p><strong>JSDelivr</strong></p>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm/php-tags.jsdelivr.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
-      <p><strong>Unpkg</strong></p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://www.unpkg.com/php-wasm/php-tags.unpkg.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
-      <p>Once you’ve included that, you can start writing php within
-      <code>&lt;script type = "text/php"&gt;</code> tags:</p>
-      <div class="sourceCode" id="cb3"><pre
-      class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span><span class="kw">&gt;</span></span>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article >
+								<h1 id="php-wasm-in-static-html">Php-Wasm in Static HTML</h1>
+        <p>PHP can be included in static HTML pages that are served with
+        no dynamic processing on the backend whatsoever. Just use the
+        <code>php-tags.js</code> script from a CDN in your page:</p>
+        <p><strong>JSDelivr</strong></p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm/php-tags.jsdelivr.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
+        <p><strong>Unpkg</strong></p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://www.unpkg.com/php-wasm/php-tags.unpkg.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
+        <p>Once you’ve included that, you can start writing php within
+        <code>&lt;script type = "text/php"&gt;</code> tags:</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span><span class="kw">&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;?</span>php <span class="fu">phpinfo</span>()<span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;output&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span></code></pre></div>
-      <p>Inline php can use standard input, output and error with
-      <code>data-</code> attributes. Just set the value of the attribute
-      to a selector that will match that tag.</p>
-      <div class="sourceCode" id="cb4" data-highlight="5"><pre
-      class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm/php-tags.jsdelivr.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+        <p>Inline php can use standard input, output and error with
+        <code>data-</code> attributes. Just set the value of the
+        attribute to a selector that will match that tag.</p>
+        <div class="sourceCode" id="cb4" data-highlight="5"><pre
+        class="sourceCode html"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/javascript&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm/php-tags.jsdelivr.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;input&quot;</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/plain&quot;</span><span class="kw">&gt;</span>Hello<span class="op">,</span> world<span class="op">!</span><span class="kw">&lt;/script&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -230,11 +229,11 @@
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;output&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;error&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span></code></pre></div>
-      <p>The <code>src</code> attribute can be used on
-      <code>&lt;script type = "text/php"&gt;</code> tags, as well as
-      their input elements. For example:</p>
-      <div class="sourceCode" id="cb5" data-highlight="4,5"><pre
-      class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+        <p>The <code>src</code> attribute can be used on
+        <code>&lt;script type = "text/php"&gt;</code> tags, as well as
+        their input elements. For example:</p>
+        <div class="sourceCode" id="cb5" data-highlight="4,5"><pre
+        class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;head&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;module&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/php-tags.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;script</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;input&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;/test-input.json&quot;</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/json&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
@@ -245,12 +244,12 @@
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;div</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;error&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/body&gt;</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
-      <h2 id="dynamic-extensions-in-static-pages">Dynamic Extensions in
-      Static Pages</h2>
-      <p>Dynamic extensions can be loaded in static webpages like
-      so:</p>
-      <div class="sourceCode" id="cb6" data-numbers="true"
-      data-highlight="4-6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span></span>
+        <h2 id="dynamic-extensions-in-static-pages">Dynamic Extensions
+        in Static Pages</h2>
+        <p>Dynamic extensions can be loaded in static webpages like
+        so:</p>
+        <div class="sourceCode" id="cb6" data-numbers="true"
+        data-highlight="4-6"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ot">    data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ot">    data-stderr</span> <span class="ot">=</span> <span class="st">&quot;#error&quot;</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ot">    data-libs</span> <span class="ot">=</span> <span class="st">&#39;[</span></span>
@@ -259,14 +258,14 @@
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&gt;</span><span class="op">&lt;?</span>php</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  print <span class="fu">yaml_emit</span>([<span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">,</span><span class="st">&quot;string&quot;</span><span class="op">,</span>[<span class="st">&quot;k1&quot;</span> <span class="kw">=&gt;</span> <span class="st">&quot;value&quot;</span><span class="op">,</span> <span class="st">&quot;k2&quot;</span> <span class="kw">=&gt;</span> <span class="st">&quot;value2&quot;</span><span class="op">,</span> <span class="st">&quot;k3&quot;</span> <span class="kw">=&gt;</span> <span class="st">&quot;value3&quot;</span>]<span class="op">,</span><span class="st">&quot;now&quot;</span> <span class="kw">=&gt;</span> <span class="fu">date</span>(<span class="st">&quot;Y-m-d h:i:s&quot;</span>)])<span class="op">;</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span></code></pre></div>
-      <p>You can find the full list of extensions here: <a
-      href="/extensions/using-php-extensions.html#extension-list">extensions/using-php-extensions.html#extension-list</a></p>
-      <p>Here is a less-than-trivial example that loads zlib, gd,
-      libwebp &amp; others:</p>
-      <p><a href="https://codepen.io/SeanMorris227/pen/Yzbbrre"
-      class="uri">https://codepen.io/SeanMorris227/pen/Yzbbrre</a></p>
-      <div class="sourceCode" id="cb7"><pre
-      class="sourceCode html"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">target</span> <span class="ot">=</span> <span class="st">&quot;_blank&quot;</span> <span class="er">href</span> <span class="ot">=</span> <span class="st">&quot;https://github.com/seanmorris/php-wasm&quot;</span><span class="kw">&gt;</span>https://github.com/seanmorris/php-wasm<span class="kw">&lt;/a&gt;&lt;hr</span> <span class="kw">/&gt;</span></span>
+        <p>You can find the full list of extensions here: <a
+        href="/extensions/using-php-extensions.html#extension-list">extensions/using-php-extensions.html#extension-list</a></p>
+        <p>Here is a less-than-trivial example that loads zlib, gd,
+        libwebp &amp; others:</p>
+        <p><a href="https://codepen.io/SeanMorris227/pen/Yzbbrre"
+        class="uri">https://codepen.io/SeanMorris227/pen/Yzbbrre</a></p>
+        <div class="sourceCode" id="cb7"><pre
+        class="sourceCode html"><code class="sourceCode html"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">target</span> <span class="ot">=</span> <span class="st">&quot;_blank&quot;</span> <span class="er">href</span> <span class="ot">=</span> <span class="st">&quot;https://github.com/seanmorris/php-wasm&quot;</span><span class="kw">&gt;</span>https://github.com/seanmorris/php-wasm<span class="kw">&lt;/a&gt;&lt;hr</span> <span class="kw">/&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;module&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/php-tags.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ot">  type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span></span>
@@ -313,19 +312,20 @@
 <span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="op">?&gt;</span><span class="kw">&lt;/script&gt;</span></span>
 <span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;output&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></span>
 <span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;pre</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;error&quot;</span><span class="kw">&gt;&lt;/pre&gt;</span></span></code></pre></div>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#php-wasm-in-static-html">Php-Wasm in Static HTML</a>
-    <ul>
-    <li><a href="#dynamic-extensions-in-static-pages">Dynamic Extensions
-    in Static Pages</a></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#php-wasm-in-static-html">Php-Wasm in Static HTML</a>
+     <ul>
+     <li><a href="#dynamic-extensions-in-static-pages">Dynamic
+     Extensions in Static Pages</a></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

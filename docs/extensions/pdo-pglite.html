@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | pdo-pglite</title>
 			<script src = "/main.js"></script>
@@ -95,7 +94,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -106,6 +104,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -125,8 +124,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -196,36 +194,37 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article >
-						<h1 id="pdo-pglite">pdo-pglite</h1>
-      <p><em>pdo driver for pglite &amp; php-wasm</em></p>
-      <p>pdo_pglite requires PHP 8.1+.</p>
-      <p>Pass the PGlite object into the php-wasm constructor to enable
-      pdo_pglite support:</p>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;@electric-sql/pglite&#39;</span><span class="op">;</span></span>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article >
+								<h1 id="pdo-pglite">pdo-pglite</h1>
+        <p><em>pdo driver for pglite &amp; php-wasm</em></p>
+        <p>pdo_pglite requires PHP 8.1+.</p>
+        <p>Pass the PGlite object into the php-wasm constructor to
+        enable pdo_pglite support:</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;@electric-sql/pglite&#39;</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({PGlite})<span class="op">;</span></span></code></pre></div>
-      <p>You can also load PGlite from a CDN:</p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&#39;</span><span class="op">;</span></span>
+        <p>You can also load PGlite from a CDN:</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&#39;</span><span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({PGlite})<span class="op">;</span></span></code></pre></div>
-      <h2 id="connect-configure">Connect &amp; Configure</h2>
-      <p>Once PGlite is passed in, <code>pgsql:</code> will be available
-      as a PDO driver.</p>
-      <div class="sourceCode" id="cb3"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&#39;</span><span class="op">;</span></span>
+        <h2 id="connect-configure">Connect &amp; Configure</h2>
+        <p>Once PGlite is passed in, <code>pgsql:</code> will be
+        available as a PDO driver.</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&#39;</span><span class="op">;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({PGlite})<span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="vs">    $pdo = new PDO(&#39;pgsql:idb-storage&#39;);</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
-      <h2 id="usage">Usage</h2>
-      <p>Use pdo-pglite like you’d use any other PDO connector. Prepared
-      statements, as well as positional &amp; named placeholders are
-      supported.</p>
-      <div class="sourceCode" id="cb4"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;@electric-sql/pglite&#39;</span><span class="op">;</span></span>
+        <h2 id="usage">Usage</h2>
+        <p>Use pdo-pglite like you’d use any other PDO connector.
+        Prepared statements, as well as positional &amp; named
+        placeholders are supported.</p>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PGlite } <span class="im">from</span> <span class="st">&#39;@electric-sql/pglite&#39;</span><span class="op">;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({PGlite})<span class="op">;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
@@ -248,22 +247,22 @@
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="vs">        fputcsv($out, $row);</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="vs">    }</span></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
-      <h3 id="phppostgresql-in-static-html">PHP/PostgreSQL in Static
-      HTML</h3>
-      <p>PGlite can also be used right from static HTML. Just pass it in
-      the <code>data-imports</code> attribute on the php script tag,
-      with the URL of the module as the key, where the value lists the
-      imports from that module as an array.</p>
-      <div class="sourceCode" id="cb5"><pre
-      class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-imports</span> <span class="ot">=</span> <span class="st">&#39;{</span></span>
+        <h3 id="phppostgresql-in-static-html">PHP/PostgreSQL in Static
+        HTML</h3>
+        <p>PGlite can also be used right from static HTML. Just pass it
+        in the <code>data-imports</code> attribute on the php script
+        tag, with the URL of the module as the key, where the value
+        lists the imports from that module as an array.</p>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode html"><code class="sourceCode html"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-imports</span> <span class="ot">=</span> <span class="st">&#39;{</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js&quot;: [&quot;PGlite&quot;]</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">}&#39;</span><span class="kw">&gt;</span></span></code></pre></div>
-      <p>You can see an example of this running in codepen:</p>
-      <p><a
-      href="https://codepen.io/SeanMorris227/pen/GRVqYzR?editors=1000"
-      class="uri">https://codepen.io/SeanMorris227/pen/GRVqYzR?editors=1000</a></p>
-      <div class="sourceCode" id="cb6"><pre
-      class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+        <p>You can see an example of this running in codepen:</p>
+        <p><a
+        href="https://codepen.io/SeanMorris227/pen/GRVqYzR?editors=1000"
+        class="uri">https://codepen.io/SeanMorris227/pen/GRVqYzR?editors=1000</a></p>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode html"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;body&gt;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script</span> <span class="er">async</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;module&quot;</span> <span class="er">src</span> <span class="ot">=</span> <span class="st">&quot;./php-tags.mjs&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;script</span><span class="ot"> type</span> <span class="ot">=</span> <span class="st">&quot;text/php&quot;</span> <span class="er">data-stdout</span> <span class="ot">=</span> <span class="st">&quot;#output&quot;</span> <span class="er">data-stderr</span> <span class="ot">=</span> <span class="st">&quot;#error&quot;</span> <span class="er">data-imports</span> <span class="ot">=</span> <span class="st">&#39;{</span></span>
@@ -292,34 +291,35 @@
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;pre</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">&quot;error&quot;</span><span class="kw">&gt;&lt;/pre&gt;</span></span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/body&gt;</span></span>
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code></pre></div>
-      <h2 id="electric-sqlpglite"><span class="citation"
-      data-cites="electric-sql/pglite">@electric-sql/pglite</span></h2>
-      <p><code>pdo_pglite</code> is powered by <a
-      href="https://electric-sql.com/"><span class="citation"
-      data-cites="electric-sql/pglite">@electric-sql/pglite</span></a>.</p>
-      <p><a href="https://github.com/electric-sql/pglite"
-      class="uri">https://github.com/electric-sql/pglite</a></p>
-      <p><a href="https://electric-sql.com/"
-      class="uri">https://electric-sql.com/</a></p>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#pdo-pglite">pdo-pglite</a>
-    <ul>
-    <li><a href="#connect-configure">Connect &amp; Configure</a></li>
-    <li><a href="#usage">Usage</a>
-    <ul>
-    <li><a href="#phppostgresql-in-static-html">PHP/PostgreSQL in Static
-    HTML</a></li>
-    </ul></li>
-    <li><a href="#electric-sqlpglite"><span class="citation"
-    data-cites="electric-sql/pglite">@electric-sql/pglite</span></a></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+        <h2 id="electric-sqlpglite"><span class="citation"
+        data-cites="electric-sql/pglite">@electric-sql/pglite</span></h2>
+        <p><code>pdo_pglite</code> is powered by <a
+        href="https://electric-sql.com/"><span class="citation"
+        data-cites="electric-sql/pglite">@electric-sql/pglite</span></a>.</p>
+        <p><a href="https://github.com/electric-sql/pglite"
+        class="uri">https://github.com/electric-sql/pglite</a></p>
+        <p><a href="https://electric-sql.com/"
+        class="uri">https://electric-sql.com/</a></p>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#pdo-pglite">pdo-pglite</a>
+     <ul>
+     <li><a href="#connect-configure">Connect &amp; Configure</a></li>
+     <li><a href="#usage">Usage</a>
+     <ul>
+     <li><a href="#phppostgresql-in-static-html">PHP/PostgreSQL in
+     Static HTML</a></li>
+     </ul></li>
+     <li><a href="#electric-sqlpglite"><span class="citation"
+     data-cites="electric-sql/pglite">@electric-sql/pglite</span></a></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

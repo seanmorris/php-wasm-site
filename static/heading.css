@@ -144,4 +144,18 @@ div.hero a.button {
 	padding-right: 0.75rem;
 }
 
+.hero > iframe {
+	width: 100%;
+	min-height: 30rem;
+	margin-top: 2rem;
+	box-sizing: border-box;
+	border: none;
+}
 
+
+iframe.page-demo {
+	width: 100%;
+	box-sizing: border-box;
+	border: none;
+	min-height: 80vh;
+}

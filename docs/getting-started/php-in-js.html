@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | PHP in Javascript</title>
 			<script src = "/main.js"></script>
@@ -95,7 +94,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -106,6 +104,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -125,8 +124,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -196,44 +194,45 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article >
-						<h1 id="php-wasm-in-javascript">Php-Wasm in Javascript</h1>
-      <h2 id="running-php-taking-output">Running PHP &amp; Taking
-      Output</h2>
-      <p>First, import the module and create an instance of PHP:</p>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article >
+								<h1 id="php-wasm-in-javascript">Php-Wasm in Javascript</h1>
+        <h2 id="running-php-taking-output">Running PHP &amp; Taking
+        Output</h2>
+        <p>First, import the module and create an instance of PHP:</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
-      <p>Add some event listeners to get ahold of the output:</p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Listen to STDOUT &amp; STDERR</span></span>
+        <p>Add some event listeners to get ahold of the output:</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Listen to STDOUT &amp; STDERR</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;output&#39;</span><span class="op">,</span> (<span class="bu">event</span>) <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="bu">event</span><span class="op">.</span><span class="at">detail</span>))<span class="op">;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;error&#39;</span><span class="op">,</span>  (<span class="bu">event</span>) <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="bu">event</span><span class="op">.</span><span class="at">detail</span>))<span class="op">;</span></span></code></pre></div>
-      <p>Pass some data on STDIN if required:</p>
-      <div class="sourceCode" id="cb3"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">inputString</span>(<span class="st">&#39;This is a string of data provided on STDIN.&#39;</span>)<span class="op">;</span></span></code></pre></div>
-      <p>… then run some PHP!</p>
-      <div class="sourceCode" id="cb4"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> exitCode <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="st">&#39;&lt;?php echo &quot;Hello, world!&quot;;&#39;</span>)<span class="op">;</span></span></code></pre></div>
-      <h2 id="exporting-php-functions-to-javascript">Exporting PHP
-      functions to Javascript</h2>
-      <p>With Vrzno enabled, the <code>php.x՝...՝</code> <a
-      href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates">tagged
-      template string</a> enables you to export almost any PHP value
-      directly to Javascript. This includes arrays, object, and even
-      functions:</p>
-      <div class="sourceCode" id="cb5"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> phpStrtotime <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`strtotime(...)`</span><span class="op">;</span></span>
+        <p>Pass some data on STDIN if required:</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">inputString</span>(<span class="st">&#39;This is a string of data provided on STDIN.&#39;</span>)<span class="op">;</span></span></code></pre></div>
+        <p>… then run some PHP!</p>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> exitCode <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="st">&#39;&lt;?php echo &quot;Hello, world!&quot;;&#39;</span>)<span class="op">;</span></span></code></pre></div>
+        <h2 id="exporting-php-functions-to-javascript">Exporting PHP
+        functions to Javascript</h2>
+        <p>With Vrzno enabled, the <code>php.x՝...՝</code> <a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates">tagged
+        template string</a> enables you to export almost any PHP value
+        directly to Javascript. This includes arrays, object, and even
+        functions:</p>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> phpStrtotime <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`strtotime(...)`</span><span class="op">;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> phpDate <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`date(...)`</span><span class="op">;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> formatTime <span class="op">=</span> (format<span class="op">,</span> time) <span class="kw">=&gt;</span> <span class="fu">phpDate</span>(format<span class="op">,</span> <span class="fu">phpStrtotime</span>(time))<span class="op">;</span></span></code></pre></div>
-      <p>You can see this working live on CodePen:</p>
-      <p><a
-      href="https://codepen.io/SeanMorris227/pen/gONmKqL?editors=1111"
-      class="uri">https://codepen.io/SeanMorris227/pen/gONmKqL?editors=1111</a></p>
-      <div class="sourceCode" id="cb6"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+        <p>You can see this working live on CodePen:</p>
+        <p><a
+        href="https://codepen.io/SeanMorris227/pen/gONmKqL?editors=1111"
+        class="uri">https://codepen.io/SeanMorris227/pen/gONmKqL?editors=1111</a></p>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> input  <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&#39;#date-input&#39;</span>)<span class="op">;</span></span>
@@ -254,20 +253,20 @@
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  output<span class="op">.</span><span class="at">innerText</span> <span class="op">=</span> <span class="fu">formatTime</span>(format<span class="op">.</span><span class="at">value</span><span class="op">,</span> input<span class="op">.</span><span class="at">value</span>)<span class="op">;</span></span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>})()<span class="op">;</span></span></code></pre></div>
-      <h2 id="importing-javascript-values-into-php">Importing Javascript
-      Values into PHP</h2>
-      <p>The <code>php.x՝...՝</code> &amp; <code>php.r՝...՝</code>
-      functions allow for Javascript to be interpolated into PHP code
-      with the <code>${𝒆𝒙𝒑𝒓𝒆𝒔𝒔𝒊𝒐𝒏}</code> notation that Javascript
-      <code>՝backtick՝</code> interpolation normally allows for. Any
-      Javascript values can be interpolated, and PHP will treat them as
-      normal, native objects.</p>
-      <p>You can see this working live on CodePen:</p>
-      <p><a
-      href="https://codepen.io/SeanMorris227/pen/wvLJXEJ?editors=0011"
-      class="uri">https://codepen.io/SeanMorris227/pen/wvLJXEJ?editors=0011</a></p>
-      <div class="sourceCode" id="cb7" data-highlight="10-12"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+        <h2 id="importing-javascript-values-into-php">Importing
+        Javascript Values into PHP</h2>
+        <p>The <code>php.x՝...՝</code> &amp; <code>php.r՝...՝</code>
+        functions allow for Javascript to be interpolated into PHP code
+        with the <code>${𝒆𝒙𝒑𝒓𝒆𝒔𝒔𝒊𝒐𝒏}</code> notation that Javascript
+        <code>՝backtick՝</code> interpolation normally allows for. Any
+        Javascript values can be interpolated, and PHP will treat them
+        as normal, native objects.</p>
+        <p>You can see this working live on CodePen:</p>
+        <p><a
+        href="https://codepen.io/SeanMorris227/pen/wvLJXEJ?editors=0011"
+        class="uri">https://codepen.io/SeanMorris227/pen/wvLJXEJ?editors=0011</a></p>
+        <div class="sourceCode" id="cb7" data-highlight="10-12"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span>
@@ -286,23 +285,24 @@
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">document</span><span class="op">.</span><span class="fu">write</span>(<span class="fu">phpCallback</span>())<span class="op">;</span></span>
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>})()<span class="op">;</span></span></code></pre></div>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#php-wasm-in-javascript">Php-Wasm in Javascript</a>
-    <ul>
-    <li><a href="#running-php-taking-output">Running PHP &amp; Taking
-    Output</a></li>
-    <li><a href="#exporting-php-functions-to-javascript">Exporting PHP
-    functions to Javascript</a></li>
-    <li><a href="#importing-javascript-values-into-php">Importing
-    Javascript Values into PHP</a></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#php-wasm-in-javascript">Php-Wasm in Javascript</a>
+     <ul>
+     <li><a href="#running-php-taking-output">Running PHP &amp; Taking
+     Output</a></li>
+     <li><a href="#exporting-php-functions-to-javascript">Exporting PHP
+     functions to Javascript</a></li>
+     <li><a href="#importing-javascript-values-into-php">Importing
+     Javascript Values into PHP</a></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

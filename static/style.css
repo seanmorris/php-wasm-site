@@ -241,16 +241,20 @@ footer img {
 	width: 135%;
 }
 
-@media (max-width: 950px) {
+.below-fold .page-content {
+	display: flex;
+	flex-direction: row;
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+@media (max-width: 1000px) {
 	.hamburger-button {
 		display: initial;
 	}
+
 	.hero h1 {
 		font-size: 58pt;
-	}
-
-	body {
-		font-size: 0.85rem !important;
 	}
 
 	ul.links {
@@ -289,6 +293,30 @@ footer img {
 
 	a.cta.button {
 		font-size: 1.25rem;
+		line-height: 1.125em;
+	}
+
+	.below-fold .page-content {
+		flex-direction: column-reverse;
+	}
+
+	.below-fold .page-content nav {
+		position: initial;
+	}
+
+	section.below-fold nav.table-of-contents {
+		width: 100%;
+		margin-left: 0 !important;
+		margin: 0;
+		padding: 0;
+	}
+
+	section.below-fold nav.table-of-contents > ul {
+		margin-left: 0 !important;
+	}
+
+	.wide-only {
+		display: none !important;
 	}
 }
 

@@ -18,8 +18,9 @@ fi
 
 set -eux
 
+cp -rfv static/* docs/;
+
 php source/template.php > source/template.html;
-php source/with-hero.php > source/with-hero.html;
 
 find ./pages -type f | while read FILENAME; do {
 
@@ -49,19 +50,22 @@ find ./pages -type f | while read FILENAME; do {
 		TOC_FLAG=--toc
 	fi
 
+	PAGE_FILE=${DIR}/${FILENAME}.${EXT}
+
+	php ${TEMPLATE} ${PAGE_FILE} > source/tmp.html;
+
 	pandoc --data-dir=. -s -f markdown -t html \
 		${HIGHLIGHT_STYLE} ${TOC_FLAG} \
-		--template=${TEMPLATE} -o ${DEST} \
+		--template=source/tmp.html \
+		-o ${DEST} \
 		--title-prefix="${TITLE_PREFIX}" \
 		--css "/heading.css" \
 		--css "/style.css" \
 		--css "/article.css" \
 		--css "/pandoc.css" \
 		--css "/fonts.css" \
-		${DIR}/${FILENAME}.${EXT};
+		${PAGE_FILE}
 
 }; done;
-
-cp -rfv static/* docs/;
 
 php source/sitemap.php https://php-wasm.seanmorr.is > docs/sitemap.xml;

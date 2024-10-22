@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | transactions</title>
 			<script src = "/main.js"></script>
@@ -95,7 +94,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -106,6 +104,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -125,8 +124,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -196,59 +194,61 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article >
-						<h1 id="transactions">Transactions</h1>
-      <p><strong>Note: This feature is available for Web and Worker
-      environments only!</strong></p>
-      <p>The web and worker builds utilize
-      <code>navigator.locks.request</code> to request a lock named
-      <code>php-wasm-fs-lock</code> before performing filesystem
-      operations. This ensures that multiple tabs and the service worker
-      can interact with the filesystem without overwriting each other’s
-      work.</p>
-      <p>Before any filesystem operation occurs, the entire filesystem
-      is loaded from IDBFS, and before releasing the lock, the entire
-      filesystem is loaded back into IDBFS.</p>
-      <p>The operations are enqueued asynchronously, meaning that
-      <strong>if multiple requests are generated before one transaction
-      closes, they will be automatically batched.</strong> This also
-      applies to multiple requests generated before the lock is
-      acquired. Generally, there is no need to take explicit control of
-      filesystem mirroring.</p>
-      <h2 id="manual-control-of-fs-mirroring">Manual Control of FS
-      Mirroring</h2>
-      <p>If you prefer to suppress this automatic behavior and take
-      explicit control over filesystem mirroring, you can pass the
-      <code>{autoTransaction: false}</code> option to the constructor.
-      In this case, you will need to call
-      <code>php.startTransaction()</code> before any filesystem
-      operations, and then <code>php.commitTransaction()</code> when you
-      are done. <strong>Using this incorrectly may leave your filesystem
-      in a corrupted state.</strong></p>
-      <h3 id="php.starttransaction">php.startTransaction</h3>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">startTransaction</span>()<span class="op">;</span></span></code></pre></div>
-      <h3 id="php.committransaction">php.commitTransaction</h3>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">commitTransaction</span>()<span class="op">;</span></span></code></pre></div>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#transactions">Transactions</a>
-    <ul>
-    <li><a href="#manual-control-of-fs-mirroring">Manual Control of FS
-    Mirroring</a>
-    <ul>
-    <li><a href="#php.starttransaction">php.startTransaction</a></li>
-    <li><a href="#php.committransaction">php.commitTransaction</a></li>
-    </ul></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article >
+								<h1 id="transactions">Transactions</h1>
+        <p><strong>Note: This feature is available for Web and Worker
+        environments only!</strong></p>
+        <p>The web and worker builds utilize
+        <code>navigator.locks.request</code> to request a lock named
+        <code>php-wasm-fs-lock</code> before performing filesystem
+        operations. This ensures that multiple tabs and the service
+        worker can interact with the filesystem without overwriting each
+        other’s work.</p>
+        <p>Before any filesystem operation occurs, the entire filesystem
+        is loaded from IDBFS, and before releasing the lock, the entire
+        filesystem is loaded back into IDBFS.</p>
+        <p>The operations are enqueued asynchronously, meaning that
+        <strong>if multiple requests are generated before one
+        transaction closes, they will be automatically batched.</strong>
+        This also applies to multiple requests generated before the lock
+        is acquired. Generally, there is no need to take explicit
+        control of filesystem mirroring.</p>
+        <h2 id="manual-control-of-fs-mirroring">Manual Control of FS
+        Mirroring</h2>
+        <p>If you prefer to suppress this automatic behavior and take
+        explicit control over filesystem mirroring, you can pass the
+        <code>{autoTransaction: false}</code> option to the constructor.
+        In this case, you will need to call
+        <code>php.startTransaction()</code> before any filesystem
+        operations, and then <code>php.commitTransaction()</code> when
+        you are done. <strong>Using this incorrectly may leave your
+        filesystem in a corrupted state.</strong></p>
+        <h3 id="php.starttransaction">php.startTransaction</h3>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">startTransaction</span>()<span class="op">;</span></span></code></pre></div>
+        <h3 id="php.committransaction">php.commitTransaction</h3>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">commitTransaction</span>()<span class="op">;</span></span></code></pre></div>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#transactions">Transactions</a>
+     <ul>
+     <li><a href="#manual-control-of-fs-mirroring">Manual Control of FS
+     Mirroring</a>
+     <ul>
+     <li><a href="#php.starttransaction">php.startTransaction</a></li>
+     <li><a href="#php.committransaction">php.commitTransaction</a></li>
+     </ul></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

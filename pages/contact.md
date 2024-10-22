@@ -5,7 +5,7 @@ microdata:
     mainContentOfPage: true
     significantLink: https://github.com/seanmorris/php-wasm/issues
     relatedLink: https://discord.gg/j8VZzju7gJ
-leftbar: false
+leftBarLink: false
 ---
 # Contact
 

@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | Php-Cgi-Wasm Methods</title>
 			<script src = "/main.js"></script>
@@ -95,7 +94,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -106,6 +104,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -125,8 +124,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -196,32 +194,33 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article  itemscope itemtype = "https://schema.org/Class" >
-						<meta itemprop = "alternateName" content = "PhpCgiWorker" />
-						<meta itemprop = "name" content = "PhpCgiWasm" />
-						<h1 id="php-cgi-wasm-methods">Php-Cgi-Wasm Methods</h1>
-      <h2 id="constructor">constructor</h2>
-      <p><span class="highlight"><span class="citation"
-      data-cites="todo">@todo</span></span> Finish documenting
-      constructor options object.</p>
-      <p>The php-cgi-wasm constructor takes an options bucket object as
-      its single parameter. The keys are outlined below.</p>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpCgiWorker<span class="op">;</span></span></code></pre></div>
-      <h3 id="sharedlibs">sharedLibs</h3>
-      <p><em>array of objects</em></p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article  itemscope itemtype = "https://schema.org/Class" >
+								<meta itemprop = "alternateName" content = "PhpCgiWorker" />
+								<meta itemprop = "name" content = "PhpCgiWasm" />
+								<h1 id="php-cgi-wasm-methods">Php-Cgi-Wasm Methods</h1>
+        <h2 id="constructor">constructor</h2>
+        <p><span class="highlight"><span class="citation"
+        data-cites="todo">@todo</span></span> Finish documenting
+        constructor options object.</p>
+        <p>The php-cgi-wasm constructor takes an options bucket object
+        as its single parameter. The keys are outlined below.</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpCgiWorker<span class="op">;</span></span></code></pre></div>
+        <h3 id="sharedlibs">sharedLibs</h3>
+        <p><em>array of objects</em></p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">sharedLibs</span><span class="op">:</span> [</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/php8.3-sqlite.so&#39;</span><span class="op">,</span> <span class="dt">ini</span><span class="op">:</span> <span class="kw">true</span>  }<span class="op">,</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/sqlite.so&#39;</span><span class="op">,</span>        <span class="dt">ini</span><span class="op">:</span> <span class="kw">false</span> }<span class="op">,</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ]</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-      <h3 id="files">files</h3>
-      <p><em>array of objects</em></p>
-      <div class="sourceCode" id="cb3"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
+        <h3 id="files">files</h3>
+        <p><em>array of objects</em></p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">files</span><span class="op">:</span> [</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        {</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;icudt72l.dat&#39;</span><span class="op">,</span></span>
@@ -230,140 +229,141 @@
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        }</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ]</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-      <h3 id="actions">actions</h3>
-      <p><em>objects&lt;string, function&gt;</em></p>
-      <div class="sourceCode" id="cb4"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
+        <h3 id="actions">actions</h3>
+        <p><em>objects&lt;string, function&gt;</em></p>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">actions</span><span class="op">:</span> {</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">helloWorld</span><span class="op">:</span> (php<span class="op">,</span> name) <span class="kw">=&gt;</span> {</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">!`</span><span class="op">;</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        }<span class="op">,</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-      <h3 id="locatefile">locateFile</h3>
-      <p><em>function</em></p>
-      <div class="sourceCode" id="cb5"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> <span class="fu">sendMessage</span>(<span class="st">&#39;hello&#39;</span><span class="op">,</span> <span class="st">&#39;person&#39;</span>)<span class="op">;</span></span></code></pre></div>
-      <h3 id="docroot">docroot</h3>
-      <p><em>string</em></p>
-      <p>Tells php where to find the php source files for your website
-      inside the emscripten filesystem.</p>
-      <div class="sourceCode" id="cb6"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
+        <h3 id="locatefile">locateFile</h3>
+        <p><em>function</em></p>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> <span class="fu">sendMessage</span>(<span class="st">&#39;hello&#39;</span><span class="op">,</span> <span class="st">&#39;person&#39;</span>)<span class="op">;</span></span></code></pre></div>
+        <h3 id="docroot">docroot</h3>
+        <p><em>string</em></p>
+        <p>Tells php where to find the php source files for your website
+        inside the emscripten filesystem.</p>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">docroot</span><span class="op">:</span> <span class="st">&#39;/persist/public&#39;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-      <h3 id="entrypoint">entrypoint</h3>
-      <p>The file within <code>docroot</code> that should be used as the
-      application entrypoint.</p>
-      <div class="sourceCode" id="cb7"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
+        <h3 id="entrypoint">entrypoint</h3>
+        <p>The file within <code>docroot</code> that should be used as
+        the application entrypoint.</p>
+        <div class="sourceCode" id="cb7"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-      <h3 id="prefix">prefix</h3>
-      <p><em>string</em></p>
-      <p>If a request is made with a pathname that starts with
-      <code>prefix</code>, php-cgi-wasm will activate and attempt to
-      route the request to PHP rather than allowing it to proceed to the
-      network.</p>
-      <div class="sourceCode" id="cb8"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
+        <h3 id="prefix">prefix</h3>
+        <p><em>string</em></p>
+        <p>If a request is made with a pathname that starts with
+        <code>prefix</code>, php-cgi-wasm will activate and attempt to
+        route the request to PHP rather than allowing it to proceed to
+        the network.</p>
+        <div class="sourceCode" id="cb8"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-      <h3 id="exclude">exclude</h3>
-      <p><em>array of strings</em></p>
-      <p>If a request matched the prefix, but the URL also matches an
-      element of <code>exclude</code>, then PHP will ignore the request
-      and it will be sent to the network.</p>
-      <div class="sourceCode" id="cb9"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
+        <h3 id="exclude">exclude</h3>
+        <p><em>array of strings</em></p>
+        <p>If a request matched the prefix, but the URL also matches an
+        element of <code>exclude</code>, then PHP will ignore the
+        request and it will be sent to the network.</p>
+        <div class="sourceCode" id="cb9"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-      <h3 id="rewrite">rewrite</h3>
-      <p><em>function(string): string</em></p>
-      <p>Pass a function that will receive paths and rewrite them before
-      PHP begins routing.</p>
-      <div class="sourceCode" id="cb10"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
+        <h3 id="rewrite">rewrite</h3>
+        <p><em>function(string): string</em></p>
+        <p>Pass a function that will receive paths and rewrite them
+        before PHP begins routing.</p>
+        <div class="sourceCode" id="cb10"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-      <h3 id="types">types</h3>
-      <p><em>object.&lt;string, string&gt;</em></p>
-      <div class="sourceCode" id="cb11"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
+        <h3 id="types">types</h3>
+        <p><em>object.&lt;string, string&gt;</em></p>
+        <div class="sourceCode" id="cb11"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-      <h3 id="notfound">notFound</h3>
-      <p><em>function(request): response</em></p>
-      <p>This callback will be called when the requested PHP
-      script/static asset is not found, and should return a
-      <code>Response</code> object.</p>
-      <div class="sourceCode" id="cb12"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
+        <h3 id="notfound">notFound</h3>
+        <p><em>function(request): response</em></p>
+        <p>This callback will be called when the requested PHP
+        script/static asset is not found, and should return a
+        <code>Response</code> object.</p>
+        <div class="sourceCode" id="cb12"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-      <h3 id="onrequest">onRequest</h3>
-      <p><em>function(request, response): void</em></p>
-      <p>Callback to run for every request.</p>
-      <div class="sourceCode" id="cb13"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
+        <h3 id="onrequest">onRequest</h3>
+        <p><em>function(request, response): void</em></p>
+        <p>Callback to run for every request.</p>
+        <div class="sourceCode" id="cb13"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiWorker</span>({</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-      <h2 id="handleinstallevent">handleInstallEvent</h2>
-      <p>In service workers, this hooks into the <code>install</code>
-      event. This should be set up as follows:</p>
-      <div class="sourceCode" id="cb14"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;install&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> php<span class="op">.</span><span class="fu">handleInstallEvent</span>(<span class="bu">event</span>))<span class="op">;</span></span></code></pre></div>
-      <p>In service workers, this hooks into the <code>activate</code>
-      event. This should be set up as follows:</p>
-      <h2 id="handleactivateevent">handleActivateEvent</h2>
-      <div class="sourceCode" id="cb15"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;activate&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> php<span class="op">.</span><span class="fu">handleActivateEvent</span>(<span class="bu">event</span>))<span class="op">;</span></span></code></pre></div>
-      <p>In service workers, this hooks into the <code>message</code>
-      event. This should be set up as follows:</p>
-      <h2 id="handlemessageevent">handleMessageEvent</h2>
-      <div class="sourceCode" id="cb16"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;message&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> php<span class="op">.</span><span class="fu">handleMessageEvent</span>(<span class="bu">event</span>))<span class="op">;</span></span></code></pre></div>
-      <p>In service workers, this hooks into the <code>fetch</code>
-      event, and will call the <code>request</code> method in service
-      workers.</p>
-      <p>This should be set up as follows:</p>
-      <h2 id="handlefetchevent">handleFetchEvent</h2>
-      <div class="sourceCode" id="cb17"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;fetch&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> php<span class="op">.</span><span class="fu">handleFetchEvent</span>(<span class="bu">event</span>))<span class="op">;</span></span></code></pre></div>
-      <h2 id="request">request</h2>
-      <p>The <code>request</code> method only needs to be called
-      manually if PHP-CGI is running under NodeJS, or inside of a
-      webpage. When running in a service worker,
-      <code>handleFetchEvent</code> will call <code>request</code>
-      internally.</p>
-      <h2 id="refresh">refresh</h2>
-      <p>This will discard the current PHP instance and spin up a brand
-      new one.</p>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#php-cgi-wasm-methods">Php-Cgi-Wasm Methods</a>
-    <ul>
-    <li><a href="#constructor">constructor</a>
-    <ul>
-    <li><a href="#sharedlibs">sharedLibs</a></li>
-    <li><a href="#files">files</a></li>
-    <li><a href="#actions">actions</a></li>
-    <li><a href="#locatefile">locateFile</a></li>
-    <li><a href="#docroot">docroot</a></li>
-    <li><a href="#entrypoint">entrypoint</a></li>
-    <li><a href="#prefix">prefix</a></li>
-    <li><a href="#exclude">exclude</a></li>
-    <li><a href="#rewrite">rewrite</a></li>
-    <li><a href="#types">types</a></li>
-    <li><a href="#notfound">notFound</a></li>
-    <li><a href="#onrequest">onRequest</a></li>
-    </ul></li>
-    <li><a href="#handleinstallevent">handleInstallEvent</a></li>
-    <li><a href="#handleactivateevent">handleActivateEvent</a></li>
-    <li><a href="#handlemessageevent">handleMessageEvent</a></li>
-    <li><a href="#handlefetchevent">handleFetchEvent</a></li>
-    <li><a href="#request">request</a></li>
-    <li><a href="#refresh">refresh</a></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+        <h2 id="handleinstallevent">handleInstallEvent</h2>
+        <p>In service workers, this hooks into the <code>install</code>
+        event. This should be set up as follows:</p>
+        <div class="sourceCode" id="cb14"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;install&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> php<span class="op">.</span><span class="fu">handleInstallEvent</span>(<span class="bu">event</span>))<span class="op">;</span></span></code></pre></div>
+        <p>In service workers, this hooks into the <code>activate</code>
+        event. This should be set up as follows:</p>
+        <h2 id="handleactivateevent">handleActivateEvent</h2>
+        <div class="sourceCode" id="cb15"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;activate&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> php<span class="op">.</span><span class="fu">handleActivateEvent</span>(<span class="bu">event</span>))<span class="op">;</span></span></code></pre></div>
+        <p>In service workers, this hooks into the <code>message</code>
+        event. This should be set up as follows:</p>
+        <h2 id="handlemessageevent">handleMessageEvent</h2>
+        <div class="sourceCode" id="cb16"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;message&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> php<span class="op">.</span><span class="fu">handleMessageEvent</span>(<span class="bu">event</span>))<span class="op">;</span></span></code></pre></div>
+        <p>In service workers, this hooks into the <code>fetch</code>
+        event, and will call the <code>request</code> method in service
+        workers.</p>
+        <p>This should be set up as follows:</p>
+        <h2 id="handlefetchevent">handleFetchEvent</h2>
+        <div class="sourceCode" id="cb17"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;fetch&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> php<span class="op">.</span><span class="fu">handleFetchEvent</span>(<span class="bu">event</span>))<span class="op">;</span></span></code></pre></div>
+        <h2 id="request">request</h2>
+        <p>The <code>request</code> method only needs to be called
+        manually if PHP-CGI is running under NodeJS, or inside of a
+        webpage. When running in a service worker,
+        <code>handleFetchEvent</code> will call <code>request</code>
+        internally.</p>
+        <h2 id="refresh">refresh</h2>
+        <p>This will discard the current PHP instance and spin up a
+        brand new one.</p>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#php-cgi-wasm-methods">Php-Cgi-Wasm Methods</a>
+     <ul>
+     <li><a href="#constructor">constructor</a>
+     <ul>
+     <li><a href="#sharedlibs">sharedLibs</a></li>
+     <li><a href="#files">files</a></li>
+     <li><a href="#actions">actions</a></li>
+     <li><a href="#locatefile">locateFile</a></li>
+     <li><a href="#docroot">docroot</a></li>
+     <li><a href="#entrypoint">entrypoint</a></li>
+     <li><a href="#prefix">prefix</a></li>
+     <li><a href="#exclude">exclude</a></li>
+     <li><a href="#rewrite">rewrite</a></li>
+     <li><a href="#types">types</a></li>
+     <li><a href="#notfound">notFound</a></li>
+     <li><a href="#onrequest">onRequest</a></li>
+     </ul></li>
+     <li><a href="#handleinstallevent">handleInstallEvent</a></li>
+     <li><a href="#handleactivateevent">handleActivateEvent</a></li>
+     <li><a href="#handlemessageevent">handleMessageEvent</a></li>
+     <li><a href="#handlefetchevent">handleFetchEvent</a></li>
+     <li><a href="#request">request</a></li>
+     <li><a href="#refresh">refresh</a></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

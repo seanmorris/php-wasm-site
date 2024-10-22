@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | Php-Wasm Methods</title>
 			<script src = "/main.js"></script>
@@ -95,7 +94,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -106,6 +104,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -125,8 +124,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -196,94 +194,96 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article  itemscope itemtype = "https://schema.org/Class" >
-						<meta itemprop = "alternateName" content = "PhpWeb" />
-						<meta itemprop = "name" content = "PhpWasm" />
-						<h1 id="php-wasm-methods">Php-Wasm Methods</h1>
-      <h2 id="constructor">constructor</h2>
-      <p><span class="highlight"><span class="citation"
-      data-cites="todo">@todo</span></span> Document constructor options
-      object.</p>
-      <h2 id="php.run">php.run</h2>
-      <p>Run a php script. Code should start with the opening
-      <code>&lt;?php</code> tag and may optionally close with
-      <code>?&gt;</code> to allow for HTML interpolation.</p>
-      <p>Will return a non-zero value in case of error. You’ll need to
-      use <a
-      href="http://localhost:8081/getting-started/php-in-js.html#running-php-taking-output">event
-      listeners</a> to get output.</p>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article  itemscope itemtype = "https://schema.org/Class" >
+								<meta itemprop = "alternateName" content = "PhpWeb" />
+								<meta itemprop = "name" content = "PhpWasm" />
+								<h1 id="php-wasm-methods">Php-Wasm Methods</h1>
+        <h2 id="constructor">constructor</h2>
+        <p><span class="highlight"><span class="citation"
+        data-cites="todo">@todo</span></span> Document constructor
+        options object.</p>
+        <h2 id="php.run">php.run</h2>
+        <p>Run a php script. Code should start with the opening
+        <code>&lt;?php</code> tag and may optionally close with
+        <code>?&gt;</code> to allow for HTML interpolation.</p>
+        <p>Will return a non-zero value in case of error. You’ll need to
+        use <a
+        href="http://localhost:8081/getting-started/php-in-js.html#running-php-taking-output">event
+        listeners</a> to get output.</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;`</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
-      <h2 id="php.exec">php.exec</h2>
-      <p>Similar to <code>php.run()</code>, but executes a single PHP
-      <em>statement</em> rather than an entire script. Code should
-      <strong><em>not</em></strong> start with a <code>&lt;?php</code>
-      tag and should <strong><em>not</em></strong> end in a
-      semicolon.</p>
-      <p>The return value of the PHP statement will be the return value
-      of <code>php.exec</code>. If Vrzno is enabled and a function or
-      object is returned, the value will be marshalled to
-      Javascript.</p>
-      <p>To run multiple commands in a single statement, use an <a
-      href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">IIFE</a>.</p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">exec</span>(<span class="vs">`(function() {</span></span>
+        <h2 id="php.exec">php.exec</h2>
+        <p>Similar to <code>php.run()</code>, but executes a single PHP
+        <em>statement</em> rather than an entire script. Code should
+        <strong><em>not</em></strong> start with a <code>&lt;?php</code>
+        tag and should <strong><em>not</em></strong> end in a
+        semicolon.</p>
+        <p>The return value of the PHP statement will be the return
+        value of <code>php.exec</code>. If Vrzno is enabled and a
+        function or object is returned, the value will be marshalled to
+        Javascript.</p>
+        <p>To run multiple commands in a single statement, use an <a
+        href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">IIFE</a>.</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">exec</span>(<span class="vs">`(function() {</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    return $date;</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">})();`</span>)<span class="op">;</span></span></code></pre></div>
-      <h2 id="php.r">php.r</h2>
-      <p>Tagged template function companion to <code>php.run()</code>.
-      If Vrzno is enabled, allows rich JS values to be interpolated into
-      PHP code.</p>
-      <p>Just like <code>php.run()</code>, this will return a non-zero
-      value in case of error.</p>
-      <div class="sourceCode" id="cb3"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">r</span><span class="vs">`&lt;?php</span></span>
+        <h2 id="php.r">php.r</h2>
+        <p>Tagged template function companion to <code>php.run()</code>.
+        If Vrzno is enabled, allows rich JS values to be interpolated
+        into PHP code.</p>
+        <p>Just like <code>php.run()</code>, this will return a non-zero
+        value in case of error.</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">r</span><span class="vs">`&lt;?php</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;`</span><span class="op">;</span></span></code></pre></div>
-      <h2 id="php.x">php.x</h2>
-      <p>Tagged template function companion to <code>php.exec()</code>.
-      If Vrzno is enabled, allows rich JS values to be interpolated into
-      PHP code.</p>
-      <p>Just like <code>php.exec()</code> this value may only run a
-      single PHP statement at a time and returns the JS value directly
-      to PHP.</p>
-      <div class="sourceCode" id="cb4"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> date <span class="op">=</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`(function() {</span></span>
+        <h2 id="php.x">php.x</h2>
+        <p>Tagged template function companion to
+        <code>php.exec()</code>. If Vrzno is enabled, allows rich JS
+        values to be interpolated into PHP code.</p>
+        <p>Just like <code>php.exec()</code> this value may only run a
+        single PHP statement at a time and returns the JS value directly
+        to PHP.</p>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> date <span class="op">=</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`(function() {</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    return $date;</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="vs">})();`</span><span class="op">;</span></span></code></pre></div>
-      <h2 id="php.refresh">php.refresh</h2>
-      <p>Clears the memory. If any objects, arrays or functions have
-      been returned to JS, these will become invalid when php is
-      refreshed.</p>
-      <div class="sourceCode" id="cb5"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">refresh</span>()<span class="op">;</span></span></code></pre></div>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#php-wasm-methods">Php-Wasm Methods</a>
-    <ul>
-    <li><a href="#constructor">constructor</a></li>
-    <li><a href="#php.run">php.run</a></li>
-    <li><a href="#php.exec">php.exec</a></li>
-    <li><a href="#php.r">php.r</a></li>
-    <li><a href="#php.x">php.x</a></li>
-    <li><a href="#php.refresh">php.refresh</a></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+        <h2 id="php.refresh">php.refresh</h2>
+        <p>Clears the memory. If any objects, arrays or functions have
+        been returned to JS, these will become invalid when php is
+        refreshed.</p>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">refresh</span>()<span class="op">;</span></span></code></pre></div>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#php-wasm-methods">Php-Wasm Methods</a>
+     <ul>
+     <li><a href="#constructor">constructor</a></li>
+     <li><a href="#php.run">php.run</a></li>
+     <li><a href="#php.exec">php.exec</a></li>
+     <li><a href="#php.r">php.r</a></li>
+     <li><a href="#php.x">php.x</a></li>
+     <li><a href="#php.refresh">php.refresh</a></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | Install &amp; Import</title>
 			<script src = "/main.js"></script>
@@ -95,7 +94,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -106,6 +104,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -125,8 +124,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -196,76 +194,78 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article >
-						<h1 id="install-import-php-wasm">Install &amp; Import
-      php-wasm</h1>
-      <p>Include the module in your preferred format:</p>
-      <h2 id="from-a-cdn">from a cdn</h2>
-      <p>Using ESM modules, you can import php-wasm directly from a
-      cdn:</p>
-      <h3 id="jsdelivr">jsdelivr</h3>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article >
+								<h1 id="install-import-php-wasm">Install &amp; Import
+        php-wasm</h1>
+        <p>Include the module in your preferred format:</p>
+        <h2 id="from-a-cdn">from a cdn</h2>
+        <p>Using ESM modules, you can import php-wasm directly from a
+        cdn:</p>
+        <h3 id="jsdelivr">jsdelivr</h3>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
-      <h3 id="unpkg">unpkg</h3>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://www.unpkg.com/php-wasm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
+        <h3 id="unpkg">unpkg</h3>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://www.unpkg.com/php-wasm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
-      <h2 id="installing-with-npm">Installing with npm</h2>
-      <p>You can also install php-wasm with npm.</p>
-      <h3 id="latest-alpha">Latest Alpha</h3>
-      <div class="sourceCode" id="cb3"><pre
-      class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-wasm@alpha</span>
+        <h2 id="installing-with-npm">Installing with npm</h2>
+        <p>You can also install php-wasm with npm.</p>
+        <h3 id="latest-alpha">Latest Alpha</h3>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-wasm@alpha</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-cgi-wasm@alpha</span></code></pre></div>
-      <h3 id="latest-stable">Latest Stable</h3>
-      <div class="sourceCode" id="cb4"><pre
-      class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-wasm</span>
+        <h3 id="latest-stable">Latest Stable</h3>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-wasm</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-cgi-wasm</span></code></pre></div>
-      <h4 id="pre-packaged-static-assets">Pre-Packaged Static
-      Assets:</h4>
-      <p>If you’re using a bundler, use the vendor’s documentation to
-      learn how to move the files matching the following pattern to your
-      public directory:</p>
-      <div class="sourceCode" id="cb5"><pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/php-wasm/php-web.mjs.wasm</span></span>
+        <h4 id="pre-packaged-static-assets">Pre-Packaged Static
+        Assets:</h4>
+        <p>If you’re using a bundler, use the vendor’s documentation to
+        learn how to move the files matching the following pattern to
+        your public directory:</p>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/php-wasm/php-web.mjs.wasm</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/php-cgi-wasm/php-cgi-worker.mjs.wasm</span></span></code></pre></div>
-      <h2 id="importing-the-module">Importing the module</h2>
-      <h3 id="esm">ESM</h3>
-      <div class="sourceCode" id="cb6"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpWeb } <span class="im">from</span> <span class="st">&#39;php-wasm/PhpWeb.mjs&#39;</span><span class="op">;</span></span>
+        <h2 id="importing-the-module">Importing the module</h2>
+        <h3 id="esm">ESM</h3>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpWeb } <span class="im">from</span> <span class="st">&#39;php-wasm/PhpWeb.mjs&#39;</span><span class="op">;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
-      <h3 id="cjs">CJS</h3>
-      <div class="sourceCode" id="cb7" data-numbers="true"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;php-wasm/PhpWeb.js&#39;</span>)<span class="op">;</span></span>
+        <h3 id="cjs">CJS</h3>
+        <div class="sourceCode" id="cb7" data-numbers="true"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;php-wasm/PhpWeb.js&#39;</span>)<span class="op">;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#install-import-php-wasm">Install &amp; Import
-    php-wasm</a>
-    <ul>
-    <li><a href="#from-a-cdn">from a cdn</a>
-    <ul>
-    <li><a href="#jsdelivr">jsdelivr</a></li>
-    <li><a href="#unpkg">unpkg</a></li>
-    </ul></li>
-    <li><a href="#installing-with-npm">Installing with npm</a>
-    <ul>
-    <li><a href="#latest-alpha">Latest Alpha</a></li>
-    <li><a href="#latest-stable">Latest Stable</a></li>
-    </ul></li>
-    <li><a href="#importing-the-module">Importing the module</a>
-    <ul>
-    <li><a href="#esm">ESM</a></li>
-    <li><a href="#cjs">CJS</a></li>
-    </ul></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#install-import-php-wasm">Install &amp; Import
+     php-wasm</a>
+     <ul>
+     <li><a href="#from-a-cdn">from a cdn</a>
+     <ul>
+     <li><a href="#jsdelivr">jsdelivr</a></li>
+     <li><a href="#unpkg">unpkg</a></li>
+     </ul></li>
+     <li><a href="#installing-with-npm">Installing with npm</a>
+     <ul>
+     <li><a href="#latest-alpha">Latest Alpha</a></li>
+     <li><a href="#latest-stable">Latest Stable</a></li>
+     </ul></li>
+     <li><a href="#importing-the-module">Importing the module</a>
+     <ul>
+     <li><a href="#esm">ESM</a></li>
+     <li><a href="#cjs">CJS</a></li>
+     </ul></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

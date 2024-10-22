@@ -1,8 +1,10 @@
 ---
 title: Php-Wasm by Sean Morris
 noprefix: true
-template: source/with-hero.html
-leftbar: false
+template: source/with-hero.php
+hero: intro.html
+leftBarLink: false
+leftBarShow: false
 itemtype: schema.org/SoftwareSourceCode
 microdata:
     name: php-wasm

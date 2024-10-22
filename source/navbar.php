@@ -26,7 +26,7 @@ function makeNavBar($name)
 
 		$frontmatter = yaml_parse(`yq --front-matter=extract $pathname 2>/dev/null|| echo ""`) ?? [];
 
-		if(!($frontmatter['leftbar'] ?? true))
+		if(!($frontmatter['leftBarLink'] ?? true))
 		{
 			continue;
 		}
@@ -79,7 +79,6 @@ function makeNavBar($name)
 		$frontmatter = $entry->frontmatter;
 
 		$title = $frontmatter['title'] ?? ucwords(preg_replace(['/\.md$/', '/-/'], ['',  ' '], $filename));
-		$leftbar = $frontmatter['leftbar'] ?? true;
 
 		?><li>
 			<a href = "<?=preg_replace(['/^.\/pages/', '/\.\w+$/'], ['', '.html'], $pathname);?>">

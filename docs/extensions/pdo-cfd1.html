@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | pdo-cfd1</title>
 			<script src = "/main.js"></script>
@@ -95,7 +94,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -106,6 +104,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -125,8 +124,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -196,20 +194,21 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article >
-						<h1 id="pdo-cfd1">pdo-cfd1</h1>
-      <p><em>pdo driver for CloudFlare D1 &amp; php-wasm</em></p>
-      <p><span class="highlight"><span class="citation"
-      data-cites="todo">@todo</span>:</span> Walkthrough on compiling
-      php-wasm for cloudflare.</p>
-      <p>pdo_cfd1 requires PHP 8.1+.</p>
-      <h2 id="connect-configure">Connect &amp; Configure</h2>
-      <p>Pass the D1 object into the php-wasm constructor as a key to
-      the <code>cfd1</code> object to enable pdo_cfd1 support.</p>
-      <p><code>cfd1:</code> will become available as a PDO driver:</p>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">onRequest</span>(<span class="bu">event</span>)</span>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article >
+								<h1 id="pdo-cfd1">pdo-cfd1</h1>
+        <p><em>pdo driver for CloudFlare D1 &amp; php-wasm</em></p>
+        <p><span class="highlight"><span class="citation"
+        data-cites="todo">@todo</span>:</span> Walkthrough on compiling
+        php-wasm for cloudflare.</p>
+        <p>pdo_cfd1 requires PHP 8.1+.</p>
+        <h2 id="connect-configure">Connect &amp; Configure</h2>
+        <p>Pass the D1 object into the php-wasm constructor as a key to
+        the <code>cfd1</code> object to enable pdo_cfd1 support.</p>
+        <p><code>cfd1:</code> will become available as a PDO driver:</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">onRequest</span>(<span class="bu">event</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>{</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWorker</span>({</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">cfd1</span><span class="op">:</span> { <span class="dt">mainDb</span><span class="op">:</span> <span class="bu">event</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">mainDb</span> }</span>
@@ -217,15 +216,15 @@
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php $pdo = new PDO(&#39;cfd1:mainDb&#39;);`</span>)<span class="op">;</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-      <p>You can check <code>phpinfo()</code> to make sure that the D1
-      object is detected. <code>CloudFlare D1 SQL module detected</code>
-      will display “yes” when the object has been passed in
-      correctly:</p>
-      <p><img
-      src="https://raw.githubusercontent.com/seanmorris/pdo-cfd1/refs/heads/master/phpinfo.png" /></p>
-      <p>PDO can be used with D1 just like any other SQL server:</p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">onRequest</span>(<span class="bu">event</span>)</span>
+        <p>You can check <code>phpinfo()</code> to make sure that the D1
+        object is detected.
+        <code>CloudFlare D1 SQL module detected</code> will display
+        “yes” when the object has been passed in correctly:</p>
+        <p><img
+        src="https://raw.githubusercontent.com/seanmorris/pdo-cfd1/refs/heads/master/phpinfo.png" /></p>
+        <p>PDO can be used with D1 just like any other SQL server:</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">onRequest</span>(<span class="bu">event</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>{</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWorker</span>({</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">cfd1</span><span class="op">:</span> { <span class="dt">mainDb</span><span class="op">:</span> <span class="bu">event</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">mainDb</span> }</span>
@@ -240,33 +239,34 @@
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="vs">        $page = $select-&gt;fetchObject();`</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-      <h2 id="todo">Todo</h2>
-      <ul>
-      <li><em>Named replacement tokens</em> - Currently only positional
-      tokens are supported.</li>
-      <li><em>Error handling</em> - Error handling is currently very
-      rudimentary and does not propagate messages.</li>
-      </ul>
-      <h2 id="cloudflare-d1">CloudFlare D1</h2>
-      <p><code>pdo_cfd1</code> is powered by <a
-      href="https://developers.cloudflare.com/d1/">CloudFlare
-      D1</a>.</p>
-      <p><a href="https://developers.cloudflare.com/d1/"
-      class="uri">https://developers.cloudflare.com/d1/</a></p>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#pdo-cfd1">pdo-cfd1</a>
-    <ul>
-    <li><a href="#connect-configure">Connect &amp; Configure</a></li>
-    <li><a href="#todo">Todo</a></li>
-    <li><a href="#cloudflare-d1">CloudFlare D1</a></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+        <h2 id="todo">Todo</h2>
+        <ul>
+        <li><em>Named replacement tokens</em> - Currently only
+        positional tokens are supported.</li>
+        <li><em>Error handling</em> - Error handling is currently very
+        rudimentary and does not propagate messages.</li>
+        </ul>
+        <h2 id="cloudflare-d1">CloudFlare D1</h2>
+        <p><code>pdo_cfd1</code> is powered by <a
+        href="https://developers.cloudflare.com/d1/">CloudFlare
+        D1</a>.</p>
+        <p><a href="https://developers.cloudflare.com/d1/"
+        class="uri">https://developers.cloudflare.com/d1/</a></p>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#pdo-cfd1">pdo-cfd1</a>
+     <ul>
+     <li><a href="#connect-configure">Connect &amp; Configure</a></li>
+     <li><a href="#todo">Todo</a></li>
+     <li><a href="#cloudflare-d1">CloudFlare D1</a></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

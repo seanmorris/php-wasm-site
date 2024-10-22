@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | CHANGELOG</title>
 			<script src = "/main.js"></script>
@@ -33,7 +32,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -44,6 +42,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -63,8 +62,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -134,141 +132,145 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article >
-						<h1 id="php-wasm">php-wasm</h1>
-      <p>Changes</p>
-      <h2 id="v0.0.9---aiming-for-the-github-stars">v0.0.9 - Aiming for
-      the (GitHub) Stars</h2>
-      <ul>
-      <li>Adding PHP-CGI support!</li>
-      <li>Runtime extension loading!</li>
-      <li>libicu, freetype, zlib, gd, libpng, libjpeg, openssl, &amp;
-      phar support.</li>
-      <li>php-wasm, php-cgi-wasm, &amp; php-wasm-builder are now
-      separate packages.</li>
-      <li>Vrzno now facilitates url fopen via the fetch() api.</li>
-      <li>pdo_cfd1 is now a separate extension from Vrzno.</li>
-      <li>pdo_pglite adds local Postgres support.</li>
-      <li>SQLite is now using version 3.46.</li>
-      <li>Demos for CodeIgniter, CakePHP, Laravel &amp; Laminas.</li>
-      <li>Drupal &amp; all other demos now use standard build + zip
-      install.</li>
-      <li>Modules are now webpack-compatible out of the box.</li>
-      <li>Exposing FS methods w/queueing &amp; locking to sync files
-      between tabs &amp; workers.</li>
-      <li>Fixed the bug with POST requests under Firefox.</li>
-      <li>Adding support for PHP 8.3.7</li>
-      <li>Automatic CI testing for PHP 8.0, 8.1, 8.2 &amp; 8.3.</li>
-      </ul>
-      <h2 id="v0.0.8---preparing-for-lift-off">v0.0.8 - Preparing for
-      Lift-off</h2>
-      <ul>
-      <li>Adding ESM &amp; CDN Module support!</li>
-      <li>Adding stdin.</li>
-      <li>Buffering stdout/stderr in javascript.</li>
-      <li>Fixing <code>&lt;script type = "text/php"&gt;</code>
-      support.</li>
-      <li>Adding fetch support for <code>src</code> on above.</li>
-      <li>Adding support for libzip, iconv, &amp; html-tidy</li>
-      <li>Adding support for NodeFS &amp; IDBFS.</li>
-      <li>Custom builds.</li>
-      <li>Updating PHP to 8.2.11</li>
-      <li>Building with Emscripten 3.1.43</li>
-      <li>Modularizing dependencies.</li>
-      <li>Compressing assets.</li>
-      </ul>
-      <h2 id="remodermizing">0.0.7 - Remodermizing</h2>
-      <ul>
-      <li>Updating PHP to 8.2.4</li>
-      <li>Updating SQLite to 3.41</li>
-      <li>Updating Drupal to 7.95</li>
-      <li>Correcting hiccups in the build process</li>
-      </ul>
-      <h2 id="ease">0.0.6 - Ease</h2>
-      <ul>
-      <li>Correcting hiccups in the build process</li>
-      </ul>
-      <h2 id="alignment">0.0.5 - Alignment</h2>
-      <ul>
-      <li>Ensuring npm &amp; github have matching tags</li>
-      <li>Ensuring Drupal re-builds correctly with no nested duplicate
-      directory</li>
-      <li>Removing some extraneous files from example application</li>
-      <li>Separating php-web-drupal from php-web for real this time</li>
-      <li>Publishing php-web-drupal to npm</li>
-      </ul>
-      <h2 id="revisiting">0.0.4 - Revisiting</h2>
-      <ul>
-      <li>Separated Drupal from standard php-web to save bandwidth</li>
-      <li>Running the build automatically on push in CircleCI</li>
-      <li>Getting the automatic build working for Drupal</li>
-      </ul>
-      <h2 id="new-horizons">0.0.3 - New Horizons</h2>
-      <ul>
-      <li>php.exec() may be used to evaluate a single php expression
-      &amp; return its result.</li>
-      <li>php may now access &amp; traverse the dom and access
-      nodes.</li>
-      <li>The querySelector method is available on dom nodes.</li>
-      <li>addEventListener/removeEventListener is also available on dom
-      nodes.</li>
-      <li>sqlite3 v3.33 is now statically linked to php &amp; the
-      sqlite3 extension is enabled.</li>
-      <li>The following extensions are now enabled: sqlite3, pdo, &amp;
-      pdo-sqlite.</li>
-      <li>Totally revamped build process that tracks build artifact
-      relationships.</li>
-      <li>Builds for web, node, shell, worker &amp; webview.</li>
-      </ul>
-      <h2 id="gaining-momentum">0.0.2 - Gaining Momentum</h2>
-      <ul>
-      <li>php objects now have persistent memory, may be cleared with
-      <code>php.refresh();</code>.</li>
-      <li>php code may now access Javascript (and thus, the DOM) via the
-      <a href="https://github.com/seanmorris/vrzno">VRZNO</a> project.
-      The extension is preinstalled with php-wasm.</li>
-      <li><code>&lt;script type = "text/php"&gt;</code> tags are now
-      supported, both inline and with <code>src=...</code>. Both require
-      opening tags as of now.</li>
-      <li>Building of object files is now separated from building of
-      binary files so multiple binaries may be built from the same set
-      of objects.</li>
-      <li>License changed from MIT to Apache-2.0, which has similar
-      terms, but USERS must have visibility of the attribution, rather
-      that just DEVELOPERS.</li>
-      <li>Build dependencies are now expressed in the makefile</li>
-      <li>Project can be built in its entirety by running
-      <code>make</code>.</li>
-      <li>Ensuring newlines in PHP output are respected.</li>
-      </ul>
-      <h2 id="humble-beginnings">0.0.1 - Humble Beginnings</h2>
-      <ul>
-      <li>Event-oriented interface added to php object.</li>
-      <li>Buildscript was slightly improved with a makefile</li>
-      </ul>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#php-wasm">php-wasm</a>
-    <ul>
-    <li><a href="#v0.0.9---aiming-for-the-github-stars">v0.0.9 - Aiming
-    for the (GitHub) Stars</a></li>
-    <li><a href="#v0.0.8---preparing-for-lift-off">v0.0.8 - Preparing
-    for Lift-off</a></li>
-    <li><a href="#remodermizing">0.0.7 - Remodermizing</a></li>
-    <li><a href="#ease">0.0.6 - Ease</a></li>
-    <li><a href="#alignment">0.0.5 - Alignment</a></li>
-    <li><a href="#revisiting">0.0.4 - Revisiting</a></li>
-    <li><a href="#new-horizons">0.0.3 - New Horizons</a></li>
-    <li><a href="#gaining-momentum">0.0.2 - Gaining Momentum</a></li>
-    <li><a href="#humble-beginnings">0.0.1 - Humble Beginnings</a></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article >
+								<h1 id="php-wasm">php-wasm</h1>
+        <p>Changes</p>
+        <h2 id="v0.0.9---aiming-for-the-github-stars">v0.0.9 - Aiming
+        for the (GitHub) Stars</h2>
+        <ul>
+        <li>Adding PHP-CGI support!</li>
+        <li>Runtime extension loading!</li>
+        <li>libicu, freetype, zlib, gd, libpng, libjpeg, openssl, &amp;
+        phar support.</li>
+        <li>php-wasm, php-cgi-wasm, &amp; php-wasm-builder are now
+        separate packages.</li>
+        <li>Vrzno now facilitates url fopen via the fetch() api.</li>
+        <li>pdo_cfd1 is now a separate extension from Vrzno.</li>
+        <li>pdo_pglite adds local Postgres support.</li>
+        <li>SQLite is now using version 3.46.</li>
+        <li>Demos for CodeIgniter, CakePHP, Laravel &amp; Laminas.</li>
+        <li>Drupal &amp; all other demos now use standard build + zip
+        install.</li>
+        <li>Modules are now webpack-compatible out of the box.</li>
+        <li>Exposing FS methods w/queueing &amp; locking to sync files
+        between tabs &amp; workers.</li>
+        <li>Fixed the bug with POST requests under Firefox.</li>
+        <li>Adding support for PHP 8.3.7</li>
+        <li>Automatic CI testing for PHP 8.0, 8.1, 8.2 &amp; 8.3.</li>
+        </ul>
+        <h2 id="v0.0.8---preparing-for-lift-off">v0.0.8 - Preparing for
+        Lift-off</h2>
+        <ul>
+        <li>Adding ESM &amp; CDN Module support!</li>
+        <li>Adding stdin.</li>
+        <li>Buffering stdout/stderr in javascript.</li>
+        <li>Fixing <code>&lt;script type = "text/php"&gt;</code>
+        support.</li>
+        <li>Adding fetch support for <code>src</code> on above.</li>
+        <li>Adding support for libzip, iconv, &amp; html-tidy</li>
+        <li>Adding support for NodeFS &amp; IDBFS.</li>
+        <li>Custom builds.</li>
+        <li>Updating PHP to 8.2.11</li>
+        <li>Building with Emscripten 3.1.43</li>
+        <li>Modularizing dependencies.</li>
+        <li>Compressing assets.</li>
+        </ul>
+        <h2 id="remodermizing">0.0.7 - Remodermizing</h2>
+        <ul>
+        <li>Updating PHP to 8.2.4</li>
+        <li>Updating SQLite to 3.41</li>
+        <li>Updating Drupal to 7.95</li>
+        <li>Correcting hiccups in the build process</li>
+        </ul>
+        <h2 id="ease">0.0.6 - Ease</h2>
+        <ul>
+        <li>Correcting hiccups in the build process</li>
+        </ul>
+        <h2 id="alignment">0.0.5 - Alignment</h2>
+        <ul>
+        <li>Ensuring npm &amp; github have matching tags</li>
+        <li>Ensuring Drupal re-builds correctly with no nested duplicate
+        directory</li>
+        <li>Removing some extraneous files from example application</li>
+        <li>Separating php-web-drupal from php-web for real this
+        time</li>
+        <li>Publishing php-web-drupal to npm</li>
+        </ul>
+        <h2 id="revisiting">0.0.4 - Revisiting</h2>
+        <ul>
+        <li>Separated Drupal from standard php-web to save
+        bandwidth</li>
+        <li>Running the build automatically on push in CircleCI</li>
+        <li>Getting the automatic build working for Drupal</li>
+        </ul>
+        <h2 id="new-horizons">0.0.3 - New Horizons</h2>
+        <ul>
+        <li>php.exec() may be used to evaluate a single php expression
+        &amp; return its result.</li>
+        <li>php may now access &amp; traverse the dom and access
+        nodes.</li>
+        <li>The querySelector method is available on dom nodes.</li>
+        <li>addEventListener/removeEventListener is also available on
+        dom nodes.</li>
+        <li>sqlite3 v3.33 is now statically linked to php &amp; the
+        sqlite3 extension is enabled.</li>
+        <li>The following extensions are now enabled: sqlite3, pdo,
+        &amp; pdo-sqlite.</li>
+        <li>Totally revamped build process that tracks build artifact
+        relationships.</li>
+        <li>Builds for web, node, shell, worker &amp; webview.</li>
+        </ul>
+        <h2 id="gaining-momentum">0.0.2 - Gaining Momentum</h2>
+        <ul>
+        <li>php objects now have persistent memory, may be cleared with
+        <code>php.refresh();</code>.</li>
+        <li>php code may now access Javascript (and thus, the DOM) via
+        the <a href="https://github.com/seanmorris/vrzno">VRZNO</a>
+        project. The extension is preinstalled with php-wasm.</li>
+        <li><code>&lt;script type = "text/php"&gt;</code> tags are now
+        supported, both inline and with <code>src=...</code>. Both
+        require opening tags as of now.</li>
+        <li>Building of object files is now separated from building of
+        binary files so multiple binaries may be built from the same set
+        of objects.</li>
+        <li>License changed from MIT to Apache-2.0, which has similar
+        terms, but USERS must have visibility of the attribution, rather
+        that just DEVELOPERS.</li>
+        <li>Build dependencies are now expressed in the makefile</li>
+        <li>Project can be built in its entirety by running
+        <code>make</code>.</li>
+        <li>Ensuring newlines in PHP output are respected.</li>
+        </ul>
+        <h2 id="humble-beginnings">0.0.1 - Humble Beginnings</h2>
+        <ul>
+        <li>Event-oriented interface added to php object.</li>
+        <li>Buildscript was slightly improved with a makefile</li>
+        </ul>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#php-wasm">php-wasm</a>
+     <ul>
+     <li><a href="#v0.0.9---aiming-for-the-github-stars">v0.0.9 - Aiming
+     for the (GitHub) Stars</a></li>
+     <li><a href="#v0.0.8---preparing-for-lift-off">v0.0.8 - Preparing
+     for Lift-off</a></li>
+     <li><a href="#remodermizing">0.0.7 - Remodermizing</a></li>
+     <li><a href="#ease">0.0.6 - Ease</a></li>
+     <li><a href="#alignment">0.0.5 - Alignment</a></li>
+     <li><a href="#revisiting">0.0.4 - Revisiting</a></li>
+     <li><a href="#new-horizons">0.0.3 - New Horizons</a></li>
+     <li><a href="#gaining-momentum">0.0.2 - Gaining Momentum</a></li>
+     <li><a href="#humble-beginnings">0.0.1 - Humble Beginnings</a></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

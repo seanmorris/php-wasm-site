@@ -1,30 +1,10 @@
 <!DOCTYPE HTML>
 <head>
-	$if(noprefix)$
-	<title>$if(pagetitle)$${pagetitle}$else$${title}$endif$</title>
-	$else$
-	$if(title-prefix)$
-	<title>$if(title-prefix)$${title-prefix} | $endif$$if(pagetitle)$${pagetitle}$else$${title}$endif$</title>
-	$else$
-	<title>$if(pagetitle)$${pagetitle}$else$${title}$endif$</title>
-	$endif$
-	$endif$
-	<script src = "/main.js"></script>
+			<title>Php-Wasm | demos</title>
+			<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=800, user-scalable=yes" />
-$for(author-meta)$
-	<meta name="author" content="$author-meta$" />
-$endfor$
-$if(date-meta)$
-	<meta name="dcterms.date" content="$date-meta$" />
-$endif$
-$if(keywords)$
-	<meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
-$endif$
-$if(description-meta)$
-	<meta name="description" content="$description-meta$" />
-$endif$
-	<meta name="title" content="$if(pagetitle)$${pagetitle}$else$${title}$endif$">
+	<meta name="title" content="demos">
 	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -38,17 +18,19 @@ $endif$
 	<link rel="dns-prefetch" href="https://github.com/" />
 	<link rel="dns-prefetch" href="https://seanmorris.github.io/" />
 	<style>
-		$styles.html()$
+		code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+  .display.math{display: block; text-align: center; margin: 0.5rem auto;}
 	</style>
-$for(css)$
-	<link rel="stylesheet" href="${css}" />
-$endfor$
-$for(header-includes)$
-	$header-includes$
-$endfor$
-$if(math)$
-	$math$
-$endif$
+	<link rel="stylesheet" href="/heading.css" />
+	<link rel="stylesheet" href="/style.css" />
+	<link rel="stylesheet" href="/article.css" />
+	<link rel="stylesheet" href="/pandoc.css" />
+	<link rel="stylesheet" href="/fonts.css" />
 </head>
 <body>
 	<section class = "heading">
@@ -75,7 +57,10 @@ $endif$
 					<div class = "burger-bar"></div>
 				</div>
 			</nav>
-					</div>
+			<div class = "hero">
+	<iframe src = "https://seanmorris.github.io/php-wasm/select-framework.html?iframed=1"></iframe>
+</div>
+		</div>
 	</section>
 
 	<section class = "below-fold">
@@ -152,20 +137,17 @@ $endif$
 				LICENSE			</a>
 		</li></ul></nav>
 						<div class = "page-content">
-				<article $if(itemtype)$ itemscope itemtype = "https://${itemtype}" $endif$>
-				$for(microdata/pairs)$
-				<meta itemprop = "${microdata.key}" content = "${microdata.value}" />
-				$endfor$
-				$body$
+				<article >
+								<h1 id="demo">Demo</h1>
+        <p>Use the dialog above to launch a 100% local, user-editable
+        site with a given framework.</p>
+        <h2 id="php-scripts">PHP Scripts</h2>
+        <p>Use the editor below to write PHP scripts that run right in
+        the page:</p>
+        <iframe class="page-demo" src="https://seanmorris.github.io/php-wasm/embedded-php.html?iframed=1&amp;demo=phpinfo.php">
+        </iframe>
 				</article>
-				$if(toc)$
-				<nav class = "table-of-contents">
-					<span class = "wide-only">on this page:</span>
-					${toc}
-					<span class = "wide-only"><a href = "#">top</a></span>
-				</nav>
-				$endif$
-			</div>
+							</div>
 		</div>
 	</section>
 

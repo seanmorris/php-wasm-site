@@ -7,9 +7,9 @@ section.below-fold div.page-rule {
 	display: flex;
 	flex-direction: row;
 }
-section.below-fold div.page-rule > article {
+section.below-fold div.page-rule article {
 	flex: 1 1 0;
-		min-width: 0;
+	min-width: 0;
 }
 
 section.below-fold a {

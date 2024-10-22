@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | Custom Builds with php-wasm-builder</title>
 			<script src = "/main.js"></script>
@@ -95,7 +94,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -106,6 +104,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -125,8 +124,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -196,132 +194,135 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article >
-						<h1 id="custom-builds-with-php-wasm-builder">Custom Builds with
-      php-wasm-builder</h1>
-      <p>The <code>php-wasm-builder</code> <em>package</em> is the set
-      of source files needed to build php-wasm &amp; php-cgi-wasm.</p>
-      <p>The <code>php-wasm-builder</code> <em>command</em> is a wrapper
-      script for the build process that allows the user to easily
-      configure the underlying build process &amp; drop the build assets
-      wherever is necessary.</p>
-      <p>You can use <a
-      href="/compiling/php-wasm-rc.html">.php-wasm-rc</a> to customize
-      your build.</p>
-      <h2 id="installing-php-wasm-builder">Installing
-      php-wasm-builder</h2>
-      <p>Install <code>php-wasm-builder</code> globally:</p>
-      <p><strong><em>Requires:</em></strong> * Docker * Docker Compose *
-      Coreutils * Wget * Make</p>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm install <span class="at">-g</span> php-wasm-builder</span></code></pre></div>
-      <p>Create the build environment (can be run from anywhere):</p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder image</span></code></pre></div>
-      <p>Clean up files from a previous build</p>
-      <p>(Usually needed if the PHP version changes or Emscripten ABI
-      changes have occurred)</p>
-      <div class="sourceCode" id="cb3"><pre
-      class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder clean</span></code></pre></div>
-      <h2 id="php-wasm-builder-commands">php-wasm-builder commands</h2>
-      <h3 id="build">build</h3>
-      <p>Use this to build custom version of php-wasm. It’s recommended
-      to build this to an empty directory using a
-      <code>.php-wasm-rc</code> file.</p>
-      <div class="sourceCode" id="cb4"><pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder build</span></code></pre></div>
-      <h3 id="image">image</h3>
-      <p>This will build the docker container used to build
-      php-wasm.</p>
-      <div class="sourceCode" id="cb5"><pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder image</span></code></pre></div>
-      <h3 id="copy-assets">copy-assets</h3>
-      <p>This will scan the current package’s node_modules directory for
-      shared libraries &amp; supporting files, and copy them to
-      <code>PHP_ASSET_DIR</code>.</p>
-      <p>You can use this with <code>.php-wasm-rc</code> to copy assets
-      even if you’re not using a custom build.</p>
-      <div class="sourceCode" id="cb6"><pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder copy-assets</span></code></pre></div>
-      <h3 id="build-assets">build-assets</h3>
-      <p>While <code>copy-assets</code> moves existing shared libraries,
-      the <code>build-assets</code> command compiles them first, then
-      moves them to PHP_ASSET_DIR.</p>
-      <p>You can use this with <code>.php-wasm-rc</code> to copy assets
-      even if you’re not using a custom build.</p>
-      <div class="sourceCode" id="cb7"><pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder build-assets</span></code></pre></div>
-      <h3 id="clean">clean</h3>
-      <p>Clear cached build resources.</p>
-      <div class="sourceCode" id="cb8"><pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder clean</span></code></pre></div>
-      <h3 id="deep-clean">deep-clean</h3>
-      <p>Clear out all downloaded dependencies and start from
-      scratch.</p>
-      <div class="sourceCode" id="cb9"><pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder deep-clean</span></code></pre></div>
-      <h3 id="help">help</h3>
-      <p>Print the help text for a given command</p>
-      <div class="sourceCode" id="cb10"><pre
-      class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder help COMMAND</span></code></pre></div>
-      <h2 id="build-for-web">Build for web</h2>
-      <p>Then navigate to the directory you want the files to be built
-      in, and run <code>php-wasm-builder build</code></p>
-      <div class="sourceCode" id="cb11"><pre
-      class="sourceCode sh"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/my-project</span>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article >
+								<h1 id="custom-builds-with-php-wasm-builder">Custom Builds with
+        php-wasm-builder</h1>
+        <p>The <code>php-wasm-builder</code> <em>package</em> is the set
+        of source files needed to build php-wasm &amp; php-cgi-wasm.</p>
+        <p>The <code>php-wasm-builder</code> <em>command</em> is a
+        wrapper script for the build process that allows the user to
+        easily configure the underlying build process &amp; drop the
+        build assets wherever is necessary.</p>
+        <p>You can use <a
+        href="/compiling/php-wasm-rc.html">.php-wasm-rc</a> to customize
+        your build.</p>
+        <h2 id="installing-php-wasm-builder">Installing
+        php-wasm-builder</h2>
+        <p>Install <code>php-wasm-builder</code> globally:</p>
+        <p><strong><em>Requires:</em></strong> * Docker * Docker Compose
+        * Coreutils * Wget * Make</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm install <span class="at">-g</span> php-wasm-builder</span></code></pre></div>
+        <p>Create the build environment (can be run from anywhere):</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder image</span></code></pre></div>
+        <p>Clean up files from a previous build</p>
+        <p>(Usually needed if the PHP version changes or Emscripten ABI
+        changes have occurred)</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder clean</span></code></pre></div>
+        <h2 id="php-wasm-builder-commands">php-wasm-builder
+        commands</h2>
+        <h3 id="build">build</h3>
+        <p>Use this to build custom version of php-wasm. It’s
+        recommended to build this to an empty directory using a
+        <code>.php-wasm-rc</code> file.</p>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder build</span></code></pre></div>
+        <h3 id="image">image</h3>
+        <p>This will build the docker container used to build
+        php-wasm.</p>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder image</span></code></pre></div>
+        <h3 id="copy-assets">copy-assets</h3>
+        <p>This will scan the current package’s node_modules directory
+        for shared libraries &amp; supporting files, and copy them to
+        <code>PHP_ASSET_DIR</code>.</p>
+        <p>You can use this with <code>.php-wasm-rc</code> to copy
+        assets even if you’re not using a custom build.</p>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder copy-assets</span></code></pre></div>
+        <h3 id="build-assets">build-assets</h3>
+        <p>While <code>copy-assets</code> moves existing shared
+        libraries, the <code>build-assets</code> command compiles them
+        first, then moves them to PHP_ASSET_DIR.</p>
+        <p>You can use this with <code>.php-wasm-rc</code> to copy
+        assets even if you’re not using a custom build.</p>
+        <div class="sourceCode" id="cb7"><pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder build-assets</span></code></pre></div>
+        <h3 id="clean">clean</h3>
+        <p>Clear cached build resources.</p>
+        <div class="sourceCode" id="cb8"><pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder clean</span></code></pre></div>
+        <h3 id="deep-clean">deep-clean</h3>
+        <p>Clear out all downloaded dependencies and start from
+        scratch.</p>
+        <div class="sourceCode" id="cb9"><pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder deep-clean</span></code></pre></div>
+        <h3 id="help">help</h3>
+        <p>Print the help text for a given command</p>
+        <div class="sourceCode" id="cb10"><pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder help COMMAND</span></code></pre></div>
+        <h2 id="build-for-web">Build for web</h2>
+        <p>Then navigate to the directory you want the files to be built
+        in, and run <code>php-wasm-builder build</code></p>
+        <div class="sourceCode" id="cb11"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/my-project</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;web&quot; is the default:</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># php-wasm-builder build web</span></span></code></pre></div>
-      <h2 id="build-for-node">Build for node</h2>
-      <div class="sourceCode" id="cb12"><pre
-      class="sourceCode sh"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/my-project</span>
+        <h2 id="build-for-node">Build for node</h2>
+        <div class="sourceCode" id="cb12"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/my-project</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node</span></code></pre></div>
-      <h2 id="esm-modules">ESM Modules:</h2>
-      <p>Build ESM modules with:</p>
-      <div class="sourceCode" id="cb13"><pre
-      class="sourceCode sh"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web mjs</span>
+        <h2 id="esm-modules">ESM Modules:</h2>
+        <p>Build ESM modules with:</p>
+        <div class="sourceCode" id="cb13"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web mjs</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node mjs</span></code></pre></div>
-      <h2 id="cgi-modules">CGI Modules:</h2>
-      <p>Build CGI modules with:</p>
-      <div class="sourceCode" id="cb14"><pre
-      class="sourceCode sh"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web cgi mjs</span>
+        <h2 id="cgi-modules">CGI Modules:</h2>
+        <p>Build CGI modules with:</p>
+        <div class="sourceCode" id="cb14"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web cgi mjs</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build worker cgi mjs</span></code></pre></div>
-      <h2 id="php_dist_dir">PHP_DIST_DIR</h2>
-      <p>This will build the package inside of the current directory (or
-      in <code>PHP_DIST_DIR</code>, <em>see <a
-      href="/compiling/php-wasm-rc.html">.php-wasm-rc</a> for more
-      info.</em>)</p>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#custom-builds-with-php-wasm-builder">Custom Builds
-    with php-wasm-builder</a>
-    <ul>
-    <li><a href="#installing-php-wasm-builder">Installing
-    php-wasm-builder</a></li>
-    <li><a href="#php-wasm-builder-commands">php-wasm-builder
-    commands</a>
-    <ul>
-    <li><a href="#build">build</a></li>
-    <li><a href="#image">image</a></li>
-    <li><a href="#copy-assets">copy-assets</a></li>
-    <li><a href="#build-assets">build-assets</a></li>
-    <li><a href="#clean">clean</a></li>
-    <li><a href="#deep-clean">deep-clean</a></li>
-    <li><a href="#help">help</a></li>
-    </ul></li>
-    <li><a href="#build-for-web">Build for web</a></li>
-    <li><a href="#build-for-node">Build for node</a></li>
-    <li><a href="#esm-modules">ESM Modules:</a></li>
-    <li><a href="#cgi-modules">CGI Modules:</a></li>
-    <li><a href="#php_dist_dir">PHP_DIST_DIR</a></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+        <h2 id="php_dist_dir">PHP_DIST_DIR</h2>
+        <p>This will build the package inside of the current directory
+        (or in <code>PHP_DIST_DIR</code>, <em>see <a
+        href="/compiling/php-wasm-rc.html">.php-wasm-rc</a> for more
+        info.</em>)</p>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#custom-builds-with-php-wasm-builder">Custom Builds
+     with php-wasm-builder</a>
+     <ul>
+     <li><a href="#installing-php-wasm-builder">Installing
+     php-wasm-builder</a></li>
+     <li><a href="#php-wasm-builder-commands">php-wasm-builder
+     commands</a>
+     <ul>
+     <li><a href="#build">build</a></li>
+     <li><a href="#image">image</a></li>
+     <li><a href="#copy-assets">copy-assets</a></li>
+     <li><a href="#build-assets">build-assets</a></li>
+     <li><a href="#clean">clean</a></li>
+     <li><a href="#deep-clean">deep-clean</a></li>
+     <li><a href="#help">help</a></li>
+     </ul></li>
+     <li><a href="#build-for-web">Build for web</a></li>
+     <li><a href="#build-for-node">Build for node</a></li>
+     <li><a href="#esm-modules">ESM Modules:</a></li>
+     <li><a href="#cgi-modules">CGI Modules:</a></li>
+     <li><a href="#php_dist_dir">PHP_DIST_DIR</a></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

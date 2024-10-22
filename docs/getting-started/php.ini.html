@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | php.ini</title>
 			<script src = "/main.js"></script>
@@ -95,7 +94,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -106,6 +104,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -125,8 +124,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -196,71 +194,73 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article >
-						<h1 id="php.ini">php.ini</h1>
-      <p>The php.ini files in php-wasm work exactly the same as in
-      normal php. See the <a
-      href="https://www.php.net/manual/en/ini.list.php">PHP docs</a> for
-      the full list of ini settings.</p>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode ini"><code class="sourceCode ini"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[php]</span></span>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article >
+								<h1 id="php.ini">php.ini</h1>
+        <p>The php.ini files in php-wasm work exactly the same as in
+        normal php. See the <a
+        href="https://www.php.net/manual/en/ini.list.php">PHP docs</a>
+        for the full list of ini settings.</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode ini"><code class="sourceCode ini"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[php]</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="dt">date.timezone</span><span class="ot">=</span><span class="st">UTC</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">tidy.clean_output</span><span class="ot">=</span><span class="dv">1</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">expose_php</span><span class="ot">=</span><span class="dv">0</span></span></code></pre></div>
-      <h2 id="setting-up-php.ini-at-runtime">Setting up php.ini at
-      Runtime</h2>
-      <p>You can pass in the <code>ini</code> property to the
-      constructor to add lines to <code>/php.ini</code>:</p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">ini</span><span class="op">:</span> <span class="vs">`</span></span>
+        <h2 id="setting-up-php.ini-at-runtime">Setting up php.ini at
+        Runtime</h2>
+        <p>You can pass in the <code>ini</code> property to the
+        constructor to add lines to <code>/php.ini</code>:</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">ini</span><span class="op">:</span> <span class="vs">`</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    date.timezone=</span><span class="sc">${</span><span class="bu">Intl</span><span class="op">.</span><span class="fu">DateTimeFormat</span>()<span class="op">.</span><span class="fu">resolvedOptions</span>()<span class="op">.</span><span class="at">timeZone</span><span class="sc">}</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    tidy.clean_output=1</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    expose_php=0</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>})<span class="op">;</span></span></code></pre></div>
-      <h2 id="fs-locations">FS Locations</h2>
-      <p>If present, The <code>/config/php.ini</code> and
-      <code>/preload/php.ini</code> files will also be loaded. You can
-      learn how to populate the filesystem in <a
-      href="/filesystem/loading-files.html">Loading Files</a>.</p>
-      <h2 id="loading-extensions-by-php-version">Loading Extensions by
-      PHP Version</h2>
-      <p>PHP allows for <code>${ENVIRONMENT_VARIABLES}</code> to be used
-      inside ini files. The <code>PHP_VERSION</code> environment
-      variable is provided to allow loading of the extension compatible
-      with the currently running version of PHP.</p>
-      <div class="sourceCode" id="cb3"><pre
-      class="sourceCode ini"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[php]</span></span>
+        <h2 id="fs-locations">FS Locations</h2>
+        <p>If present, The <code>/config/php.ini</code> and
+        <code>/preload/php.ini</code> files will also be loaded. You can
+        learn how to populate the filesystem in <a
+        href="/filesystem/loading-files.html">Loading Files</a>.</p>
+        <h2 id="loading-extensions-by-php-version">Loading Extensions by
+        PHP Version</h2>
+        <p>PHP allows for <code>${ENVIRONMENT_VARIABLES}</code> to be
+        used inside ini files. The <code>PHP_VERSION</code> environment
+        variable is provided to allow loading of the extension
+        compatible with the currently running version of PHP.</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode ini"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[php]</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">extension</span><span class="ot">=</span><span class="st">php${PHP_VERSION}-phar.so</span></span></code></pre></div>
-      <p>Remember to correctly escape the <code>$</code> if you’re
-      supplying the INI from Javascript with
-      <code>՝backtics՝</code>.</p>
-      <div class="sourceCode" id="cb4" data-highlight="2"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">ini</span><span class="op">:</span> <span class="vs">`</span></span>
+        <p>Remember to correctly escape the <code>$</code> if you’re
+        supplying the INI from Javascript with
+        <code>՝backtics՝</code>.</p>
+        <div class="sourceCode" id="cb4" data-highlight="2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">ini</span><span class="op">:</span> <span class="vs">`</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    extension=php</span><span class="sc">\$</span><span class="vs">{PHP_VERSION}-phar.so</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    date.timezone=</span><span class="sc">${</span><span class="bu">Intl</span><span class="op">.</span><span class="fu">DateTimeFormat</span>()<span class="op">.</span><span class="fu">resolvedOptions</span>()<span class="op">.</span><span class="at">timeZone</span><span class="sc">}</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>})<span class="op">;</span></span></code></pre></div>
-      <h2 id="cgi-configuration">CGI Configuration</h2>
-      <p>When running in CGI mode, php will look for a
-      <code>php.ini</code> file in the document root directory, and load
-      it along with the files listed above.</p>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#php.ini">php.ini</a>
-    <ul>
-    <li><a href="#setting-up-php.ini-at-runtime">Setting up php.ini at
-    Runtime</a></li>
-    <li><a href="#fs-locations">FS Locations</a></li>
-    <li><a href="#loading-extensions-by-php-version">Loading Extensions
-    by PHP Version</a></li>
-    <li><a href="#cgi-configuration">CGI Configuration</a></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+        <h2 id="cgi-configuration">CGI Configuration</h2>
+        <p>When running in CGI mode, php will look for a
+        <code>php.ini</code> file in the document root directory, and
+        load it along with the files listed above.</p>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#php.ini">php.ini</a>
+     <ul>
+     <li><a href="#setting-up-php.ini-at-runtime">Setting up php.ini at
+     Runtime</a></li>
+     <li><a href="#fs-locations">FS Locations</a></li>
+     <li><a href="#loading-extensions-by-php-version">Loading Extensions
+     by PHP Version</a></li>
+     <li><a href="#cgi-configuration">CGI Configuration</a></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

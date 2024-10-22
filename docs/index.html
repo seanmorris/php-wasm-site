@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 		<title>Php-Wasm by Sean Morris</title>
 		<script src = "/main.js"></script>
@@ -33,7 +32,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -44,6 +42,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -58,8 +57,7 @@
 					<div class = "burger-bar"></div>
 				</div>
 			</nav>
-			
-			<div class = "hero">
+						<div class = "hero">
 				<h1>Deploy in One Click.</h1>
 				<p>Deploy PHP 8 apps client-side in one click, run PHP in cloudflare with full access to D1 SQL, or write PHP desktop apps with GTK.</p>
 				<a href = "/getting-started/home.html" class = "cta button">Learn More</a>
@@ -79,138 +77,143 @@
 
 				<p>Php-Wasm is currently powering cutting-edge client side php apps like wordpress-playground, drupal-playground & playwithlaravel.</p>
 			</div>
-
 		</div>
 	</section>
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<article  itemscope itemtype = "https://schema.org/SoftwareSourceCode" >
-						<meta itemprop = "additionalType" content = "https://schema.org/ComputerLanguage" />
-						<meta itemprop = "alternateName" content = "php-cgi-wasm" />
-						<meta itemprop = "codeRepository" content = "https://github.com/seanmorris/php-wasm" />
-						<meta itemprop = "copyrightHolder" content = "Sean Morris" />
-						<meta itemprop = "copyrightYear" content = "2020-2024" />
-						<meta itemprop = "countryOfOrigin" content = "USA" />
-						<meta itemprop = "description" content = "Php-Wasm is an
+						<div class = "page-content">
+				<article  itemscope itemtype = "https://schema.org/SoftwareSourceCode" >
+								<meta itemprop = "additionalType" content = "https://schema.org/ComputerLanguage" />
+								<meta itemprop = "alternateName" content = "php-cgi-wasm" />
+								<meta itemprop = "codeRepository" content = "https://github.com/seanmorris/php-wasm" />
+								<meta itemprop = "copyrightHolder" content = "Sean Morris" />
+								<meta itemprop = "copyrightYear" content = "2020-2024" />
+								<meta itemprop = "countryOfOrigin" content = "USA" />
+								<meta itemprop = "description" content = "Php-Wasm is an
 implementation of PHP running in Web Assembly." />
-						<meta itemprop = "headline" content = "PHP powered by
+								<meta itemprop = "headline" content = "PHP powered by
 WebAssembly." />
-						<meta itemprop = "isAccessibleForFree" content = "true" />
-						<meta itemprop = "isBasedOn" content = "php" />
-						<meta itemprop = "isFamilyFriendly" content = "true" />
-						<meta itemprop = "keywords" content = "php, javascript,
+								<meta itemprop = "isAccessibleForFree" content = "true" />
+								<meta itemprop = "isBasedOn" content = "php" />
+								<meta itemprop = "isFamilyFriendly" content = "true" />
+								<meta itemprop = "keywords" content = "php, javascript,
 webassembly" />
-						<meta itemprop = "license" content = "https://www.apache.org/licenses/LICENSE-2.0.txt" />
-						<meta itemprop = "maintainer" content = "Sean Morris" />
-						<meta itemprop = "name" content = "php-wasm" />
-						<meta itemprop = "programmingLanguage" content = "php, javascript,
-webassembly" />
-						<meta itemprop = "runtimePlatform" content = "webassembly" />
-						<p class="strong">
-      Php Wasm puts PHP right in the browser.
-      </p>
-      <p>PHP can now run in the browser as a counterpart to Javascript,
-      and can either be invoked from Javascript code or static HTML,
-      where it’s got full access to JS APIs as well as the DOM. Or, it
-      can run a service worker, where it mimics a CGI webserver like
-      Apache or nginx. And yea, it can serve whole websites.</p>
-      <aside>
-      <ul>
-      <li>
-      Embeds directly in HTML.
-      </li>
-      <li>
-      Full Access to JS APIs.
-      </li>
-      <li>
-      Runs in the Browser, Node, &amp; CloudFlare.
-      </li>
-      <li>
-      Supports 17 of the top PHP Extensions.
-      </li>
-      </ul>
-      <p>
-      Why even write Javascript anymore?
-      </p>
-      </aside>
-      <p class="strong">
-      Standard PDO Database Connectors.
-      </p>
-      <p>Php Wasm supports Sqlite, PostgreSQL, and CloudFlare’s D1 SQL,
-      all via PDO, so you can query your database just like you’ve
-      always done it.</p>
-      <p class="strong">
-      A Full Bridge To Javascript Code
-      </p>
-      <p>The Vrzno extension allows PHP to gain access to any APIs
-      available to Javascript. Objects, functions, and even classes can
-      be imported from Javascript and used in PHP as if they were native
-      code. That opens up things like DOM APIs, or anything else the
-      browser expose to Javascript. On the desktop, NodeJS packages like
-      NodeGTK can be used to build desktop applications in PHP.</p>
-      <p>You can see a simple demo of the Curvature framework being used
-      to generate some dynamic html <a
-      href="https://seanmorris.github.io/php-wasm/?demo=curvature.php">here</a>,
-      or a node-based version that allows PHP to access GTK <a
-      href="https://github.com/seanmorris/php-gtk">here</a>.</p>
-      <aside class="centered">
-      <a target = "_blank" alt = "Drupal Logo" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">
-      <img class = "downstream-logo" src = "drupal-logo.svg" /></a>
-      <p>
-      <a target = "_blank" alt = "WordPress Logo" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">Drupal
-      Playground</a>
-      </p>
-      <a target = "_blank" href = "https://playground.wordpress.net/">
-      <img class = "downstream-logo" src = "wordpress-logo.svg" /> </a>
-      <p>
-      <a target = "_blank" href = "https://playground.wordpress.net/">Wordpress
-      Playground</a>
-      </p>
-      </aside>
-      <p class="strong">
-      Field Tested.
-      </p>
-      <p>Php Wasm is already powering cutting-edge frontend PHP
-      applications like WordPress-Playground, Drupal-Playground, and
-      PlayWithLaravel. You can also find it featured on <a
-      href="https://3v4l.org">3v4l.org</a>.</p>
-      <p class="strong">
-      Fully Loaded with Batteries Included.
-      </p>
-      <p>Php Wasm comes with support for <strong>17</strong> of the most
-      commonly used PHP extensions, like LibXML, OpenSSL, Intl, ICU, GD,
-      mbString + oniguruma, &amp; zLib. Most of them can be loaded
-      dynamically as shared objects, or compiled statically if your use
-      case requires it. You can view the whole list <a
-      href="http://localhost:8081/getting-started/README.html#extensions">here</a>.</p>
-      <p>Extensions can even be loaded in from a CDN like jsdelivr or
-      unpkg, since they’re wrapped in JS modules. You can learn how to
-      do all that and more in the <a
-      href="http://localhost:8081/getting-started/README.html#loading-dynamic-extensions-as-js-modules">docs</a>.</p>
-      <p class="strong">
-      Isomorphic PHP.
-      </p>
-      <p>Write code that runs on the backend, the frontend, the edge and
-      the service worker. You can even include classes directly from
-      Packagist with a cloud-based autoloader.</p>
-      <p class="strong">
-      And, of course, its Open Source.
-      </p>
-      <p>Php Wasm is published 100% for free under the Apache License,
-      Version 2.0. This means Php Wasm is and always will be 100% free.
-      Php Wasm is committed to maintaining the free and open nature of
-      the web, and all the tools the project is based on.</p>
-      <p class="strong">
-      Want to Reach Out?
-      </p>
-      <p>If you’d like to get involved and contribute code or
-      sponsorship, head over to the <a
-      href="https://github.com/seanmorris/php-wasm">GitHub repo</a>, and
-      don’t hesitate to say hi on <a
-      href="https://discord.com/invite/j8VZzju7gJ">Discord</a>!</p>
-			</article>
-					</div>
+								<meta itemprop = "license" content = "https://www.apache.org/licenses/LICENSE-2.0.txt" />
+								<meta itemprop = "maintainer" content = "Sean Morris" />
+								<meta itemprop = "name" content = "php-wasm" />
+								<meta itemprop = "programmingLanguage" content = "php,
+javascript, webassembly" />
+								<meta itemprop = "runtimePlatform" content = "webassembly" />
+								<p class="strong">
+        Php Wasm puts PHP right in the browser.
+        </p>
+        <p>PHP can now run in the browser as a counterpart to
+        Javascript, and can either be invoked from Javascript code or
+        static HTML, where it’s got full access to JS APIs as well as
+        the DOM. Or, it can run a service worker, where it mimics a CGI
+        webserver like Apache or nginx. And yea, it can serve whole
+        websites.</p>
+        <aside>
+        <ul>
+        <li>
+        Embeds directly in HTML.
+        </li>
+        <li>
+        Full Access to JS APIs.
+        </li>
+        <li>
+        Runs in the Browser, Node, &amp; CloudFlare.
+        </li>
+        <li>
+        Supports 17 of the top PHP Extensions.
+        </li>
+        </ul>
+        <p>
+        Why even write Javascript anymore?
+        </p>
+        </aside>
+        <p class="strong">
+        Standard PDO Database Connectors.
+        </p>
+        <p>Php Wasm supports Sqlite, PostgreSQL, and CloudFlare’s D1
+        SQL, all via PDO, so you can query your database just like
+        you’ve always done it.</p>
+        <p class="strong">
+        A Full Bridge To Javascript Code
+        </p>
+        <p>The Vrzno extension allows PHP to gain access to any APIs
+        available to Javascript. Objects, functions, and even classes
+        can be imported from Javascript and used in PHP as if they were
+        native code. That opens up things like DOM APIs, or anything
+        else the browser expose to Javascript. On the desktop, NodeJS
+        packages like NodeGTK can be used to build desktop applications
+        in PHP.</p>
+        <p>You can see a simple demo of the Curvature framework being
+        used to generate some dynamic html <a
+        href="https://seanmorris.github.io/php-wasm/?demo=curvature.php">here</a>,
+        or a node-based version that allows PHP to access GTK <a
+        href="https://github.com/seanmorris/php-gtk">here</a>.</p>
+        <aside class="centered">
+        <a target = "_blank" alt = "Drupal Logo" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">
+        <img class = "downstream-logo" src = "drupal-logo.svg" /></a>
+        <p>
+        <a target = "_blank" alt = "WordPress Logo" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">Drupal
+        Playground</a>
+        </p>
+        <a target = "_blank" href = "https://playground.wordpress.net/">
+        <img class = "downstream-logo" src = "wordpress-logo.svg" />
+        </a>
+        <p>
+        <a target = "_blank" href = "https://playground.wordpress.net/">Wordpress
+        Playground</a>
+        </p>
+        </aside>
+        <p class="strong">
+        Field Tested.
+        </p>
+        <p>Php Wasm is already powering cutting-edge frontend PHP
+        applications like WordPress-Playground, Drupal-Playground, and
+        PlayWithLaravel. You can also find it featured on <a
+        href="https://3v4l.org">3v4l.org</a>.</p>
+        <p class="strong">
+        Fully Loaded with Batteries Included.
+        </p>
+        <p>Php Wasm comes with support for <strong>17</strong> of the
+        most commonly used PHP extensions, like LibXML, OpenSSL, Intl,
+        ICU, GD, mbString + oniguruma, &amp; zLib. Most of them can be
+        loaded dynamically as shared objects, or compiled statically if
+        your use case requires it. You can view the whole list <a
+        href="http://localhost:8081/getting-started/README.html#extensions">here</a>.</p>
+        <p>Extensions can even be loaded in from a CDN like jsdelivr or
+        unpkg, since they’re wrapped in JS modules. You can learn how to
+        do all that and more in the <a
+        href="http://localhost:8081/getting-started/README.html#loading-dynamic-extensions-as-js-modules">docs</a>.</p>
+        <p class="strong">
+        Isomorphic PHP.
+        </p>
+        <p>Write code that runs on the backend, the frontend, the edge
+        and the service worker. You can even include classes directly
+        from Packagist with a cloud-based autoloader.</p>
+        <p class="strong">
+        And, of course, its Open Source.
+        </p>
+        <p>Php Wasm is published 100% for free under the Apache License,
+        Version 2.0. This means Php Wasm is and always will be 100%
+        free. Php Wasm is committed to maintaining the free and open
+        nature of the web, and all the tools the project is based
+        on.</p>
+        <p class="strong">
+        Want to Reach Out?
+        </p>
+        <p>If you’d like to get involved and contribute code or
+        sponsorship, head over to the <a
+        href="https://github.com/seanmorris/php-wasm">GitHub repo</a>,
+        and don’t hesitate to say hi on <a
+        href="https://discord.com/invite/j8VZzju7gJ">Discord</a>!</p>
+				</article>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-
 <head>
 			<title>Php-Wasm | Using PHP Extensions</title>
 			<script src = "/main.js"></script>
@@ -95,7 +94,6 @@
 	<link rel="stylesheet" href="/pandoc.css" />
 	<link rel="stylesheet" href="/fonts.css" />
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -106,6 +104,7 @@
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -125,8 +124,7 @@
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-						<nav class = "main">
-				<ul><details open>
+							<nav class = "main"><ul><details open>
 			<summary>Getting Started</summary>
 			<ul><li>
 			<a href = "/getting-started/home.html">
@@ -196,162 +194,165 @@
 		</li><li>
 			<a href = "/LICENSE.html">
 				LICENSE			</a>
-		</li></ul>			</nav>
-						<article >
-						<h1 id="using-php-extensions">Using PHP Extensions</h1>
-      <p>There are two ways to load extensions at runtime, using the
-      <code>dl()</code> function or <code>php.ini</code>. The following
-      code will attempt to load the .so files from the same directory
-      the main WASM binary was loaded from, unless further configuration
-      is provided.</p>
-      <div class="sourceCode" id="cb1"><pre
-      class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+		</li></ul></nav>
+						<div class = "page-content">
+				<article >
+								<h1 id="using-php-extensions">Using PHP Extensions</h1>
+        <p>There are two ways to load extensions at runtime, using the
+        <code>dl()</code> function or <code>php.ini</code>. The
+        following code will attempt to load the .so files from the same
+        directory the main WASM binary was loaded from, unless further
+        configuration is provided.</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dl</span>(<span class="st">&#39;php-8.3-xml.so&#39;</span>)<span class="ot">;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dl</span>(<span class="st">&#39;php-8.3-dom.so&#39;</span>)<span class="ot">;</span></span></code></pre></div>
-      <p>You can also pass an array as the <code>extensions</code>
-      argument to the constructor from Javascript to automatically
-      generate an ini file that loads your extensions.</p>
-      <div class="sourceCode" id="cb2"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
+        <p>You can also pass an array as the <code>extensions</code>
+        argument to the constructor from Javascript to automatically
+        generate an ini file that loads your extensions.</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`php8.3-xml.so`</span><span class="op">,</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`php8.3-dom.so`</span><span class="op">,</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
-      <p>The class used to load PHP (<code>PhpWeb</code> here)
-      implements a phpVersion property to ensure libs can be loaded for
-      any compatible version:</p>
-      <div class="sourceCode" id="cb3"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
+        <p>The class used to load PHP (<code>PhpWeb</code> here)
+        implements a phpVersion property to ensure libs can be loaded
+        for any compatible version:</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`php</span><span class="sc">${</span>PhpWeb<span class="op">.</span><span class="at">phpVersion</span><span class="sc">}</span><span class="vs">-xml.so`</span><span class="op">,</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`php</span><span class="sc">${</span>PhpWeb<span class="op">.</span><span class="at">phpVersion</span><span class="sc">}</span><span class="vs">-dom.so`</span><span class="op">,</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
-      <h2 id="dynamic-extensions-from-remote-servers">Dynamic Extensions
-      from Remote Servers</h2>
-      <p>You can also load extensions from remote servers with URLs:</p>
-      <div class="sourceCode" id="cb4"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [<span class="vs">`https://unpkg.com/php-wasm-phar/php8.3-phar.so`</span>]})<span class="op">;</span></span></code></pre></div>
-      <p>The above is shorthand for the following code. Passing
-      <code>ini: true</code> will automatically load the extension via
-      <code>/php.ini</code>, passing <code>ini: false</code> will wait
-      for a call to <code>dl()</code> to do the lookup.</p>
-      <div class="sourceCode" id="cb5"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
+        <h2 id="dynamic-extensions-from-remote-servers">Dynamic
+        Extensions from Remote Servers</h2>
+        <p>You can also load extensions from remote servers with
+        URLs:</p>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [<span class="vs">`https://unpkg.com/php-wasm-phar/php8.3-phar.so`</span>]})<span class="op">;</span></span></code></pre></div>
+        <p>The above is shorthand for the following code. Passing
+        <code>ini: true</code> will automatically load the extension via
+        <code>/php.ini</code>, passing <code>ini: false</code> will wait
+        for a call to <code>dl()</code> to do the lookup.</p>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    {</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">name</span><span class="op">:</span> <span class="vs">`php8.3-phar.so`</span><span class="op">,</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">url</span><span class="op">:</span>  <span class="vs">`https://unpkg.com/php-wasm-phar/php8.3-phar.so`</span><span class="op">,</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">ini</span><span class="op">:</span>  <span class="kw">true</span><span class="op">,</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
-      <p>Strings starting with <code>/</code>, <code>./</code>,
-      <code>http://</code> or <code>https://</code> will be treated as
-      URLs:</p>
-      <div class="sourceCode" id="cb6"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
+        <p>Strings starting with <code>/</code>, <code>./</code>,
+        <code>http://</code> or <code>https://</code> will be treated as
+        URLs:</p>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`./php8.3-phar.so`</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
-      <p>Some extensions require supporting libraries. You can provide
-      URLs for those as <code>sharedLibs</code> as well, just pass
-      <code>ini: false</code>:</p>
-      <p><em>(<code>name</code> is implied to be the last section of the
-      URL here.)</em></p>
-      <div class="sourceCode" id="cb7"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
+        <p>Some extensions require supporting libraries. You can provide
+        URLs for those as <code>sharedLibs</code> as well, just pass
+        <code>ini: false</code>:</p>
+        <p><em>(<code>name</code> is implied to be the last section of
+        the URL here.)</em></p>
+        <div class="sourceCode" id="cb7"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/php8.3-sqlite.so&#39;</span><span class="op">,</span> <span class="dt">ini</span><span class="op">:</span> <span class="kw">true</span>  }<span class="op">,</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/sqlite.so&#39;</span><span class="op">,</span>        <span class="dt">ini</span><span class="op">:</span> <span class="kw">false</span> }<span class="op">,</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
-      <h2 id="loading-dynamic-extensions-as-js-modules">Loading Dynamic
-      Extensions as JS Modules:</h2>
-      <p>Dynamic extensions can be loaded as modules.</p>
-      <p>So long as the main file of the module defines the
-      <code>getLibs</code> and <code>getFiles</code> methods, extensions
-      may be loaded like so:</p>
-      <div class="sourceCode" id="cb8"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">new</span> <span class="fu">PhpNode</span>({<span class="dt">sharedLibs</span><span class="op">:</span>[ <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-intl&#39;</span>) ]})</span></code></pre></div>
-      <p>Dynamic extensions can also be loaded as modules from any
-      static HTTP server with an ESM directory structure.</p>
-      <div class="sourceCode" id="cb9"><pre
-      class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This will load both sqlite.so &amp; php8.x-sqlite.so:</span></span>
+        <h2 id="loading-dynamic-extensions-as-js-modules">Loading
+        Dynamic Extensions as JS Modules:</h2>
+        <p>Dynamic extensions can be loaded as modules.</p>
+        <p>So long as the main file of the module defines the
+        <code>getLibs</code> and <code>getFiles</code> methods,
+        extensions may be loaded like so:</p>
+        <div class="sourceCode" id="cb8"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">new</span> <span class="fu">PhpNode</span>({<span class="dt">sharedLibs</span><span class="op">:</span>[ <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-intl&#39;</span>) ]})</span></code></pre></div>
+        <p>Dynamic extensions can also be loaded as modules from any
+        static HTTP server with an ESM directory structure.</p>
+        <div class="sourceCode" id="cb9"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This will load both sqlite.so &amp; php8.x-sqlite.so:</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [ <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm-sqlite&#39;</span>) ]})<span class="op">;</span></span></code></pre></div>
-      <p>Unfortunately, this notation is not available for Service
-      Workers, as they do not yet support dynamic
-      <code>imports()</code>. Hopefully this will change soon.</p>
-      <h2 id="extension-list">Extension List</h2>
-      <p>The following extensions may be loaded at runtime. This allows
-      the shared extensions and their dependencies to be cached, reused,
-      and selected à la carte for each application</p>
-      <h3 id="gd">gd</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-gd"
-      class="uri">https://www.npmjs.com/package/php-wasm-gd</a></p>
-      <h3 id="iconv">iconv</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-iconv"
-      class="uri">https://www.npmjs.com/package/php-wasm-iconv</a></p>
-      <h3 id="intl">intl</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-intl"
-      class="uri">https://www.npmjs.com/package/php-wasm-intl</a></p>
-      <h3 id="xml">xml</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-libxml"
-      class="uri">https://www.npmjs.com/package/php-wasm-libxml</a></p>
-      <h3 id="dom">dom</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-libxml"
-      class="uri">https://www.npmjs.com/package/php-wasm-libxml</a></p>
-      <h3 id="simplexml">simplexml</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-libxml"
-      class="uri">https://www.npmjs.com/package/php-wasm-libxml</a></p>
-      <h3 id="yaml">yaml</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-libyaml"
-      class="uri">https://www.npmjs.com/package/php-wasm-libyaml</a></p>
-      <h3 id="zip">zip</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-libzip"
-      class="uri">https://www.npmjs.com/package/php-wasm-libzip</a></p>
-      <h3 id="mbstring">mbstring</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-mbstring"
-      class="uri">https://www.npmjs.com/package/php-wasm-mbstring</a></p>
-      <h3 id="openssl">openssl</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-openssl"
-      class="uri">https://www.npmjs.com/package/php-wasm-openssl</a></p>
-      <h3 id="phar">phar</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-phar"
-      class="uri">https://www.npmjs.com/package/php-wasm-phar</a></p>
-      <h3 id="sqlite">sqlite</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-sqlite"
-      class="uri">https://www.npmjs.com/package/php-wasm-sqlite</a></p>
-      <h3 id="pdo-sqlite">pdo-sqlite</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-sqlite"
-      class="uri">https://www.npmjs.com/package/php-wasm-sqlite</a></p>
-      <h3 id="zlib">zlib</h3>
-      <p><a href="https://www.npmjs.com/package/php-wasm-zlib"
-      class="uri">https://www.npmjs.com/package/php-wasm-zlib</a></p>
-			</article>
-						<nav class = "table-of-contents">
-				<span>on this page:</span>
-				<ul>
-    <li><a href="#using-php-extensions">Using PHP Extensions</a>
-    <ul>
-    <li><a href="#dynamic-extensions-from-remote-servers">Dynamic
-    Extensions from Remote Servers</a></li>
-    <li><a href="#loading-dynamic-extensions-as-js-modules">Loading
-    Dynamic Extensions as JS Modules:</a></li>
-    <li><a href="#extension-list">Extension List</a>
-    <ul>
-    <li><a href="#gd">gd</a></li>
-    <li><a href="#iconv">iconv</a></li>
-    <li><a href="#intl">intl</a></li>
-    <li><a href="#xml">xml</a></li>
-    <li><a href="#dom">dom</a></li>
-    <li><a href="#simplexml">simplexml</a></li>
-    <li><a href="#yaml">yaml</a></li>
-    <li><a href="#zip">zip</a></li>
-    <li><a href="#mbstring">mbstring</a></li>
-    <li><a href="#openssl">openssl</a></li>
-    <li><a href="#phar">phar</a></li>
-    <li><a href="#sqlite">sqlite</a></li>
-    <li><a href="#pdo-sqlite">pdo-sqlite</a></li>
-    <li><a href="#zlib">zlib</a></li>
-    </ul></li>
-    </ul></li>
-    </ul>
-				<span><a href = "#">top</a></span>
-			</nav>
-					</div>
+        <p>Unfortunately, this notation is not available for Service
+        Workers, as they do not yet support dynamic
+        <code>imports()</code>. Hopefully this will change soon.</p>
+        <h2 id="extension-list">Extension List</h2>
+        <p>The following extensions may be loaded at runtime. This
+        allows the shared extensions and their dependencies to be
+        cached, reused, and selected à la carte for each application</p>
+        <h3 id="gd">gd</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-gd"
+        class="uri">https://www.npmjs.com/package/php-wasm-gd</a></p>
+        <h3 id="iconv">iconv</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-iconv"
+        class="uri">https://www.npmjs.com/package/php-wasm-iconv</a></p>
+        <h3 id="intl">intl</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-intl"
+        class="uri">https://www.npmjs.com/package/php-wasm-intl</a></p>
+        <h3 id="xml">xml</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-libxml"
+        class="uri">https://www.npmjs.com/package/php-wasm-libxml</a></p>
+        <h3 id="dom">dom</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-libxml"
+        class="uri">https://www.npmjs.com/package/php-wasm-libxml</a></p>
+        <h3 id="simplexml">simplexml</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-libxml"
+        class="uri">https://www.npmjs.com/package/php-wasm-libxml</a></p>
+        <h3 id="yaml">yaml</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-libyaml"
+        class="uri">https://www.npmjs.com/package/php-wasm-libyaml</a></p>
+        <h3 id="zip">zip</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-libzip"
+        class="uri">https://www.npmjs.com/package/php-wasm-libzip</a></p>
+        <h3 id="mbstring">mbstring</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-mbstring"
+        class="uri">https://www.npmjs.com/package/php-wasm-mbstring</a></p>
+        <h3 id="openssl">openssl</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-openssl"
+        class="uri">https://www.npmjs.com/package/php-wasm-openssl</a></p>
+        <h3 id="phar">phar</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-phar"
+        class="uri">https://www.npmjs.com/package/php-wasm-phar</a></p>
+        <h3 id="sqlite">sqlite</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-sqlite"
+        class="uri">https://www.npmjs.com/package/php-wasm-sqlite</a></p>
+        <h3 id="pdo-sqlite">pdo-sqlite</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-sqlite"
+        class="uri">https://www.npmjs.com/package/php-wasm-sqlite</a></p>
+        <h3 id="zlib">zlib</h3>
+        <p><a href="https://www.npmjs.com/package/php-wasm-zlib"
+        class="uri">https://www.npmjs.com/package/php-wasm-zlib</a></p>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#using-php-extensions">Using PHP Extensions</a>
+     <ul>
+     <li><a href="#dynamic-extensions-from-remote-servers">Dynamic
+     Extensions from Remote Servers</a></li>
+     <li><a href="#loading-dynamic-extensions-as-js-modules">Loading
+     Dynamic Extensions as JS Modules:</a></li>
+     <li><a href="#extension-list">Extension List</a>
+     <ul>
+     <li><a href="#gd">gd</a></li>
+     <li><a href="#iconv">iconv</a></li>
+     <li><a href="#intl">intl</a></li>
+     <li><a href="#xml">xml</a></li>
+     <li><a href="#dom">dom</a></li>
+     <li><a href="#simplexml">simplexml</a></li>
+     <li><a href="#yaml">yaml</a></li>
+     <li><a href="#zip">zip</a></li>
+     <li><a href="#mbstring">mbstring</a></li>
+     <li><a href="#openssl">openssl</a></li>
+     <li><a href="#phar">phar</a></li>
+     <li><a href="#sqlite">sqlite</a></li>
+     <li><a href="#pdo-sqlite">pdo-sqlite</a></li>
+     <li><a href="#zlib">zlib</a></li>
+     </ul></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
 	</section>
 
 	<footer class="footer">

@@ -1,5 +1,8 @@
-<!DOCTYPE HTML>
-
+<?php
+$frontmatter = yaml_parse(`yq --front-matter=extract $argv[1] 2>/dev/null || echo ""`) ?? [];
+$leftBarLink = $frontmatter['leftBarLink'];
+$leftBarShow = $frontmatter['leftBarShow'];
+?><!DOCTYPE HTML>
 <head>
 	$if(noprefix)$
 	<title>$if(pagetitle)$${pagetitle}$else$${title}$endif$</title>
@@ -51,7 +54,6 @@ $if(math)$
 	$math$
 $endif$
 </head>
-
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
@@ -62,6 +64,7 @@ $endif$
 				<div class = "spacer"></div>
 				<ul class = "links">
 					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
@@ -82,24 +85,24 @@ $endif$
 
 	<section class = "below-fold">
 		<div class = "page-rule">
-			<?php if($leftBar ?? true): ?>
-			<nav class = "main">
-				<?php include 'source/navbar.php'; ?>
-			</nav>
+			<?php if($leftBarShow ?? true): ?>
+				<nav class = "main"><?php include 'source/navbar.php'; ?></nav>
 			<?php endif; ?>
-			<article $if(itemtype)$ itemscope itemtype = "https://${itemtype}" $endif$>
-			$for(microdata/pairs)$
-			<meta itemprop = "${microdata.key}" content = "${microdata.value}" />
-			$endfor$
-			$body$
-			</article>
-			$if(toc)$
-			<nav class = "table-of-contents">
-				<span>on this page:</span>
-				${toc}
-				<span><a href = "#">top</a></span>
-			</nav>
-			$endif$
+			<div class = "page-content">
+				<article $if(itemtype)$ itemscope itemtype = "https://${itemtype}" $endif$>
+				$for(microdata/pairs)$
+				<meta itemprop = "${microdata.key}" content = "${microdata.value}" />
+				$endfor$
+				$body$
+				</article>
+				$if(toc)$
+				<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					${toc}
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+				$endif$
+			</div>
 		</div>
 	</section>
 
