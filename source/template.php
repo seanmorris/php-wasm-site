@@ -57,10 +57,10 @@ $endif$
 		<div class = "page-rule">
 			<nav>
 				<div class = "logo">
-					<a href = "/index.html"><img src = "/logo-80.png"></a>
+					<a href = "/"><img src = "/logo-80.png"></a>
 				</div>
 				<ul class = "links">
-					<li><a href = "/index.html">Home</a></li>
+					<li><a href = "/">Home</a></li>
 					<li><a href = "/getting-started/home.html">Docs</a></li>
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
