@@ -7,9 +7,13 @@ section.heading {
 }
 
 section.heading nav {
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	max-width: 1800px;
 	margin: auto;
+}
+
+section.heading nav .spacer{
+	flex: 1;
 }
 
 section.heading nav,
@@ -80,6 +84,7 @@ section.heading nav a.cta.button {
 	padding-left: 0rem;
 	padding-right: 0rem;
 	transition: box-shadow 0.125s ease-in;
+	max-height: 24px;
 }
 
 section.heading nav a.cta.button:hover {
@@ -103,14 +108,13 @@ div.hero a.button {
 	margin: 2rem;
 }
 
-
-
 .hero h1 {
 	font-family: 'Corbel';
 	font-weight: bold;
 	font-size: 68pt;
 	margin-top: 4rem;
 	margin-bottom: 2rem;
+	text-align: center;
 }
 
 .hero p {
@@ -130,10 +134,6 @@ div.hero a.button {
 	background: linear-gradient(0.10turn, #3601a9, #8216de);
 }
 
-.sub-hero {
-	max-width: 50%;
-}
-
 .sub-hero ul {
 	list-style: none;
 	padding: 0;
@@ -143,3 +143,5 @@ div.hero a.button {
 	content: "\B7";
 	padding-right: 0.75rem;
 }
+
+

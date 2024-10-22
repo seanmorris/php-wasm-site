@@ -108,6 +108,17 @@ document.addEventListener('mousedown', event => {
 });
 
 document.addEventListener('DOMContentLoaded', event => {
+
+	const button = document.getElementById('burgerButton');
+
+	button.addEventListener('click', event => {
+		const newValue = (button.getAttribute('data-open') === 'false' || button.getAttribute('data-open') === '');
+		button.setAttribute('data-open', newValue);
+		newValue
+			? document.body.classList.add('menu-open')
+			: document.body.classList.remove('menu-open');
+	});
+
 	const currentLink = document.querySelector(`nav.main a[href="${location.pathname}"]`);
 	currentLink && currentLink.classList.add('current');
 
@@ -162,4 +173,5 @@ document.addEventListener('DOMContentLoaded', event => {
 			}
 		}
 	}
+
 });
