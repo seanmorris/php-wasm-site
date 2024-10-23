@@ -48,12 +48,12 @@ You can see a simple demo of the Curvature framework being used to generate some
 
 <aside class = "centered">
 	<a target = "_blank" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">
-		<img alt = "Drupal Logo" class = "downstream-logo" src = "drupal-logo.svg" /></a>
+		<img alt = "Drupal Logo" class = "downstream-logo" src = "drupal-logo.svg" width = "144" height = "192" /></a>
 	<p>
 		<a target = "_blank" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">Drupal Playground</a>
 	</p>
 	<a target = "_blank" href = "https://playground.wordpress.net/">
-		<img alt = "WordPress Logo" class = "downstream-logo" src = "wordpress-logo.svg" />
+		<img alt = "WordPress Logo" class = "downstream-logo" src = "wordpress-logo.svg" width = "144" height = "192" />
 	</a>
 	<p>
 		<a target = "_blank" href = "https://playground.wordpress.net/">Wordpress Playground</a>
