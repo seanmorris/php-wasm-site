@@ -63,7 +63,7 @@ find ./pages -type f | while read FILENAME; do {
 		--css "/style.css" \
 		--css "/article.css" \
 		--css "/pandoc.css" \
-		--css "/fonts.css" \
+		-H "docs/fonts.css" \
 		${PAGE_FILE}
 
 }; done;

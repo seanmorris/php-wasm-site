@@ -4,6 +4,7 @@
 		url('anonymous_pro.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 
 }
 @font-face {
@@ -12,6 +13,7 @@
 		url('notosans-regular.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -20,6 +22,7 @@
 		url('notosans-italic.woff') format('woff');
 	font-weight: normal;
 	font-style: italic;
+	font-display: swap;
 }
 
 @font-face {
@@ -28,6 +31,7 @@
 		url('notosans-bold.woff') format('woff');
 	font-weight: bold;
 	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
@@ -36,5 +40,6 @@
 		url('corbelb.woff') format('woff');
 	font-weight: bold;
 	font-style: normal;
+	font-display: swap;
 
 }

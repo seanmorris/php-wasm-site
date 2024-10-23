@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width=800, user-scalable=yes" />
 	<meta name="title" content="LICENSE">
 	<link rel="sitemap" href="/sitemap.xml" />
+	<link rel="preload" href="/logo-80.webp" as="image" type="image/webp" crossorigin>
+	<link rel="preload" href="/splash-wide.webp" as="image" type="image/webp" crossorigin>
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
@@ -31,14 +33,60 @@
 	<link rel="stylesheet" href="/style.css" />
 	<link rel="stylesheet" href="/article.css" />
 	<link rel="stylesheet" href="/pandoc.css" />
-	<link rel="stylesheet" href="/fonts.css" />
+	<style>
+	@font-face {
+ 	font-family: 'Anonymous Pro';
+ 	src: url('anonymous_pro.woff2') format('woff2'),
+ 		url('anonymous_pro.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: normal;
+ 	font-display: swap;
+
+ }
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('notosans-regular.woff2') format('woff2'),
+ 		url('notosans-regular.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: normal;
+ 	font-display: swap;
+ }
+
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('notosans-italic.woff2') format('woff2'),
+ 		url('notosans-italic.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: italic;
+ 	font-display: swap;
+ }
+
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('notosans-bold.woff2') format('woff2'),
+ 		url('notosans-bold.woff') format('woff');
+ 	font-weight: bold;
+ 	font-style: normal;
+ 	font-display: swap;
+ }
+
+ @font-face {
+ 	font-family: 'Corbel';
+ 	src: url('corbelb.woff2') format('woff2'),
+ 		url('corbelb.woff') format('woff');
+ 	font-weight: bold;
+ 	font-style: normal;
+ 	font-display: swap;
+
+ }
+	</style>
 </head>
 <body>
 	<section class = "heading">
 		<div class = "page-rule">
 			<nav>
 				<div class = "logo">
-					<a href = "/"><img src = "/logo-80.png"></a>
+					<a href = "/"><img src = "/logo-80.webp" width = "304" height = "82" /></a>
 				</div>
 				<div class = "spacer"></div>
 				<ul class = "links">
@@ -367,7 +415,7 @@
 		<h4>About</h4>
 		<p>&copy; 2024 Sean Morris | <a href="/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap" width = "80" height = "15"></a>
 	</footer>
 	<!-- Google tag (gtag.js) -->
 <!-- Google tag (gtag.js) -->

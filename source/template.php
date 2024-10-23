@@ -30,6 +30,8 @@ $if(description-meta)$
 $endif$
 	<meta name="title" content="$if(pagetitle)$${pagetitle}$else$${title}$endif$">
 	<link rel="sitemap" href="/sitemap.xml" />
+	<link rel="preload" href="/logo-80.webp" as="image" type="image/webp" crossorigin>
+	<link rel="preload" href="/splash-wide.webp" as="image" type="image/webp" crossorigin>
 	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
@@ -48,9 +50,11 @@ $endif$
 $for(css)$
 	<link rel="stylesheet" href="${css}" />
 $endfor$
+	<style>
 $for(header-includes)$
 	$header-includes$
 $endfor$
+	</style>
 $if(math)$
 	$math$
 $endif$
@@ -60,7 +64,7 @@ $endif$
 		<div class = "page-rule">
 			<nav>
 				<div class = "logo">
-					<a href = "/"><img src = "/logo-80.png"></a>
+					<a href = "/"><img src = "/logo-80.webp" width = "304" height = "82" /></a>
 				</div>
 				<div class = "spacer"></div>
 				<ul class = "links">
@@ -127,7 +131,7 @@ $endif$
 		<h4>About</h4>
 		<p>&copy; 2024 Sean Morris | <a href="/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap"></a>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap" width = "80" height = "15"></a>
 	</footer>
 	<!-- Google tag (gtag.js) -->
 <!-- Google tag (gtag.js) -->
