@@ -34,6 +34,7 @@ $endif$
 	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="preload" href="/notosans-italic.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="dns-prefetch" href="https://www.npmjs.com/" />
 	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
 	<link rel="dns-prefetch" href="https://discord.gg/" />
 	<link rel="dns-prefetch" href="https://discord.com/" />
