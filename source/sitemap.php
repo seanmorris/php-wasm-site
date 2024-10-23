@@ -13,8 +13,14 @@ echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . PHP_EOL;
 foreach($directory as $entry)
 {
 	$pathname = $entry->getPathname();
+	$filename = $entry->getFilename();
 
 	if(substr($pathname, -4) !== 'html' || substr($pathname, -8) === '404.html')
+	{
+		continue;
+	}
+
+	if($filename === 'google0fd3cfdc440cb5a3.html')
 	{
 		continue;
 	}
