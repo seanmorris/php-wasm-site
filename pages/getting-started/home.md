@@ -46,12 +46,6 @@ If you'd like to serve websites with Node.js [PHP-CGI In NodeJs](/getting-starte
 * Adding support for PHP 8.3.7
 * Automatic CI testing for PHP 8.0, 8.1, 8.2 & 8.3.
 
-## php-wasm started as a fork of oraoto/PIB...
-
-The repository [pib-legacy](https://github.com/seanmorris/pib-legacy) was created to preserve the original state of the project.
-
-<https://github.com/oraoto/pib>
-
 ## 🍻 Licensed under the Apache License, Version 2.0
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
