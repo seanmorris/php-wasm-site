@@ -47,6 +47,10 @@ p.strong {
 	font-weight: bold;
 }
 
+p.strong.larger {
+	font-size: 1.125rem;
+}
+
 ul, strong {
 	margin-block-start: 1rem;
 	margin-block-end: 0.5rem;
@@ -76,8 +80,8 @@ a.button {
 }
 
 a {
-	color: #cc5de3;
 	color: #CAC;
+	color: #cc5de3;
 }
 
 a:hover {

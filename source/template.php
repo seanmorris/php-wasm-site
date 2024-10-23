@@ -3,6 +3,7 @@ $frontmatter = yaml_parse(`yq --front-matter=extract $argv[1] 2>/dev/null || ech
 $leftBarLink = $frontmatter['leftBarLink'];
 $leftBarShow = $frontmatter['leftBarShow'];
 ?><!DOCTYPE HTML>
+<html lang = "en">
 <head>
 	$if(noprefix)$
 	<title>$if(pagetitle)$${pagetitle}$else$${title}$endif$</title>
@@ -114,7 +115,7 @@ $endif$
 	</section>
 
 	<footer class="footer">
-		<h3>PHP WASM</h3>
+		<p class ="strong larger">PHP WASM</p>
 
 		<h4>Resources</h4>
 		<ul>
@@ -145,3 +146,4 @@ $endif$
 	gtag('config', 'G-ZX6DJE9JCG');
 </script>
 </body>
+</html>
