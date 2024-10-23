@@ -37,8 +37,6 @@ self.addEventListener('fetch',    event => php.handleFetchEvent(event));
 self.addEventListener('message',  event => php.handleMessageEvent(event));
 ```
 
-You can see examples of php-cgi-wasm running in a service worker and nodejs in [`demo-web/src/cgi-worker.mjs`](demo-web/src/cgi-worker.mjs) & [`demo-node/index.mjs`](demo-node/index.mjs) respectively.
-
 ***Note:*** `php-cgi-wasm` & `php-wasm` are separate packages. One "embeds" php right into your javascript, the other runs in "cgi-mode," just like php would under apache or nginx.
 
 You can find documentation specific to php-cgi-wasm [here](packages/php-cgi-wasm).

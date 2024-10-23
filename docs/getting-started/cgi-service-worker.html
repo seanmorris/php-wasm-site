@@ -234,12 +234,6 @@
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;activate&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> php<span class="op">.</span><span class="fu">handleActivateEvent</span>(<span class="bu">event</span>))<span class="op">;</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;fetch&#39;</span><span class="op">,</span>    <span class="bu">event</span> <span class="kw">=&gt;</span> php<span class="op">.</span><span class="fu">handleFetchEvent</span>(<span class="bu">event</span>))<span class="op">;</span></span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>self<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;message&#39;</span><span class="op">,</span>  <span class="bu">event</span> <span class="kw">=&gt;</span> php<span class="op">.</span><span class="fu">handleMessageEvent</span>(<span class="bu">event</span>))<span class="op">;</span></span></code></pre></div>
-        <p>You can see examples of php-cgi-wasm running in a service
-        worker and nodejs in <a
-        href="demo-web/src/cgi-worker.mjs"><code>demo-web/src/cgi-worker.mjs</code></a>
-        &amp; <a
-        href="demo-node/index.mjs"><code>demo-node/index.mjs</code></a>
-        respectively.</p>
         <p><strong><em>Note:</em></strong> <code>php-cgi-wasm</code>
         &amp; <code>php-wasm</code> are separate packages. One “embeds”
         php right into your javascript, the other runs in “cgi-mode,”
