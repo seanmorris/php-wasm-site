@@ -39,8 +39,6 @@ self.addEventListener('message',  event => php.handleMessageEvent(event));
 
 ***Note:*** `php-cgi-wasm` & `php-wasm` are separate packages. One "embeds" php right into your javascript, the other runs in "cgi-mode," just like php would under apache or nginx.
 
-You can find documentation specific to php-cgi-wasm [here](packages/php-cgi-wasm).
-
 ### msg-bus
 
 There is a `msg-bus` module supplied by `php-cgi-wasm` as a helper to communicate with php running inside a worker. The module exposes two functions: `sendMessageFor` and `onMessage`.
