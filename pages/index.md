@@ -66,9 +66,9 @@ Php Wasm is already powering cutting-edge frontend PHP applications like WordPre
 
 <p class = "strong">Fully Loaded with Batteries Included.</p>
 
-Php Wasm comes with support for **17** of the most commonly used PHP extensions, like LibXML, OpenSSL, Intl, ICU, GD, mbString + oniguruma, & zLib. Most of them can be loaded dynamically as shared objects, or compiled statically if your use case requires it. You can view the whole list [here](http://localhost:8081/getting-started/README.html#extensions).
+Php Wasm comes with support for **17** of the most commonly used PHP extensions, like LibXML, OpenSSL, Intl, ICU, GD, mbString + oniguruma, & zLib. Most of them can be loaded dynamically as shared objects, or compiled statically if your use case requires it. You can view the whole list [here](/getting-started/README.html#extensions).
 
-Extensions can even be loaded in from a CDN like jsdelivr or unpkg, since they're wrapped in JS modules. You can learn how to do all that and more in the [docs](http://localhost:8081/getting-started/README.html#loading-dynamic-extensions-as-js-modules).
+Extensions can even be loaded in from a CDN like jsdelivr or unpkg, since they're wrapped in JS modules. You can learn how to do all that and more in the [docs](/getting-started/README.html#loading-dynamic-extensions-as-js-modules).
 
 <p class = "strong">Isomorphic PHP.</p>
 

@@ -19,7 +19,7 @@ microdata:
 
 Run a php script. Code should start with the opening `<?php` tag and may optionally close with `?>` to allow for HTML interpolation.
 
-Will return a non-zero value in case of error. You'll need to use [event listeners](http://localhost:8081/getting-started/php-in-js.html#running-php-taking-output) to get output.
+Will return a non-zero value in case of error. You'll need to use [event listeners](/getting-started/php-in-js.html#running-php-taking-output) to get output.
 
 ```javascript
 php.run(`<?php
