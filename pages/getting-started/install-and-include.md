@@ -28,6 +28,8 @@ const php = new PhpWeb;
 
 You can also install php-wasm with npm.
 
+[Find php-wasm on npm](https://www.npmjs.com/package/php-wasm)
+
 ### Latest Alpha
 
 ```sh
