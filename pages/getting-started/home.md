@@ -45,3 +45,17 @@ If you'd like to serve websites with Node.js [PHP-CGI In NodeJs](/getting-starte
 * Fixed the bug with POST requests under Firefox.
 * Adding support for PHP 8.3.7
 * Automatic CI testing for PHP 8.0, 8.1, 8.2 & 8.3.
+
+## php-wasm started as a fork of oraoto/PIB...
+
+The repository [pib-legacy](https://github.com/seanmorris/pib-legacy) was created to preserve the original state of the project.
+
+<https://github.com/oraoto/pib>
+
+## 🍻 Licensed under the Apache License, Version 2.0
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+http://www.apache.org/licenses/LICENSE-2.0
