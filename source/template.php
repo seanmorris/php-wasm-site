@@ -74,7 +74,7 @@ $endif$
 					<li><a href = "/contact.html">Contact</a></li>
 					<li>
 						<a href = "https://github.com/seanmorris/php-wasm">Github</a>
-						<a href = "https://github.com/seanmorris/php-wasm"><img src = "/github-icon.png"></a>
+						<a href = "https://github.com/seanmorris/php-wasm"><img src = "/github-icon.png" alt = "Github icon"></a>
 					</li>
 				</ul>
 				<a href = "https://github.com/sponsors/seanmorris" class = "cta button">Donate</a>

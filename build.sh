@@ -59,10 +59,10 @@ find ./pages -type f | while read FILENAME; do {
 		--template=source/tmp.html \
 		-o ${DEST} \
 		--title-prefix="${TITLE_PREFIX}" \
-		--css "/heading.css" \
 		--css "/style.css" \
 		--css "/article.css" \
 		--css "/pandoc.css" \
+		-H "docs/heading.css" \
 		-H "docs/fonts.css" \
 		${PAGE_FILE}
 
