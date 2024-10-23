@@ -47,13 +47,13 @@ The Vrzno extension allows PHP to gain access to any APIs available to Javascrip
 You can see a simple demo of the Curvature framework being used to generate some dynamic html [here](https://seanmorris.github.io/php-wasm/?demo=curvature.php), or a node-based version that allows PHP to access GTK [here](https://github.com/seanmorris/php-gtk).
 
 <aside class = "centered">
-	<a target = "_blank" alt = "Drupal Logo" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">
-		<img class = "downstream-logo" src = "drupal-logo.svg" /></a>
+	<a target = "_blank" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">
+		<img alt = "Drupal Logo" class = "downstream-logo" src = "drupal-logo.svg" /></a>
 	<p>
-		<a target = "_blank" alt = "WordPress Logo" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">Drupal Playground</a>
+		<a target = "_blank" href = "https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/">Drupal Playground</a>
 	</p>
 	<a target = "_blank" href = "https://playground.wordpress.net/">
-		<img class = "downstream-logo" src = "wordpress-logo.svg" />
+		<img alt = "WordPress Logo" class = "downstream-logo" src = "wordpress-logo.svg" />
 	</a>
 	<p>
 		<a target = "_blank" href = "https://playground.wordpress.net/">Wordpress Playground</a>
