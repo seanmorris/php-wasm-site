@@ -109,7 +109,7 @@ div.hero a.button {
 }
 
 .hero h1 {
-	font-family: 'Corbel';
+	font-family: 'Corbel', sans-serif;
 	font-weight: bold;
 	font-size: 68pt;
 	margin-top: 4rem;
