@@ -447,12 +447,14 @@ javascript, webassembly" />
 	</footer>
 	<!-- Google tag (gtag.js) -->
 <!-- Google tag (gtag.js) -->
-<script defer src="https://www.googletagmanager.com/gtag/js?id=G-ZX6DJE9JCG"></script>
 <script>
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
 	gtag('js', new Date());
 	gtag('config', 'G-ZX6DJE9JCG');
+	const gascript = document.createElement('script');
+	gascript.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=G-ZX6DJE9JCG');
+	setTimeout(() => document.head.appendChild(gascript), 0);
 </script>
 </body>
 </html>
