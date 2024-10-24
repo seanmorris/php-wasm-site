@@ -33,10 +33,6 @@ $endif$
 	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/logo-80.webp" as="image" type="image/webp">
 	<link rel="preload" href="/splash-wide.webp" as="image" type="image/webp">
-	<link rel="preload" href="/corbelb.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-regular.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-bold.woff2" as="font" type="font/woff2">
-	<link rel="preload" href="/notosans-italic.woff2" as="font" type="font/woff2">
 	<link rel="preconnect" href="https://www.googletagmanager.com" />
 	<link rel="preconnect" href="https://www.google-analytics.com" />
 	<link rel="dns-prefetch" href="https://www.npmjs.com/" />
