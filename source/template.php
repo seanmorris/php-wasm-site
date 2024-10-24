@@ -113,13 +113,13 @@ $endif$
 	<footer class="footer">
 		<p class ="strong larger">PHP WASM</p>
 
-		<h4>Resources</h4>
+		<p>Resources</p>
 		<ul>
 			<li><a href="https://github.com/seanmorris/php-wasm/issues">Issue Tracker</a></li>
 			<li><a href="https://github.com/seanmorris/php-wasm/discussions">GitHub Discussions</a></li>
 		</ul>
 
-		<h4>Contact</h4>
+		<p>Contact</p>
 		<ul>
 			<li><a href = "https://github.com/sponsors/seanmorris">Sponsor</a></li>
 			<li><a href="https://github.com/seanmorris/php-wasm">Github</a></li>
@@ -127,7 +127,7 @@ $endif$
 			<li><a href="https://www.npmjs.com/package/php-wasm">npmjs</a></li>
 		</ul>
 
-		<h4>About</h4>
+		<p>About</p>
 		<p>&copy; 2024 Sean Morris | <a href="/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
 		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap" width = "80" height = "15" alt = "xml sitemap badge"></a>
