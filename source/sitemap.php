@@ -32,9 +32,14 @@ foreach($directory as $entry)
 		continue;
 	}
 
+
+
 	?>
 	<url>
 		<loc><?=$domain?>/<?=$urlPath?></loc>
+		<lastmod><?=trim(`date -r $pathname +"%Y-%m-%d"`);?></lastmod>
+		<changefreq>daily</changefreq>
+		<priority>0.8</priority>
 	</url>
 <?php
 }
