@@ -25,6 +25,9 @@ $endif$
 $if(description-meta)$
 	<meta name="description" content="$description-meta$" />
 $endif$
+$if(canonical)$
+	<link rel="canonical" href="$canonical$" />
+$endif$
 	<meta name="title" content="$if(pagetitle)$${pagetitle}$else$${title}$endif$">
 	<link rel="sitemap" href="/sitemap.xml" />
 	<link rel="preload" href="/logo-80.webp" as="image" type="image/webp">

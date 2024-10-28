@@ -1,10 +1,12 @@
 ---
 title: Php-Wasm by Sean Morris
+description-meta: PHP in Browser, powered by WebAssembly. Deploy PHP 8 apps client-side in one click, run PHP in cloudflare with full access to D1 SQL, or write PHP desktop apps with GTK.
 noprefix: true
 template: source/with-hero.php
 hero: intro.html
 leftBarLink: false
 leftBarShow: false
+canonical: https://php-wasm.seanmorr.is/
 itemtype: schema.org/SoftwareSourceCode
 microdata:
     name: php-wasm
