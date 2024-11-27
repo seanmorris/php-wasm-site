@@ -143,7 +143,7 @@ footer {
 }
 
 footer a {
-	color: inherit;
+	color: #00081d;
 	text-decoration: inherit;
 }
 
@@ -165,18 +165,13 @@ footer a {
 	text-decoration: underline;
 }
 
-.footer ul li a {
-	color: #333;
-	text-decoration: none;
-}
-
 p > img:first-child:last-child {
 	width: 100%;
 }
 
 span.higlight {
 	background-color: white;
-	color: #00081d;
+	color: #080e1b;
 	border-radius: 3px;
 	font-weight: bold;
 }

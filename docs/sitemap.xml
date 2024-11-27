@@ -2,139 +2,139 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>https://php-wasm.seanmorr.is/contact.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/getting-started/cgi-service-worker.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/getting-started/php-in-static-html.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/getting-started/home.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/getting-started/php-in-js.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/getting-started/php.ini.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/getting-started/install-and-include.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/getting-started/cgi-in-nodeJs.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/extensions/using-php-extensions.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/extensions/pdo-pglite.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/extensions/vrzno.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/extensions/pdo-cfd1.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/compiling/custom-builds.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/compiling/php-wasm-rc.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/CHANGELOG.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/filesystem/loading-files.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/filesystem/transactions.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/filesystem/fs-operations.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/methods/php-wasm.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/methods/php-cgi-wasm.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/index.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/demos.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>https://php-wasm.seanmorr.is/LICENSE.html</loc>
-		<lastmod>2024-10-28</lastmod>
+		<lastmod>2024-11-27</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
