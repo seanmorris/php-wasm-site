@@ -15,4 +15,4 @@ Use the dialog above to launch a 100% local, user-editable site with a given fra
 
 Use the editor below to write PHP scripts that run right in the page:
 
-<iframe class = "page-demo" src = "https://seanmorris.github.io/php-wasm/embedded-php.html?iframed=1&demo=phpinfo.php"></iframe>
+<iframe class = "page-demo" src = "https://seanmorris.github.io/php-wasm/embedded-php.html?iframed=1&no-service-worker=1&demo=phpinfo.php"></iframe>
