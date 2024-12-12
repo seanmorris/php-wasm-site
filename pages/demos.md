@@ -2,7 +2,7 @@
 title: Demo
 template: source/with-hero.php
 hero: hero-frame.php
-framed: https://seanmorris.github.io/php-wasm/select-framework.html?iframed=1
+framed: https://seanmorris.github.io/php-wasm/select-framework.html?iframed=1&no-service-worker=1
 leftBarLink: false
 TOC: false
 ---
