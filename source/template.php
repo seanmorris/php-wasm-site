@@ -1,7 +1,7 @@
 <?php
 $frontmatter = yaml_parse(`yq --front-matter=extract $argv[1] 2>/dev/null || echo ""`) ?? [];
-$leftBarLink = $frontmatter['leftBarLink'];
-$leftBarShow = $frontmatter['leftBarShow'];
+$leftBarLink = $frontmatter['leftBarLink'] ?? TRUE;
+$leftBarShow = $frontmatter['leftBarShow'] ?? TRUE;
 ?><!DOCTYPE HTML>
 <html lang = "en">
 <head>

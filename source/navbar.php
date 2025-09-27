@@ -1,12 +1,15 @@
 <?php
 
-function makeNavBar($name)
+function makeNavBar($path, $rootPath = NULL)
 {
+	$rootPath = $rootPath ?? $path;
 	$directories = [];
 	$files = [];
 
 	?><ul><?php
-	$dir = new \DirectoryIterator($name);
+
+	$dir = new \DirectoryIterator($path);
+
 	foreach($dir as $entry)
 	{
 		$filename = $entry->getFilename();
@@ -63,12 +66,13 @@ function makeNavBar($name)
 	{
 		$filename = $entry->filename;
 		$pathname = $entry->pathname;
+		$frontmatter = $entry->frontmatter;
 
-		$displayName = ucwords(trim(str_replace('-', ' ', basename($filename))));
+		$title = $frontmatter['title'] ?? ucwords(trim(str_replace('-', ' ', basename($filename))));
 
 		?><details open>
-			<summary><?=$displayName;?></summary>
-			<?=makeNavBar($pathname);?>
+			<summary><?=$title;?></summary>
+			<?=makeNavBar($pathname, $rootPath);?>
 		</details><?php
 	}
 
@@ -79,9 +83,10 @@ function makeNavBar($name)
 		$frontmatter = $entry->frontmatter;
 
 		$title = $frontmatter['title'] ?? ucwords(preg_replace(['/\.md$/', '/-/'], ['',  ' '], $filename));
+		$linkPath = substr($pathname, strlen($rootPath));
 
 		?><li>
-			<a href = "<?=preg_replace(['/^.\/pages/', '/\.\w+$/'], ['', '.html'], $pathname);?>">
+			<a href = "<?=preg_replace('/\.\w+$/', '.html', $linkPath);?>">
 				<?=$title?>
 			</a>
 		</li><?php
@@ -90,4 +95,4 @@ function makeNavBar($name)
 	?></ul><?php
 }
 
-makeNavBar('./pages');
+makeNavBar(getenv('PAGES_DIR'));

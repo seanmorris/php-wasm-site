@@ -31,10 +31,7 @@ foreach($directory as $entry)
 	{
 		continue;
 	}
-
-
-
-	?>
+?>
 	<url>
 		<loc><?=$domain?>/<?=$urlPath?></loc>
 		<lastmod><?=trim(`date -r $pathname +"%Y-%m-%d"`);?></lastmod>
