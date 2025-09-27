@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euxo pipefail
+
 TITLE_PREFIX=Php-Wasm
 HIGHLIGHT_STYLE=
 
@@ -12,31 +14,56 @@ HIGHLIGHT_STYLE=zenburn;
 # HIGHLIGHT_STYLE=breezedark;
 # HIGHLIGHT_STYLE=haddock;
 
+OUTPUT_DIR=./docs
+PAGES_DIR=./pages
+
+PHP=${PHP:-"php -d display_errors=stderr"}
+PANDOC=${PANDOC:-"pandoc"}
+YQ=${YQ:-"yq"}
+
+if ! command -v ${PHP} >/dev/null 2>&1
+then
+    echo "php is required."
+    exit 1
+fi
+
+if ! command -v ${YQ} >/dev/null 2>&1
+then
+    echo "yq is required."
+    exit 1
+fi
+
+if ! command -v ${PANDOC} >/dev/null 2>&1
+then
+    echo "pandoc is required."
+    exit 1
+fi
+
 if [ "${HIGHLIGHT_STYLE}" != "" ]; then
 	HIGHLIGHT_STYLE="--highlight-style ${HIGHLIGHT_STYLE}"
 fi
 
-set -eux
+echo -e "\e[33;4mBuilding templates...\e[0m"
 
-cp -rfv static/* docs/;
+${PHP} source/template.php > source/template.html;
 
-php source/template.php > source/template.html;
+echo -e "\e[33;4mBuilding pages...\e[0m"
 
-find ./pages -type f | while read FILENAME; do {
+find ${PAGES_DIR} -type f | while read FILENAME; do {
 
 	DIR=$(dirname ${FILENAME});
 	BASE=$(basename ${FILENAME});
 	EXT="${BASE##*.}"
 	FILENAME="${BASE%.*}"
-	DEST=./docs${DIR#./pages}/${FILENAME}.html
+	DEST=${OUTPUT_DIR}/${DIR#${PAGES_DIR}}/${FILENAME}.html
 
 	if [ "${FILENAME}.${EXT}" == ".fm.yaml" ]; then
 		continue;
 	fi
 
-	mkdir -p ./docs${DIR#./pages};
+	mkdir -p ${OUTPUT_DIR}/${DIR#${PAGES_DIR}};
 
-	TEMPLATE=`yq --front-matter=extract '.template' ${DIR}/${FILENAME}.${EXT} || echo ""`;
+	TEMPLATE=`${YQ} --front-matter=extract '.template' ${DIR}/${FILENAME}.${EXT} || echo ""`;
 	if [ "${TEMPLATE}" == "null" ] || [ "${TEMPLATE}" == "" ]; then
 		TEMPLATE=source/template.html
 		if [ -f "source/${EXT}-template.html" ]; then
@@ -45,16 +72,16 @@ find ./pages -type f | while read FILENAME; do {
 	fi
 
 	TOC_FLAG=
-	TOC=`yq --front-matter=extract '.TOC' ${DIR}/${FILENAME}.${EXT} || echo ""`;
+	TOC=`${YQ} --front-matter=extract '.TOC' ${DIR}/${FILENAME}.${EXT} || echo ""`;
 	if [ "${TOC}" == "null" ] || [ "${TOC}" == "" ] || [ "${TOC}" == "true" ]; then
 		TOC_FLAG=--toc
 	fi
 
 	PAGE_FILE=${DIR}/${FILENAME}.${EXT}
 
-	php ${TEMPLATE} ${PAGE_FILE} > source/tmp.html;
+	${PHP} ${TEMPLATE} ${PAGE_FILE} > source/tmp.html;
 
-	pandoc --data-dir=. -s -f markdown -t html \
+	${PANDOC} --data-dir=. -s -f markdown+yaml_metadata_block -t html \
 		${HIGHLIGHT_STYLE} ${TOC_FLAG} \
 		--template=source/tmp.html \
 		-o ${DEST} \
@@ -62,10 +89,16 @@ find ./pages -type f | while read FILENAME; do {
 		--css "/style.css" \
 		--css "/article.css" \
 		--css "/pandoc.css" \
-		-H "docs/heading.css" \
-		-H "docs/fonts.css" \
+		-H "${OUTPUT_DIR}/heading.css" \
+		-H "${OUTPUT_DIR}/fonts.css" \
 		${PAGE_FILE}
 
 }; done;
 
-php source/sitemap.php https://php-wasm.seanmorr.is > docs/sitemap.xml;
+echo -e "\e[33;4mCopying static assets...\e[0m"
+
+cp -rfv static/* ${OUTPUT_DIR}/;
+
+echo -e "\e[33;4mAssembing sitemap...\e[0m"
+
+${PHP} source/sitemap.php https://php-wasm.seanmorr.is > docs/sitemap.xml;
