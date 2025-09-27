@@ -131,7 +131,7 @@ $endif$
 		</ul>
 
 		<p class ="strong">About</p>
-		<p>&copy; 2024 Sean Morris | <a href="/LICENSE.html">License</a></p>
+		<p>&copy; 2024 - <?=date('Y');?> Sean Morris | <a href="/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
 		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap" width = "80" height = "15" alt = "xml sitemap badge"></a>
 	</footer>

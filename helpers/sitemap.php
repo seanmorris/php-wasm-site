@@ -20,7 +20,7 @@ foreach($directory as $entry)
 		continue;
 	}
 
-	if($filename === 'google0fd3cfdc440cb5a3.html')
+	if(preg_match('/^google[0-9a-f].html$/', $filename))
 	{
 		continue;
 	}

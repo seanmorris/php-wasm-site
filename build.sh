@@ -3,7 +3,7 @@
 set -euo pipefail
 
 OUTPUT_DIR=${OUTPUT_DIR:-"./docs"}
-TEMPLATE_DIR=${TEMPLATE_DIR:-"./source"}
+TEMPLATE_DIR=${TEMPLATE_DIR:-"./templates"}
 STATIC_DIR=${STATIC_DIR:-"./static"}
 PAGES_DIR=${PAGES_DIR:-"./pages"}
 
@@ -12,7 +12,7 @@ PANDOC=${PANDOC:-"pandoc"}
 YQ=${YQ:-"yq"}
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-PHP_FLAGS="-d display_errors=stderr -d include_path=\"${SCRIPT_DIR}/helpers\""
+PHP_FLAGS='-d display_errors=stderr -d include_path="'${SCRIPT_DIR}/helpers'"'
 
 # HIGHLIGHT_STYLE=
 # HIGHLIGHT_STYLE=pygments;
@@ -136,4 +136,4 @@ find "${PAGES_DIR}" -type f | while read -r PAGE_FILE; do {
 
 echo -e "\e[33;4mAssembing sitemap...\e[0m"
 echo -e "\e[37m  ${OUTPUT_DIR}/sitemap.xml...\e[0m"
-"${PHP}" ${PHP_FLAGS} "${TEMPLATE_DIR}/sitemap.php" "${BASE_URL}" > "${OUTPUT_DIR}/sitemap.xml"
+"${PHP}" ${PHP_FLAGS} "${SCRIPT_DIR}/helpers/sitemap.php" "${BASE_URL}" > "${OUTPUT_DIR}/sitemap.xml"
