@@ -22,12 +22,18 @@ function makeNavBar($path, $rootPath = NULL)
 
 		if(is_dir($pathname))
 		{
-			$frontmatter = yaml_parse(`yq --front-matter=extract $pathname/.fm.yaml 2>/dev/null|| echo ""`) ?? [];
+			$frontmatter = [];
+
+			if(file_exists($pathname . '/.fm.yaml'))
+			{
+				$frontmatter = yaml_parse(`yq --front-matter=extract $pathname/.fm.yaml 2>/dev/null|| echo ""`) ?? [];
+			}
+
 			$directories[] = (object)[ 'filename' => $filename, 'pathname' => $pathname, 'frontmatter' => $frontmatter ];
 			continue;
 		}
 
-		$frontmatter = yaml_parse(`yq --front-matter=extract $pathname 2>/dev/null|| echo ""`) ?? [];
+		$frontmatter = yaml_parse(`yq --front-matter=extract $pathname 2>/dev/null || echo ""`) ?? [];
 
 		if(!($frontmatter['leftBarLink'] ?? true))
 		{
@@ -83,10 +89,10 @@ function makeNavBar($path, $rootPath = NULL)
 		$frontmatter = $entry->frontmatter;
 
 		$title = $frontmatter['title'] ?? ucwords(preg_replace(['/\.md$/', '/-/'], ['',  ' '], $filename));
-		$linkPath = substr($pathname, strlen($rootPath));
+		$linkPath = preg_replace('/\.\w+$/', '.html', substr($pathname, strlen($rootPath)));
 
 		?><li>
-			<a href = "<?=preg_replace('/\.\w+$/', '.html', $linkPath);?>">
+			<a href = "<?=$linkPath;?>" <?= getenv('CURRENT_PAGE') === $linkPath ? 'class="active_link"' : ''; ?>>
 				<?=$title?>
 			</a>
 		</li><?php

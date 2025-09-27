@@ -119,9 +119,6 @@ document.addEventListener('DOMContentLoaded', event => {
 			: document.body.classList.remove('menu-open');
 	});
 
-	const currentLink = document.querySelector(`nav.main a[href="${location.pathname}"]`);
-	currentLink && currentLink.classList.add('current');
-
 	const codeBlocks = document.querySelectorAll(`div.sourceCode`);
 
 	for(const codeBlock of codeBlocks)

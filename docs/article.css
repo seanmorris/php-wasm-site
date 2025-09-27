@@ -57,9 +57,12 @@ section.below-fold nav.table-of-contents a {
 	/* padding-left: 0.5em; */
 }
 
-section.below-fold nav a:hover,
-section.below-fold nav summary:hover {
+section.below-fold nav a:hover{
 	color: #FFFFFFFF;
+}
+
+section.below-fold nav summary:hover {
+	color: #FFFFFFC0;
 }
 
 section.below-fold nav ul {
@@ -121,7 +124,7 @@ section.below-fold aside ul li::before {
 	color: #ebadf8;
 }
 
-nav.main a.current {
+nav.main a.active_link {
 	box-shadow: 1px 1px 1px #FFF4;
 	color: #F0F0F0;
 }

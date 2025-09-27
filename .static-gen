@@ -1,0 +1,27 @@
+TITLE_PREFIX=${TITLE_PREFIX:-"Php-Wasm"}
+BASE_URL=${BASE_URL:-"https://php-wasm.seanmorr.is"}
+STATIC_DIR=${STATIC_DIR:-"./static"}
+
+STYLES=$( cat <<-END
+	/style.css
+	/article.css
+	/pandoc.css
+END )
+
+INLINE_STYLES=$( cat <<-END
+	${STATIC_DIR}/heading.css
+	${STATIC_DIR}/fonts.css
+END )
+
+JAVASCRIPTS=$( cat <<-END
+	/main.js
+END )
+
+# HIGHLIGHT_STYLE=
+# HIGHLIGHT_STYLE=pygments;
+# HIGHLIGHT_STYLE=tango;
+# HIGHLIGHT_STYLE=espresso;
+# HIGHLIGHT_STYLE=kate;
+# HIGHLIGHT_STYLE=monochrome;
+# HIGHLIGHT_STYLE=breezedark;
+# HIGHLIGHT_STYLE=haddock;

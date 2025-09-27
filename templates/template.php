@@ -14,7 +14,6 @@ $leftBarShow = $frontmatter['leftBarShow'] ?? TRUE;
 	<title>$if(pagetitle)$${pagetitle}$else$${title}$endif$</title>
 	$endif$
 	$endif$
-	<script src = "/main.js"></script>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=800, user-scalable=yes" />
 $for(author-meta)$
@@ -60,6 +59,12 @@ $endfor$
 $if(math)$
 	$math$
 $endif$
+	<?php if(getEnv('JAVASCRIPTS')) foreach(explode(PHP_EOL, getEnv('JAVASCRIPTS')) as $javascript):?>
+	<script src = "<?=$javascript;?>"></script>
+	<?php endforeach; ?>
+	<?php if(getEnv('INLINE_JAVASCRIPTS')) foreach(explode(PHP_EOL, getEnv('INLINE_JAVASCRIPTS')) as $javascriptFile):?>
+	<script><?=file_get_contents($javascriptFile);?></script>
+	<?php endforeach; ?>
 </head>
 <body>
 	<section class = "heading">
@@ -144,5 +149,11 @@ $endif$
 	gascript.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=G-ZX6DJE9JCG');
 	setTimeout(() => document.head.appendChild(gascript), 0);
 </script>
+<?php if(getEnv('BODY_JAVASCRIPTS')) foreach(explode(PHP_EOL, getEnv('BODY_JAVASCRIPTS')) as $javascript):?>
+<script src = "<?=$javascript;?>"></script>
+<?php endforeach; ?>
+<?php if(getEnv('INLINE_BODY_JAVASCRIPTS')) foreach(explode(PHP_EOL, getEnv('INLINE_BODY_JAVASCRIPTS')) as $javascriptFile):?>
+<script><?=file_get_contents($javascriptFile);?></script>
+<?php endforeach; ?>
 </body>
 </html>
