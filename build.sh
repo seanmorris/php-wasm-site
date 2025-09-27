@@ -7,7 +7,7 @@ TEMPLATE_DIR=${TEMPLATE_DIR:-"./source"}
 STATIC_DIR=${STATIC_DIR:-"./static"}
 PAGES_DIR=${PAGES_DIR:-"./pages"}
 
-PHP=${PHP:-"php -d display_errors=stderr"}
+PHP=${PHP:-"php"}
 PANDOC=${PANDOC:-"pandoc"}
 YQ=${YQ:-"yq"}
 
@@ -19,6 +19,9 @@ YQ=${YQ:-"yq"}
 # HIGHLIGHT_STYLE=monochrome;
 # HIGHLIGHT_STYLE=breezedark;
 # HIGHLIGHT_STYLE=haddock;
+
+BASE_URL=${BASE_URL:-"https://php-wasm.seanmorr.is"}
+
 HIGHLIGHT_STYLE=${HIGHLIGHT_STYLE:-"zenburn"};
 
 if [ "${HIGHLIGHT_STYLE}" != "" ]; then
@@ -30,32 +33,32 @@ if [ "${TITLE_PREFIX}" != "" ]; then
 	TITLE_PREFIX="--title-prefix=${TITLE_PREFIX}"
 fi
 
-if ! command -v ${PHP} >/dev/null 2>&1; then
+if ! command -v "${PHP}" >/dev/null 2>&1; then
     echo "php is required."
     exit 1
 fi
 
-if ! command -v ${YQ} >/dev/null 2>&1; then
+if ! command -v "${YQ}" >/dev/null 2>&1; then
     echo "yq is required."
     exit 1
 fi
 
-if ! command -v ${PANDOC} >/dev/null 2>&1; then
+if ! command -v "${PANDOC}" >/dev/null 2>&1; then
     echo "pandoc is required."
     exit 1
 fi
 
 echo -e "\e[33;4mCopying static assets...\e[0m"
-cp -rfv ${STATIC_DIR}/* ${OUTPUT_DIR}/;
+cp -rfv "${STATIC_DIR}/"* "${OUTPUT_DIR}/";
 
 echo -e "\e[33;4mBuilding pages...\e[0m"
-find ${PAGES_DIR} -type f | while read PAGE_FILE; do {
+find "${PAGES_DIR}" -type f | while read -r PAGE_FILE; do {
 
-	DIR=$(dirname ${PAGE_FILE});
-	BASE=$(basename ${PAGE_FILE});
+	DIR=$(dirname "${PAGE_FILE}");
+	BASE=$(basename "${PAGE_FILE}");
 	EXT="${BASE##*.}"
 	PAGE_NAME="${BASE%.*}"
-	DEST=${OUTPUT_DIR}/${DIR#${PAGES_DIR}}/${PAGE_NAME}.html
+	DEST="${OUTPUT_DIR}/${DIR#"${PAGES_DIR}"}/${PAGE_NAME}.html"
 
 	# Skip directory-level frontmatter
 	if [ "${PAGE_NAME}.${EXT}" == ".fm.yaml" ]; then
@@ -72,11 +75,11 @@ find ${PAGES_DIR} -type f | while read PAGE_FILE; do {
 	fi
 
 	# Make sure the matching subdirectory exists
-	mkdir -p ${OUTPUT_DIR}/${DIR#${PAGES_DIR}};
+	mkdir -p "${OUTPUT_DIR}/${DIR#"${PAGES_DIR}"}"
 
 	# Determine the template
 	if [ "${HAS_FM}" == "1" ]; then
-		TEMPLATE=`${YQ} --front-matter=extract '.template' ${PAGE_FILE}`;
+		TEMPLATE=$("${YQ}" --front-matter=extract '.template' "${PAGE_FILE}")
 	else
 		TEMPLATE=${TEMPLATE_DIR}/template.php
 	fi
@@ -99,7 +102,7 @@ find ${PAGES_DIR} -type f | while read PAGE_FILE; do {
 	# Table of contents
 	TOC_FLAG=
 	if [ "${HAS_FM}" == "1" ]; then
-		TOC=`${YQ} --front-matter=extract '.TOC' ${PAGE_FILE}`;
+		TOC=$("${YQ}" --front-matter=extract '.TOC' "${PAGE_FILE}")
 		if [ "${TOC}" == "null" ] || [ "${TOC}" == "" ] || [ "${TOC}" == "true" ]; then
 			TOC_FLAG=--toc
 		fi
@@ -108,27 +111,26 @@ find ${PAGES_DIR} -type f | while read PAGE_FILE; do {
 	fi
 
 	# Build the final template
-	TMP_FILE=`mktemp`
-	PAGES_DIR=${PAGES_DIR} ${PHP} ${TEMPLATE} ${PAGE_FILE} > ${TMP_FILE};
+	TMP_FILE=$(mktemp)
+	PAGES_DIR="${PAGES_DIR}" "${PHP}" -d display_errors=stderr "${TEMPLATE}" "${PAGE_FILE}" > "${TMP_FILE}"
 
 	# Build the HTML
-	${PANDOC} --data-dir=. -s -f markdown -t html \
-		${HIGHLIGHT_STYLE} ${TOC_FLAG} \
-		--template=${TMP_FILE} \
-		-o ${DEST} \
-		${TITLE_PREFIX} \
+	"${PANDOC}" --data-dir=. -s -f markdown -t html \
+		${HIGHLIGHT_STYLE} ${TOC_FLAG} ${TITLE_PREFIX} \
+		--template="${TMP_FILE}" \
+		-o "${DEST}" \
 		--css "/style.css" \
 		--css "/article.css" \
 		--css "/pandoc.css" \
 		-H "${OUTPUT_DIR}/heading.css" \
 		-H "${OUTPUT_DIR}/fonts.css" \
-		${PAGE_FILE}
+		"${PAGE_FILE}"
 
 	#Cleanup
-	rm ${TMP_FILE}
+	rm "${TMP_FILE}"
 
 }; done;
 
 echo -e "\e[33;4mAssembing sitemap...\e[0m"
 echo -e "\e[37m  ${OUTPUT_DIR}/sitemap.xml...\e[0m"
-${PHP} ${TEMPLATE_DIR}/sitemap.php https://php-wasm.seanmorr.is > ${OUTPUT_DIR}/sitemap.xml;
+"${PHP}" -d display_errors=stderr "${TEMPLATE_DIR}/sitemap.php" "${BASE_URL}" > "${OUTPUT_DIR}/sitemap.xml"
