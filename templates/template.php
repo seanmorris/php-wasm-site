@@ -93,7 +93,7 @@ $endif$
 	<section class = "below-fold">
 		<div class = "page-rule">
 			<?php if($leftBarShow ?? true): ?>
-				<nav class = "main"><?php include 'source/navbar.php'; ?></nav>
+				<nav class = "main"><?php include 'navbar.php'; ?></nav>
 			<?php endif; ?>
 			<div class = "page-content">
 				<article $if(itemtype)$ itemscope itemtype = "https://${itemtype}" $endif$>

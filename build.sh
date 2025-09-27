@@ -11,6 +11,9 @@ PHP=${PHP:-"php"}
 PANDOC=${PANDOC:-"pandoc"}
 YQ=${YQ:-"yq"}
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+PHP_FLAGS="-d display_errors=stderr -d include_path=\"${SCRIPT_DIR}/helpers\""
+
 # HIGHLIGHT_STYLE=
 # HIGHLIGHT_STYLE=pygments;
 # HIGHLIGHT_STYLE=tango;
@@ -111,8 +114,8 @@ find "${PAGES_DIR}" -type f | while read -r PAGE_FILE; do {
 	fi
 
 	# Build the final template
-	TMP_FILE=$(mktemp)
-	PAGES_DIR="${PAGES_DIR}" "${PHP}" -d display_errors=stderr "${TEMPLATE}" "${PAGE_FILE}" > "${TMP_FILE}"
+	TMP_FILE=$(uuid).html
+	PAGES_DIR="${PAGES_DIR}" "${PHP}" ${PHP_FLAGS} "${TEMPLATE}" "${PAGE_FILE}" > "${TMP_FILE}"
 
 	# Build the HTML
 	"${PANDOC}" --data-dir=. -s -f markdown -t html \
@@ -133,4 +136,4 @@ find "${PAGES_DIR}" -type f | while read -r PAGE_FILE; do {
 
 echo -e "\e[33;4mAssembing sitemap...\e[0m"
 echo -e "\e[37m  ${OUTPUT_DIR}/sitemap.xml...\e[0m"
-"${PHP}" -d display_errors=stderr "${TEMPLATE_DIR}/sitemap.php" "${BASE_URL}" > "${OUTPUT_DIR}/sitemap.xml"
+"${PHP}" ${PHP_FLAGS} "${TEMPLATE_DIR}/sitemap.php" "${BASE_URL}" > "${OUTPUT_DIR}/sitemap.xml"
