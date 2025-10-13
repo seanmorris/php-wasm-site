@@ -2,51 +2,78 @@
 title: Using PHP Extensions
 weight: -1000
 ---
-
 # Using PHP Extensions
 
-There are two ways to load extensions at runtime, using the `dl()` function or `php.ini`. The following code will attempt to load the .so files from the same directory the main WASM binary was loaded from, unless further configuration is provided.
+PHP extensions are provided as ESM modules.
+
+You can pass an array as the `sharedLibs` argument to the constructor from Javascript to automatically generate an ini file that loads your extensions.
+
+```javascript
+import libxml from 'php-wasm-libxml';
+import dom from 'php-wasm-dom';
+
+const php = new PhpWeb({sharedLibs: [
+	libxml,
+	dom,
+]});
+```
+
+You can also use the `dynamicLibs` argument to get similar behavior **without** automatically loading the extension. A PHP script can call the `dl()` function to dynamically load the extension at runtime:
+
+```javascript
+import libxml from 'php-wasm-libxml';
+import dom from 'php-wasm-dom';
+
+const php = new PhpWeb({dynamicLibs: [
+	libxml,
+	dom,
+]});
+```
 
 ```php
 <?php
-dl('php-8.3-xml.so');
+// Load the extension at runtime
 dl('php-8.3-dom.so');
 ```
 
-You can also pass an array as the `extensions` argument to the constructor from Javascript to automatically generate an ini file that loads your extensions.
+## Dynamic Imports for Extensions
+
+You can also load extensions modules dynamically:
 
 ```javascript
+// This will load both sqlite.so & php8.x-sqlite.so:
 const php = new PhpWeb({sharedLibs: [
-	`php8.3-xml.so`,
-	`php8.3-dom.so`,
+	await import('https://unpkg.com/php-wasm-sqlite')
 ]});
 ```
 
-The class used to load PHP (`PhpWeb` here) implements a phpVersion property to ensure libs can be loaded for any compatible version:
+Unfortunately, this notation is not available for Service Workers, as they do not yet support dynamic `imports()`. Hopefully this will change soon.
+
+## Loading extensions manually
+
+
+If you're in an environment where ESM is unavailable, you can provide the extensions manually.
+
+
+The first codeblock is shorthand for the second. Passing `ini: true` will automatically load the extension via `/php.ini`, passing `ini: false` will wait for a call to `dl()` to do the lookup.
 
 ```javascript
-const php = new PhpWeb({sharedLibs: [
-	`php${PhpWeb.phpVersion}-xml.so`,
-	`php${PhpWeb.phpVersion}-dom.so`,
-]});
+const php = new PhpWeb({sharedLibs: [ await import('https://unpkg.com/php-wasm-sqlite') ]});
 ```
 
-## Dynamic Extensions from Remote Servers
-
-You can also load extensions from remote servers with URLs:
-
-```javascript
-const php = new PhpWeb({sharedLibs: [`https://unpkg.com/php-wasm-phar/php8.3-phar.so`]});
-```
-
-The above is shorthand for the following code. Passing `ini: true` will automatically load the extension via `/php.ini`, passing `ini: false` will wait for a call to `dl()` to do the lookup.
+Supporting libraries should **not** be loaed via `ini`.
 
 ```javascript
 const php = new PhpWeb({sharedLibs: [
 	{
 		name: `php8.3-phar.so`,
-		url:  `https://unpkg.com/php-wasm-phar/php8.3-phar.so`,
+		url:  `https://unpkg.com/php-wasm-sqlite/php8.3-sqlite.so`,
 		ini:  true,
+	},
+	{	
+		name: 'sqlite.so'
+		url: 'https://unpkg.com/php-wasm-sqlite/sqlite.so',
+		ini: false 
 	}
 ]});
 ```
@@ -70,83 +97,66 @@ const php = new PhpWeb({sharedLibs: [
 ]});
 ```
 
-## Loading Dynamic Extensions as JS Modules:
-
-Dynamic extensions can be loaded as modules.
-
-So long as the main file of the module defines the `getLibs` and `getFiles` methods, extensions may be loaded like so:
-
-```javascript
-new PhpNode({sharedLibs:[ await import('php-wasm-intl') ]})
-```
-
-Dynamic extensions can also be loaded as modules from any static HTTP server with an ESM directory structure.
-
-```javascript
-// This will load both sqlite.so & php8.x-sqlite.so:
-const php = new PhpWeb({sharedLibs: [ await import('https://cdn.jsdelivr.net/npm/php-wasm-sqlite') ]});
-```
-
-Unfortunately, this notation is not available for Service Workers, as they do not yet support dynamic `imports()`. Hopefully this will change soon.
-
 ## Extension List
 
 The following extensions may be loaded at runtime. This allows the shared extensions and their dependencies to be cached, reused, and selected à la carte for each application
 
 ### gd
 
-<https://www.npmjs.com/package/php-wasm-gd>
+[https://www.npmjs.com/package/php-wasm-gd](https://www.npmjs.com/package/php-wasm-gd)
 
 ### iconv
 
-<https://www.npmjs.com/package/php-wasm-iconv>
+[https://www.npmjs.com/package/php-wasm-iconv](https://www.npmjs.com/package/php-wasm-iconv)
 
 ### intl
 
-<https://www.npmjs.com/package/php-wasm-intl>
+[https://www.npmjs.com/package/php-wasm-intl](https://www.npmjs.com/package/php-wasm-intl)
+
+### libxml
+
+[https://www.npmjs.com/package/php-wasm-libxml](https://www.npmjs.com/package/php-wasm-libxml)
 
 ### xml
 
-<https://www.npmjs.com/package/php-wasm-libxml>
+[https://www.npmjs.com/package/php-wasm-xml](https://www.npmjs.com/package/php-wasm-xml)
 
 ### dom
 
-<https://www.npmjs.com/package/php-wasm-libxml>
+[https://www.npmjs.com/package/php-wasm-dom](https://www.npmjs.com/package/php-wasm-dom)
 
 ### simplexml
 
-<https://www.npmjs.com/package/php-wasm-libxml>
+[https://www.npmjs.com/package/php-wasm-simplexml](https://www.npmjs.com/package/php-wasm-simplexml)
 
 ### yaml
 
-<https://www.npmjs.com/package/php-wasm-libyaml>
+[https://www.npmjs.com/package/php-wasm-libyaml](https://www.npmjs.com/package/php-wasm-libyaml)
 
 ### zip
 
-<https://www.npmjs.com/package/php-wasm-libzip>
+[https://www.npmjs.com/package/php-wasm-libzip](https://www.npmjs.com/package/php-wasm-libzip)
 
 ### mbstring
 
-<https://www.npmjs.com/package/php-wasm-mbstring>
+[https://www.npmjs.com/package/php-wasm-mbstring](https://www.npmjs.com/package/php-wasm-mbstring)
 
 ### openssl
 
-<https://www.npmjs.com/package/php-wasm-openssl>
+[https://www.npmjs.com/package/php-wasm-openssl](https://www.npmjs.com/package/php-wasm-openssl)
 
 ### phar
 
-<https://www.npmjs.com/package/php-wasm-phar>
+[https://www.npmjs.com/package/php-wasm-phar](https://www.npmjs.com/package/php-wasm-phar)
 
 ### sqlite
 
-<https://www.npmjs.com/package/php-wasm-sqlite>
+[https://www.npmjs.com/package/php-wasm-sqlite](https://www.npmjs.com/package/php-wasm-sqlite)
 
 ### pdo-sqlite
 
-<https://www.npmjs.com/package/php-wasm-sqlite>
+[https://www.npmjs.com/package/php-wasm-sqlite](https://www.npmjs.com/package/php-wasm-sqlite)
 
 ### zlib
 
-<https://www.npmjs.com/package/php-wasm-zlib>
-
-
+[https://www.npmjs.com/package/php-wasm-zlib](https://www.npmjs.com/package/php-wasm-zlib)

@@ -67,6 +67,33 @@ $endif$
 	<?php endforeach; ?>
 </head>
 <body>
+	<div class = "nag-bar" id = "nag-bar">
+		<div class = "page-rule">
+			<div class = "row">
+				<div class = "prose">
+					<p><strong>I am giving up my bed for one night.</strong></p>
+
+					<p>My Sleep Out helps youth facing homelessness find safe shelter and loving care at Covenant House. That care includes essential services like education, job training, medical care, mental health and substance use counseling, and legal aid — everything they need to build independent, sustainable futures.</p>
+
+					<p>By supporting my Sleep Out, you are supporting the dreams of young people overcoming homelessness.</p>
+
+					<p>Together, we are working towards a future where every young person has a safe place to sleep.</p>
+
+					<p>Thank you.</p>
+				</div>
+				<div class = "col center">
+					<a href = "https://www.sleepout.org/participants/62915">
+						<span class = "button">DONATE NOW</span>
+					</a>
+					<a href = "https://www.sleepout.org/participants/62915">
+						<img src = "https://camo.githubusercontent.com/9b729dba14577310713521176919420b435a9de7f2af8281b63e85fc60b2d61c/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f64796e616d69632f6a736f6e3f75726c3d68747470732533412532462532467777772e736c6565706f75742e6f7267253246617069253246312e332532467061727469636970616e747325324636323931352533465f253344313736303033393031373432382671756572793d2532342e73756d446f6e6174696f6e73267072656669783d253234267375666669783d253230526169736564267374796c653d666f722d7468652d6261646765266c6162656c3d536c6565702532304f75742533412532304e5943266c696e6b3d68747470732533412532462532467777772e736c6565706f75742e6f72672532467061727469636970616e74732532463632393135">
+					</a>
+				</div>
+			</div>
+			<div class = "close-button" id = "close-nag"></div>
+			<div class = "open-button" id = "open-nag"></div>
+		</div>
+	</div>
 	<section class = "heading">
 		<div class = "page-rule">
 			<nav>
@@ -84,7 +111,7 @@ $endif$
 						<a href = "https://github.com/seanmorris/php-wasm"><img src = "/github-icon.png" alt = "Github icon" width = "37" height = "37" ></a>
 					</li>
 				</ul>
-				<a href = "https://github.com/sponsors/seanmorris" class = "cta button">Donate</a>
+				<a href = "https://github.com/sponsors/seanmorris" class = "cta button">Sponsor</a>
 				<div class = "hamburger-button" id = "burgerButton" data-open = "false">
 					<div class = "burger-bar"></div>
 					<div class = "burger-bar"></div>

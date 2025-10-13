@@ -19,227 +19,265 @@
 	<link rel="dns-prefetch" href="https://github.com/" />
 	<link rel="dns-prefetch" href="https://seanmorris.github.io/" />
 	<style>
-		code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-  .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+		/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+/* The extra [class] is a hack that increases specificity enough to
+   override a similar rule in reveal.js */
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  font-size: inherit;
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
 	</style>
 	<link rel="stylesheet" href="/style.css" />
 	<link rel="stylesheet" href="/article.css" />
 	<link rel="stylesheet" href="/pandoc.css" />
 	<style>
 	section.heading {
- 	background-color: #220359;
- 	background-image: url('/splash-wide.webp');
- 	background-size: cover;
- 	background-position: center top;
- 	padding: 2rem;
- }
+	background-color: #220359;
+	background-image: url('/splash-wide.webp');
+	background-size: cover;
+	background-position: center top;
+	padding: 2rem;
+}
 
- section.heading nav {
- 	/* justify-content: space-between; */
- 	max-width: 1800px;
- 	margin: auto;
- }
+section.heading nav {
+	/* justify-content: space-between; */
+	max-width: 1800px;
+	margin: auto;
+}
 
- section.heading nav .spacer{
- 	flex: 1;
- }
+section.heading nav .spacer{
+	flex: 1;
+}
 
- section.heading nav,
- section.heading nav ul {
- 	display: flex;
- 	flex-direction: row;
- }
+section.heading nav,
+section.heading nav ul {
+	display: flex;
+	flex-direction: row;
+}
 
- section.heading nav ul {
- 	align-items: center;
- 	list-style: none;
- 	margin: 0;
- }
+section.heading nav ul {
+	align-items: center;
+	list-style: none;
+	margin: 0;
+}
 
- section.heading nav ul li {
- 	min-height: 80px;
- 	display: flex;
- 	align-items: center;
- }
+section.heading nav ul li {
+	min-height: 80px;
+	display: flex;
+	align-items: center;
+}
 
- section.heading nav ul a {
- 	padding: 1rem;
- 	display: inline-block;
- 	color: inherit;
- 	text-decoration: inherit;
- 	font-weight: bold;
- }
+section.heading nav ul a {
+	padding: 1rem;
+	display: inline-block;
+	color: inherit;
+	text-decoration: inherit;
+	font-weight: bold;
+}
 
- section.heading nav ul a img {
- 	display: inline;
- 	vertical-align: middle;
- }
+section.heading nav ul a img {
+	display: inline;
+	vertical-align: middle;
+}
 
- section.heading nav ul {
- 	align-items: center;
- 	list-style: none;
- 	margin: 0;
- }
+section.heading nav ul {
+	align-items: center;
+	list-style: none;
+	margin: 0;
+}
 
- section.heading nav ul li {
- 	min-height: 80px;
- 	display: flex;
- 	align-items: center;
- }
+section.heading nav ul li {
+	min-height: 80px;
+	display: flex;
+	align-items: center;
+}
 
- section.heading nav ul a {
- 	padding: 1rem;
- 	display: inline-block;
- 	color: inherit;
- 	text-decoration: inherit;
- 	font-weight: bold;
- }
+section.heading nav ul a {
+	padding: 1rem;
+	display: inline-block;
+	color: inherit;
+	text-decoration: inherit;
+	font-weight: bold;
+}
 
- section.heading nav ul a img {
- 	display: inline;
- 	vertical-align: middle;
- }
+section.heading nav ul a img {
+	display: inline;
+	vertical-align: middle;
+}
 
- section.heading nav a.cta.button {
- 	border-width: 1px;
- 	border-style: solid;
- 	border-color: white;
- 	box-shadow: 0 0 0.5rem 0.25rem #3601a9;
- 	font-style: italic;
- 	min-width: 5rem;
- 	display: inline-block;
- 	padding: 0.75rem;
- 	padding-left: 0rem;
- 	padding-right: 0rem;
- 	transition: box-shadow 0.125s ease-in;
- 	max-height: 24px;
- }
+section.heading nav a.cta.button {
+	border-width: 1px;
+	border-style: solid;
+	border-color: white;
+	box-shadow: 0 0 0.5rem 0.25rem #3601a9;
+	font-style: italic;
+	min-width: 5rem;
+	display: inline-block;
+	padding: 0.75rem;
+	padding-left: 0rem;
+	padding-right: 0rem;
+	transition: box-shadow 0.125s ease-in;
+	max-height: 24px;
+}
 
- section.heading nav a.cta.button:hover {
- 	box-shadow: 0 0 0.25rem 0.125rem #8216de;
- 	transition: box-shadow 0.125s ease-out;
- }
+section.heading nav a.cta.button:hover {
+	box-shadow: 0 0 0.25rem 0.125rem #8216de;
+	transition: box-shadow 0.125s ease-out;
+}
 
- section.heading nav,
- section.heading nav ul {
- 	display: flex;
- 	flex-direction: row;
- }
+section.heading nav,
+section.heading nav ul {
+	display: flex;
+	flex-direction: row;
+}
 
- section.heading div.hero {
- 	display: flex;
- 	flex-direction: column;
- 	align-items: center;
- }
+section.heading div.hero {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
- div.hero a.button {
- 	margin: 2rem;
- }
+div.hero a.button {
+	margin: 2rem;
+}
 
- .hero h1 {
- 	font-family: 'Corbel', sans-serif;
- 	font-weight: bold;
- 	font-size: 68pt;
- 	margin-top: 4rem;
- 	margin-bottom: 2rem;
- 	text-align: center;
- }
+.hero h1 {
+	font-family: 'Corbel', sans-serif;
+	font-weight: bold;
+	font-size: 68pt;
+	margin-top: 4rem;
+	margin-bottom: 2rem;
+	text-align: center;
+}
 
- .hero p {
- 	margin: 1rem;
- 	max-width: 40rem;
- 	text-align: center;
- 	font-weight: bold;
- }
+.hero p {
+	margin: 1rem;
+	max-width: 40rem;
+	text-align: center;
+	font-weight: bold;
+}
 
- .hero a.cta.button {
- 	background: linear-gradient(0.15turn, #3601a9, #8216de);
- 	padding: 1.25rem;
- 	font-weight: bold;
- }
+.hero a.cta.button {
+	background: linear-gradient(0.15turn, #3601a9, #8216de);
+	padding: 1.25rem;
+	font-weight: bold;
+}
 
- .hero a.cta.button:hover {
- 	background: linear-gradient(0.10turn, #3601a9, #8216de);
- }
+.hero a.cta.button:hover {
+	background: linear-gradient(0.10turn, #3601a9, #8216de);
+}
 
- .sub-hero ul {
- 	list-style: none;
- 	padding: 0;
- }
+.sub-hero ul {
+	list-style: none;
+	padding: 0;
+}
 
- .sub-hero ul li:before {
- 	content: "\B7";
- 	padding-right: 0.75rem;
- }
+.sub-hero ul li:before {
+	content: "\B7";
+	padding-right: 0.75rem;
+}
 
- .hero > iframe {
- 	width: 100%;
- 	min-height: 30rem;
- 	margin-top: 2rem;
- 	box-sizing: border-box;
- 	border: none;
- }
+.hero > iframe {
+	width: 100%;
+	min-height: 30rem;
+	margin-top: 2rem;
+	box-sizing: border-box;
+	border: none;
+}
 
 
- iframe.page-demo {
- 	width: 100%;
- 	box-sizing: border-box;
- 	border: none;
- 	min-height: 80vh;
- }
+iframe.page-demo {
+	width: 100%;
+	box-sizing: border-box;
+	border: none;
+	min-height: 80vh;
+}
 	@font-face {
- 	font-family: 'Anonymous Pro';
- 	src: url('/anonymous_pro.woff2') format('woff2'),
- 		url('/anonymous_pro.woff') format('woff');
- 	font-weight: normal;
- 	font-style: normal;
- 	font-display: swap;
+	font-family: 'Anonymous Pro';
+	src: url('/anonymous_pro.woff2') format('woff2'),
+		url('/anonymous_pro.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
 
- }
- @font-face {
- 	font-family: 'NotoSans';
- 	src: url('/notosans-regular.woff2') format('woff2'),
- 		url('/notosans-regular.woff') format('woff');
- 	font-weight: normal;
- 	font-style: normal;
- 	font-display: swap;
- }
+}
+@font-face {
+	font-family: 'NotoSans';
+	src: url('/notosans-regular.woff2') format('woff2'),
+		url('/notosans-regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
 
- @font-face {
- 	font-family: 'NotoSans';
- 	src: url('/notosans-italic.woff2') format('woff2'),
- 		url('/notosans-italic.woff') format('woff');
- 	font-weight: normal;
- 	font-style: italic;
- 	font-display: swap;
- }
+@font-face {
+	font-family: 'NotoSans';
+	src: url('/notosans-italic.woff2') format('woff2'),
+		url('/notosans-italic.woff') format('woff');
+	font-weight: normal;
+	font-style: italic;
+	font-display: swap;
+}
 
- @font-face {
- 	font-family: 'NotoSans';
- 	src: url('/notosans-bold.woff2') format('woff2'),
- 		url('/notosans-bold.woff') format('woff');
- 	font-weight: bold;
- 	font-style: normal;
- 	font-display: swap;
- }
+@font-face {
+	font-family: 'NotoSans';
+	src: url('/notosans-bold.woff2') format('woff2'),
+		url('/notosans-bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
 
- @font-face {
- 	font-family: 'Corbel';
- 	src: url('/corbelb.woff2') format('woff2'),
- 		url('/corbelb.woff') format('woff');
- 	font-weight: bold;
- 	font-style: normal;
- 	font-display: swap;
- }
+@font-face {
+	font-family: 'Corbel';
+	src: url('/corbelb.woff2') format('woff2'),
+		url('/corbelb.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
 	</style>
 		<script src = "/main.js"></script>
 		</head>
 <body>
+	<div class = "nag-bar" id = "nag-bar">
+		<div class = "page-rule">
+			<div class = "row">
+				<div class = "prose">
+					<p><strong>I am giving up my bed for one night.</strong></p>
+
+					<p>My Sleep Out helps youth facing homelessness find safe shelter and loving care at Covenant House. That care includes essential services like education, job training, medical care, mental health and substance use counseling, and legal aid — everything they need to build independent, sustainable futures.</p>
+
+					<p>By supporting my Sleep Out, you are supporting the dreams of young people overcoming homelessness.</p>
+
+					<p>Together, we are working towards a future where every young person has a safe place to sleep.</p>
+
+					<p>Thank you.</p>
+				</div>
+				<div class = "col center">
+					<a href = "https://www.sleepout.org/participants/62915">
+						<span class = "button">DONATE NOW</span>
+					</a>
+					<a href = "https://www.sleepout.org/participants/62915">
+						<img src = "https://camo.githubusercontent.com/9b729dba14577310713521176919420b435a9de7f2af8281b63e85fc60b2d61c/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f64796e616d69632f6a736f6e3f75726c3d68747470732533412532462532467777772e736c6565706f75742e6f7267253246617069253246312e332532467061727469636970616e747325324636323931352533465f253344313736303033393031373432382671756572793d2532342e73756d446f6e6174696f6e73267072656669783d253234267375666669783d253230526169736564267374796c653d666f722d7468652d6261646765266c6162656c3d536c6565702532304f75742533412532304e5943266c696e6b3d68747470732533412532462532467777772e736c6565706f75742e6f72672532467061727469636970616e74732532463632393135">
+					</a>
+				</div>
+			</div>
+			<div class = "close-button" id = "close-nag"></div>
+			<div class = "open-button" id = "open-nag"></div>
+		</div>
+	</div>
 	<section class = "heading">
 		<div class = "page-rule">
 			<nav>
@@ -257,7 +295,7 @@
 						<a href = "https://github.com/seanmorris/php-wasm"><img src = "/github-icon.png" alt = "Github icon" width = "37" height = "37" ></a>
 					</li>
 				</ul>
-				<a href = "https://github.com/sponsors/seanmorris" class = "cta button">Donate</a>
+				<a href = "https://github.com/sponsors/seanmorris" class = "cta button">Sponsor</a>
 				<div class = "hamburger-button" id = "burgerButton" data-open = "false">
 					<div class = "burger-bar"></div>
 					<div class = "burger-bar"></div>
@@ -343,137 +381,140 @@
 						<div class = "page-content">
 				<article >
 								<h1 id="php-wasm">php-wasm</h1>
-        <p>Changes</p>
-        <h2 id="v0.0.9---aiming-for-the-github-stars">v0.0.9 - Aiming
-        for the (GitHub) Stars</h2>
-        <ul>
-        <li>Adding PHP-CGI support!</li>
-        <li>Runtime extension loading!</li>
-        <li>libicu, freetype, zlib, gd, libpng, libjpeg, openssl, &amp;
-        phar support.</li>
-        <li>php-wasm, php-cgi-wasm, &amp; php-wasm-builder are now
-        separate packages.</li>
-        <li>Vrzno now facilitates url fopen via the fetch() api.</li>
-        <li>pdo_cfd1 is now a separate extension from Vrzno.</li>
-        <li>pdo_pglite adds local Postgres support.</li>
-        <li>SQLite is now using version 3.46.</li>
-        <li>Demos for CodeIgniter, CakePHP, Laravel &amp; Laminas.</li>
-        <li>Drupal &amp; all other demos now use standard build + zip
-        install.</li>
-        <li>Modules are now webpack-compatible out of the box.</li>
-        <li>Exposing FS methods w/queueing &amp; locking to sync files
-        between tabs &amp; workers.</li>
-        <li>Fixed the bug with POST requests under Firefox.</li>
-        <li>Adding support for PHP 8.3.7</li>
-        <li>Automatic CI testing for PHP 8.0, 8.1, 8.2 &amp; 8.3.</li>
-        </ul>
-        <h2 id="v0.0.8---preparing-for-lift-off">v0.0.8 - Preparing for
-        Lift-off</h2>
-        <ul>
-        <li>Adding ESM &amp; CDN Module support!</li>
-        <li>Adding stdin.</li>
-        <li>Buffering stdout/stderr in javascript.</li>
-        <li>Fixing <code>&lt;script type = "text/php"&gt;</code>
-        support.</li>
-        <li>Adding fetch support for <code>src</code> on above.</li>
-        <li>Adding support for libzip, iconv, &amp; html-tidy</li>
-        <li>Adding support for NodeFS &amp; IDBFS.</li>
-        <li>Custom builds.</li>
-        <li>Updating PHP to 8.2.11</li>
-        <li>Building with Emscripten 3.1.43</li>
-        <li>Modularizing dependencies.</li>
-        <li>Compressing assets.</li>
-        </ul>
-        <h2 id="remodermizing">0.0.7 - Remodermizing</h2>
-        <ul>
-        <li>Updating PHP to 8.2.4</li>
-        <li>Updating SQLite to 3.41</li>
-        <li>Updating Drupal to 7.95</li>
-        <li>Correcting hiccups in the build process</li>
-        </ul>
-        <h2 id="ease">0.0.6 - Ease</h2>
-        <ul>
-        <li>Correcting hiccups in the build process</li>
-        </ul>
-        <h2 id="alignment">0.0.5 - Alignment</h2>
-        <ul>
-        <li>Ensuring npm &amp; github have matching tags</li>
-        <li>Ensuring Drupal re-builds correctly with no nested duplicate
-        directory</li>
-        <li>Removing some extraneous files from example application</li>
-        <li>Separating php-web-drupal from php-web for real this
-        time</li>
-        <li>Publishing php-web-drupal to npm</li>
-        </ul>
-        <h2 id="revisiting">0.0.4 - Revisiting</h2>
-        <ul>
-        <li>Separated Drupal from standard php-web to save
-        bandwidth</li>
-        <li>Running the build automatically on push in CircleCI</li>
-        <li>Getting the automatic build working for Drupal</li>
-        </ul>
-        <h2 id="new-horizons">0.0.3 - New Horizons</h2>
-        <ul>
-        <li>php.exec() may be used to evaluate a single php expression
-        &amp; return its result.</li>
-        <li>php may now access &amp; traverse the dom and access
-        nodes.</li>
-        <li>The querySelector method is available on dom nodes.</li>
-        <li>addEventListener/removeEventListener is also available on
-        dom nodes.</li>
-        <li>sqlite3 v3.33 is now statically linked to php &amp; the
-        sqlite3 extension is enabled.</li>
-        <li>The following extensions are now enabled: sqlite3, pdo,
-        &amp; pdo-sqlite.</li>
-        <li>Totally revamped build process that tracks build artifact
-        relationships.</li>
-        <li>Builds for web, node, shell, worker &amp; webview.</li>
-        </ul>
-        <h2 id="gaining-momentum">0.0.2 - Gaining Momentum</h2>
-        <ul>
-        <li>php objects now have persistent memory, may be cleared with
-        <code>php.refresh();</code>.</li>
-        <li>php code may now access Javascript (and thus, the DOM) via
-        the <a href="https://github.com/seanmorris/vrzno">VRZNO</a>
-        project. The extension is preinstalled with php-wasm.</li>
-        <li><code>&lt;script type = "text/php"&gt;</code> tags are now
-        supported, both inline and with <code>src=...</code>. Both
-        require opening tags as of now.</li>
-        <li>Building of object files is now separated from building of
-        binary files so multiple binaries may be built from the same set
-        of objects.</li>
-        <li>License changed from MIT to Apache-2.0, which has similar
-        terms, but USERS must have visibility of the attribution, rather
-        that just DEVELOPERS.</li>
-        <li>Build dependencies are now expressed in the makefile</li>
-        <li>Project can be built in its entirety by running
-        <code>make</code>.</li>
-        <li>Ensuring newlines in PHP output are respected.</li>
-        </ul>
-        <h2 id="humble-beginnings">0.0.1 - Humble Beginnings</h2>
-        <ul>
-        <li>Event-oriented interface added to php object.</li>
-        <li>Buildscript was slightly improved with a makefile</li>
-        </ul>
+<p>Changes</p>
+<h2 id="v0.0.9---aiming-for-the-github-stars">v0.0.9 - Aiming for the
+(GitHub) Stars</h2>
+<ul>
+<li>Adding PHP-CGI support!</li>
+<li>Runtime extension loading!</li>
+<li>libicu, freetype, zlib, gd, libpng, libjpeg, openssl, &amp; phar
+support.</li>
+<li>php-wasm, php-cgi-wasm, &amp; php-wasm-builder are now separate
+packages.</li>
+<li>Vrzno now facilitates url fopen via the fetch() api.</li>
+<li>pdo_cfd1 is now a separate extension from Vrzno.</li>
+<li>pdo_pglite adds local Postgres support.</li>
+<li>SQLite is now using version 3.46.</li>
+<li>Demos for CodeIgniter, CakePHP, Laravel &amp; Laminas.</li>
+<li>Drupal &amp; all other demos now use standard build + zip
+install.</li>
+<li>Modules are now webpack-compatible out of the box.</li>
+<li>Exposing FS methods w/queueing &amp; locking to sync files between
+tabs &amp; workers.</li>
+<li>Fixed the bug with POST requests under Firefox.</li>
+<li>Adding support for PHP 8.3.7</li>
+<li>Automatic CI testing for PHP 8.0, 8.1, 8.2 &amp; 8.3.</li>
+</ul>
+<h2 id="v0.0.8---preparing-for-lift-off">v0.0.8 - Preparing for
+Lift-off</h2>
+<ul>
+<li>Adding ESM &amp; CDN Module support!</li>
+<li>Adding stdin.</li>
+<li>Buffering stdout/stderr in javascript.</li>
+<li>Fixing <code>&lt;script type = "text/php"&gt;</code> support.</li>
+<li>Adding fetch support for <code>src</code> on above.</li>
+<li>Adding support for libzip, iconv, &amp; html-tidy</li>
+<li>Adding support for NodeFS &amp; IDBFS.</li>
+<li>Custom builds.</li>
+<li>Updating PHP to 8.2.11</li>
+<li>Building with Emscripten 3.1.43</li>
+<li>Modularizing dependencies.</li>
+<li>Compressing assets.</li>
+</ul>
+<h2 id="remodermizing">0.0.7 - Remodermizing</h2>
+<ul>
+<li>Updating PHP to 8.2.4</li>
+<li>Updating SQLite to 3.41</li>
+<li>Updating Drupal to 7.95</li>
+<li>Correcting hiccups in the build process</li>
+</ul>
+<h2 id="ease">0.0.6 - Ease</h2>
+<ul>
+<li>Correcting hiccups in the build process</li>
+</ul>
+<h2 id="alignment">0.0.5 - Alignment</h2>
+<ul>
+<li>Ensuring npm &amp; github have matching tags</li>
+<li>Ensuring Drupal re-builds correctly with no nested duplicate
+directory</li>
+<li>Removing some extraneous files from example application</li>
+<li>Separating php-web-drupal from php-web for real this time</li>
+<li>Publishing php-web-drupal to npm</li>
+</ul>
+<h2 id="revisiting">0.0.4 - Revisiting</h2>
+<ul>
+<li>Separated Drupal from standard php-web to save bandwidth</li>
+<li>Running the build automatically on push in CircleCI</li>
+<li>Getting the automatic build working for Drupal</li>
+</ul>
+<h2 id="new-horizons">0.0.3 - New Horizons</h2>
+<ul>
+<li>php.exec() may be used to evaluate a single php expression &amp;
+return its result.</li>
+<li>php may now access &amp; traverse the dom and access nodes.</li>
+<li>The querySelector method is available on dom nodes.</li>
+<li>addEventListener/removeEventListener is also available on dom
+nodes.</li>
+<li>sqlite3 v3.33 is now statically linked to php &amp; the sqlite3
+extension is enabled.</li>
+<li>The following extensions are now enabled: sqlite3, pdo, &amp;
+pdo-sqlite.</li>
+<li>Totally revamped build process that tracks build artifact
+relationships.</li>
+<li>Builds for web, node, shell, worker &amp; webview.</li>
+</ul>
+<h2 id="gaining-momentum">0.0.2 - Gaining Momentum</h2>
+<ul>
+<li>php objects now have persistent memory, may be cleared with
+<code>php.refresh();</code>.</li>
+<li>php code may now access Javascript (and thus, the DOM) via the <a
+href="https://github.com/seanmorris/vrzno">VRZNO</a> project. The
+extension is preinstalled with php-wasm.</li>
+<li><code>&lt;script type = "text/php"&gt;</code> tags are now
+supported, both inline and with <code>src=...</code>. Both require
+opening tags as of now.</li>
+<li>Building of object files is now separated from building of binary
+files so multiple binaries may be built from the same set of
+objects.</li>
+<li>License changed from MIT to Apache-2.0, which has similar terms, but
+USERS must have visibility of the attribution, rather that just
+DEVELOPERS.</li>
+<li>Build dependencies are now expressed in the makefile</li>
+<li>Project can be built in its entirety by running
+<code>make</code>.</li>
+<li>Ensuring newlines in PHP output are respected.</li>
+</ul>
+<h2 id="humble-beginnings">0.0.1 - Humble Beginnings</h2>
+<ul>
+<li>Event-oriented interface added to php object.</li>
+<li>Buildscript was slightly improved with a makefile</li>
+</ul>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>
 					<ul>
-     <li><a href="#php-wasm">php-wasm</a>
-     <ul>
-     <li><a href="#v0.0.9---aiming-for-the-github-stars">v0.0.9 - Aiming
-     for the (GitHub) Stars</a></li>
-     <li><a href="#v0.0.8---preparing-for-lift-off">v0.0.8 - Preparing
-     for Lift-off</a></li>
-     <li><a href="#remodermizing">0.0.7 - Remodermizing</a></li>
-     <li><a href="#ease">0.0.6 - Ease</a></li>
-     <li><a href="#alignment">0.0.5 - Alignment</a></li>
-     <li><a href="#revisiting">0.0.4 - Revisiting</a></li>
-     <li><a href="#new-horizons">0.0.3 - New Horizons</a></li>
-     <li><a href="#gaining-momentum">0.0.2 - Gaining Momentum</a></li>
-     <li><a href="#humble-beginnings">0.0.1 - Humble Beginnings</a></li>
-     </ul></li>
-     </ul>
+<li><a href="#php-wasm" id="toc-php-wasm">php-wasm</a>
+<ul>
+<li><a href="#v0.0.9---aiming-for-the-github-stars"
+id="toc-v0.0.9---aiming-for-the-github-stars">v0.0.9 - Aiming for the
+(GitHub) Stars</a></li>
+<li><a href="#v0.0.8---preparing-for-lift-off"
+id="toc-v0.0.8---preparing-for-lift-off">v0.0.8 - Preparing for
+Lift-off</a></li>
+<li><a href="#remodermizing" id="toc-remodermizing">0.0.7 -
+Remodermizing</a></li>
+<li><a href="#ease" id="toc-ease">0.0.6 - Ease</a></li>
+<li><a href="#alignment" id="toc-alignment">0.0.5 - Alignment</a></li>
+<li><a href="#revisiting" id="toc-revisiting">0.0.4 -
+Revisiting</a></li>
+<li><a href="#new-horizons" id="toc-new-horizons">0.0.3 - New
+Horizons</a></li>
+<li><a href="#gaining-momentum" id="toc-gaining-momentum">0.0.2 -
+Gaining Momentum</a></li>
+<li><a href="#humble-beginnings" id="toc-humble-beginnings">0.0.1 -
+Humble Beginnings</a></li>
+</ul></li>
+</ul>
 					<span class = "wide-only"><a href = "#">top</a></span>
 				</nav>
 							</div>

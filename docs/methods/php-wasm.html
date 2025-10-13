@@ -19,289 +19,329 @@
 	<link rel="dns-prefetch" href="https://github.com/" />
 	<link rel="dns-prefetch" href="https://seanmorris.github.io/" />
 	<style>
-		code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-  pre > code.sourceCode { white-space: pre; position: relative; }
-  pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-  pre > code.sourceCode > span:empty { height: 1.2em; }
-  .sourceCode { overflow: visible; }
-  code.sourceCode > span { color: inherit; text-decoration: inherit; }
-  div.sourceCode { margin: 1em 0; }
-  pre.sourceCode { margin: 0; }
-  @media screen {
-  div.sourceCode { overflow: auto; }
+		/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+/* The extra [class] is a hack that increases specificity enough to
+   override a similar rule in reveal.js */
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  font-size: inherit;
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
   }
-  @media print {
-  pre > code.sourceCode { white-space: pre-wrap; }
-  pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-  }
-  pre.numberSource code
-    { counter-reset: source-line 0; }
-  pre.numberSource code > span
-    { position: relative; left: -4em; counter-increment: source-line; }
-  pre.numberSource code > span > a:first-child::before
-    { content: counter(source-line);
-      position: relative; left: -1em; text-align: right; vertical-align: baseline;
-      border: none; display: inline-block;
-      -webkit-touch-callout: none; -webkit-user-select: none;
-      -khtml-user-select: none; -moz-user-select: none;
-      -ms-user-select: none; user-select: none;
-      padding: 0 4px; width: 4em;
-    }
-  pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-  div.sourceCode
-    { color: #cccccc; background-color: #303030; }
-  @media screen {
-  pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-  }
-  code span.al { color: #ffcfaf; } /* Alert */
-  code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
-  code span.at { } /* Attribute */
-  code span.bn { color: #dca3a3; } /* BaseN */
-  code span.bu { } /* BuiltIn */
-  code span.cf { color: #f0dfaf; } /* ControlFlow */
-  code span.ch { color: #dca3a3; } /* Char */
-  code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
-  code span.co { color: #7f9f7f; } /* Comment */
-  code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
-  code span.do { color: #7f9f7f; } /* Documentation */
-  code span.dt { color: #dfdfbf; } /* DataType */
-  code span.dv { color: #dcdccc; } /* DecVal */
-  code span.er { color: #c3bf9f; } /* Error */
-  code span.ex { } /* Extension */
-  code span.fl { color: #c0bed1; } /* Float */
-  code span.fu { color: #efef8f; } /* Function */
-  code span.im { } /* Import */
-  code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
-  code span.kw { color: #f0dfaf; } /* Keyword */
-  code span.op { color: #f0efd0; } /* Operator */
-  code span.ot { color: #efef8f; } /* Other */
-  code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
-  code span.sc { color: #dca3a3; } /* SpecialChar */
-  code span.ss { color: #cc9393; } /* SpecialString */
-  code span.st { color: #cc9393; } /* String */
-  code span.va { } /* Variable */
-  code span.vs { color: #cc9393; } /* VerbatimString */
-  code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-  .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
 	</style>
 	<link rel="stylesheet" href="/style.css" />
 	<link rel="stylesheet" href="/article.css" />
 	<link rel="stylesheet" href="/pandoc.css" />
 	<style>
 	section.heading {
- 	background-color: #220359;
- 	background-image: url('/splash-wide.webp');
- 	background-size: cover;
- 	background-position: center top;
- 	padding: 2rem;
- }
+	background-color: #220359;
+	background-image: url('/splash-wide.webp');
+	background-size: cover;
+	background-position: center top;
+	padding: 2rem;
+}
 
- section.heading nav {
- 	/* justify-content: space-between; */
- 	max-width: 1800px;
- 	margin: auto;
- }
+section.heading nav {
+	/* justify-content: space-between; */
+	max-width: 1800px;
+	margin: auto;
+}
 
- section.heading nav .spacer{
- 	flex: 1;
- }
+section.heading nav .spacer{
+	flex: 1;
+}
 
- section.heading nav,
- section.heading nav ul {
- 	display: flex;
- 	flex-direction: row;
- }
+section.heading nav,
+section.heading nav ul {
+	display: flex;
+	flex-direction: row;
+}
 
- section.heading nav ul {
- 	align-items: center;
- 	list-style: none;
- 	margin: 0;
- }
+section.heading nav ul {
+	align-items: center;
+	list-style: none;
+	margin: 0;
+}
 
- section.heading nav ul li {
- 	min-height: 80px;
- 	display: flex;
- 	align-items: center;
- }
+section.heading nav ul li {
+	min-height: 80px;
+	display: flex;
+	align-items: center;
+}
 
- section.heading nav ul a {
- 	padding: 1rem;
- 	display: inline-block;
- 	color: inherit;
- 	text-decoration: inherit;
- 	font-weight: bold;
- }
+section.heading nav ul a {
+	padding: 1rem;
+	display: inline-block;
+	color: inherit;
+	text-decoration: inherit;
+	font-weight: bold;
+}
 
- section.heading nav ul a img {
- 	display: inline;
- 	vertical-align: middle;
- }
+section.heading nav ul a img {
+	display: inline;
+	vertical-align: middle;
+}
 
- section.heading nav ul {
- 	align-items: center;
- 	list-style: none;
- 	margin: 0;
- }
+section.heading nav ul {
+	align-items: center;
+	list-style: none;
+	margin: 0;
+}
 
- section.heading nav ul li {
- 	min-height: 80px;
- 	display: flex;
- 	align-items: center;
- }
+section.heading nav ul li {
+	min-height: 80px;
+	display: flex;
+	align-items: center;
+}
 
- section.heading nav ul a {
- 	padding: 1rem;
- 	display: inline-block;
- 	color: inherit;
- 	text-decoration: inherit;
- 	font-weight: bold;
- }
+section.heading nav ul a {
+	padding: 1rem;
+	display: inline-block;
+	color: inherit;
+	text-decoration: inherit;
+	font-weight: bold;
+}
 
- section.heading nav ul a img {
- 	display: inline;
- 	vertical-align: middle;
- }
+section.heading nav ul a img {
+	display: inline;
+	vertical-align: middle;
+}
 
- section.heading nav a.cta.button {
- 	border-width: 1px;
- 	border-style: solid;
- 	border-color: white;
- 	box-shadow: 0 0 0.5rem 0.25rem #3601a9;
- 	font-style: italic;
- 	min-width: 5rem;
- 	display: inline-block;
- 	padding: 0.75rem;
- 	padding-left: 0rem;
- 	padding-right: 0rem;
- 	transition: box-shadow 0.125s ease-in;
- 	max-height: 24px;
- }
+section.heading nav a.cta.button {
+	border-width: 1px;
+	border-style: solid;
+	border-color: white;
+	box-shadow: 0 0 0.5rem 0.25rem #3601a9;
+	font-style: italic;
+	min-width: 5rem;
+	display: inline-block;
+	padding: 0.75rem;
+	padding-left: 0rem;
+	padding-right: 0rem;
+	transition: box-shadow 0.125s ease-in;
+	max-height: 24px;
+}
 
- section.heading nav a.cta.button:hover {
- 	box-shadow: 0 0 0.25rem 0.125rem #8216de;
- 	transition: box-shadow 0.125s ease-out;
- }
+section.heading nav a.cta.button:hover {
+	box-shadow: 0 0 0.25rem 0.125rem #8216de;
+	transition: box-shadow 0.125s ease-out;
+}
 
- section.heading nav,
- section.heading nav ul {
- 	display: flex;
- 	flex-direction: row;
- }
+section.heading nav,
+section.heading nav ul {
+	display: flex;
+	flex-direction: row;
+}
 
- section.heading div.hero {
- 	display: flex;
- 	flex-direction: column;
- 	align-items: center;
- }
+section.heading div.hero {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
- div.hero a.button {
- 	margin: 2rem;
- }
+div.hero a.button {
+	margin: 2rem;
+}
 
- .hero h1 {
- 	font-family: 'Corbel', sans-serif;
- 	font-weight: bold;
- 	font-size: 68pt;
- 	margin-top: 4rem;
- 	margin-bottom: 2rem;
- 	text-align: center;
- }
+.hero h1 {
+	font-family: 'Corbel', sans-serif;
+	font-weight: bold;
+	font-size: 68pt;
+	margin-top: 4rem;
+	margin-bottom: 2rem;
+	text-align: center;
+}
 
- .hero p {
- 	margin: 1rem;
- 	max-width: 40rem;
- 	text-align: center;
- 	font-weight: bold;
- }
+.hero p {
+	margin: 1rem;
+	max-width: 40rem;
+	text-align: center;
+	font-weight: bold;
+}
 
- .hero a.cta.button {
- 	background: linear-gradient(0.15turn, #3601a9, #8216de);
- 	padding: 1.25rem;
- 	font-weight: bold;
- }
+.hero a.cta.button {
+	background: linear-gradient(0.15turn, #3601a9, #8216de);
+	padding: 1.25rem;
+	font-weight: bold;
+}
 
- .hero a.cta.button:hover {
- 	background: linear-gradient(0.10turn, #3601a9, #8216de);
- }
+.hero a.cta.button:hover {
+	background: linear-gradient(0.10turn, #3601a9, #8216de);
+}
 
- .sub-hero ul {
- 	list-style: none;
- 	padding: 0;
- }
+.sub-hero ul {
+	list-style: none;
+	padding: 0;
+}
 
- .sub-hero ul li:before {
- 	content: "\B7";
- 	padding-right: 0.75rem;
- }
+.sub-hero ul li:before {
+	content: "\B7";
+	padding-right: 0.75rem;
+}
 
- .hero > iframe {
- 	width: 100%;
- 	min-height: 30rem;
- 	margin-top: 2rem;
- 	box-sizing: border-box;
- 	border: none;
- }
+.hero > iframe {
+	width: 100%;
+	min-height: 30rem;
+	margin-top: 2rem;
+	box-sizing: border-box;
+	border: none;
+}
 
 
- iframe.page-demo {
- 	width: 100%;
- 	box-sizing: border-box;
- 	border: none;
- 	min-height: 80vh;
- }
+iframe.page-demo {
+	width: 100%;
+	box-sizing: border-box;
+	border: none;
+	min-height: 80vh;
+}
 	@font-face {
- 	font-family: 'Anonymous Pro';
- 	src: url('/anonymous_pro.woff2') format('woff2'),
- 		url('/anonymous_pro.woff') format('woff');
- 	font-weight: normal;
- 	font-style: normal;
- 	font-display: swap;
+	font-family: 'Anonymous Pro';
+	src: url('/anonymous_pro.woff2') format('woff2'),
+		url('/anonymous_pro.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
 
- }
- @font-face {
- 	font-family: 'NotoSans';
- 	src: url('/notosans-regular.woff2') format('woff2'),
- 		url('/notosans-regular.woff') format('woff');
- 	font-weight: normal;
- 	font-style: normal;
- 	font-display: swap;
- }
+}
+@font-face {
+	font-family: 'NotoSans';
+	src: url('/notosans-regular.woff2') format('woff2'),
+		url('/notosans-regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
 
- @font-face {
- 	font-family: 'NotoSans';
- 	src: url('/notosans-italic.woff2') format('woff2'),
- 		url('/notosans-italic.woff') format('woff');
- 	font-weight: normal;
- 	font-style: italic;
- 	font-display: swap;
- }
+@font-face {
+	font-family: 'NotoSans';
+	src: url('/notosans-italic.woff2') format('woff2'),
+		url('/notosans-italic.woff') format('woff');
+	font-weight: normal;
+	font-style: italic;
+	font-display: swap;
+}
 
- @font-face {
- 	font-family: 'NotoSans';
- 	src: url('/notosans-bold.woff2') format('woff2'),
- 		url('/notosans-bold.woff') format('woff');
- 	font-weight: bold;
- 	font-style: normal;
- 	font-display: swap;
- }
+@font-face {
+	font-family: 'NotoSans';
+	src: url('/notosans-bold.woff2') format('woff2'),
+		url('/notosans-bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
 
- @font-face {
- 	font-family: 'Corbel';
- 	src: url('/corbelb.woff2') format('woff2'),
- 		url('/corbelb.woff') format('woff');
- 	font-weight: bold;
- 	font-style: normal;
- 	font-display: swap;
- }
+@font-face {
+	font-family: 'Corbel';
+	src: url('/corbelb.woff2') format('woff2'),
+		url('/corbelb.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+	font-display: swap;
+}
 	</style>
 		<script src = "/main.js"></script>
 		</head>
 <body>
+	<div class = "nag-bar" id = "nag-bar">
+		<div class = "page-rule">
+			<div class = "row">
+				<div class = "prose">
+					<p><strong>I am giving up my bed for one night.</strong></p>
+
+					<p>My Sleep Out helps youth facing homelessness find safe shelter and loving care at Covenant House. That care includes essential services like education, job training, medical care, mental health and substance use counseling, and legal aid — everything they need to build independent, sustainable futures.</p>
+
+					<p>By supporting my Sleep Out, you are supporting the dreams of young people overcoming homelessness.</p>
+
+					<p>Together, we are working towards a future where every young person has a safe place to sleep.</p>
+
+					<p>Thank you.</p>
+				</div>
+				<div class = "col center">
+					<a href = "https://www.sleepout.org/participants/62915">
+						<span class = "button">DONATE NOW</span>
+					</a>
+					<a href = "https://www.sleepout.org/participants/62915">
+						<img src = "https://camo.githubusercontent.com/9b729dba14577310713521176919420b435a9de7f2af8281b63e85fc60b2d61c/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f64796e616d69632f6a736f6e3f75726c3d68747470732533412532462532467777772e736c6565706f75742e6f7267253246617069253246312e332532467061727469636970616e747325324636323931352533465f253344313736303033393031373432382671756572793d2532342e73756d446f6e6174696f6e73267072656669783d253234267375666669783d253230526169736564267374796c653d666f722d7468652d6261646765266c6162656c3d536c6565702532304f75742533412532304e5943266c696e6b3d68747470732533412532462532467777772e736c6565706f75742e6f72672532467061727469636970616e74732532463632393135">
+					</a>
+				</div>
+			</div>
+			<div class = "close-button" id = "close-nag"></div>
+			<div class = "open-button" id = "open-nag"></div>
+		</div>
+	</div>
 	<section class = "heading">
 		<div class = "page-rule">
 			<nav>
@@ -319,7 +359,7 @@
 						<a href = "https://github.com/seanmorris/php-wasm"><img src = "/github-icon.png" alt = "Github icon" width = "37" height = "37" ></a>
 					</li>
 				</ul>
-				<a href = "https://github.com/sponsors/seanmorris" class = "cta button">Donate</a>
+				<a href = "https://github.com/sponsors/seanmorris" class = "cta button">Sponsor</a>
 				<div class = "hamburger-button" id = "burgerButton" data-open = "false">
 					<div class = "burger-bar"></div>
 					<div class = "burger-bar"></div>
@@ -407,86 +447,82 @@
 								<meta itemprop = "alternateName" content = "PhpWeb" />
 								<meta itemprop = "name" content = "PhpWasm" />
 								<h1 id="php-wasm-methods">Php-Wasm Methods</h1>
-        <h2 id="constructor">constructor</h2>
-        <p><span class="highlight"><span class="citation"
-        data-cites="todo">@todo</span></span> Document constructor
-        options object.</p>
-        <h2 id="php.run">php.run</h2>
-        <p>Run a php script. Code should start with the opening
-        <code>&lt;?php</code> tag and may optionally close with
-        <code>?&gt;</code> to allow for HTML interpolation.</p>
-        <p>Will return a non-zero value in case of error. You’ll need to
-        use <a
-        href="/getting-started/php-in-js.html#running-php-taking-output">event
-        listeners</a> to get output.</p>
-        <div class="sourceCode" id="cb1"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
+<h2 id="constructor">constructor</h2>
+<p><span class="highlight"><span class="citation"
+data-cites="todo">@todo</span></span> Document constructor options
+object.</p>
+<h2 id="php.run">php.run</h2>
+<p>Run a php script. Code should start with the opening
+<code>&lt;?php</code> tag and may optionally close with
+<code>?&gt;</code> to allow for HTML interpolation.</p>
+<p>Will return a non-zero value in case of error. You’ll need to use <a
+href="/getting-started/php-in-js.html#running-php-taking-output">event
+listeners</a> to get output.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;`</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
-        <h2 id="php.exec">php.exec</h2>
-        <p>Similar to <code>php.run()</code>, but executes a single PHP
-        <em>statement</em> rather than an entire script. Code should
-        <strong><em>not</em></strong> start with a <code>&lt;?php</code>
-        tag and should <strong><em>not</em></strong> end in a
-        semicolon.</p>
-        <p>The return value of the PHP statement will be the return
-        value of <code>php.exec</code>. If Vrzno is enabled and a
-        function or object is returned, the value will be marshalled to
-        Javascript.</p>
-        <p>To run multiple commands in a single statement, use an <a
-        href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">IIFE</a>.</p>
-        <div class="sourceCode" id="cb2"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">exec</span>(<span class="vs">`(function() {</span></span>
+<h2 id="php.exec">php.exec</h2>
+<p>Similar to <code>php.run()</code>, but executes a single PHP
+<em>statement</em> rather than an entire script. Code should
+<strong><em>not</em></strong> start with a <code>&lt;?php</code> tag and
+should <strong><em>not</em></strong> end in a semicolon.</p>
+<p>The return value of the PHP statement will be the return value of
+<code>php.exec</code>. If Vrzno is enabled and a function or object is
+returned, the value will be marshalled to Javascript.</p>
+<p>To run multiple commands in a single statement, use an <a
+href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">IIFE</a>.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">exec</span>(<span class="vs">`(function() {</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    return $date;</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">})();`</span>)<span class="op">;</span></span></code></pre></div>
-        <h2 id="php.r">php.r</h2>
-        <p>Tagged template function companion to <code>php.run()</code>.
-        If Vrzno is enabled, allows rich JS values to be interpolated
-        into PHP code.</p>
-        <p>Just like <code>php.run()</code>, this will return a non-zero
-        value in case of error.</p>
-        <div class="sourceCode" id="cb3"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">r</span><span class="vs">`&lt;?php</span></span>
+<h2 id="php.r">php.r</h2>
+<p>Tagged template function companion to <code>php.run()</code>. If
+Vrzno is enabled, allows rich JS values to be interpolated into PHP
+code.</p>
+<p>Just like <code>php.run()</code>, this will return a non-zero value
+in case of error.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">r</span><span class="vs">`&lt;?php</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;`</span><span class="op">;</span></span></code></pre></div>
-        <h2 id="php.x">php.x</h2>
-        <p>Tagged template function companion to
-        <code>php.exec()</code>. If Vrzno is enabled, allows rich JS
-        values to be interpolated into PHP code.</p>
-        <p>Just like <code>php.exec()</code> this value may only run a
-        single PHP statement at a time and returns the JS value directly
-        to PHP.</p>
-        <div class="sourceCode" id="cb4"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> date <span class="op">=</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`(function() {</span></span>
+<h2 id="php.x">php.x</h2>
+<p>Tagged template function companion to <code>php.exec()</code>. If
+Vrzno is enabled, allows rich JS values to be interpolated into PHP
+code.</p>
+<p>Just like <code>php.exec()</code> this value may only run a single
+PHP statement at a time and returns the JS value directly to PHP.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> date <span class="op">=</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`(function() {</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    return $date;</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="vs">})();`</span><span class="op">;</span></span></code></pre></div>
-        <h2 id="php.refresh">php.refresh</h2>
-        <p>Clears the memory. If any objects, arrays or functions have
-        been returned to JS, these will become invalid when php is
-        refreshed.</p>
-        <div class="sourceCode" id="cb5"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">refresh</span>()<span class="op">;</span></span></code></pre></div>
+<h2 id="php.refresh">php.refresh</h2>
+<p>Clears the memory. If any objects, arrays or functions have been
+returned to JS, these will become invalid when php is refreshed.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">refresh</span>()<span class="op">;</span></span></code></pre></div>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>
 					<ul>
-     <li><a href="#php-wasm-methods">Php-Wasm Methods</a>
-     <ul>
-     <li><a href="#constructor">constructor</a></li>
-     <li><a href="#php.run">php.run</a></li>
-     <li><a href="#php.exec">php.exec</a></li>
-     <li><a href="#php.r">php.r</a></li>
-     <li><a href="#php.x">php.x</a></li>
-     <li><a href="#php.refresh">php.refresh</a></li>
-     </ul></li>
-     </ul>
+<li><a href="#php-wasm-methods" id="toc-php-wasm-methods">Php-Wasm
+Methods</a>
+<ul>
+<li><a href="#constructor" id="toc-constructor">constructor</a></li>
+<li><a href="#php.run" id="toc-php.run">php.run</a></li>
+<li><a href="#php.exec" id="toc-php.exec">php.exec</a></li>
+<li><a href="#php.r" id="toc-php.r">php.r</a></li>
+<li><a href="#php.x" id="toc-php.x">php.x</a></li>
+<li><a href="#php.refresh" id="toc-php.refresh">php.refresh</a></li>
+</ul></li>
+</ul>
 					<span class = "wide-only"><a href = "#">top</a></span>
 				</nav>
 							</div>

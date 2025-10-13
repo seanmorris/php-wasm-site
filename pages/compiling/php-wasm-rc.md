@@ -208,7 +208,7 @@ When compiled as a `dynamic` extension, this will produce the extension `php-8.x
 
 ---
 
-#### WITH_LIBPNG
+### WITH_LIBPNG
 
 static|**shared**
 
@@ -218,7 +218,7 @@ If WITH_GD is dynamic, then loading will be deferred until after gd is loaded.
 
 ---
 
-#### WITH_FREETYPE
+### WITH_FREETYPE
 
 static|**shared**
 
@@ -228,7 +228,7 @@ If WITH_GD is dynamic, then loading will be deferred until after gd is loaded.
 
 ---
 
-#### WITH_LIBJPEG
+### WITH_LIBJPEG
 
 static|**shared**
 

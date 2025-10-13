@@ -323,3 +323,94 @@ footer img {
 	}
 }
 
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.col {
+	display: flex;
+	flex-direction: column;
+}
+
+.center {
+	justify-content: center;
+	text-align: center;
+}
+
+div.nag-bar {
+	font-size: 0.8rem;
+	padding: 0.5rem;
+}
+
+div.nag-bar:not(.closed) {
+	background-color: #fffdcd;
+	color: black;
+}
+
+div.nag-bar strong {
+	font-size: 1rem;
+}
+
+div.nag-bar span.button {
+	display: inline-block;
+	background-color: #0677ff;
+	color: white;
+	padding: 1rem;
+	border-radius: 3rem;
+	margin: 1rem;
+}
+
+div.nag-bar .prose {
+	padding: 0 1rem;
+}
+
+div.nag-bar .page-rule {
+	position: relative;
+}
+
+div.nag-bar .close-button {
+	display: block;
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	width: 0.75rem;
+	height: 0.75rem;
+	background-image: url(close.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	cursor: pointer;
+}
+
+div.nag-bar .open-button {
+	display: none;
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	width: 0.75rem;
+	height: 0.75rem;
+	background-image: url(plus.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	cursor: pointer;
+	filter: invert(1);
+}
+
+div.nag-bar a {
+	cursor: pointer;
+}
+
+div.nag-bar.closed .close-button,
+div.nag-bar.closed .page-rule .row {
+	display: none;
+}
+
+div.nag-bar.closed .open-button {
+	display: block;
+}
+
+.nag-bar.closed {
+	margin-bottom: -1rem;
+}
