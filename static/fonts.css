@@ -7,6 +7,7 @@
 	font-display: swap;
 
 }
+
 @font-face {
 	font-family: 'NotoSans';
 	src: url('/notosans-regular.woff2') format('woff2'),

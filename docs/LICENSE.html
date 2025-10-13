@@ -19,234 +19,224 @@
 	<link rel="dns-prefetch" href="https://github.com/" />
 	<link rel="dns-prefetch" href="https://seanmorris.github.io/" />
 	<style>
-		/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-/* The extra [class] is a hack that increases specificity enough to
-   override a similar rule in reveal.js */
-ul.task-list[class]{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  font-size: inherit;
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
-  vertical-align: middle;
-}
-.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+		code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+  .display.math{display: block; text-align: center; margin: 0.5rem auto;}
 	</style>
 	<link rel="stylesheet" href="/style.css" />
 	<link rel="stylesheet" href="/article.css" />
 	<link rel="stylesheet" href="/pandoc.css" />
 	<style>
 	section.heading {
-	background-color: #220359;
-	background-image: url('/splash-wide.webp');
-	background-size: cover;
-	background-position: center top;
-	padding: 2rem;
-}
+ 	background-color: #220359;
+ 	background-image: url('/splash-wide.webp');
+ 	background-size: cover;
+ 	background-position: center top;
+ 	padding: 2rem;
+ }
 
-section.heading nav {
-	/* justify-content: space-between; */
-	max-width: 1800px;
-	margin: auto;
-}
+ section.heading nav {
+ 	/* justify-content: space-between; */
+ 	max-width: 1800px;
+ 	margin: auto;
+ }
 
-section.heading nav .spacer{
-	flex: 1;
-}
+ section.heading nav .spacer{
+ 	flex: 1;
+ }
 
-section.heading nav,
-section.heading nav ul {
-	display: flex;
-	flex-direction: row;
-}
+ section.heading nav,
+ section.heading nav ul {
+ 	display: flex;
+ 	flex-direction: row;
+ }
 
-section.heading nav ul {
-	align-items: center;
-	list-style: none;
-	margin: 0;
-}
+ section.heading nav ul {
+ 	align-items: center;
+ 	list-style: none;
+ 	margin: 0;
+ }
 
-section.heading nav ul li {
-	min-height: 80px;
-	display: flex;
-	align-items: center;
-}
+ section.heading nav ul li {
+ 	min-height: 80px;
+ 	display: flex;
+ 	align-items: center;
+ }
 
-section.heading nav ul a {
-	padding: 1rem;
-	display: inline-block;
-	color: inherit;
-	text-decoration: inherit;
-	font-weight: bold;
-}
+ section.heading nav ul a {
+ 	padding: 1rem;
+ 	display: inline-block;
+ 	color: inherit;
+ 	text-decoration: inherit;
+ 	font-weight: bold;
+ }
 
-section.heading nav ul a img {
-	display: inline;
-	vertical-align: middle;
-}
+ section.heading nav ul a img {
+ 	display: inline;
+ 	vertical-align: middle;
+ }
 
-section.heading nav ul {
-	align-items: center;
-	list-style: none;
-	margin: 0;
-}
+ section.heading nav ul {
+ 	align-items: center;
+ 	list-style: none;
+ 	margin: 0;
+ }
 
-section.heading nav ul li {
-	min-height: 80px;
-	display: flex;
-	align-items: center;
-}
+ section.heading nav ul li {
+ 	min-height: 80px;
+ 	display: flex;
+ 	align-items: center;
+ }
 
-section.heading nav ul a {
-	padding: 1rem;
-	display: inline-block;
-	color: inherit;
-	text-decoration: inherit;
-	font-weight: bold;
-}
+ section.heading nav ul a {
+ 	padding: 1rem;
+ 	display: inline-block;
+ 	color: inherit;
+ 	text-decoration: inherit;
+ 	font-weight: bold;
+ }
 
-section.heading nav ul a img {
-	display: inline;
-	vertical-align: middle;
-}
+ section.heading nav ul a img {
+ 	display: inline;
+ 	vertical-align: middle;
+ }
 
-section.heading nav a.cta.button {
-	border-width: 1px;
-	border-style: solid;
-	border-color: white;
-	box-shadow: 0 0 0.5rem 0.25rem #3601a9;
-	font-style: italic;
-	min-width: 5rem;
-	display: inline-block;
-	padding: 0.75rem;
-	padding-left: 0rem;
-	padding-right: 0rem;
-	transition: box-shadow 0.125s ease-in;
-	max-height: 24px;
-}
+ section.heading nav a.cta.button {
+ 	border-width: 1px;
+ 	border-style: solid;
+ 	border-color: white;
+ 	box-shadow: 0 0 0.5rem 0.25rem #3601a9;
+ 	font-style: italic;
+ 	min-width: 5rem;
+ 	display: inline-block;
+ 	padding: 0.75rem;
+ 	padding-left: 0rem;
+ 	padding-right: 0rem;
+ 	transition: box-shadow 0.125s ease-in;
+ 	max-height: 24px;
+ }
 
-section.heading nav a.cta.button:hover {
-	box-shadow: 0 0 0.25rem 0.125rem #8216de;
-	transition: box-shadow 0.125s ease-out;
-}
+ section.heading nav a.cta.button:hover {
+ 	box-shadow: 0 0 0.25rem 0.125rem #8216de;
+ 	transition: box-shadow 0.125s ease-out;
+ }
 
-section.heading nav,
-section.heading nav ul {
-	display: flex;
-	flex-direction: row;
-}
+ section.heading nav,
+ section.heading nav ul {
+ 	display: flex;
+ 	flex-direction: row;
+ }
 
-section.heading div.hero {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
+ section.heading div.hero {
+ 	display: flex;
+ 	flex-direction: column;
+ 	align-items: center;
+ }
 
-div.hero a.button {
-	margin: 2rem;
-}
+ div.hero a.button {
+ 	margin: 2rem;
+ }
 
-.hero h1 {
-	font-family: 'Corbel', sans-serif;
-	font-weight: bold;
-	font-size: 68pt;
-	margin-top: 4rem;
-	margin-bottom: 2rem;
-	text-align: center;
-}
+ .hero h1 {
+ 	font-family: 'Corbel', sans-serif;
+ 	font-weight: bold;
+ 	font-size: 68pt;
+ 	margin-top: 4rem;
+ 	margin-bottom: 2rem;
+ 	text-align: center;
+ }
 
-.hero p {
-	margin: 1rem;
-	max-width: 40rem;
-	text-align: center;
-	font-weight: bold;
-}
+ .hero p {
+ 	margin: 1rem;
+ 	max-width: 40rem;
+ 	text-align: center;
+ 	font-weight: bold;
+ }
 
-.hero a.cta.button {
-	background: linear-gradient(0.15turn, #3601a9, #8216de);
-	padding: 1.25rem;
-	font-weight: bold;
-}
+ .hero a.cta.button {
+ 	background: linear-gradient(0.15turn, #3601a9, #8216de);
+ 	padding: 1.25rem;
+ 	font-weight: bold;
+ }
 
-.hero a.cta.button:hover {
-	background: linear-gradient(0.10turn, #3601a9, #8216de);
-}
+ .hero a.cta.button:hover {
+ 	background: linear-gradient(0.10turn, #3601a9, #8216de);
+ }
 
-.sub-hero ul {
-	list-style: none;
-	padding: 0;
-}
+ .sub-hero ul {
+ 	list-style: none;
+ 	padding: 0;
+ }
 
-.sub-hero ul li:before {
-	content: "\B7";
-	padding-right: 0.75rem;
-}
+ .sub-hero ul li:before {
+ 	content: "\B7";
+ 	padding-right: 0.75rem;
+ }
 
-.hero > iframe {
-	width: 100%;
-	min-height: 30rem;
-	margin-top: 2rem;
-	box-sizing: border-box;
-	border: none;
-}
+ .hero > iframe {
+ 	width: 100%;
+ 	min-height: 30rem;
+ 	margin-top: 2rem;
+ 	box-sizing: border-box;
+ 	border: none;
+ }
 
 
-iframe.page-demo {
-	width: 100%;
-	box-sizing: border-box;
-	border: none;
-	min-height: 80vh;
-}
+ iframe.page-demo {
+ 	width: 100%;
+ 	box-sizing: border-box;
+ 	border: none;
+ 	min-height: 80vh;
+ }
 	@font-face {
-	font-family: 'Anonymous Pro';
-	src: url('/anonymous_pro.woff2') format('woff2'),
-		url('/anonymous_pro.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
+ 	font-family: 'Anonymous Pro';
+ 	src: url('/anonymous_pro.woff2') format('woff2'),
+ 		url('/anonymous_pro.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: normal;
+ 	font-display: swap;
 
-}
-@font-face {
-	font-family: 'NotoSans';
-	src: url('/notosans-regular.woff2') format('woff2'),
-		url('/notosans-regular.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-	font-display: swap;
-}
+ }
 
-@font-face {
-	font-family: 'NotoSans';
-	src: url('/notosans-italic.woff2') format('woff2'),
-		url('/notosans-italic.woff') format('woff');
-	font-weight: normal;
-	font-style: italic;
-	font-display: swap;
-}
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('/notosans-regular.woff2') format('woff2'),
+ 		url('/notosans-regular.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: normal;
+ 	font-display: swap;
+ }
 
-@font-face {
-	font-family: 'NotoSans';
-	src: url('/notosans-bold.woff2') format('woff2'),
-		url('/notosans-bold.woff') format('woff');
-	font-weight: bold;
-	font-style: normal;
-	font-display: swap;
-}
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('/notosans-italic.woff2') format('woff2'),
+ 		url('/notosans-italic.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: italic;
+ 	font-display: swap;
+ }
 
-@font-face {
-	font-family: 'Corbel';
-	src: url('/corbelb.woff2') format('woff2'),
-		url('/corbelb.woff') format('woff');
-	font-weight: bold;
-	font-style: normal;
-	font-display: swap;
-}
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('/notosans-bold.woff2') format('woff2'),
+ 		url('/notosans-bold.woff') format('woff');
+ 	font-weight: bold;
+ 	font-style: normal;
+ 	font-display: swap;
+ }
+
+ @font-face {
+ 	font-family: 'Corbel';
+ 	src: url('/corbelb.woff2') format('woff2'),
+ 		url('/corbelb.woff') format('woff');
+ 	font-weight: bold;
+ 	font-style: normal;
+ 	font-display: swap;
+ }
 	</style>
 		<script src = "/main.js"></script>
 		</head>
@@ -270,7 +260,7 @@ iframe.page-demo {
 						<span class = "button">DONATE NOW</span>
 					</a>
 					<a href = "https://www.sleepout.org/participants/62915">
-						<img src = "https://camo.githubusercontent.com/9b729dba14577310713521176919420b435a9de7f2af8281b63e85fc60b2d61c/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f64796e616d69632f6a736f6e3f75726c3d68747470732533412532462532467777772e736c6565706f75742e6f7267253246617069253246312e332532467061727469636970616e747325324636323931352533465f253344313736303033393031373432382671756572793d2532342e73756d446f6e6174696f6e73267072656669783d253234267375666669783d253230526169736564267374796c653d666f722d7468652d6261646765266c6162656c3d536c6565702532304f75742533412532304e5943266c696e6b3d68747470732533412532462532467777772e736c6565706f75742e6f72672532467061727469636970616e74732532463632393135">
+						<img src = "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwww.sleepout.org%2Fapi%2F1.3%2Fparticipants%2F62915%3F_%3D1760039017428&query=%24.sumDonations&prefix=%24&suffix=%20Raised&style=for-the-badge&label=Sleep%20Out%3A%20NYC&link=https%3A%2F%2Fwww.sleepout.org%2Fparticipants%2F62915&color=0677ff">
 					</a>
 				</div>
 			</div>
@@ -375,203 +365,216 @@ iframe.page-demo {
 			<a href = "/CHANGELOG.html" >
 				CHANGELOG			</a>
 		</li><li>
-			<a href = "/LICENSE.html" class="active_link">
+			<a href = "/LICENSE.html" class="active-link">
 				LICENSE			</a>
 		</li></ul></nav>
 						<div class = "page-content">
 				<article >
 								<h1 id="apache-license">Apache License</h1>
-<p><em>Version 2.0, January 2004</em> <em>&lt;<a
-href="http://www.apache.org/licenses/"
-class="uri">http://www.apache.org/licenses/</a>&gt;</em></p>
-<h2
-id="terms-and-conditions-for-use-reproduction-and-distribution">TERMS
-AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION</h2>
-<h3 id="definitions.">1. Definitions.</h3>
-<p>“License” shall mean the terms and conditions for use, reproduction,
-and distribution as defined by Sections 1 through 9 of this
-document.</p>
-<p>“Licensor” shall mean the copyright owner or entity authorized by the
-copyright owner that is granting the License.</p>
-<p>“Legal Entity” shall mean the union of the acting entity and all
-other entities that control, are controlled by, or are under common
-control with that entity. For the purposes of this definition, “control”
-means (i) the power, direct or indirect, to cause the direction or
-management of such entity, whether by contract or otherwise, or (ii)
-ownership of fifty percent (50%) or more of the outstanding shares, or
-(iii) beneficial ownership of such entity.</p>
-<p>“You” (or “Your”) shall mean an individual or Legal Entity exercising
-permissions granted by this License.</p>
-<p>“Source” form shall mean the preferred form for making modifications,
-including but not limited to software source code, documentation source,
-and configuration files.</p>
-<p>“Object” form shall mean any form resulting from mechanical
-transformation or translation of a Source form, including but not
-limited to compiled object code, generated documentation, and
-conversions to other media types.</p>
-<p>“Work” shall mean the work of authorship, whether in Source or Object
-form, made available under the License, as indicated by a copyright
-notice that is included in or attached to the work (an example is
-provided in the Appendix below).</p>
-<p>“Derivative Works” shall mean any work, whether in Source or Object
-form, that is based on (or derived from) the Work and for which the
-editorial revisions, annotations, elaborations, or other modifications
-represent, as a whole, an original work of authorship. For the purposes
-of this License, Derivative Works shall not include works that remain
-separable from, or merely link (or bind by name) to the interfaces of,
-the Work and Derivative Works thereof.</p>
-<p>“Contribution” shall mean any work of authorship, including the
-original version of the Work and any modifications or additions to that
-Work or Derivative Works thereof, that is intentionally submitted to
-Licensor for inclusion in the Work by the copyright owner or by an
-individual or Legal Entity authorized to submit on behalf of the
-copyright owner. For the purposes of this definition, “submitted” means
-any form of electronic, verbal, or written communication sent to the
-Licensor or its representatives, including but not limited to
-communication on electronic mailing lists, source code control systems,
-and issue tracking systems that are managed by, or on behalf of, the
-Licensor for the purpose of discussing and improving the Work, but
-excluding communication that is conspicuously marked or otherwise
-designated in writing by the copyright owner as “Not a
-Contribution.”</p>
-<p>“Contributor” shall mean Licensor and any individual or Legal Entity
-on behalf of whom a Contribution has been received by Licensor and
-subsequently incorporated within the Work.</p>
-<h3 id="grant-of-copyright-license.">2. Grant of Copyright License.</h3>
-<p>Subject to the terms and conditions of this License, each Contributor
-hereby grants to You a perpetual, worldwide, non-exclusive, no-charge,
-royalty-free, irrevocable copyright license to reproduce, prepare
-Derivative Works of, publicly display, publicly perform, sublicense, and
-distribute the Work and such Derivative Works in Source or Object
-form.</p>
-<h3 id="grant-of-patent-license.">3. Grant of Patent License.</h3>
-<p>Subject to the terms and conditions of this License, each Contributor
-hereby grants to You a perpetual, worldwide, non-exclusive, no-charge,
-royalty-free, irrevocable (except as stated in this section) patent
-license to make, have made, use, offer to sell, sell, import, and
-otherwise transfer the Work, where such license applies only to those
-patent claims licensable by such Contributor that are necessarily
-infringed by their Contribution(s) alone or by combination of their
-Contribution(s) with the Work to which such Contribution(s) was
-submitted. If You institute patent litigation against any entity
-(including a cross-claim or counterclaim in a lawsuit) alleging that the
-Work or a Contribution incorporated within the Work constitutes direct
-or contributory patent infringement, then any patent licenses granted to
-You under this License for that Work shall terminate as of the date such
-litigation is filed.</p>
-<h3 id="redistribution.">4. Redistribution.</h3>
-<p>You may reproduce and distribute copies of the Work or Derivative
-Works thereof in any medium, with or without modifications, and in
-Source or Object form, provided that You meet the following
-conditions:</p>
-<ul>
-<li>You must give any other recipients of the Work or Derivative Works a
-copy of this License; and</li>
-<li>You must cause any modified files to carry prominent notices stating
-that You changed the files; and</li>
-<li>You must retain, in the Source form of any Derivative Works that You
-distribute, all copyright, patent, trademark, and attribution notices
-from the Source form of the Work, excluding those notices that do not
-pertain to any part of the Derivative Works; and</li>
-<li>If the Work includes a “NOTICE” text file as part of its
-distribution, then any Derivative Works that You distribute must include
-a readable copy of the attribution notices contained within such NOTICE
-file, excluding those notices that do not pertain to any part of the
-Derivative Works, in at least one of the following places: within a
-NOTICE text file distributed as part of the Derivative Works; within the
-Source form or documentation, if provided along with the Derivative
-Works; or, within a display generated by the Derivative Works, if and
-wherever such third-party notices normally appear. The contents of the
-NOTICE file are for informational purposes only and do not modify the
-License. You may add Your own attribution notices within Derivative
-Works that You distribute, alongside or as an addendum to the NOTICE
-text from the Work, provided that such additional attribution notices
-cannot be construed as modifying the License. You may add Your own
-copyright statement to Your modifications and may provide additional or
-different license terms and conditions for use, reproduction, or
-distribution of Your modifications, or for any such Derivative Works as
-a whole, provided Your use, reproduction, and distribution of the Work
-otherwise complies with the conditions stated in this License.</li>
-</ul>
-<h3 id="submission-of-contributions.">5. Submission of
-Contributions.</h3>
-<p>Unless You explicitly state otherwise, any Contribution intentionally
-submitted for inclusion in the Work by You to the Licensor shall be
-under the terms and conditions of this License, without any additional
-terms or conditions. Notwithstanding the above, nothing herein shall
-supersede or modify the terms of any separate license agreement you may
-have executed with Licensor regarding such Contributions.</p>
-<h3 id="trademarks.">6. Trademarks.</h3>
-<p>This License does not grant permission to use the trade names,
-trademarks, service marks, or product names of the Licensor, except as
-required for reasonable and customary use in describing the origin of
-the Work and reproducing the content of the NOTICE file.</p>
-<h3 id="disclaimer-of-warranty.">7. Disclaimer of Warranty.</h3>
-<p>Unless required by applicable law or agreed to in writing, Licensor
-provides the Work (and each Contributor provides its Contributions) on
-an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-express or implied, including, without limitation, any warranties or
-conditions of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
-PARTICULAR PURPOSE. You are solely responsible for determining the
-appropriateness of using or redistributing the Work and assume any risks
-associated with Your exercise of permissions under this License.</p>
-<h3 id="limitation-of-liability.">8. Limitation of Liability.</h3>
-<p>In no event and under no legal theory, whether in tort (including
-negligence), contract, or otherwise, unless required by applicable law
-(such as deliberate and grossly negligent acts) or agreed to in writing,
-shall any Contributor be liable to You for damages, including any
-direct, indirect, special, incidental, or consequential damages of any
-character arising as a result of this License or out of the use or
-inability to use the Work (including but not limited to damages for loss
-of goodwill, work stoppage, computer failure or malfunction, or any and
-all other commercial damages or losses), even if such Contributor has
-been advised of the possibility of such damages.</p>
-<h3 id="accepting-warranty-or-additional-liability.">9. Accepting
-Warranty or Additional Liability.</h3>
-<p>While redistributing the Work or Derivative Works thereof, You may
-choose to offer, and charge a fee for, acceptance of support, warranty,
-indemnity, or other liability obligations and/or rights consistent with
-this License. However, in accepting such obligations, You may act only
-on Your own behalf and on Your sole responsibility, not on behalf of any
-other Contributor, and only if You agree to indemnify, defend, and hold
-each Contributor harmless for any liability incurred by, or claims
-asserted against, such Contributor by reason of your accepting any such
-warranty or additional liability.</p>
-<p><em>END OF TERMS AND CONDITIONS</em></p>
+        <p><em>Version 2.0, January 2004</em> <em>&lt;<a
+        href="http://www.apache.org/licenses/"
+        class="uri">http://www.apache.org/licenses/</a>&gt;</em></p>
+        <h2
+        id="terms-and-conditions-for-use-reproduction-and-distribution">TERMS
+        AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION</h2>
+        <h3 id="definitions.">1. Definitions.</h3>
+        <p>“License” shall mean the terms and conditions for use,
+        reproduction, and distribution as defined by Sections 1 through
+        9 of this document.</p>
+        <p>“Licensor” shall mean the copyright owner or entity
+        authorized by the copyright owner that is granting the
+        License.</p>
+        <p>“Legal Entity” shall mean the union of the acting entity and
+        all other entities that control, are controlled by, or are under
+        common control with that entity. For the purposes of this
+        definition, “control” means (i) the power, direct or indirect,
+        to cause the direction or management of such entity, whether by
+        contract or otherwise, or (ii) ownership of fifty percent (50%)
+        or more of the outstanding shares, or (iii) beneficial ownership
+        of such entity.</p>
+        <p>“You” (or “Your”) shall mean an individual or Legal Entity
+        exercising permissions granted by this License.</p>
+        <p>“Source” form shall mean the preferred form for making
+        modifications, including but not limited to software source
+        code, documentation source, and configuration files.</p>
+        <p>“Object” form shall mean any form resulting from mechanical
+        transformation or translation of a Source form, including but
+        not limited to compiled object code, generated documentation,
+        and conversions to other media types.</p>
+        <p>“Work” shall mean the work of authorship, whether in Source
+        or Object form, made available under the License, as indicated
+        by a copyright notice that is included in or attached to the
+        work (an example is provided in the Appendix below).</p>
+        <p>“Derivative Works” shall mean any work, whether in Source or
+        Object form, that is based on (or derived from) the Work and for
+        which the editorial revisions, annotations, elaborations, or
+        other modifications represent, as a whole, an original work of
+        authorship. For the purposes of this License, Derivative Works
+        shall not include works that remain separable from, or merely
+        link (or bind by name) to the interfaces of, the Work and
+        Derivative Works thereof.</p>
+        <p>“Contribution” shall mean any work of authorship, including
+        the original version of the Work and any modifications or
+        additions to that Work or Derivative Works thereof, that is
+        intentionally submitted to Licensor for inclusion in the Work by
+        the copyright owner or by an individual or Legal Entity
+        authorized to submit on behalf of the copyright owner. For the
+        purposes of this definition, “submitted” means any form of
+        electronic, verbal, or written communication sent to the
+        Licensor or its representatives, including but not limited to
+        communication on electronic mailing lists, source code control
+        systems, and issue tracking systems that are managed by, or on
+        behalf of, the Licensor for the purpose of discussing and
+        improving the Work, but excluding communication that is
+        conspicuously marked or otherwise designated in writing by the
+        copyright owner as “Not a Contribution.”</p>
+        <p>“Contributor” shall mean Licensor and any individual or Legal
+        Entity on behalf of whom a Contribution has been received by
+        Licensor and subsequently incorporated within the Work.</p>
+        <h3 id="grant-of-copyright-license.">2. Grant of Copyright
+        License.</h3>
+        <p>Subject to the terms and conditions of this License, each
+        Contributor hereby grants to You a perpetual, worldwide,
+        non-exclusive, no-charge, royalty-free, irrevocable copyright
+        license to reproduce, prepare Derivative Works of, publicly
+        display, publicly perform, sublicense, and distribute the Work
+        and such Derivative Works in Source or Object form.</p>
+        <h3 id="grant-of-patent-license.">3. Grant of Patent
+        License.</h3>
+        <p>Subject to the terms and conditions of this License, each
+        Contributor hereby grants to You a perpetual, worldwide,
+        non-exclusive, no-charge, royalty-free, irrevocable (except as
+        stated in this section) patent license to make, have made, use,
+        offer to sell, sell, import, and otherwise transfer the Work,
+        where such license applies only to those patent claims
+        licensable by such Contributor that are necessarily infringed by
+        their Contribution(s) alone or by combination of their
+        Contribution(s) with the Work to which such Contribution(s) was
+        submitted. If You institute patent litigation against any entity
+        (including a cross-claim or counterclaim in a lawsuit) alleging
+        that the Work or a Contribution incorporated within the Work
+        constitutes direct or contributory patent infringement, then any
+        patent licenses granted to You under this License for that Work
+        shall terminate as of the date such litigation is filed.</p>
+        <h3 id="redistribution.">4. Redistribution.</h3>
+        <p>You may reproduce and distribute copies of the Work or
+        Derivative Works thereof in any medium, with or without
+        modifications, and in Source or Object form, provided that You
+        meet the following conditions:</p>
+        <ul>
+        <li>You must give any other recipients of the Work or Derivative
+        Works a copy of this License; and</li>
+        <li>You must cause any modified files to carry prominent notices
+        stating that You changed the files; and</li>
+        <li>You must retain, in the Source form of any Derivative Works
+        that You distribute, all copyright, patent, trademark, and
+        attribution notices from the Source form of the Work, excluding
+        those notices that do not pertain to any part of the Derivative
+        Works; and</li>
+        <li>If the Work includes a “NOTICE” text file as part of its
+        distribution, then any Derivative Works that You distribute must
+        include a readable copy of the attribution notices contained
+        within such NOTICE file, excluding those notices that do not
+        pertain to any part of the Derivative Works, in at least one of
+        the following places: within a NOTICE text file distributed as
+        part of the Derivative Works; within the Source form or
+        documentation, if provided along with the Derivative Works; or,
+        within a display generated by the Derivative Works, if and
+        wherever such third-party notices normally appear. The contents
+        of the NOTICE file are for informational purposes only and do
+        not modify the License. You may add Your own attribution notices
+        within Derivative Works that You distribute, alongside or as an
+        addendum to the NOTICE text from the Work, provided that such
+        additional attribution notices cannot be construed as modifying
+        the License. You may add Your own copyright statement to Your
+        modifications and may provide additional or different license
+        terms and conditions for use, reproduction, or distribution of
+        Your modifications, or for any such Derivative Works as a whole,
+        provided Your use, reproduction, and distribution of the Work
+        otherwise complies with the conditions stated in this
+        License.</li>
+        </ul>
+        <h3 id="submission-of-contributions.">5. Submission of
+        Contributions.</h3>
+        <p>Unless You explicitly state otherwise, any Contribution
+        intentionally submitted for inclusion in the Work by You to the
+        Licensor shall be under the terms and conditions of this
+        License, without any additional terms or conditions.
+        Notwithstanding the above, nothing herein shall supersede or
+        modify the terms of any separate license agreement you may have
+        executed with Licensor regarding such Contributions.</p>
+        <h3 id="trademarks.">6. Trademarks.</h3>
+        <p>This License does not grant permission to use the trade
+        names, trademarks, service marks, or product names of the
+        Licensor, except as required for reasonable and customary use in
+        describing the origin of the Work and reproducing the content of
+        the NOTICE file.</p>
+        <h3 id="disclaimer-of-warranty.">7. Disclaimer of Warranty.</h3>
+        <p>Unless required by applicable law or agreed to in writing,
+        Licensor provides the Work (and each Contributor provides its
+        Contributions) on an “AS IS” BASIS, WITHOUT WARRANTIES OR
+        CONDITIONS OF ANY KIND, either express or implied, including,
+        without limitation, any warranties or conditions of TITLE,
+        NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR
+        PURPOSE. You are solely responsible for determining the
+        appropriateness of using or redistributing the Work and assume
+        any risks associated with Your exercise of permissions under
+        this License.</p>
+        <h3 id="limitation-of-liability.">8. Limitation of
+        Liability.</h3>
+        <p>In no event and under no legal theory, whether in tort
+        (including negligence), contract, or otherwise, unless required
+        by applicable law (such as deliberate and grossly negligent
+        acts) or agreed to in writing, shall any Contributor be liable
+        to You for damages, including any direct, indirect, special,
+        incidental, or consequential damages of any character arising as
+        a result of this License or out of the use or inability to use
+        the Work (including but not limited to damages for loss of
+        goodwill, work stoppage, computer failure or malfunction, or any
+        and all other commercial damages or losses), even if such
+        Contributor has been advised of the possibility of such
+        damages.</p>
+        <h3 id="accepting-warranty-or-additional-liability.">9.
+        Accepting Warranty or Additional Liability.</h3>
+        <p>While redistributing the Work or Derivative Works thereof,
+        You may choose to offer, and charge a fee for, acceptance of
+        support, warranty, indemnity, or other liability obligations
+        and/or rights consistent with this License. However, in
+        accepting such obligations, You may act only on Your own behalf
+        and on Your sole responsibility, not on behalf of any other
+        Contributor, and only if You agree to indemnify, defend, and
+        hold each Contributor harmless for any liability incurred by, or
+        claims asserted against, such Contributor by reason of your
+        accepting any such warranty or additional liability.</p>
+        <p><em>END OF TERMS AND CONDITIONS</em></p>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>
 					<ul>
-<li><a href="#apache-license" id="toc-apache-license">Apache License</a>
-<ul>
-<li><a
-href="#terms-and-conditions-for-use-reproduction-and-distribution"
-id="toc-terms-and-conditions-for-use-reproduction-and-distribution">TERMS
-AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION</a>
-<ul>
-<li><a href="#definitions." id="toc-definitions.">1.
-Definitions.</a></li>
-<li><a href="#grant-of-copyright-license."
-id="toc-grant-of-copyright-license.">2. Grant of Copyright
-License.</a></li>
-<li><a href="#grant-of-patent-license."
-id="toc-grant-of-patent-license.">3. Grant of Patent License.</a></li>
-<li><a href="#redistribution." id="toc-redistribution.">4.
-Redistribution.</a></li>
-<li><a href="#submission-of-contributions."
-id="toc-submission-of-contributions.">5. Submission of
-Contributions.</a></li>
-<li><a href="#trademarks." id="toc-trademarks.">6. Trademarks.</a></li>
-<li><a href="#disclaimer-of-warranty."
-id="toc-disclaimer-of-warranty.">7. Disclaimer of Warranty.</a></li>
-<li><a href="#limitation-of-liability."
-id="toc-limitation-of-liability.">8. Limitation of Liability.</a></li>
-<li><a href="#accepting-warranty-or-additional-liability."
-id="toc-accepting-warranty-or-additional-liability.">9. Accepting
-Warranty or Additional Liability.</a></li>
-</ul></li>
-</ul></li>
-</ul>
+     <li><a href="#apache-license">Apache License</a>
+     <ul>
+     <li><a
+     href="#terms-and-conditions-for-use-reproduction-and-distribution">TERMS
+     AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION</a>
+     <ul>
+     <li><a href="#definitions.">1. Definitions.</a></li>
+     <li><a href="#grant-of-copyright-license.">2. Grant of Copyright
+     License.</a></li>
+     <li><a href="#grant-of-patent-license.">3. Grant of Patent
+     License.</a></li>
+     <li><a href="#redistribution.">4. Redistribution.</a></li>
+     <li><a href="#submission-of-contributions.">5. Submission of
+     Contributions.</a></li>
+     <li><a href="#trademarks.">6. Trademarks.</a></li>
+     <li><a href="#disclaimer-of-warranty.">7. Disclaimer of
+     Warranty.</a></li>
+     <li><a href="#limitation-of-liability.">8. Limitation of
+     Liability.</a></li>
+     <li><a href="#accepting-warranty-or-additional-liability.">9.
+     Accepting Warranty or Additional Liability.</a></li>
+     </ul></li>
+     </ul></li>
+     </ul>
 					<span class = "wide-only"><a href = "#">top</a></span>
 				</nav>
 							</div>

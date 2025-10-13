@@ -124,7 +124,7 @@ section.below-fold aside ul li::before {
 	color: #ebadf8;
 }
 
-nav.main a.active_link {
+nav.main a.active-link {
 	box-shadow: 1px 1px 1px #FFF4;
 	color: #F0F0F0;
 }

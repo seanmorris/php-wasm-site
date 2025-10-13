@@ -352,13 +352,19 @@ div.nag-bar strong {
 	font-size: 1rem;
 }
 
+div.nag-bar span.button,
+div.nag-bar img {
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.333);
+}
+
 div.nag-bar span.button {
 	display: inline-block;
 	background-color: #0677ff;
 	color: white;
-	padding: 1rem;
+	padding: 1rem 2rem;
 	border-radius: 3rem;
 	margin: 1rem;
+	font-size: 1rem;
 }
 
 div.nag-bar .prose {
