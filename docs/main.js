@@ -4,11 +4,11 @@ function resolveLines(...args)
 	for(const arg of args)
 	{
 		if(typeof arg === 'number')
-			{
-				lines.push(arg);
-			}
+		{
+			lines.push(arg);
+		}
 
-			if(typeof arg === 'string' && arg.match(/^\d+$/))
+		if(typeof arg === 'string' && arg.match(/^\d+$/))
 		{
 			lines.push(arg);
 		}
@@ -16,7 +16,7 @@ function resolveLines(...args)
 		if(typeof arg === 'string' && arg.match(/^\d+-\d+$/))
 		{
 			const [start, end] = arg.split('-').map(Number);
-			const range = Array(1 + -start + end).fill(0).map((_,i) => i + start);
+			const range = Array(1 + -start + end).fill(0).map((_, i) => i + start);
 			lines.push(...range);
 		}
 	}
@@ -28,7 +28,7 @@ function flicker(element, timeout)
 {
 	if(element.classList.contains('flickering')) return;
 	element.classList.add('flickering');
-	setTimeout(() => element.classList.remove('flickering'), timeout)
+	setTimeout(() => element.classList.remove('flickering'), timeout);
 }
 
 document.addEventListener('click', event => {
@@ -43,9 +43,9 @@ document.addEventListener('click', event => {
 		{
 			const url = new URL(href, location);
 
-			if((href.substr(0, 4) === 'http' || href.substr(0, 4) === '//'))
+			if(url.origin !== window.location.origin)
 			{
-				window.open(href);
+				window.open(href, '_blank', 'noopener,noreferrer');
 				event.preventDefault();
 				return;
 			}
@@ -89,6 +89,7 @@ document.addEventListener('mousedown', event => {
 	{
 		return;
 	}
+
 	let target = event.target;
 	let href;
 
@@ -107,25 +108,24 @@ document.addEventListener('mousedown', event => {
 	}
 });
 
-document.addEventListener('DOMContentLoaded', event => {
-
+document.addEventListener('DOMContentLoaded', () => {
 	const button = document.getElementById('burgerButton');
 
-	button.addEventListener('click', event => {
-		const newValue = (button.getAttribute('data-open') === 'false' || button.getAttribute('data-open') === '');
+	button && button.addEventListener('click', () => {
+		const newValue = button.getAttribute('data-open') === 'false' || button.getAttribute('data-open') === '';
 		button.setAttribute('data-open', newValue);
 		newValue
 			? document.body.classList.add('menu-open')
 			: document.body.classList.remove('menu-open');
 	});
 
-	const codeBlocks = document.querySelectorAll(`div.sourceCode`);
+	const codeBlocks = document.querySelectorAll('div.sourceCode');
 
 	for(const codeBlock of codeBlocks)
 	{
 		const lines = [...codeBlock.querySelectorAll('pre > code > span')];
 
-		const start = codeBlock.getAttribute('start');
+		const start = codeBlock.getAttribute('data-startfrom') ?? codeBlock.getAttribute('start');
 		if(start)
 		{
 			codeBlock.style.setProperty('--startFrom', start);
@@ -155,8 +155,11 @@ document.addEventListener('DOMContentLoaded', event => {
 			if(attribute.substring(0, prefix.length) === prefix)
 			{
 				const suffix = attribute.substring(prefix.length);
+				const lineSelectors = codeBlock.getAttribute(attribute).split(',');
 
-				const numbers = resolveLines(...codeBlock.getAttribute(attribute).split(',').map(n => n.trim()));
+				if(!lineSelectors.length) continue;
+
+				const numbers = resolveLines(...lineSelectors.map(n => n.trim()));
 
 				for(const number of numbers)
 				{
@@ -170,25 +173,4 @@ document.addEventListener('DOMContentLoaded', event => {
 			}
 		}
 	}
-
-	const nagBar = document.getElementById('nag-bar');
-	const openNag = document.getElementById('open-nag');
-	const closeNag = document.getElementById('close-nag');
-
-	const wasClosed = !!Number(sessionStorage.getItem('nagClosed') || 0);
-
-	if(nagBar && wasClosed)
-	{
-		nagBar.classList.add('closed');
-	}
-
-	closeNag && closeNag.addEventListener('click', event => {
-		sessionStorage.setItem('nagClosed', 1);
-		nagBar.classList.add('closed');
-	});
-
-	openNag && openNag.addEventListener('click', event => {
-		sessionStorage.setItem('nagClosed', 0);
-		nagBar.classList.remove('closed');
-	});
 });

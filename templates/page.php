@@ -68,7 +68,7 @@ $endif$
 	<?php endforeach; ?>
 </head>
 <body>
-	<div class = "nag-bar" id = "nag-bar">
+	<!-- <div class = "nag-bar" id = "nag-bar">
 		<div class = "page-rule">
 			<div class = "row">
 				<div class = "prose">
@@ -94,7 +94,7 @@ $endif$
 			<div class = "close-button" id = "close-nag"></div>
 			<div class = "open-button" id = "open-nag"></div>
 		</div>
-	</div>
+	</div> -->
 	<section class = "heading">
 		<div class = "page-rule">
 			<nav>

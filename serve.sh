@@ -2,6 +2,6 @@
 
 set -euo pipefail
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+SMGEN_BIN=${SMGEN_BIN:-smgen}
 
-exec "${SCRIPT_DIR}/smgen.sh" serve "$@"
+exec "${SMGEN_BIN}" serve "$@"

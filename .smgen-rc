@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
 TITLE_PREFIX=${TITLE_PREFIX:-"Php-Wasm"}
-BASE_URL=${BASE_URL:-"https://php-wasm.seanmorr.is"}
+# BASE_URL=${BASE_URL:-"https://php-wasm.seanmorr.is"}
 STATIC_DIR=${STATIC_DIR:-"./static"}
-UUID=${UUID:-"uuidgen"}
+SMG_SEARCH=${SMG_SEARCH:-""}
+
+CORE_ASSETS=$( cat <<-END
+	nav-state.js
+	main.js
+END
+)
 
 STYLES=$( cat <<-END
 	/style.css
@@ -20,6 +26,8 @@ END
 
 SCRIPTS=$( cat <<-END
 	/main.js
+	/nag-bar.js
+	/nav-state.js
 END
 )
 
