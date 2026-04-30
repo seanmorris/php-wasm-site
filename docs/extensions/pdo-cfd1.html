@@ -435,10 +435,10 @@
 						<div class = "page-content">
 				<article >
 								<h1 id="pdo-cfd1">pdo-cfd1</h1>
-        <p><em>pdo driver for CloudFlare D1 &amp; php-wasm</em></p>
+        <p><em>pdo driver for Cloudflare D1 &amp; php-wasm</em></p>
         <p><span class="highlight"><span class="citation"
         data-cites="todo">@todo</span>:</span> Walkthrough on compiling
-        php-wasm for cloudflare.</p>
+        php-wasm for Cloudflare.</p>
         <p>pdo_cfd1 requires PHP 8.1+.</p>
         <h2 id="connect-configure">Connect &amp; Configure</h2>
         <p>Pass the D1 object into the php-wasm constructor as a key to
@@ -455,7 +455,7 @@
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
         <p>You can check <code>phpinfo()</code> to make sure that the D1
         object is detected.
-        <code>CloudFlare D1 SQL module detected</code> will display
+        <code>Cloudflare D1 SQL module detected</code> will display
         “yes” when the object has been passed in correctly:</p>
         <p><img
         src="https://raw.githubusercontent.com/seanmorris/pdo-cfd1/refs/heads/master/phpinfo.png" /></p>
@@ -468,7 +468,7 @@
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="vs">        $pdo = new PDO(&#39;cfd1:main&#39;);</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="vs">        $pdo = new PDO(&#39;cfd1:mainDb&#39;);</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="vs">        $select = $pdo-&gt;prepare(</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="vs">            &#39;SELECT PageTitle, PageContent FROM WikiPages WHERE PageTitle = ?&#39;</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="vs">        );</span></span>
@@ -483,9 +483,9 @@
         <li><em>Error handling</em> - Error handling is currently very
         rudimentary and does not propagate messages.</li>
         </ul>
-        <h2 id="cloudflare-d1">CloudFlare D1</h2>
+        <h2 id="cloudflare-d1">Cloudflare D1</h2>
         <p><code>pdo_cfd1</code> is powered by <a
-        href="https://developers.cloudflare.com/d1/">CloudFlare
+        href="https://developers.cloudflare.com/d1/">Cloudflare
         D1</a>.</p>
         <p><a href="https://developers.cloudflare.com/d1/"
         class="uri">https://developers.cloudflare.com/d1/</a></p>
@@ -497,7 +497,7 @@
      <ul>
      <li><a href="#connect-configure">Connect &amp; Configure</a></li>
      <li><a href="#todo">Todo</a></li>
-     <li><a href="#cloudflare-d1">CloudFlare D1</a></li>
+     <li><a href="#cloudflare-d1">Cloudflare D1</a></li>
      </ul></li>
      </ul>
 					<span class = "wide-only"><a href = "#">top</a></span>

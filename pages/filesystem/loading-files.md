@@ -49,7 +49,7 @@ const { PhpWeb } = await import('https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mj
 const php = new PhpWeb({persist: {mountPath: '/persist'}});
 ```
 
-### NodeFS (NodeJS Only)
+### NodeFS (Node.js Only)
 
 To use NodeFS in PhpWeb, pass a `persist` object with `mountPath` & `localPath` keys.
 

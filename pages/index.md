@@ -16,7 +16,7 @@ microdata:
     runtimePlatform: webassembly
     codeRepository: https://github.com/seanmorris/php-wasm
     copyrightHolder: Sean Morris
-    copyrightYear: 2020-2024
+    copyrightYear: 2020-2026
     countryOfOrigin: USA
     headline: PHP powered by WebAssembly.
     isAccessibleForFree: true
@@ -34,17 +34,17 @@ PHP can now run in the browser as a counterpart to Javascript, and can either be
 	<ul>
 		<li>Embeds directly in HTML.</li>
 		<li>Full Access to JS APIs.</li>
-		<li>Runs in the Browser, Node, & CloudFlare.</li>
-		<li>Supports 17 of the top PHP Extensions.</li>
+		<li>Runs in the browser, Node.js, and Cloudflare Workers.</li>
+		<li>Supports a broad set of PHP extensions.</li>
 	</ul>
 	<p>Why even write Javascript anymore?</p>
 </aside>
 
 <p class = "strong">Standard PDO Database Connectors.</p>
-Php Wasm supports Sqlite, PostgreSQL, and CloudFlare's D1 SQL, all via PDO, so you can query your database just like you've always done it.
+Php Wasm supports SQLite, PostgreSQL, and Cloudflare D1, all via PDO, so you can query your database just like you've always done it.
 
 <p class = "strong">A Full Bridge To Javascript Code</p>
-The Vrzno extension allows PHP to gain access to any APIs available to Javascript. Objects, functions, and even classes can be imported from Javascript and used in PHP  as if they were native code. That opens up things like DOM APIs, or anything else the browser expose to Javascript. On the desktop, NodeJS packages like NodeGTK can be used to build desktop applications in PHP.
+The Vrzno extension allows PHP to gain access to any APIs available to Javascript. Objects, functions, and even classes can be imported from Javascript and used in PHP as if they were native code. That opens up things like DOM APIs, or anything else the browser exposes to Javascript. On the desktop, Node.js packages like NodeGTK can be used to build desktop applications in PHP.
 
 You can see a simple demo of the Curvature framework being used to generate some dynamic html [here](https://seanmorris.github.io/php-wasm/?demo=curvature.php), or a node-based version that allows PHP to access GTK [here](https://github.com/seanmorris/php-gtk).
 
@@ -58,7 +58,7 @@ You can see a simple demo of the Curvature framework being used to generate some
 		<img alt = "WordPress Logo" class = "downstream-logo" src = "wordpress-logo.svg" width = "144" height = "192" />
 	</a>
 	<p>
-		<a target = "_blank" href = "https://playground.wordpress.net/">Wordpress Playground</a>
+		<a target = "_blank" href = "https://playground.wordpress.net/">WordPress Playground</a>
 	</p>
 </aside>
 
@@ -68,9 +68,9 @@ Php Wasm is already powering cutting-edge frontend PHP applications like WordPre
 
 <p class = "strong">Fully Loaded with Batteries Included.</p>
 
-Php Wasm comes with support for **17** of the most commonly used PHP extensions, like LibXML, OpenSSL, Intl, ICU, GD, mbString + oniguruma, & zLib. Most of them can be loaded dynamically as shared objects, or compiled statically if your use case requires it. [View the whole list](/extensions/using-php-extensions.html#extension-list).
+Php Wasm comes with support for many of the most commonly used PHP extensions, including LibXML, OpenSSL, Intl, ICU, GD, mbstring + oniguruma, and zlib. Most of them can be loaded dynamically as shared objects, or compiled statically if your use case requires it. [View the whole list](/extensions/using-php-extensions.html#extension-list).
 
-Extensions can even be loaded in from a CDN like jsdelivr or unpkg, since they're wrapped in JS modules. You can learn how to do all that and more in the [docs](/extensions/using-php-extensions.html#dynamic-extensions-from-remote-servers).
+Extensions can even be loaded from a CDN like jsDelivr or unpkg, since they're wrapped in JS modules. You can learn how to do all that and more in the [docs](/extensions/using-php-extensions.html#dynamic-imports-for-extensions).
 
 <p class = "strong">Isomorphic PHP.</p>
 

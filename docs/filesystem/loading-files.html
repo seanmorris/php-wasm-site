@@ -481,7 +481,7 @@
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs&#39;</span>)<span class="op">;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">persist</span><span class="op">:</span> {<span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span>}})<span class="op">;</span></span></code></pre></div>
-        <h3 id="nodefs-nodejs-only">NodeFS (NodeJS Only)</h3>
+        <h3 id="nodefs-node.js-only">NodeFS (Node.js Only)</h3>
         <p>To use NodeFS in PhpWeb, pass a <code>persist</code> object
         with <code>mountPath</code> &amp; <code>localPath</code>
         keys.</p>
@@ -505,7 +505,7 @@
      <li><a href="#persistent-storage">Persistent Storage</a>
      <ul>
      <li><a href="#idbfs-web-worker">IDBFS (Web &amp; Worker)</a></li>
-     <li><a href="#nodefs-nodejs-only">NodeFS (NodeJS Only)</a></li>
+     <li><a href="#nodefs-node.js-only">NodeFS (Node.js Only)</a></li>
      </ul></li>
      </ul></li>
      </ul>

@@ -442,7 +442,7 @@
         build process.</p>
         <p>Example <code>.php-wasm-rc</code> file:</p>
         <pre class="make"><code># Select a PHP version
-PHP_VERSION=8.3
+PHP_VERSION=8.4
 
 # Build the package to a directory other than the current one (RELATIVE path)
 PHP_DIST_DIR=./public
@@ -468,7 +468,7 @@ INITIAL_MEMORY=2048MB
 ASSERTIONS=0
 
 # Select the optimization level
-OPTIMIZATION=3
+OPTIMIZE=3
 
 # Build with extensions
 WITH_GD=1
@@ -493,7 +493,7 @@ WITH_FREETYPE=1</code></pre>
         <div class="sourceCode" id="cb2"><pre
         class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">PRELOAD_ASSETS</span><span class="op">=</span><span class="st">&#39;/path/to/file.txt /some/directory /path/to/other_file.txt /some/other/directory&#39;</span></span></code></pre></div>
         <h3 id="php_version">PHP_VERSION</h3>
-        <p>8.0|8.1|8.2|<strong>8.3</strong></p>
+        <p>8.0|8.1|8.2|8.3|8.4|8.5</p>
         <hr />
         <h3 id="php_dist_dir">PHP_DIST_DIR</h3>
         <p>This is the directory where javascript &amp; wasm files will
@@ -576,7 +576,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <h3 id="with_libzip">WITH_LIBZIP</h3>
         <p>static|shared|<strong>dynamic</strong></p>
         <p>When compiled as a <code>dynamic</code> extension, this will
-        produce the extension <code>php-8.x-zip.so</code>.</p>
+        produce the extension <code>php8.x-zip.so</code>.</p>
         <p>When compiled as a <code>dynamic</code> or
         <code>shared</code> extension, it will produce the library
         <code>libzip.so</code>.</p>
@@ -585,7 +585,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <h3 id="with_iconv">WITH_ICONV</h3>
         <p>static|shared|<strong>dynamic</strong></p>
         <p>When compiled as a <code>dynamic</code> extension, this will
-        produce the extension <code>php-8.x-iconv.so</code>.</p>
+        produce the extension <code>php8.x-iconv.so</code>.</p>
         <p>When compiled as a <code>dynamic</code> or
         <code>shared</code> extension, it will produce the library
         <code>libiconv.so</code>.</p>
@@ -593,8 +593,8 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <h3 id="with_sqlite">WITH_SQLITE</h3>
         <p>static|shared|<strong>dynamic</strong></p>
         <p>When compiled as a <code>dynamic</code> extension, this will
-        produce the extensions <code>php-8.x-sqlite.so</code>, &amp;
-        <code>php-8.x-pdo-sqlite.so</code>.</p>
+        produce the extensions <code>php8.x-sqlite.so</code>, &amp;
+        <code>php8.x-pdo-sqlite.so</code>.</p>
         <p>When compiled as a <code>dynamic</code> or
         <code>shared</code> extension, it will produce the library
         <code>libsqlite3.so</code>.</p>
@@ -604,7 +604,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <p>If WITH_GD is set to dynamic, then libpng, libjpeg, and
         freetype will load after GD is loaded.</p>
         <p>When compiled as a <code>dynamic</code> extension, this will
-        produce the extension <code>php-8.x-gd.so</code>.</p>
+        produce the extension <code>php8.x-gd.so</code>.</p>
         <hr />
         <h3 id="with_libpng">WITH_LIBPNG</h3>
         <p>static|<strong>shared</strong></p>
@@ -630,7 +630,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <h3 id="with_zlib">WITH_ZLIB</h3>
         <p>static|shared|<strong>dynamic</strong></p>
         <p>When compiled as a <code>dynamic</code> extension, this will
-        produce the extension <code>php-8.x-zlib.so</code>.</p>
+        produce the extension <code>php8.x-zlib.so</code>.</p>
         <p>When compiled as a <code>dynamic</code> or
         <code>shared</code> extension, it will produce the library
         <code>libz.so</code>.</p>
@@ -638,7 +638,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <h3 id="with_yaml">WITH_YAML</h3>
         <p>static|shared|<strong>dynamic</strong></p>
         <p>When compiled as a <code>dynamic</code> extension, this will
-        produce the extension <code>php-8.x-yaml.so</code>.</p>
+        produce the extension <code>php8.x-yaml.so</code>.</p>
         <p>When compiled as a <code>dynamic</code> or
         <code>shared</code> extension, it will produce the library
         <code>libyaml.so</code>.</p>
@@ -646,7 +646,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <h3 id="with_tidy">WITH_TIDY</h3>
         <p>static|shared|<strong>dynamic</strong></p>
         <p>When compiled as a <code>dynamic</code> extension, this will
-        produce the extension <code>php-8.x-tidy.so</code>.</p>
+        produce the extension <code>php8.x-tidy.so</code>.</p>
         <p>When compiled as a <code>dynamic</code> or
         <code>shared</code> extension, it will produce the library
         <code>libtidy.so</code>.</p>
@@ -654,7 +654,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <h3 id="with_mbstring">WITH_MBSTRING</h3>
         <p>static|<strong>dynamic</strong></p>
         <p>When compiled as a <code>dynamic</code> extension, this will
-        produce the extension <code>php-8.x-mbstring.so</code>.</p>
+        produce the extension <code>php8.x-mbstring.so</code>.</p>
         <hr />
         <h3 id="with_oniguruma">WITH_ONIGURUMA</h3>
         <p>static|shared|<strong>dynamic</strong></p>
@@ -669,7 +669,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <h3 id="with_openssl">WITH_OPENSSL</h3>
         <p>shared|<strong>dynamic</strong></p>
         <p>When compiled as a <code>dynamic</code> extension, this will
-        produce the extension <code>php-8.x-openssl</code>.</p>
+        produce the extension <code>php8.x-openssl.so</code>.</p>
         <p>When compiled as a <code>dynamic</code> or
         <code>shared</code> extension, it will produce the libraries
         <code>libssl.so</code> &amp; <code>libcrypto.so</code>.</p>
@@ -678,7 +678,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <p>static|shared|<strong>dynamic</strong></p>
         <p>When compiled as a <code>dynamic</code>, or
         <code>shared</code> extension, this will produce the extension
-        <code>php-8.x-intl.so</code> &amp; the following libraries:</p>
+        <code>php8.x-intl.so</code> &amp; the following libraries:</p>
         <ul>
         <li>libicuuc.so</li>
         <li>libicutu.so</li>

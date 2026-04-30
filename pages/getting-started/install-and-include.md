@@ -6,11 +6,11 @@ weight: -900
 
 Include the module in your preferred format:
 
-## from a cdn
+## From a CDN
 
-Using ESM modules, you can import php-wasm directly from a cdn:
+Using ESM modules, you can import php-wasm directly from a CDN:
 
-### jsdelivr
+### jsDelivr
 
 ```javascript
 const { PhpWeb } = await import('https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs');
@@ -20,7 +20,7 @@ const php = new PhpWeb;
 ### unpkg
 
 ```javascript
-const { PhpWeb } = await import('https://www.unpkg.com/php-wasm/php-wasm/PhpWeb.mjs');
+const { PhpWeb } = await import('https://unpkg.com/php-wasm/PhpWeb.mjs');
 const php = new PhpWeb;
 ```
 
@@ -30,19 +30,30 @@ You can also install php-wasm with npm.
 
 [Find php-wasm on npm](https://www.npmjs.com/package/php-wasm)
 
-### Latest Alpha
-
-```sh
-$ npm i php-wasm@alpha
-$ npm i php-cgi-wasm@alpha
-```
-
-### Latest Stable
+### Current packages
 
 ```sh
 $ npm i php-wasm
 $ npm i php-cgi-wasm
+$ npm i php-wasm-builder
 ```
+
+### Latest nightly build
+
+If you want the newest unpublished artifacts instead of the npm packages, use the latest successful `Build Artifacts` workflow run from GitHub Actions.
+
+As of February 24, 2026, the latest successful nightly artifact build is:
+
+- `Build Artifacts` run `#92`
+- GitHub Actions run ID `22360005357`
+- Branch: `develop`
+- Versions built: PHP `8.0` through `8.5`
+- Library modes built: `static`, `shared`, and `dynamic`
+- Discord: nightly builds are announced in `#nightly-builds`
+
+Link:
+
+<https://github.com/seanmorris/php-wasm/actions/runs/22360005357>
 
 #### Pre-Packaged Static Assets:
 

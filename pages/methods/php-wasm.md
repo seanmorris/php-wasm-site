@@ -5,7 +5,7 @@ itemtype: schema.org/Class
 microdata:
     name: PhpWasm
     alternateName: PhpWorker
-    alternateName: PhpWebView
+    alternateName: PhpWebview
     alternateName: PhpNode
     alternateName: PhpWeb
 ---
@@ -13,16 +13,123 @@ microdata:
 
 ## constructor
 
-<span class = "highlight">@todo</span> Document constructor options object.
+The concrete `php-wasm` classes all extend the same base runtime API:
+
+- `PhpWeb`
+- `PhpWebview`
+- `PhpWorker`
+- `PhpNode`
+
+All four accept the same core options bucket, with different defaults for binary loading and filesystem persistence depending on environment.
+
+### Common constructor options
+
+### version
+
+*string*
+
+Selects the PHP runtime version to load. The current defaults in `source/` are `8.4` for `PhpWeb`, `PhpWorker`, and `PhpNode`.
+
+```javascript
+const php = new PhpWeb({version: '8.4'});
+```
+
+### variant
+
+*string*
+
+Optional build suffix appended to the runtime filename.
+
+```javascript
+const php = new PhpWeb({version: '8.4', variant: '-debug'});
+```
+
+### sharedLibs
+
+*array of strings or objects*
+
+Loads shared extensions before boot and writes `extension=...` lines for any item with `ini: true`.
+
+```javascript
+const php = new PhpWeb({
+  sharedLibs: [
+    { url: 'https://unpkg.com/php-wasm-sqlite/php8.4-sqlite.so', ini: true },
+    { url: 'https://unpkg.com/php-wasm-sqlite/sqlite.so', ini: false },
+  ]
+});
+```
+
+### dynamicLibs
+
+*array of strings or objects*
+
+Resolved the same way as `sharedLibs`, but never written into `php.ini`.
+
+### files
+
+*array of objects*
+
+Preloads arbitrary files into the runtime before startup.
+
+```javascript
+const php = new PhpWeb({
+  files: [
+    {
+      name: 'icudt72l.dat',
+      parent: '/preload/',
+      url: 'https://unpkg.com/php-wasm-intl/icudt72l.dat'
+    }
+  ]
+});
+```
+
+### locateFile
+
+*function(path, directory): string | undefined*
+
+Overrides how `.wasm`, shared libraries, preload assets, and other runtime files are resolved.
+
+### ini
+
+*string*
+
+Additional `php.ini` lines appended to the generated runtime config.
+
+```javascript
+const php = new PhpWeb({ini: `
+display_errors=1
+memory_limit=256M
+`});
+```
+
+### persist
+
+*object or array*
+
+Mounts persistent filesystems. In web runtimes this is typically IDBFS, and in `PhpNode` it can point to a host directory.
+
+### autoTransaction
+
+*boolean*
+
+Defaults to `true`. Controls whether queued operations automatically start and commit filesystem transactions.
+
+### shared
+
+*object*
+
+Shared JS object registry used internally by `php.x` and `php.r` when VRZNO is enabled. You generally do not need to set this manually.
 
 ## php.run
 
-Run a php script. Code should start with the opening `<?php` tag and may optionally close with `?>` to allow for HTML interpolation.
+Run a PHP script and return its numeric exit code. `php.run()` is the right choice when you want script semantics, output on STDOUT/STDERR, or mixed PHP/HTML.
 
-Will return a non-zero value in case of error. You'll need to use [event listeners](/getting-started/php-in-js.html#running-php-taking-output) to get output.
+The examples in this project use an opening `<?php` tag, and that remains the safest form to document and copy.
+
+You'll need to use [event listeners](/getting-started/php-in-js.html#running-php-taking-output) to capture output.
 
 ```javascript
-php.run(`<?php
+const exitCode = await php.run(`<?php
     $time = strtotime('8:00pm 2 days ago');
     $date = date('Y-m-d H:i:s', $time);
     echo $date;`
@@ -31,14 +138,22 @@ php.run(`<?php
 
 ## php.exec
 
-Similar to `php.run()`, but executes a single PHP *statement* rather than an entire script. Code should ***not*** start with a `<?php` tag and should ***not*** end in a semicolon.
+Execute a single PHP expression and return the result as a string.
 
-The return value of the PHP statement will be the return value of `php.exec`. If Vrzno is enabled and a function or object is returned, the value will be marshalled to Javascript.
+Unlike `php.run()`, this should:
+
+- not start with `<?php`
+- not end in a semicolon
+- evaluate to one expression
+
+Multiple steps can be wrapped in an IIFE.
+
+If you want automatic JS marshalling for functions, arrays, objects, or other VRZNO-backed values, use `php.x` instead.
 
 To run multiple commands in a single statement, use an [IIFE](https://en.wikipedia.org/wiki/Immediately_invoked_function_expression).
 
 ```javascript
-php.exec(`(function() {
+const date = await php.exec(`(function() {
     $time = strtotime('8:00pm 2 days ago');
     $date = date('Y-m-d H:i:s', $time);
     return $date;
@@ -52,7 +167,7 @@ Tagged template function companion to `php.run()`. If Vrzno is enabled, allows r
 Just like `php.run()`, this will return a non-zero value in case of error.
 
 ```javascript
-php.r`<?php
+const exitCode = await php.r`<?php
     $time = strtotime('8:00pm 2 days ago');
     $date = date('Y-m-d H:i:s', $time);
     echo $date;`;
@@ -62,20 +177,38 @@ php.r`<?php
 
 Tagged template function companion to `php.exec()`. If Vrzno is enabled, allows rich JS values to be interpolated into PHP code.
 
-Just like `php.exec()` this value may only run a single PHP statement at a time and returns the JS value directly to PHP.
+Like `php.exec()`, this may only evaluate a single expression at a time. Unlike `php.exec()`, it will marshal the result back into Javascript when VRZNO support is available.
 
 ```javascript
-const date = php.x`(function() {
-    $time = strtotime('8:00pm 2 days ago');
-    $date = date('Y-m-d H:i:s', $time);
-    return $date;
-})();`;
+const callback = await php.x`function() {
+    return 321;
+}`;
+
+const value = callback();
 ```
 
 ## php.refresh
 
-Clears the memory. If any objects, arrays or functions have been returned to JS, these will become invalid when php is refreshed.
+Refreshes the PHP runtime and clears in-memory state. Any JS handles backed by live PHP values become invalid after a refresh.
 
 ```javascript
-php.refresh();
+await php.refresh();
 ```
+
+## Input and Filesystem Helpers
+
+All `PhpBase` implementations also expose the queued helper methods below:
+
+- `php.inputString(string)`
+- `php.input(bytes)`
+- `php.analyzePath(path)`
+- `php.readdir(path)`
+- `php.readFile(path, options)`
+- `php.stat(path)`
+- `php.mkdir(path)`
+- `php.rmdir(path)`
+- `php.rename(path, newPath)`
+- `php.writeFile(path, data, options)`
+- `php.unlink(path)`
+
+These methods run through the same queueing and transaction logic as `run`, `exec`, `r`, and `x`.

@@ -4,7 +4,7 @@ weight: -700
 ---
 # Php-Wasm in Static HTML
 
-PHP can be included in static HTML pages that are served with no dynamic processing on the backend whatsoever. Just use the `php-tags.js` script from a CDN in your page:
+PHP can be included in static HTML pages that are served with no dynamic processing on the backend whatsoever. Just use one of the `php-tags` module entrypoints from a CDN in your page:
 
 **JSDelivr**
 
@@ -15,7 +15,7 @@ PHP can be included in static HTML pages that are served with no dynamic process
 **Unpkg**
 
 ```html
-<script async type = "text/javascript" src = "https://www.unpkg.com/php-wasm/php-tags.unpkg.mjs"></script>
+<script async type = "text/javascript" src = "https://unpkg.com/php-wasm/php-tags.unpkg.mjs"></script>
 ```
 
 Once you've included that, you can start writing php within `<script type = "text/php">` tags:
@@ -48,7 +48,7 @@ The `src` attribute can be used on `<script type = "text/php">` tags, as well as
 ``` { .html highlight="4,5" }
 <html>
 	<head>
-		<script async type = "module" src = "https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/php-tags.mjs"></script>
+		<script async type = "module" src = "https://cdn.jsdelivr.net/npm/php-wasm/php-tags.mjs"></script>
 		<script id = "input" src = "/test-input.json" type = "text/json"></script>
 		<script type = "text/php" src = "/test.php" data-stdin = "#input" data-stdout = "#output" data-stderr = "#error"></script>
 	</head>
@@ -68,7 +68,7 @@ Dynamic extensions can be loaded in static webpages like so:
     data-stdout = "#output"
     data-stderr = "#error"
     data-libs = '[
-        {"url": "https://unpkg.com/php-wasm-yaml/php8.3-yaml.so", "ini": true},
+        {"url": "https://unpkg.com/php-wasm-yaml/php8.4-yaml.so", "ini": true},
         {"url": "https://unpkg.com/php-wasm-yaml/libyaml.so", "ini": false}]'
 ><?php
   print yaml_emit([1,2,3,"string",["k1" => "value", "k2" => "value2", "k3" => "value3"],"now" => date("Y-m-d h:i:s")]);
@@ -83,15 +83,15 @@ Here is a less-than-trivial example that loads zlib, gd, libwebp & others:
 
 ```html
 <a target = "_blank" href = "https://github.com/seanmorris/php-wasm">https://github.com/seanmorris/php-wasm</a><hr />
-<script async type = "module" src = "https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/php-tags.mjs"></script>
+<script async type = "module" src = "https://cdn.jsdelivr.net/npm/php-wasm/php-tags.mjs"></script>
 <script
   type = "text/php"
   data-stdout = "div#output"
   data-stderr = "pre#error"
   data-libs   = '[
-    {"url": "https://unpkg.com/php-wasm-zlib/php8.3-zlib.so", "ini": true},
+    {"url": "https://unpkg.com/php-wasm-zlib/php8.4-zlib.so", "ini": true},
     {"url": "https://unpkg.com/php-wasm-zlib/libz.so",        "ini": false},
-    {"url": "https://unpkg.com/php-wasm-gd/php8.3-gd.so",     "ini": true},
+    {"url": "https://unpkg.com/php-wasm-gd/php8.4-gd.so",     "ini": true},
     {"url": "https://unpkg.com/php-wasm-gd/libpng.so",        "ini": false},
     {"url": "https://unpkg.com/php-wasm-gd/libjpeg.so",       "ini": false},
     {"url": "https://unpkg.com/php-wasm-gd/libwebp.so",       "ini": false},
@@ -131,3 +131,5 @@ Here is a less-than-trivial example that loads zlib, gd, libwebp & others:
 <pre id = "error"></pre>
 
 ```
+
+The examples above assume the default `php-tags` runtime version (`8.4` at the moment). If you set a different `data-version`, update the `php8.x-*.so` filenames to match.

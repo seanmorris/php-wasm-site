@@ -9,6 +9,8 @@ weight: -1000
 
 <span style = "font-size:larger">Join the community: [reddit](https://www.reddit.com/r/phpwasm/) | [discord](https://discord.gg/j8VZzju7gJ)</span>
 
+Nightly builds are announced in the `#nightly-builds` channel on the `php-wasm` Discord server.
+
 ## Getting Started
 
 To install php-wasm with npm, see [INSTALLING](/getting-started/install-and-include.html).
@@ -19,32 +21,26 @@ If you want to write pure frontend PHP and skip the JS entirely, see [PHP In Sta
 
 If you'd like to spin up a webserver right in your browser, see [PHP-CGI In Service Workers](/getting-started/cgi-service-worker.html).
 
-If you'd like to serve websites with Node.js [PHP-CGI In NodeJs](/getting-started/cgi-in-nodeJs.html).
+If you'd like to serve websites with Node.js, see [PHP-CGI In Node.js](/getting-started/cgi-in-nodeJs.html).
 
 ## Demo
 
 <iframe class="video" src="https://www.youtube.com/embed/rQ-_KMgUtFg?si=mPylUsIqa1FTwSjP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
 </iframe>
 
-## Updates
+## Nightly Builds
 
-**v0.0.9 - Aiming for the (GitHub) Stars**
+The latest successful nightly artifact build published from GitHub Actions is the `Build Artifacts` workflow run on `develop` from **February 24, 2026**:
 
-* Adding PHP-CGI support!
-* Runtime extension loading!
-* libicu, freetype, zlib, gd, libpng, libjpeg, openssl, & phar support.
-* php-wasm, php-cgi-wasm, & php-wasm-builder are now separate packages.
-* Vrzno now facilitates url fopen via the fetch() api.
-* pdo_cfd1 is now a separate extension from Vrzno.
-* pdo_pglite adds local Postgres support.
-* SQLite is now using version 3.46.
-* Demos for CodeIgniter, CakePHP, Laravel & Laminas.
-* Drupal & all other demos now use standard build + zip install.
-* Modules are now webpack-compatible out of the box.
-* Exposing FS methods w/queueing & locking to sync files between tabs & workers.
-* Fixed the bug with POST requests under Firefox.
-* Adding support for PHP 8.3.7
-* Automatic CI testing for PHP 8.0, 8.1, 8.2 & 8.3.
+- Run `#92`
+- GitHub Actions run ID `22360005357`
+- PHP `8.0`, `8.1`, `8.2`, `8.3`, `8.4`, and `8.5`
+- `static`, `shared`, and `dynamic` library builds
+- Discord: nightly builds are announced in `#nightly-builds`
+
+<https://github.com/seanmorris/php-wasm/actions/runs/22360005357>
+
+For historical release notes, see the [CHANGELOG](/CHANGELOG.html).
 
 ## 🍻 Licensed under the Apache License, Version 2.0
 

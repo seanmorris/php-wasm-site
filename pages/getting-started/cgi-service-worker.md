@@ -55,7 +55,7 @@ const result = await sendMessage(methodName, [param, param, param]);
 * Use `sendMessageFor` to **GENERATE A FUNCTION** that you can use to send messages to your service worker.
 
 ```{ .javascript highlight="9,11" }
-import { onMessage, sendMessageFor } from `php-cgi-wasm/msg-bus`;
+import { onMessage, sendMessageFor } from 'php-cgi-wasm/msg-bus';
 
 const SERVICE_WORKER_SCRIPT_URL = '/cgi-worker.mjs';
 

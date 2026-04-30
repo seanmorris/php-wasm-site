@@ -50,7 +50,7 @@ You can see this working live on CodePen:
 
 ```javascript
 (async () => {
-  const { PhpWeb } = await import('https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/PhpWeb.mjs');
+  const { PhpWeb } = await import('https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs');
   const php = new PhpWeb;
   const input  = document.querySelector('#date-input');
   const format = document.querySelector('#date-format');
@@ -82,7 +82,7 @@ You can see this working live on CodePen:
 
 ```{ .javascript highlight="10-12" }
 (async () => {
-  const { PhpWeb } = await import('https://cdn.jsdelivr.net/npm/php-wasm@0.0.9-alpha-20/PhpWeb.mjs');
+  const { PhpWeb } = await import('https://cdn.jsdelivr.net/npm/php-wasm/PhpWeb.mjs');
 
   const php = new PhpWeb;
 

@@ -14,6 +14,7 @@ You can use [.php-wasm-rc](/compiling/php-wasm-rc.html) to customize your build.
 Install `php-wasm-builder` globally:
 
 ***Requires:***
+
 * Docker
 * Docker Compose
 * Coreutils
@@ -128,15 +129,17 @@ $ php-wasm-builder build web mjs
 $ php-wasm-builder build node mjs
 ```
 
+The current builder script defaults to `js` output unless you pass `mjs`.
+
 ## CGI Modules:
 
 Build CGI modules with:
 
 ```sh
 $ php-wasm-builder build web cgi mjs
+$ php-wasm-builder build node cgi mjs
 $ php-wasm-builder build worker cgi mjs
 ```
 ## PHP_DIST_DIR
 
 This will build the package inside of the current directory (or in `PHP_DIST_DIR`, *see [.php-wasm-rc](/compiling/php-wasm-rc.html) for more info.*)
-

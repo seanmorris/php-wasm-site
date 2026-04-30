@@ -382,6 +382,9 @@
         <p><span style="font-size:larger">Join the community: <a
         href="https://www.reddit.com/r/phpwasm/">reddit</a> | <a
         href="https://discord.gg/j8VZzju7gJ">discord</a></span></p>
+        <p>Nightly builds are announced in the
+        <code>#nightly-builds</code> channel on the
+        <code>php-wasm</code> Discord server.</p>
         <h2 id="getting-started">Getting Started</h2>
         <p>To install php-wasm with npm, see <a
         href="/getting-started/install-and-include.html">INSTALLING</a>.</p>
@@ -395,35 +398,32 @@
         <p>If you’d like to spin up a webserver right in your browser,
         see <a href="/getting-started/cgi-service-worker.html">PHP-CGI
         In Service Workers</a>.</p>
-        <p>If you’d like to serve websites with Node.js <a
+        <p>If you’d like to serve websites with Node.js, see <a
         href="/getting-started/cgi-in-nodeJs.html">PHP-CGI In
-        NodeJs</a>.</p>
+        Node.js</a>.</p>
         <h2 id="demo">Demo</h2>
         <iframe class="video" src="https://www.youtube.com/embed/rQ-_KMgUtFg?si=mPylUsIqa1FTwSjP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
         </iframe>
-        <h2 id="updates">Updates</h2>
-        <p><strong>v0.0.9 - Aiming for the (GitHub) Stars</strong></p>
+        <h2 id="nightly-builds">Nightly Builds</h2>
+        <p>The latest successful nightly artifact build published from
+        GitHub Actions is the <code>Build Artifacts</code> workflow run
+        on <code>develop</code> from <strong>February 24,
+        2026</strong>:</p>
         <ul>
-        <li>Adding PHP-CGI support!</li>
-        <li>Runtime extension loading!</li>
-        <li>libicu, freetype, zlib, gd, libpng, libjpeg, openssl, &amp;
-        phar support.</li>
-        <li>php-wasm, php-cgi-wasm, &amp; php-wasm-builder are now
-        separate packages.</li>
-        <li>Vrzno now facilitates url fopen via the fetch() api.</li>
-        <li>pdo_cfd1 is now a separate extension from Vrzno.</li>
-        <li>pdo_pglite adds local Postgres support.</li>
-        <li>SQLite is now using version 3.46.</li>
-        <li>Demos for CodeIgniter, CakePHP, Laravel &amp; Laminas.</li>
-        <li>Drupal &amp; all other demos now use standard build + zip
-        install.</li>
-        <li>Modules are now webpack-compatible out of the box.</li>
-        <li>Exposing FS methods w/queueing &amp; locking to sync files
-        between tabs &amp; workers.</li>
-        <li>Fixed the bug with POST requests under Firefox.</li>
-        <li>Adding support for PHP 8.3.7</li>
-        <li>Automatic CI testing for PHP 8.0, 8.1, 8.2 &amp; 8.3.</li>
+        <li>Run <code>#92</code></li>
+        <li>GitHub Actions run ID <code>22360005357</code></li>
+        <li>PHP <code>8.0</code>, <code>8.1</code>, <code>8.2</code>,
+        <code>8.3</code>, <code>8.4</code>, and <code>8.5</code></li>
+        <li><code>static</code>, <code>shared</code>, and
+        <code>dynamic</code> library builds</li>
+        <li>Discord: nightly builds are announced in
+        <code>#nightly-builds</code></li>
         </ul>
+        <p><a
+        href="https://github.com/seanmorris/php-wasm/actions/runs/22360005357"
+        class="uri">https://github.com/seanmorris/php-wasm/actions/runs/22360005357</a></p>
+        <p>For historical release notes, see the <a
+        href="/CHANGELOG.html">CHANGELOG</a>.</p>
         <h2 id="licensed-under-the-apache-license-version-2.0">🍻
         Licensed under the Apache License, Version 2.0</h2>
         <p>Licensed under the Apache License, Version 2.0 (the
@@ -443,7 +443,7 @@
      <ul>
      <li><a href="#getting-started">Getting Started</a></li>
      <li><a href="#demo">Demo</a></li>
-     <li><a href="#updates">Updates</a></li>
+     <li><a href="#nightly-builds">Nightly Builds</a></li>
      <li><a href="#licensed-under-the-apache-license-version-2.0">🍻
      Licensed under the Apache License, Version 2.0</a></li>
      </ul></li>

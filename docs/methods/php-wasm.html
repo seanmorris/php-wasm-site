@@ -438,83 +438,205 @@
 								<meta itemprop = "name" content = "PhpWasm" />
 								<h1 id="php-wasm-methods">Php-Wasm Methods</h1>
         <h2 id="constructor">constructor</h2>
-        <p><span class="highlight"><span class="citation"
-        data-cites="todo">@todo</span></span> Document constructor
-        options object.</p>
-        <h2 id="php.run">php.run</h2>
-        <p>Run a php script. Code should start with the opening
-        <code>&lt;?php</code> tag and may optionally close with
-        <code>?&gt;</code> to allow for HTML interpolation.</p>
-        <p>Will return a non-zero value in case of error. You’ll need to
-        use <a
-        href="/getting-started/php-in-js.html#running-php-taking-output">event
-        listeners</a> to get output.</p>
+        <p>The concrete <code>php-wasm</code> classes all extend the
+        same base runtime API:</p>
+        <ul>
+        <li><code>PhpWeb</code></li>
+        <li><code>PhpWebview</code></li>
+        <li><code>PhpWorker</code></li>
+        <li><code>PhpNode</code></li>
+        </ul>
+        <p>All four accept the same core options bucket, with different
+        defaults for binary loading and filesystem persistence depending
+        on environment.</p>
+        <h3 id="common-constructor-options">Common constructor
+        options</h3>
+        <h3 id="version">version</h3>
+        <p><em>string</em></p>
+        <p>Selects the PHP runtime version to load. The current defaults
+        in <code>source/</code> are <code>8.4</code> for
+        <code>PhpWeb</code>, <code>PhpWorker</code>, and
+        <code>PhpNode</code>.</p>
         <div class="sourceCode" id="cb1"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;`</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span>})<span class="op">;</span></span></code></pre></div>
+        <h3 id="variant">variant</h3>
+        <p><em>string</em></p>
+        <p>Optional build suffix appended to the runtime filename.</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span><span class="op">,</span> <span class="dt">variant</span><span class="op">:</span> <span class="st">&#39;-debug&#39;</span>})<span class="op">;</span></span></code></pre></div>
+        <h3 id="sharedlibs">sharedLibs</h3>
+        <p><em>array of strings or objects</em></p>
+        <p>Loads shared extensions before boot and writes
+        <code>extension=...</code> lines for any item with
+        <code>ini: true</code>.</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">sharedLibs</span><span class="op">:</span> [</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/php8.4-sqlite.so&#39;</span><span class="op">,</span> <span class="dt">ini</span><span class="op">:</span> <span class="kw">true</span> }<span class="op">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/sqlite.so&#39;</span><span class="op">,</span> <span class="dt">ini</span><span class="op">:</span> <span class="kw">false</span> }<span class="op">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+        <h3 id="dynamiclibs">dynamicLibs</h3>
+        <p><em>array of strings or objects</em></p>
+        <p>Resolved the same way as <code>sharedLibs</code>, but never
+        written into <code>php.ini</code>.</p>
+        <h3 id="files">files</h3>
+        <p><em>array of objects</em></p>
+        <p>Preloads arbitrary files into the runtime before startup.</p>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">files</span><span class="op">:</span> [</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;icudt72l.dat&#39;</span><span class="op">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">parent</span><span class="op">:</span> <span class="st">&#39;/preload/&#39;</span><span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-intl/icudt72l.dat&#39;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+        <h3 id="locatefile">locateFile</h3>
+        <p><em>function(path, directory): string | undefined</em></p>
+        <p>Overrides how <code>.wasm</code>, shared libraries, preload
+        assets, and other runtime files are resolved.</p>
+        <h3 id="ini">ini</h3>
+        <p><em>string</em></p>
+        <p>Additional <code>php.ini</code> lines appended to the
+        generated runtime config.</p>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">ini</span><span class="op">:</span> <span class="vs">`</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="vs">display_errors=1</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="vs">memory_limit=256M</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>})<span class="op">;</span></span></code></pre></div>
+        <h3 id="persist">persist</h3>
+        <p><em>object or array</em></p>
+        <p>Mounts persistent filesystems. In web runtimes this is
+        typically IDBFS, and in <code>PhpNode</code> it can point to a
+        host directory.</p>
+        <h3 id="autotransaction">autoTransaction</h3>
+        <p><em>boolean</em></p>
+        <p>Defaults to <code>true</code>. Controls whether queued
+        operations automatically start and commit filesystem
+        transactions.</p>
+        <h3 id="shared">shared</h3>
+        <p><em>object</em></p>
+        <p>Shared JS object registry used internally by
+        <code>php.x</code> and <code>php.r</code> when VRZNO is enabled.
+        You generally do not need to set this manually.</p>
+        <h2 id="php.run">php.run</h2>
+        <p>Run a PHP script and return its numeric exit code.
+        <code>php.run()</code> is the right choice when you want script
+        semantics, output on STDOUT/STDERR, or mixed PHP/HTML.</p>
+        <p>The examples in this project use an opening
+        <code>&lt;?php</code> tag, and that remains the safest form to
+        document and copy.</p>
+        <p>You’ll need to use <a
+        href="/getting-started/php-in-js.html#running-php-taking-output">event
+        listeners</a> to capture output.</p>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> exitCode <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;`</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
         <h2 id="php.exec">php.exec</h2>
-        <p>Similar to <code>php.run()</code>, but executes a single PHP
-        <em>statement</em> rather than an entire script. Code should
-        <strong><em>not</em></strong> start with a <code>&lt;?php</code>
-        tag and should <strong><em>not</em></strong> end in a
-        semicolon.</p>
-        <p>The return value of the PHP statement will be the return
-        value of <code>php.exec</code>. If Vrzno is enabled and a
-        function or object is returned, the value will be marshalled to
-        Javascript.</p>
+        <p>Execute a single PHP expression and return the result as a
+        string.</p>
+        <p>Unlike <code>php.run()</code>, this should:</p>
+        <ul>
+        <li>not start with <code>&lt;?php</code></li>
+        <li>not end in a semicolon</li>
+        <li>evaluate to one expression</li>
+        </ul>
+        <p>Multiple steps can be wrapped in an IIFE.</p>
+        <p>If you want automatic JS marshalling for functions, arrays,
+        objects, or other VRZNO-backed values, use <code>php.x</code>
+        instead.</p>
         <p>To run multiple commands in a single statement, use an <a
         href="https://en.wikipedia.org/wiki/Immediately_invoked_function_expression">IIFE</a>.</p>
-        <div class="sourceCode" id="cb2"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">exec</span>(<span class="vs">`(function() {</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    return $date;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">})();`</span>)<span class="op">;</span></span></code></pre></div>
+        <div class="sourceCode" id="cb7"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> date <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">exec</span>(<span class="vs">`(function() {</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    return $date;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="vs">})();`</span>)<span class="op">;</span></span></code></pre></div>
         <h2 id="php.r">php.r</h2>
         <p>Tagged template function companion to <code>php.run()</code>.
         If Vrzno is enabled, allows rich JS values to be interpolated
         into PHP code.</p>
         <p>Just like <code>php.run()</code>, this will return a non-zero
         value in case of error.</p>
-        <div class="sourceCode" id="cb3"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">r</span><span class="vs">`&lt;?php</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;`</span><span class="op">;</span></span></code></pre></div>
+        <div class="sourceCode" id="cb8"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> exitCode <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">r</span><span class="vs">`&lt;?php</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    echo $date;`</span><span class="op">;</span></span></code></pre></div>
         <h2 id="php.x">php.x</h2>
         <p>Tagged template function companion to
         <code>php.exec()</code>. If Vrzno is enabled, allows rich JS
         values to be interpolated into PHP code.</p>
-        <p>Just like <code>php.exec()</code> this value may only run a
-        single PHP statement at a time and returns the JS value directly
-        to PHP.</p>
-        <div class="sourceCode" id="cb4"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> date <span class="op">=</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`(function() {</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $time = strtotime(&#39;8:00pm 2 days ago&#39;);</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    $date = date(&#39;Y-m-d H:i:s&#39;, $time);</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    return $date;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="vs">})();`</span><span class="op">;</span></span></code></pre></div>
+        <p>Like <code>php.exec()</code>, this may only evaluate a single
+        expression at a time. Unlike <code>php.exec()</code>, it will
+        marshal the result back into Javascript when VRZNO support is
+        available.</p>
+        <div class="sourceCode" id="cb9"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> callback <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">x</span><span class="vs">`function() {</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    return 321;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="vs">}`</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> value <span class="op">=</span> <span class="fu">callback</span>()<span class="op">;</span></span></code></pre></div>
         <h2 id="php.refresh">php.refresh</h2>
-        <p>Clears the memory. If any objects, arrays or functions have
-        been returned to JS, these will become invalid when php is
-        refreshed.</p>
-        <div class="sourceCode" id="cb5"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">refresh</span>()<span class="op">;</span></span></code></pre></div>
+        <p>Refreshes the PHP runtime and clears in-memory state. Any JS
+        handles backed by live PHP values become invalid after a
+        refresh.</p>
+        <div class="sourceCode" id="cb10"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">refresh</span>()<span class="op">;</span></span></code></pre></div>
+        <h2 id="input-and-filesystem-helpers">Input and Filesystem
+        Helpers</h2>
+        <p>All <code>PhpBase</code> implementations also expose the
+        queued helper methods below:</p>
+        <ul>
+        <li><code>php.inputString(string)</code></li>
+        <li><code>php.input(bytes)</code></li>
+        <li><code>php.analyzePath(path)</code></li>
+        <li><code>php.readdir(path)</code></li>
+        <li><code>php.readFile(path, options)</code></li>
+        <li><code>php.stat(path)</code></li>
+        <li><code>php.mkdir(path)</code></li>
+        <li><code>php.rmdir(path)</code></li>
+        <li><code>php.rename(path, newPath)</code></li>
+        <li><code>php.writeFile(path, data, options)</code></li>
+        <li><code>php.unlink(path)</code></li>
+        </ul>
+        <p>These methods run through the same queueing and transaction
+        logic as <code>run</code>, <code>exec</code>, <code>r</code>,
+        and <code>x</code>.</p>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>
 					<ul>
      <li><a href="#php-wasm-methods">Php-Wasm Methods</a>
      <ul>
-     <li><a href="#constructor">constructor</a></li>
+     <li><a href="#constructor">constructor</a>
+     <ul>
+     <li><a href="#common-constructor-options">Common constructor
+     options</a></li>
+     <li><a href="#version">version</a></li>
+     <li><a href="#variant">variant</a></li>
+     <li><a href="#sharedlibs">sharedLibs</a></li>
+     <li><a href="#dynamiclibs">dynamicLibs</a></li>
+     <li><a href="#files">files</a></li>
+     <li><a href="#locatefile">locateFile</a></li>
+     <li><a href="#ini">ini</a></li>
+     <li><a href="#persist">persist</a></li>
+     <li><a href="#autotransaction">autoTransaction</a></li>
+     <li><a href="#shared">shared</a></li>
+     </ul></li>
      <li><a href="#php.run">php.run</a></li>
      <li><a href="#php.exec">php.exec</a></li>
      <li><a href="#php.r">php.r</a></li>
      <li><a href="#php.x">php.x</a></li>
      <li><a href="#php.refresh">php.refresh</a></li>
+     <li><a href="#input-and-filesystem-helpers">Input and Filesystem
+     Helpers</a></li>
      </ul></li>
      </ul>
 					<span class = "wide-only"><a href = "#">top</a></span>

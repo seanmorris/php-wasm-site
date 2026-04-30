@@ -33,7 +33,7 @@ const php = new PhpWeb({dynamicLibs: [
 ```php
 <?php
 // Load the extension at runtime
-dl('php-8.3-dom.so');
+dl('php8.4-dom.so');
 ```
 
 ## Dynamic Imports for Extensions
@@ -61,17 +61,17 @@ The first codeblock is shorthand for the second. Passing `ini: true` will automa
 const php = new PhpWeb({sharedLibs: [ await import('https://unpkg.com/php-wasm-sqlite') ]});
 ```
 
-Supporting libraries should **not** be loaed via `ini`.
+Supporting libraries should **not** be loaded via `ini`.
 
 ```javascript
 const php = new PhpWeb({sharedLibs: [
 	{
-		name: `php8.3-phar.so`,
-		url:  `https://unpkg.com/php-wasm-sqlite/php8.3-sqlite.so`,
+		name: `php8.4-sqlite.so`,
+		url:  `https://unpkg.com/php-wasm-sqlite/php8.4-sqlite.so`,
 		ini:  true,
 	},
 	{	
-		name: 'sqlite.so'
+		name: 'sqlite.so',
 		url: 'https://unpkg.com/php-wasm-sqlite/sqlite.so',
 		ini: false 
 	}
@@ -82,7 +82,7 @@ Strings starting with `/`, `./`, `http://` or `https://` will be treated as URLs
 
 ```javascript
 const php = new PhpWeb({sharedLibs: [
-	`./php8.3-phar.so`
+	`./php8.4-phar.so`
 ]});
 ```
 
@@ -92,7 +92,7 @@ Some extensions require supporting libraries. You can provide URLs for those as 
 
 ```javascript
 const php = new PhpWeb({sharedLibs: [
-	{ url: 'https://unpkg.com/php-wasm-sqlite/php8.3-sqlite.so', ini: true  },
+	{ url: 'https://unpkg.com/php-wasm-sqlite/php8.4-sqlite.so', ini: true  },
 	{ url: 'https://unpkg.com/php-wasm-sqlite/sqlite.so',        ini: false },
 ]});
 ```
@@ -131,7 +131,7 @@ The following extensions may be loaded at runtime. This allows the shared extens
 
 ### yaml
 
-[https://www.npmjs.com/package/php-wasm-libyaml](https://www.npmjs.com/package/php-wasm-libyaml)
+[https://www.npmjs.com/package/php-wasm-yaml](https://www.npmjs.com/package/php-wasm-yaml)
 
 ### zip
 
@@ -156,6 +156,14 @@ The following extensions may be loaded at runtime. This allows the shared extens
 ### pdo-sqlite
 
 [https://www.npmjs.com/package/php-wasm-sqlite](https://www.npmjs.com/package/php-wasm-sqlite)
+
+### tidy
+
+[https://www.npmjs.com/package/php-wasm-tidy](https://www.npmjs.com/package/php-wasm-tidy)
+
+### sdl
+
+[https://www.npmjs.com/package/php-wasm-sdl](https://www.npmjs.com/package/php-wasm-sdl)
 
 ### zlib
 

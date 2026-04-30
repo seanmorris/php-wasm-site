@@ -462,7 +462,7 @@
         <div class="sourceCode" id="cb3"><pre
         class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Load the extension at runtime</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dl</span>(<span class="st">&#39;php-8.3-dom.so&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dl</span>(<span class="st">&#39;php8.4-dom.so&#39;</span>)<span class="ot">;</span></span></code></pre></div>
         <h2 id="dynamic-imports-for-extensions">Dynamic Imports for
         Extensions</h2>
         <p>You can also load extensions modules dynamically:</p>
@@ -484,17 +484,17 @@
         for a call to <code>dl()</code> to do the lookup.</p>
         <div class="sourceCode" id="cb5"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [ <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://unpkg.com/php-wasm-sqlite&#39;</span>) ]})<span class="op">;</span></span></code></pre></div>
-        <p>Supporting libraries should <strong>not</strong> be loaed via
-        <code>ini</code>.</p>
+        <p>Supporting libraries should <strong>not</strong> be loaded
+        via <code>ini</code>.</p>
         <div class="sourceCode" id="cb6"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">name</span><span class="op">:</span> <span class="vs">`php8.3-phar.so`</span><span class="op">,</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">url</span><span class="op">:</span>  <span class="vs">`https://unpkg.com/php-wasm-sqlite/php8.3-sqlite.so`</span><span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">name</span><span class="op">:</span> <span class="vs">`php8.4-sqlite.so`</span><span class="op">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">url</span><span class="op">:</span>  <span class="vs">`https://unpkg.com/php-wasm-sqlite/php8.4-sqlite.so`</span><span class="op">,</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">ini</span><span class="op">:</span>  <span class="kw">true</span><span class="op">,</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    {   </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;sqlite.so&#39;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;sqlite.so&#39;</span><span class="op">,</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/sqlite.so&#39;</span><span class="op">,</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">ini</span><span class="op">:</span> <span class="kw">false</span> </span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    }</span>
@@ -504,7 +504,7 @@
         URLs:</p>
         <div class="sourceCode" id="cb7"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`./php8.3-phar.so`</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="vs">`./php8.4-phar.so`</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
         <p>Some extensions require supporting libraries. You can provide
         URLs for those as <code>sharedLibs</code> as well, just pass
@@ -513,7 +513,7 @@
         the URL here.)</em></p>
         <div class="sourceCode" id="cb8"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/php8.3-sqlite.so&#39;</span><span class="op">,</span> <span class="dt">ini</span><span class="op">:</span> <span class="kw">true</span>  }<span class="op">,</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/php8.4-sqlite.so&#39;</span><span class="op">,</span> <span class="dt">ini</span><span class="op">:</span> <span class="kw">true</span>  }<span class="op">,</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/sqlite.so&#39;</span><span class="op">,</span>        <span class="dt">ini</span><span class="op">:</span> <span class="kw">false</span> }<span class="op">,</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
         <h2 id="extension-list">Extension List</h2>
@@ -543,7 +543,7 @@
         href="https://www.npmjs.com/package/php-wasm-simplexml">https://www.npmjs.com/package/php-wasm-simplexml</a></p>
         <h3 id="yaml">yaml</h3>
         <p><a
-        href="https://www.npmjs.com/package/php-wasm-libyaml">https://www.npmjs.com/package/php-wasm-libyaml</a></p>
+        href="https://www.npmjs.com/package/php-wasm-yaml">https://www.npmjs.com/package/php-wasm-yaml</a></p>
         <h3 id="zip">zip</h3>
         <p><a
         href="https://www.npmjs.com/package/php-wasm-libzip">https://www.npmjs.com/package/php-wasm-libzip</a></p>
@@ -562,6 +562,12 @@
         <h3 id="pdo-sqlite">pdo-sqlite</h3>
         <p><a
         href="https://www.npmjs.com/package/php-wasm-sqlite">https://www.npmjs.com/package/php-wasm-sqlite</a></p>
+        <h3 id="tidy">tidy</h3>
+        <p><a
+        href="https://www.npmjs.com/package/php-wasm-tidy">https://www.npmjs.com/package/php-wasm-tidy</a></p>
+        <h3 id="sdl">sdl</h3>
+        <p><a
+        href="https://www.npmjs.com/package/php-wasm-sdl">https://www.npmjs.com/package/php-wasm-sdl</a></p>
         <h3 id="zlib">zlib</h3>
         <p><a
         href="https://www.npmjs.com/package/php-wasm-zlib">https://www.npmjs.com/package/php-wasm-zlib</a></p>
@@ -591,6 +597,8 @@
      <li><a href="#phar">phar</a></li>
      <li><a href="#sqlite">sqlite</a></li>
      <li><a href="#pdo-sqlite">pdo-sqlite</a></li>
+     <li><a href="#tidy">tidy</a></li>
+     <li><a href="#sdl">sdl</a></li>
      <li><a href="#zlib">zlib</a></li>
      </ul></li>
      </ul></li>

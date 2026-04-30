@@ -3,9 +3,9 @@ title: pdo-cfd1
 ---
 # pdo-cfd1
 
-*pdo driver for CloudFlare D1 & php-wasm*
+*pdo driver for Cloudflare D1 & php-wasm*
 
-<span class = "highlight">@todo:</span> Walkthrough on compiling php-wasm for cloudflare.
+<span class = "highlight">@todo:</span> Walkthrough on compiling php-wasm for Cloudflare.
 
 pdo_cfd1 requires PHP 8.1+.
 
@@ -26,7 +26,7 @@ export async function onRequest(event)
 }
 ```
 
-You can check `phpinfo()` to make sure that the D1 object is detected. `CloudFlare D1 SQL module detected` will display "yes" when the object has been passed in correctly:
+You can check `phpinfo()` to make sure that the D1 object is detected. `Cloudflare D1 SQL module detected` will display "yes" when the object has been passed in correctly:
 
 ![](https://raw.githubusercontent.com/seanmorris/pdo-cfd1/refs/heads/master/phpinfo.png)
 
@@ -40,7 +40,7 @@ export async function onRequest(event)
     });
 
     php.run(`<?php
-        $pdo = new PDO('cfd1:main');
+        $pdo = new PDO('cfd1:mainDb');
         $select = $pdo->prepare(
             'SELECT PageTitle, PageContent FROM WikiPages WHERE PageTitle = ?'
         );
@@ -55,8 +55,8 @@ export async function onRequest(event)
 * *Named replacement tokens* - Currently only positional tokens are supported.
 * *Error handling* - Error handling is currently very rudimentary and does not propagate messages.
 
-## CloudFlare D1
+## Cloudflare D1
 
-`pdo_cfd1` is powered by [CloudFlare D1](https://developers.cloudflare.com/d1/).
+`pdo_cfd1` is powered by [Cloudflare D1](https://developers.cloudflare.com/d1/).
 
 <https://developers.cloudflare.com/d1/>

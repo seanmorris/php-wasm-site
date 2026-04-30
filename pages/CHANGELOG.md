@@ -2,6 +2,8 @@
 
 Changes
 
+> Latest nightly artifact build: `Build Artifacts` run `#92` on `develop`, published on February 24, 2026. GitHub Actions run: <https://github.com/seanmorris/php-wasm/actions/runs/22360005357>. Nightly builds are announced in `#nightly-builds` on the `php-wasm` Discord server.
+
 ## v0.0.9 - Aiming for the (GitHub) Stars
 
 * Adding PHP-CGI support!

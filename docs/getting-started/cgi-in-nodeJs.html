@@ -435,68 +435,228 @@
 						<div class = "page-content">
 				<article >
 								<h1 id="php-cgi-wasm-for-node.js">Php-Cgi-Wasm for Node.js</h1>
-        <p><span class="highlight"><span class="citation"
-        data-cites="todo">@todo</span></span> Document this example.</p>
+        <p><code>PhpCgiNode</code> runs the CGI build of PHP inside
+        Node.js and lets you serve requests through a normal Node HTTP
+        server.</p>
+        <p>Use it when you want PHP to behave like a web application
+        instead of an embedded expression runner. In practice that
+        means:</p>
+        <ul>
+        <li>requests go through <code>php.request(...)</code></li>
+        <li>PHP reads from a document root</li>
+        <li>cookies and CGI environment variables are managed for
+        you</li>
+        <li>files can persist to host directories with NodeFS
+        mounts</li>
+        </ul>
+        <h2 id="install">Install</h2>
         <div class="sourceCode" id="cb1"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> http <span class="im">from</span> <span class="st">&#39;http&#39;</span><span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpCgiNode } <span class="im">from</span> <span class="st">&#39;php-cgi-wasm/PhpCgiNode.mjs&#39;</span><span class="op">;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiNode</span>({</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">prefix</span><span class="op">:</span> <span class="st">&#39;/php-wasm/cgi-bin/&#39;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">,</span> <span class="dt">docroot</span><span class="op">:</span> <span class="st">&#39;/persist/www&#39;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">,</span> <span class="dt">persist</span><span class="op">:</span> [</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        {<span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span> <span class="op">,</span> <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;./persist&#39;</span>}</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> {<span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/config&#39;</span> <span class="op">,</span> <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;./config&#39;</span>}</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">,</span> <span class="dt">sharedLibs</span><span class="op">:</span> [</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-intl&#39;</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-libxml&#39;</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-phar&#39;</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-mbstring&#39;</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-openssl&#39;</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-dom&#39;</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-xml&#39;</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-simplexml&#39;</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-sqlite&#39;</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-zlib&#39;</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-gd&#39;</span>)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">,</span> <span class="dt">types</span><span class="op">:</span> {</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">jpeg</span><span class="op">:</span> <span class="st">&#39;image/jpeg&#39;</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="dt">jpg</span><span class="op">:</span> <span class="st">&#39;image/jpeg&#39;</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="dt">gif</span><span class="op">:</span> <span class="st">&#39;image/gif&#39;</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="dt">png</span><span class="op">:</span> <span class="st">&#39;image/png&#39;</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="op">,</span> <span class="dt">svg</span><span class="op">:</span> <span class="st">&#39;image/svg+xml&#39;</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">&#39;Open &quot;</span><span class="sc">\x1b</span><span class="st">[33mhttp://localhost:3003/php-wasm/cgi-bin</span><span class="sc">\x1b</span><span class="st">[0m&quot; in your browser...&#39;</span>)<span class="op">;</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> server <span class="op">=</span> http<span class="op">.</span><span class="fu">createServer</span>(<span class="kw">async</span> (request<span class="op">,</span> response) <span class="kw">=&gt;</span> {</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">request</span>(request)<span class="op">;</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> reader <span class="op">=</span> result<span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="fu">getReader</span>()<span class="op">;</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    response<span class="op">.</span><span class="fu">writeHead</span>(result<span class="op">.</span><span class="at">status</span><span class="op">,</span> [<span class="op">...</span>result<span class="op">.</span><span class="at">headers</span><span class="op">.</span><span class="fu">entries</span>()]<span class="op">.</span><span class="fu">flat</span>())<span class="op">;</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> done <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (<span class="op">!</span>done)</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    {</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> chunk <span class="op">=</span> <span class="cf">await</span> reader<span class="op">.</span><span class="fu">read</span>()<span class="op">;</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        done <span class="op">=</span> chunk<span class="op">.</span><span class="at">done</span><span class="op">;</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        chunk<span class="op">.</span><span class="at">value</span> <span class="op">&amp;&amp;</span> response<span class="op">.</span><span class="fu">write</span>(chunk<span class="op">.</span><span class="at">value</span>)<span class="op">;</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    response<span class="op">.</span><span class="fu">end</span>()<span class="op">;</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>server<span class="op">.</span><span class="fu">listen</span>(<span class="dv">3003</span>)<span class="op">;</span></span></code></pre></div>
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> i php-cgi-wasm</span></code></pre></div>
+        <p>If you want runtime-loadable extensions, install the packages
+        you plan to use as well:</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> i php-wasm-intl php-wasm-libxml php-wasm-phar php-wasm-mbstring php-wasm-openssl php-wasm-dom php-wasm-xml php-wasm-simplexml php-wasm-sqlite php-wasm-zlib php-wasm-gd</span></code></pre></div>
+        <h2 id="minimal-http-server">Minimal HTTP server</h2>
+        <p>This is the basic pattern:</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env node</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> http <span class="im">from</span> <span class="st">&#39;node:http&#39;</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpCgiNode } <span class="im">from</span> <span class="st">&#39;php-cgi-wasm/PhpCgiNode.mjs&#39;</span><span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiNode</span>({</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">prefix</span><span class="op">:</span> <span class="st">&#39;/php-wasm/cgi-bin/&#39;</span><span class="op">,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">docroot</span><span class="op">:</span> <span class="st">&#39;/persist/www&#39;</span><span class="op">,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">persist</span><span class="op">:</span> [</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span><span class="op">,</span> <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;./persist&#39;</span> }<span class="op">,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/config&#39;</span><span class="op">,</span>  <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;./config&#39;</span>  }<span class="op">,</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> server <span class="op">=</span> http<span class="op">.</span><span class="fu">createServer</span>(<span class="kw">async</span> (request<span class="op">,</span> response) <span class="kw">=&gt;</span> {</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">request</span>(request)<span class="op">;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> reader <span class="op">=</span> result<span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="fu">getReader</span>()<span class="op">;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  response<span class="op">.</span><span class="fu">writeHead</span>(result<span class="op">.</span><span class="at">status</span><span class="op">,</span> [<span class="op">...</span>result<span class="op">.</span><span class="at">headers</span><span class="op">.</span><span class="fu">entries</span>()]<span class="op">.</span><span class="fu">flat</span>())<span class="op">;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> done <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span>(<span class="op">!</span>done)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> chunk <span class="op">=</span> <span class="cf">await</span> reader<span class="op">.</span><span class="fu">read</span>()<span class="op">;</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    done <span class="op">=</span> chunk<span class="op">.</span><span class="at">done</span><span class="op">;</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(chunk<span class="op">.</span><span class="at">value</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>      response<span class="op">.</span><span class="fu">write</span>(chunk<span class="op">.</span><span class="at">value</span>)<span class="op">;</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  response<span class="op">.</span><span class="fu">end</span>()<span class="op">;</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>server<span class="op">.</span><span class="fu">listen</span>(<span class="dv">3003</span>)<span class="op">;</span></span></code></pre></div>
+        <p>Open <code>http://localhost:3003/php-wasm/cgi-bin/</code>
+        after creating a PHP app under <code>./persist/www</code>.</p>
+        <h2 id="loading-extensions">Loading extensions</h2>
+        <p>For the dynamic build, pass extension packages as
+        <code>sharedLibs</code>:</p>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCgiNode</span>({</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">prefix</span><span class="op">:</span> <span class="st">&#39;/php-wasm/cgi-bin/&#39;</span><span class="op">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">docroot</span><span class="op">:</span> <span class="st">&#39;/persist/www&#39;</span><span class="op">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">persist</span><span class="op">:</span> [</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span><span class="op">,</span> <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;./persist&#39;</span> }<span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/config&#39;</span><span class="op">,</span>  <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;./config&#39;</span>  }<span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">sharedLibs</span><span class="op">:</span> [</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-intl&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-libxml&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-phar&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-mbstring&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-openssl&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-dom&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-xml&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-simplexml&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-sqlite&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-zlib&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;php-wasm-gd&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+        <p><code>sharedLibs</code> works the same way here as it does in
+        the other runtimes: extension packages resolve their
+        <code>.so</code> files and supporting libraries
+        automatically.</p>
+        <h2 id="important-options">Important options</h2>
+        <h3 id="docroot"><code>docroot</code></h3>
+        <p>The PHP document root inside the emscripten filesystem.</p>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>docroot<span class="op">:</span> <span class="st">&#39;/persist/www&#39;</span></span></code></pre></div>
+        <p>With the <code>persist</code> mounts above, that maps to
+        <code>./persist/www</code> on the host.</p>
+        <h3 id="prefix"><code>prefix</code></h3>
+        <p>The URL prefix that identifies requests meant for this PHP
+        application.</p>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>prefix<span class="op">:</span> <span class="st">&#39;/php-wasm/cgi-bin/&#39;</span></span></code></pre></div>
+        <h3 id="persist"><code>persist</code></h3>
+        <p>NodeFS mounts. These expose host directories to PHP.</p>
+        <div class="sourceCode" id="cb7"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>persist<span class="op">:</span> [</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span><span class="op">,</span> <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;./persist&#39;</span> }<span class="op">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/config&#39;</span><span class="op">,</span>  <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;./config&#39;</span>  }<span class="op">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div>
+        <p>This is how you keep application files, sessions, caches, and
+        config across requests.</p>
+        <h3 id="types"><code>types</code></h3>
+        <p>Optional MIME type map for static files served through the
+        CGI wrapper.</p>
+        <div class="sourceCode" id="cb8"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>types<span class="op">:</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">jpg</span><span class="op">:</span>  <span class="st">&#39;image/jpeg&#39;</span><span class="op">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">jpeg</span><span class="op">:</span> <span class="st">&#39;image/jpeg&#39;</span><span class="op">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">gif</span><span class="op">:</span>  <span class="st">&#39;image/gif&#39;</span><span class="op">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">png</span><span class="op">:</span>  <span class="st">&#39;image/png&#39;</span><span class="op">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">svg</span><span class="op">:</span>  <span class="st">&#39;image/svg+xml&#39;</span><span class="op">,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+        <h3 id="version"><code>version</code></h3>
+        <p>Selects the PHP-CGI runtime version to load.
+        <code>PhpCgiNode</code> currently defaults to
+        <code>8.4</code>.</p>
+        <div class="sourceCode" id="cb9"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>version<span class="op">:</span> <span class="st">&#39;8.5&#39;</span></span></code></pre></div>
+        <h3
+        id="rewrite-entrypoint-exclude-env-notfound-onrequest"><code>rewrite</code>,
+        <code>entrypoint</code>, <code>exclude</code>, <code>env</code>,
+        <code>notFound</code>, <code>onRequest</code></h3>
+        <p>These work the same way as the CGI worker/web runtimes
+        documented in <a href="/methods/php-cgi-wasm.html">php-cgi-wasm
+        methods</a>:</p>
+        <ul>
+        <li><code>rewrite</code> rewrites incoming paths before
+        routing</li>
+        <li><code>entrypoint</code> forces a single PHP entry script
+        such as <code>index.php</code></li>
+        <li><code>exclude</code> bypasses PHP for matching URL
+        prefixes</li>
+        <li><code>env</code> sets CGI environment variables</li>
+        <li><code>notFound</code> returns a custom 404 response</li>
+        <li><code>onRequest</code> lets you inspect each
+        request/response pair</li>
+        </ul>
+        <h2 id="what-php.request-expects">What
+        <code>php.request()</code> expects</h2>
+        <p><code>PhpCgiNode</code> accepts a Node HTTP request object
+        directly:</p>
+        <div class="sourceCode" id="cb10"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">request</span>(request)<span class="op">;</span></span></code></pre></div>
+        <p>Internally it normalizes the Node request into a URL plus
+        headers map, then returns a standard <code>Response</code>
+        object. That is why the server bridge above reads:</p>
+        <ul>
+        <li><code>result.status</code></li>
+        <li><code>result.headers</code></li>
+        <li><code>result.body.getReader()</code></li>
+        </ul>
+        <h2 id="cookies-and-config">Cookies and config</h2>
+        <p>The CGI runtime keeps its cookie jar under
+        <code>/config/.cookies</code>. If <code>/config</code> is
+        persisted to disk, cookies survive process restarts along with
+        the rest of your mounted config.</p>
+        <p>The runtime also sets <code>PHP_INI_SCAN_DIR</code> to
+        include <code>/config</code>, <code>/preload</code>, and the
+        active document root, so project-local configuration files can
+        be loaded from those paths.</p>
+        <h2 id="multi-app-routing">Multi-app routing</h2>
+        <p>If you need to host more than one PHP app behind one Node
+        server, <code>PhpCgiBase</code> also supports
+        <code>vHosts</code> entries with:</p>
+        <ul>
+        <li><code>pathPrefix</code></li>
+        <li><code>directory</code></li>
+        <li><code>entrypoint</code></li>
+        </ul>
+        <p>That lets one runtime serve multiple PHP applications by URL
+        prefix from different directories.</p>
+        <h2 id="related-source">Related source</h2>
+        <p>The current Node demo in the upstream repo lives at:</p>
+        <ul>
+        <li><a
+        href="https://github.com/seanmorris/php-wasm/blob/develop/demo-node/index.mjs"><code>demo-node/index.mjs</code></a></li>
+        </ul>
+        <p>The <code>PhpCgiNode</code> class itself is implemented
+        at:</p>
+        <ul>
+        <li><a
+        href="https://github.com/seanmorris/php-wasm/blob/develop/source/PhpCgiNode.js"><code>source/PhpCgiNode.js</code></a></li>
+        </ul>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>
 					<ul>
      <li><a href="#php-cgi-wasm-for-node.js">Php-Cgi-Wasm for
-     Node.js</a></li>
+     Node.js</a>
+     <ul>
+     <li><a href="#install">Install</a></li>
+     <li><a href="#minimal-http-server">Minimal HTTP server</a></li>
+     <li><a href="#loading-extensions">Loading extensions</a></li>
+     <li><a href="#important-options">Important options</a>
+     <ul>
+     <li><a href="#docroot"><code>docroot</code></a></li>
+     <li><a href="#prefix"><code>prefix</code></a></li>
+     <li><a href="#persist"><code>persist</code></a></li>
+     <li><a href="#types"><code>types</code></a></li>
+     <li><a href="#version"><code>version</code></a></li>
+     <li><a
+     href="#rewrite-entrypoint-exclude-env-notfound-onrequest"><code>rewrite</code>,
+     <code>entrypoint</code>, <code>exclude</code>, <code>env</code>,
+     <code>notFound</code>, <code>onRequest</code></a></li>
+     </ul></li>
+     <li><a href="#what-php.request-expects">What
+     <code>php.request()</code> expects</a></li>
+     <li><a href="#cookies-and-config">Cookies and config</a></li>
+     <li><a href="#multi-app-routing">Multi-app routing</a></li>
+     <li><a href="#related-source">Related source</a></li>
+     </ul></li>
      </ul>
 					<span class = "wide-only"><a href = "#">top</a></span>
 				</nav>

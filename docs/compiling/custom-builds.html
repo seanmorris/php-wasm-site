@@ -448,8 +448,14 @@
         <h2 id="installing-php-wasm-builder">Installing
         php-wasm-builder</h2>
         <p>Install <code>php-wasm-builder</code> globally:</p>
-        <p><strong><em>Requires:</em></strong> * Docker * Docker Compose
-        * Coreutils * Wget * Make</p>
+        <p><strong><em>Requires:</em></strong></p>
+        <ul>
+        <li>Docker</li>
+        <li>Docker Compose</li>
+        <li>Coreutils</li>
+        <li>Wget</li>
+        <li>Make</li>
+        </ul>
         <div class="sourceCode" id="cb1"><pre
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm install <span class="at">-g</span> php-wasm-builder</span></code></pre></div>
         <p>Create the build environment (can be run from anywhere):</p>
@@ -519,11 +525,14 @@
         <div class="sourceCode" id="cb13"><pre
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web mjs</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node mjs</span></code></pre></div>
+        <p>The current builder script defaults to <code>js</code> output
+        unless you pass <code>mjs</code>.</p>
         <h2 id="cgi-modules">CGI Modules:</h2>
         <p>Build CGI modules with:</p>
         <div class="sourceCode" id="cb14"><pre
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web cgi mjs</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build worker cgi mjs</span></code></pre></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node cgi mjs</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build worker cgi mjs</span></code></pre></div>
         <h2 id="php_dist_dir">PHP_DIST_DIR</h2>
         <p>This will build the package inside of the current directory
         (or in <code>PHP_DIST_DIR</code>, <em>see <a
