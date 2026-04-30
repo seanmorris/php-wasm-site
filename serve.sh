@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-set -eux
+set -euo pipefail
 
-cd docs;
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-npx http-server;
+exec "${SCRIPT_DIR}/smgen.sh" serve "$@"

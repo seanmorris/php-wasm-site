@@ -1,7 +1,8 @@
 <?php
 
-function makeNavBar($path, $rootPath = NULL)
+function renderNavBar($path = NULL, $rootPath = NULL)
 {
+	$path = $path ?? getConf('PAGES_DIR') ?? (__DIR__ . '/../pages');
 	$rootPath = $rootPath ?? $path;
 	$directories = [];
 	$files = [];
@@ -26,14 +27,21 @@ function makeNavBar($path, $rootPath = NULL)
 
 			if(file_exists($pathname . '/.fm.yaml'))
 			{
-				$frontmatter = yaml_parse(`yq --front-matter=extract $pathname/.fm.yaml 2>/dev/null|| echo ""`) ?? [];
+				$fmPath = escapeshellarg($pathname . '/.fm.yaml');
+				$frontmatter = yaml_parse(`yq --front-matter=extract $fmPath 2>/dev/null|| echo ""`) ?? [];
+			}
+
+			if(!($frontmatter['leftBarLink'] ?? true))
+			{
+				continue;
 			}
 
 			$directories[] = (object)[ 'filename' => $filename, 'pathname' => $pathname, 'frontmatter' => $frontmatter ];
 			continue;
 		}
 
-		$frontmatter = yaml_parse(`yq --front-matter=extract $pathname 2>/dev/null || echo ""`) ?? [];
+		$fmPath = escapeshellarg($pathname);
+		$frontmatter = yaml_parse(`yq --front-matter=extract $fmPath 2>/dev/null || echo ""`) ?? [];
 
 		if(!($frontmatter['leftBarLink'] ?? true))
 		{
@@ -78,7 +86,7 @@ function makeNavBar($path, $rootPath = NULL)
 
 		?><details open>
 			<summary><?=$title;?></summary>
-			<?=makeNavBar($pathname, $rootPath);?>
+			<?=renderNavBar($pathname, $rootPath);?>
 		</details><?php
 	}
 
@@ -100,5 +108,3 @@ function makeNavBar($path, $rootPath = NULL)
 
 	?></ul><?php
 }
-
-makeNavBar(getenv('PAGES_DIR'));
