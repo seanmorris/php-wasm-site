@@ -28,7 +28,9 @@ All four accept the same core options bucket, with different defaults for binary
 
 *string*
 
-Selects the PHP runtime version to load. The current defaults in `source/` are `8.4` for `PhpWeb`, `PhpWorker`, and `PhpNode`.
+Selects the PHP runtime version to load. `PhpWeb`, `PhpWebview`, and the browser-oriented defaults currently use `8.4`.
+
+`PhpNode` also defaults to `8.4` in this repo, but it checks the `PHP_VERSION` environment variable first. If `PHP_VERSION` is set, `PhpNode` will use that value unless you pass `version` explicitly.
 
 ```javascript
 const php = new PhpWeb({version: '8.4'});
@@ -39,6 +41,8 @@ const php = new PhpWeb({version: '8.4'});
 *string*
 
 Optional build suffix appended to the runtime filename.
+
+`PhpNode` also checks `PHP_VARIANT` before falling back to the empty-string default.
 
 ```javascript
 const php = new PhpWeb({version: '8.4', variant: '-debug'});

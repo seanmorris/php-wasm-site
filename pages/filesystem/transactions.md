@@ -4,7 +4,7 @@
 
 The web and worker builds utilize `navigator.locks.request` to request a lock named `php-wasm-fs-lock` before performing filesystem operations. This ensures that multiple tabs and the service worker can interact with the filesystem without overwriting each other's work.
 
-Before any filesystem operation occurs, the entire filesystem is loaded from IDBFS, and before releasing the lock, the entire filesystem is loaded back into IDBFS.
+Before any filesystem operation occurs, the runtime syncs the filesystem in from IDBFS, and before releasing the lock it syncs any changes back out to IDBFS.
 
 The operations are enqueued asynchronously, meaning that **if multiple requests are generated before one transaction closes, they will be automatically batched.** This also applies to multiple requests generated before the lock is acquired. Generally, there is no need to take explicit control of filesystem mirroring.
 

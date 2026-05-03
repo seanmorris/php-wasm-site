@@ -29,7 +29,7 @@ The concrete classes are:
 
 *string*
 
-Selects the PHP-CGI runtime version to load.
+Selects the PHP-CGI runtime version to load. The current concrete class defaults in this repo are `8.4`.
 
 ```javascript
 const php = new PhpCgiWorker({version: '8.4'});

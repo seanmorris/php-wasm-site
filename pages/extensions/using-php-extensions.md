@@ -36,6 +36,8 @@ const php = new PhpWeb({dynamicLibs: [
 dl('php8.4-dom.so');
 ```
 
+Versioned extension filenames must match the active runtime version. If you switch away from the default `8.4` runtime, update `php8.4-*.so` examples accordingly.
+
 ## Dynamic Imports for Extensions
 
 You can also load extensions modules dynamically:
