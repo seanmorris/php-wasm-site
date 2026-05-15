@@ -4,6 +4,41 @@ Changes
 
 > Latest nightly artifact build: `Build Artifacts` run `#92` on `develop`, published on February 24, 2026. GitHub Actions run: <https://github.com/seanmorris/php-wasm/actions/runs/22360005357>. Nightly builds are announced in `#nightly-builds` on the `php-wasm` Discord server.
 
+## Nightly changes - May 8-13, 2026
+
+### Runtime & packaging
+
+* Shared-object packaging was cleaned up across the extension packages so runtime-loadable modules expose a more consistent JS package surface and test/build plumbing no longer carries duplicate per-package loader rules.
+* Static and shared test paths stopped carrying their own separate stdlib/runtime assumptions. Shared-lib resolution is now centralized in the Node test wrappers so package smoke tests, docs fixtures, demos, and CLI-node PHPT runs follow the same loader rules.
+* Static and shared builds now treat OpenSSL support more like a built-in runtime feature: `libssl` and related support no longer have to be re-injected in the same places as dynamic extension packages, and the CI matrix was updated to match the new static SSL layout.
+* Shared runtime loading now distinguishes built-in extensions from third-party support libraries. That fixes cases like `intl`, where shared builds should load ICU support libraries without trying to reload `php8.x-intl.so`.
+* The ICU data filter was refreshed to trim collation payload size without regressing the currently tested `intl` surface.
+
+### Demo & worker loading
+
+* Shared `demo-web` CGI workers now keep a split ESM module graph instead of collapsing every shared runtime into one oversized service-worker bundle.
+* `demo-web` was updated to lazy-load CGI worker instances and to supply shared support libraries more accurately, including the missing ICU/shared-lib path that was breaking shared worker runs.
+* Browser and Node demo/test harnesses were updated to follow the same shared-lib resolution rules as the package runtimes.
+
+### XML, libxml & extension fixes
+
+* Fixed XML-family shared and dynamic regressions across supported PHP versions, including `xml_parser_create()` and file-backed `SimpleXML` and `DOMDocument` paths.
+* The libxml/XML patch set for PHP `8.0` through `8.5` was corrected and realigned so rebuilt runtimes behave consistently across versions.
+* Added the `php-wasm-xmlwriter` package and wired it into the extension packaging, smoke tests, and runtime loader coverage.
+
+### PHPT & test coverage
+
+* Expanded direct `php-cli-node` PHPT coverage across `tests/lang`, `dom`, `simplexml`, `xmlwriter`, `zlib`, `sqlite3`, `tidy`, `iconv`, and `intl`.
+* The PHPT runner now handles malformed section headers, version-specific renamed tests, `%r` patterns in `EXPECTF`, `{PWD}` ini expansion, and modern fatal-error output with stack traces.
+* XMLWriter was added to the CI env matrix, and the CLI-node PHPT inventory was pushed much deeper across all supported PHP versions.
+
+### CI & harness stability
+
+* `demo-web` artifact smoke testing was added to CI so built web artifacts are exercised after packaging, not just built.
+* Shared-build smoke tests for Node and Deno were corrected so built-in extensions are not redundantly loaded as if they were dynamic modules.
+* The Node CGI harness picked up startup and dependency fixes, including better startup timing behavior and workflow fixes around missing install/setup steps.
+* Build jobs that depend on upstream downloads now use more resilient retry behavior, and cross-version rebuild cleanup was tightened so stale generated headers and wrappers do not poison later builds.
+
 ## v0.0.9 - Aiming for the (GitHub) Stars
 
 * Adding PHP-CGI support!

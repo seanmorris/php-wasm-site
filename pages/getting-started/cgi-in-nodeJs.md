@@ -155,6 +155,8 @@ Selects the PHP-CGI runtime version to load. `PhpCgiNode` currently defaults to 
 version: '8.5'
 ```
 
+If you are running upstream docs or tests around `PhpCgiNode`, set `PHP_VERSION` explicitly when the desired CGI runtime should be forced by environment instead of constructor args.
+
 ### `rewrite`, `entrypoint`, `exclude`, `env`, `notFound`, `onRequest`
 
 These work the same way as the CGI worker/web runtimes documented in [php-cgi-wasm methods](/methods/php-cgi-wasm.html):
