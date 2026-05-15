@@ -89,19 +89,19 @@ await php.writeFile(path, data, {encoding: 'utf8'});
 
 ## Accessing the FileSystem of a Service Worker
 
-***Note:*** If you're using php-web in conjunction with php-cgi-worker to work on the filesystem, you'll need to `refresh` the filesystem in the worker. You can do that with the following call using `msg-bus` (as shown below).
+***Note:*** If you're using php-web in conjunction with php-cgi-worker to work on the filesystem, you'll need to `refresh` the filesystem in the worker. You can do that with the `quickbus` client from the Service Worker guide.
 
 ```javascript
 // Write a file
-await sendMessage('writeFile', ['/path/to/your/file', 'contents', {encoding: 'utf8'}]);
+await bus.writeFile('/path/to/your/file', 'contents', {encoding: 'utf8'});
 
 // Check the path
-const result = await sendMessage('analyzePath', ['/path/to/your/file']);
+const result = await bus.analyzePath('/path/to/your/file');
 ```
 
 If you modify the filesystem outside of the service worker, you can refresh its filesystem with a call to `refresh`.
 
 ```javascript
 // Tell the worker that the FS has been updated
-await sendMessage('refresh');
+await bus.refresh();
 ```

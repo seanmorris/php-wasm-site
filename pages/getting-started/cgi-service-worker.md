@@ -39,33 +39,38 @@ self.addEventListener('message',  event => php.handleMessageEvent(event));
 
 ***Note:*** `php-cgi-wasm` & `php-wasm` are separate packages. One "embeds" php right into your javascript, the other runs in "cgi-mode," just like php would under apache or nginx.
 
-### msg-bus
+### quickbus
 
-There is a `msg-bus` module supplied by `php-cgi-wasm` as a helper to communicate with php running inside a worker. The module exposes two functions: `sendMessageFor` and `onMessage`.
+Install `quickbus` separately if you want to call `php-cgi-wasm` methods from the page:
 
-This allows you to simply `await` the result of calls to file system methods (see above) on the service worker:
-
-```javascript
-const result = await sendMessage(methodName, [param, param, param]);
+```bash
+$ npm install quickbus@^1.0.2
 ```
 
-#### onMessage & sendMessageFor
+`php.handleMessageEvent` already speaks the same request/reply protocol, so you can `await` service worker filesystem calls through a `quickbus` client:
 
-* Use `onMessage` as an event handler for `message` events coming from the Service Worker.
-* Use `sendMessageFor` to **GENERATE A FUNCTION** that you can use to send messages to your service worker.
+```javascript
+const result = await bus.analyzePath('/path/to/your/file');
+```
 
-```{ .javascript highlight="9,11" }
-import { onMessage, sendMessageFor } from 'php-cgi-wasm/msg-bus';
+#### Client.forServiceWorker & Client.forServiceWorkerRegistration
+
+* Use `Client.forServiceWorker(navigator.serviceWorker)` once the page is already controlled by the worker.
+* Use `Client.forServiceWorkerRegistration(registration)` on first load, after `await navigator.serviceWorker.ready`.
+
+```javascript
+import { Client } from 'quickbus';
 
 const SERVICE_WORKER_SCRIPT_URL = '/cgi-worker.mjs';
 
-navigator.serviceWorker.register(SERVICE_WORKER_SCRIPT_URL);
+await navigator.serviceWorker.register(SERVICE_WORKER_SCRIPT_URL, {type: 'module'});
+const registration = await navigator.serviceWorker.ready;
 
-navigator.serviceWorker.addEventListener('message', onMessage);
+const bus = navigator.serviceWorker.controller
+	? Client.forServiceWorker(navigator.serviceWorker)
+	: Client.forServiceWorkerRegistration(registration);
 
-const sendMessage = sendMessageFor(SERVICE_WORKER_SCRIPT_URL);
-
-const result = await sendMessage(methodName, [param, param, param]);
+const result = await bus.analyzePath('/path/to/your/file');
 ```
 
 #### php.handleMessageEvent
