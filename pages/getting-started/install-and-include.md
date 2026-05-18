@@ -35,6 +35,8 @@ You can also install php-wasm with npm.
 ```sh
 $ npm i php-wasm
 $ npm i php-cgi-wasm
+$ npm i php-cli-wasm
+$ npm i php-dbg-wasm
 $ npm i php-wasm-builder
 ```
 
@@ -42,7 +44,7 @@ $ npm i php-wasm-builder
 
 If you want the newest unpublished artifacts instead of the npm packages, use the latest successful `Build Artifacts` workflow run from GitHub Actions.
 
-As of February 24, 2026, the latest successful nightly artifact build is:
+If you specifically need the long-lived `develop` artifacts, the latest successful `develop`-branch build is still the February 24, 2026 run:
 
 - `Build Artifacts` run `#92`
 - GitHub Actions run ID `22360005357`
@@ -60,8 +62,8 @@ Link:
 If you're using a bundler, use the vendor's documentation to learn how to move the files matching the following pattern to your public directory:
 
 ```bash
-node_modules/php-wasm/php-web.mjs.wasm
-node_modules/php-cgi-wasm/php-cgi-worker.mjs.wasm
+node_modules/php-wasm/php8.4-web.mjs.wasm
+node_modules/php-cgi-wasm/php8.4-cgi-worker.mjs.wasm
 ```
 
 ## Importing the module
@@ -73,9 +75,27 @@ import { PhpWeb } from 'php-wasm/PhpWeb.mjs';
 const php = new PhpWeb;
 ```
 
-### CJS
+### CommonJS Node runtimes
 
-```{ .javascript data-numbers="true" }
-const { PhpWeb } = require('php-wasm/PhpWeb.js');
-const php = new PhpWeb;
+```javascript
+const { PhpNode } = require('php-wasm/PhpNode');
+
+const php = new PhpNode({version: '8.5'});
 ```
+
+### Module Format
+
+Core Node runtimes support both ESM and CommonJS.
+
+For `0.1.0`, use the published entrypoints across the runtime packages.
+
+- `php-wasm/PhpNode`
+- `php-cgi-wasm/PhpCgiNode`
+- `php-cli-wasm/PhpCliNode`
+- `php-dbg-wasm/PhpDbgNode`
+
+Browser and worker entrypoints remain ESM-only.
+
+Extension helper JS packages also remain ESM-only. Their helper modules use `import.meta.url` to resolve static assets, and there is no universal CommonJS equivalent for that pattern.
+
+When you need to manage runtime-loadable extensions from CommonJS, load the core runtime with `require()` and provide the extension `.so`, `.data`, `.wasm`, and support-library assets yourself via `sharedLibs`, `dynamicLibs`, `files`, and `locateFile`.

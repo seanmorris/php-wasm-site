@@ -3,8 +3,6 @@ pagetitle: Php-Cgi-Wasm Methods
 itemtype: schema.org/Class
 microdata:
     name: PhpCgiWasm
-    alternateName: PhpCgiWeb
-    alternateName: PhpCgiWebview
     alternateName: PhpCgiNode
     alternateName: PhpCgiWorker
 ---
@@ -20,8 +18,6 @@ const php = new PhpCgiWorker();
 
 The concrete classes are:
 
-- `PhpCgiWeb`
-- `PhpCgiWebview`
 - `PhpCgiNode`
 - `PhpCgiWorker`
 
@@ -29,7 +25,7 @@ The concrete classes are:
 
 *string*
 
-Selects the PHP-CGI runtime version to load. The current concrete class defaults in this repo are `8.4`.
+Selects the PHP-CGI runtime version to load.
 
 ```javascript
 const php = new PhpCgiWorker({version: '8.4'});
@@ -48,11 +44,15 @@ const php = new PhpCgiWorker({
 });
 ```
 
+ESM helper packages can be passed directly here. CommonJS callers should pass strings, `URL`s, or `{name, url, ini}` records manually instead.
+
 ### dynamicLibs
 
 *array of strings or objects*
 
 Resolved like `sharedLibs`, but never written into `php.ini`.
+
+The same CommonJS rule applies here: pass manual strings, `URL`s, or objects rather than the ESM helper packages.
 
 ### files
 
@@ -90,7 +90,7 @@ const php = new PhpCgiWorker({
 
 ### locateFile
 
-*function*
+*function(path, directory): string | URL | undefined*
 
 ```javascript
 const php = new PhpCgiWorker({

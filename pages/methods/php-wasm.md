@@ -4,8 +4,6 @@ weight: -1000
 itemtype: schema.org/Class
 microdata:
     name: PhpWasm
-    alternateName: PhpWorker
-    alternateName: PhpWebview
     alternateName: PhpNode
     alternateName: PhpWeb
 ---
@@ -16,11 +14,9 @@ microdata:
 The concrete `php-wasm` classes all extend the same base runtime API:
 
 - `PhpWeb`
-- `PhpWebview`
-- `PhpWorker`
 - `PhpNode`
 
-All four accept the same core options bucket, with different defaults for binary loading and filesystem persistence depending on environment.
+Both accept the same core options bucket, with different defaults for binary loading and filesystem persistence depending on environment.
 
 ### Common constructor options
 
@@ -28,9 +24,7 @@ All four accept the same core options bucket, with different defaults for binary
 
 *string*
 
-Selects the PHP runtime version to load. `PhpWeb`, `PhpWebview`, and the browser-oriented defaults currently use `8.4`.
-
-`PhpNode` also defaults to `8.4` in this repo, but it checks the `PHP_VERSION` environment variable first. If `PHP_VERSION` is set, `PhpNode` will use that value unless you pass `version` explicitly.
+Selects the PHP runtime version to load. The current defaults in `source/` are `8.4` for `PhpWeb` and `PhpNode`.
 
 ```javascript
 const php = new PhpWeb({version: '8.4'});
@@ -41,8 +35,6 @@ const php = new PhpWeb({version: '8.4'});
 *string*
 
 Optional build suffix appended to the runtime filename.
-
-`PhpNode` also checks `PHP_VARIANT` before falling back to the empty-string default.
 
 ```javascript
 const php = new PhpWeb({version: '8.4', variant: '-debug'});
@@ -63,11 +55,15 @@ const php = new PhpWeb({
 });
 ```
 
+ESM helper packages can be passed directly here. CommonJS callers should pass strings, `URL`s, or `{name, url, ini}` records manually instead.
+
 ### dynamicLibs
 
 *array of strings or objects*
 
 Resolved the same way as `sharedLibs`, but never written into `php.ini`.
+
+The same CommonJS rule applies here: pass manual strings, `URL`s, or objects rather than the ESM helper packages.
 
 ### files
 
@@ -91,7 +87,7 @@ const php = new PhpWeb({
 
 ### locateFile
 
-*function(path, directory): string | undefined*
+*function(path, directory): string | URL | undefined*
 
 Overrides how `.wasm`, shared libraries, preload assets, and other runtime files are resolved.
 

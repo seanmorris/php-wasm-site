@@ -32,7 +32,7 @@ This is the basic pattern:
 ```javascript
 #!/usr/bin/env node
 import http from 'node:http';
-import { PhpCgiNode } from 'php-cgi-wasm/PhpCgiNode.mjs';
+import { PhpCgiNode } from 'php-cgi-wasm/PhpCgiNode';
 
 const php = new PhpCgiNode({
   prefix: '/php-wasm/cgi-bin/',
@@ -70,9 +70,11 @@ server.listen(3003);
 
 Open `http://localhost:3003/php-wasm/cgi-bin/` after creating a PHP app under `./persist/www`.
 
+If you're running CommonJS instead of ESM, use `const { PhpCgiNode } = require('php-cgi-wasm/PhpCgiNode');` and keep the rest of the constructor options the same.
+
 ## Loading extensions
 
-For the dynamic build, pass extension packages as `sharedLibs`:
+When your active library mode is `dynamic`, pass extension packages as `sharedLibs`:
 
 ```javascript
 const php = new PhpCgiNode({
@@ -99,6 +101,8 @@ const php = new PhpCgiNode({
 ```
 
 `sharedLibs` works the same way here as it does in the other runtimes: extension packages resolve their `.so` files and supporting libraries automatically.
+
+The extension helper JS packages remain ESM-only. In CommonJS, do not `require()` those helper packages. Manage extension `.so`, `.data`, `.wasm`, and support-library assets manually through `sharedLibs`, `dynamicLibs`, `files`, and `locateFile`, as described in the extensions guide.
 
 ## Important options
 
@@ -155,8 +159,6 @@ Selects the PHP-CGI runtime version to load. `PhpCgiNode` currently defaults to 
 version: '8.5'
 ```
 
-If you are running upstream docs or tests around `PhpCgiNode`, set `PHP_VERSION` explicitly when the desired CGI runtime should be forced by environment instead of constructor args.
-
 ### `rewrite`, `entrypoint`, `exclude`, `env`, `notFound`, `onRequest`
 
 These work the same way as the CGI worker/web runtimes documented in [php-cgi-wasm methods](/methods/php-cgi-wasm.html):
@@ -206,4 +208,4 @@ The current Node demo in the upstream repo lives at:
 
 The `PhpCgiNode` class itself is implemented at:
 
-- [`source/PhpCgiNode.js`](https://github.com/seanmorris/php-wasm/blob/develop/source/PhpCgiNode.js)
+- [`source/PhpCgiNode.mjs`](https://github.com/seanmorris/php-wasm/blob/develop/source/PhpCgiNode.mjs)
