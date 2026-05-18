@@ -441,18 +441,15 @@
         php-wasm for Cloudflare.</p>
         <p>pdo_cfd1 requires PHP 8.1+.</p>
         <h2 id="connect-configure">Connect &amp; Configure</h2>
-        <p>Pass the D1 object into the php-wasm constructor as a key to
+        <p>Pass the D1 object into the runtime constructor as a key to
         the <code>cfd1</code> object to enable pdo_cfd1 support.</p>
         <p><code>cfd1:</code> will become available as a PDO driver:</p>
         <div class="sourceCode" id="cb1"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">onRequest</span>(<span class="bu">event</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWorker</span>({</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">cfd1</span><span class="op">:</span> { <span class="dt">mainDb</span><span class="op">:</span> <span class="bu">event</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">mainDb</span> }</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php $pdo = new PDO(&#39;cfd1:mainDb&#39;);`</span>)<span class="op">;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> phpOptions <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">cfd1</span><span class="op">:</span> { <span class="dt">mainDb</span><span class="op">:</span> <span class="bu">event</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">mainDb</span> }</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php $pdo = new PDO(&#39;cfd1:mainDb&#39;);`</span>)<span class="op">;</span></span></code></pre></div>
         <p>You can check <code>phpinfo()</code> to make sure that the D1
         object is detected.
         <code>Cloudflare D1 SQL module detected</code> will display
@@ -461,21 +458,18 @@
         src="https://raw.githubusercontent.com/seanmorris/pdo-cfd1/refs/heads/master/phpinfo.png" /></p>
         <p>PDO can be used with D1 just like any other SQL server:</p>
         <div class="sourceCode" id="cb2"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">async</span> <span class="kw">function</span> <span class="fu">onRequest</span>(<span class="bu">event</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWorker</span>({</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">cfd1</span><span class="op">:</span> { <span class="dt">mainDb</span><span class="op">:</span> <span class="bu">event</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">mainDb</span> }</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="vs">        $pdo = new PDO(&#39;cfd1:mainDb&#39;);</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="vs">        $select = $pdo-&gt;prepare(</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="vs">            &#39;SELECT PageTitle, PageContent FROM WikiPages WHERE PageTitle = ?&#39;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="vs">        );</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="vs">        $select-&gt;execute([$pageTitle]);</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="vs">        $page = $select-&gt;fetchObject();`</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> phpOptions <span class="op">=</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">cfd1</span><span class="op">:</span> { <span class="dt">mainDb</span><span class="op">:</span> <span class="bu">event</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">mainDb</span> }</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="vs">    $pdo = new PDO(&#39;cfd1:mainDb&#39;);</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="vs">    $select = $pdo-&gt;prepare(</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="vs">        &#39;SELECT PageTitle, PageContent FROM WikiPages WHERE PageTitle = ?&#39;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="vs">    );</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="vs">    $select-&gt;execute([$pageTitle]);</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="vs">    $page = $select-&gt;fetchObject();`</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
         <h2 id="todo">Todo</h2>
         <ul>
         <li><em>Named replacement tokens</em> - Currently only

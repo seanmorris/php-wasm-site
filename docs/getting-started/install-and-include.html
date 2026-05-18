@@ -456,14 +456,17 @@
         <div class="sourceCode" id="cb3"><pre
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-wasm</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-cgi-wasm</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-wasm-builder</span></code></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-cli-wasm</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-dbg-wasm</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> npm i php-wasm-builder</span></code></pre></div>
         <h3 id="latest-nightly-build">Latest nightly build</h3>
         <p>If you want the newest unpublished artifacts instead of the
         npm packages, use the latest successful
         <code>Build Artifacts</code> workflow run from GitHub
         Actions.</p>
-        <p>As of February 24, 2026, the latest successful nightly
-        artifact build is:</p>
+        <p>If you specifically need the long-lived <code>develop</code>
+        artifacts, the latest successful <code>develop</code>-branch
+        build is still the February 24, 2026 run:</p>
         <ul>
         <li><code>Build Artifacts</code> run <code>#92</code></li>
         <li>GitHub Actions run ID <code>22360005357</code></li>
@@ -485,17 +488,39 @@
         learn how to move the files matching the following pattern to
         your public directory:</p>
         <div class="sourceCode" id="cb4"><pre
-        class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/php-wasm/php-web.mjs.wasm</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/php-cgi-wasm/php-cgi-worker.mjs.wasm</span></span></code></pre></div>
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/php-wasm/php8.4-web.mjs.wasm</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">node_modules/php-cgi-wasm/php8.4-cgi-worker.mjs.wasm</span></span></code></pre></div>
         <h2 id="importing-the-module">Importing the module</h2>
         <h3 id="esm">ESM</h3>
         <div class="sourceCode" id="cb5"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpWeb } <span class="im">from</span> <span class="st">&#39;php-wasm/PhpWeb.mjs&#39;</span><span class="op">;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
-        <h3 id="cjs">CJS</h3>
-        <div class="sourceCode" id="cb6" data-numbers="true"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpWeb } <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;php-wasm/PhpWeb.js&#39;</span>)<span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> PhpWeb<span class="op">;</span></span></code></pre></div>
+        <h3 id="commonjs-node-runtimes">CommonJS Node runtimes</h3>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpNode } <span class="op">=</span> <span class="pp">require</span>(<span class="st">&#39;php-wasm/PhpNode&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpNode</span>({<span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.5&#39;</span>})<span class="op">;</span></span></code></pre></div>
+        <h3 id="module-format">Module Format</h3>
+        <p>Core Node runtimes support both ESM and CommonJS.</p>
+        <p>For <code>0.1.0</code>, use the published entrypoints across
+        the runtime packages.</p>
+        <ul>
+        <li><code>php-wasm/PhpNode</code></li>
+        <li><code>php-cgi-wasm/PhpCgiNode</code></li>
+        <li><code>php-cli-wasm/PhpCliNode</code></li>
+        <li><code>php-dbg-wasm/PhpDbgNode</code></li>
+        </ul>
+        <p>Browser and worker entrypoints remain ESM-only.</p>
+        <p>Extension helper JS packages also remain ESM-only. Their
+        helper modules use <code>import.meta.url</code> to resolve
+        static assets, and there is no universal CommonJS equivalent for
+        that pattern.</p>
+        <p>When you need to manage runtime-loadable extensions from
+        CommonJS, load the core runtime with <code>require()</code> and
+        provide the extension <code>.so</code>, <code>.data</code>,
+        <code>.wasm</code>, and support-library assets yourself via
+        <code>sharedLibs</code>, <code>dynamicLibs</code>,
+        <code>files</code>, and <code>locateFile</code>.</p>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>
@@ -516,7 +541,9 @@
      <li><a href="#importing-the-module">Importing the module</a>
      <ul>
      <li><a href="#esm">ESM</a></li>
-     <li><a href="#cjs">CJS</a></li>
+     <li><a href="#commonjs-node-runtimes">CommonJS Node
+     runtimes</a></li>
+     <li><a href="#module-format">Module Format</a></li>
      </ul></li>
      </ul></li>
      </ul>

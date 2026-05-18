@@ -374,17 +374,62 @@
 				<article >
 								<h1 id="php-wasm">php-wasm</h1>
         <p>Changes</p>
-        <blockquote>
-        <p>Latest nightly artifact build: <code>Build Artifacts</code>
-        run <code>#92</code> on <code>develop</code>, published on
-        February 24, 2026. GitHub Actions run: <a
-        href="https://github.com/seanmorris/php-wasm/actions/runs/22360005357"
-        class="uri">https://github.com/seanmorris/php-wasm/actions/runs/22360005357</a>.
-        Nightly builds are announced in <code>#nightly-builds</code> on
-        the <code>php-wasm</code> Discord server.</p>
-        </blockquote>
-        <h2 id="v0.0.9---aiming-for-the-github-stars">v0.0.9 - Aiming
+        <h2 id="v0.1.0---aiming-for-the-github-stars">v0.1.0 - Aiming
         for the (GitHub) Stars</h2>
+        <ul>
+        <li>Rebuilt <code>demo-web</code> around Vite, reorganized it
+        into <code>pages</code>, <code>components</code>,
+        <code>lib</code>, and <code>assets</code>, and added the newer
+        browser/e2e harnesses plus runtime path helpers for the worker
+        and page builds.</li>
+        <li>Added Quickbus-backed browser messaging, a richer
+        <code>phpdbg</code> bus session, and a VSCode debugger bridge
+        for the demo app and debugger workflow.</li>
+        <li>Expanded runtime/build coverage across older targets,
+        including <code>phpdbg</code>, SDL, and Vrzno support in PHP
+        <code>8.0</code> builds. SDL now ships as the <code>_sdl</code>
+        runtime variant instead of a separately loaded shared
+        library.</li>
+        <li>Added <code>version</code> and <code>variant</code> support
+        to <code>php-tags</code>, making it possible to select
+        non-default runtimes from static HTML.</li>
+        <li>Standardized the maintained runtime sources on
+        <code>.mjs</code> modules and expanded type/JSDoc coverage
+        across <code>php-wasm</code>, <code>php-cgi-wasm</code>,
+        <code>php-cli-wasm</code>, <code>php-dbg-wasm</code>, and the
+        extension helper packages.</li>
+        <li>Reworked shared and dynamic extension loading so built-in
+        support libraries, ICU payloads, OpenSSL, libxml/XML, DOM,
+        SimpleXML, XMLReader, and XMLWriter behave consistently across
+        Node, browser, demo, and docs/test harnesses.</li>
+        <li>Suppressed implicit <code>libxml2.so</code> loading when it
+        is not provided in <code>sharedLibs</code>, which reduces
+        startup download size for minimal runtime configurations.</li>
+        <li>Broadened verification with vendored
+        <code>php-wasm-site</code> docs fixtures, split docs/CGI
+        coverage suites, deeper CLI-node PHPT coverage, richer
+        XML/intl/tidy/iconv/sqlite smoke tests, and browser-test
+        race-condition fixes.</li>
+        <li>Added <code>require()</code> support and CJS harness
+        coverage for the core Node runtimes, documented manual extension
+        asset wiring for CommonJS consumers, standardized
+        <code>LIB_TYPE</code> as the static/shared/dynamic selector, and
+        left <code>BUILD_TYPE</code> as the JS/MJS wrapper-format
+        selector.</li>
+        <li>Improved local workspace and release plumbing with
+        symlink-aware package loading, action-artifact overlay support,
+        and refreshed README/package docs around runtime defaults,
+        versioned <code>.wasm</code> assets, extension wiring,
+        interactive CLI/debugger behavior via <code>waitline</code>, and
+        Cloudflare D1 setup through <code>pdo_cfd1</code>.</li>
+        </ul>
+        <h2 id="v0.0.9---here-there-be-dragons">v0.0.9 - Here there be
+        dragons</h2>
+        <p><em>Version 0.0.9 is represented by a near endless stream of
+        letter-tagged alpha releases and will be considered officially
+        skipped. The changes in v0.1.0 mostly landed somewhere in this
+        range, but since the API is not stable, here there be
+        dragons.</em></p>
         <ul>
         <li>Adding PHP-CGI support!</li>
         <li>Runtime extension loading!</li>
@@ -403,8 +448,9 @@
         <li>Exposing FS methods w/queueing &amp; locking to sync files
         between tabs &amp; workers.</li>
         <li>Fixed the bug with POST requests under Firefox.</li>
-        <li>Adding support for PHP 8.3.7</li>
-        <li>Automatic CI testing for PHP 8.0, 8.1, 8.2 &amp; 8.3.</li>
+        <li>Adding support for PHP 8.3.7 &amp; 8.4.1.</li>
+        <li>Automatic CI testing for PHP 8.0, 8.1, 8.2, 8.3, &amp;
+        8.4.</li>
         </ul>
         <h2 id="v0.0.8---preparing-for-lift-off">v0.0.8 - Preparing for
         Lift-off</h2>
@@ -500,8 +546,10 @@
 					<ul>
      <li><a href="#php-wasm">php-wasm</a>
      <ul>
-     <li><a href="#v0.0.9---aiming-for-the-github-stars">v0.0.9 - Aiming
+     <li><a href="#v0.1.0---aiming-for-the-github-stars">v0.1.0 - Aiming
      for the (GitHub) Stars</a></li>
+     <li><a href="#v0.0.9---here-there-be-dragons">v0.0.9 - Here there
+     be dragons</a></li>
      <li><a href="#v0.0.8---preparing-for-lift-off">v0.0.8 - Preparing
      for Lift-off</a></li>
      <li><a href="#remodermizing">0.0.7 - Remodermizing</a></li>

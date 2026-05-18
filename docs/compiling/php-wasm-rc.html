@@ -676,9 +676,9 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <hr />
         <h3 id="with_intl">WITH_INTL</h3>
         <p>static|shared|<strong>dynamic</strong></p>
-        <p>When compiled as a <code>dynamic</code>, or
-        <code>shared</code> extension, this will produce the extension
-        <code>php8.x-intl.so</code> &amp; the following libraries:</p>
+        <p>When compiled as a <code>dynamic</code> extension, this will
+        produce the extension <code>php8.x-intl.so</code>, the following
+        libraries, and the preload file <code>icudt72l.dat</code>:</p>
         <ul>
         <li>libicuuc.so</li>
         <li>libicutu.so</li>
@@ -688,6 +688,15 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <li>libicudata.so</li>
         <li>icudt72l.dat</li>
         </ul>
+        <p>When compiled as a <code>shared</code> extension, the
+        <code>intl</code> extension itself is built into the base
+        runtime. Shared builds still emit the ICU support libraries
+        above and the preload file <code>icudt72l.dat</code>, but they
+        should not reload <code>php8.x-intl.so</code>.</p>
+        <p>When compiled as a <code>static</code> extension,
+        <code>icudt72l.dat</code> is bundled into the runtime
+        <code>.data</code> payload instead of being loaded
+        separately.</p>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>

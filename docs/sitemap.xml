@@ -2,145 +2,145 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>/contact.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/getting-started/cgi-service-worker.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/getting-started/php-in-static-html.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/getting-started/home.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/getting-started/php-in-js.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/getting-started/php.ini.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/getting-started/install-and-include.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/getting-started/cgi-in-nodeJs.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/extensions/using-php-extensions.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/extensions/pdo-pglite.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/extensions/vrzno.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/extensions/pdo-cfd1.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/compiling/custom-builds.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/compiling/php-wasm-rc.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/CHANGELOG.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/filesystem/loading-files.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/filesystem/transactions.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/filesystem/fs-operations.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/methods/php-wasm.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/methods/php-cgi-wasm.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/index.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/demos.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/google0fd3cfdc440cb5a3.html</loc>
-		<lastmod>2024-10-23</lastmod>
+		<lastmod>2024-10-22</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>
 	<url>
 		<loc>/LICENSE.html</loc>
-		<lastmod>2026-04-30</lastmod>
+		<lastmod>2026-05-18</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>
 	</url>

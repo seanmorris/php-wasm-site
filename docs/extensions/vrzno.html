@@ -435,7 +435,7 @@
 						<div class = "page-content">
 				<article >
 								<h1 id="vrzno">Vrzno</h1>
-        <p><em>Vrzno requires PHP 8.1+</em></p>
+        <p><em>Vrzno requires PHP 8.0+</em></p>
         <p>VRZNO is the first PHP extension built for php-wasm. Once
         it’s compiled with PHP, it can be served to any browser and
         executed client side. It can also run in Node.js and Cloudflare
@@ -542,7 +542,8 @@
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">$window</span>-&gt;setTimeout( <span class="kw">fn</span>() =&gt; <span class="va">$accept</span>(<span class="st">&#39;Pass.&#39;</span>)<span class="ot">,</span> <span class="dv">1000</span>)<span class="ot">;</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>})<span class="ot">;</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="va">$p</span>-&gt;then(<span class="fu">var_dump</span>(...))-&gt;<span class="cf">catch</span>(<span class="fu">var_dump</span>(...))<span class="ot">;</span></span></code></pre></div>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="va">$dump</span> <span class="op">=</span> <span class="kw">fn</span>(<span class="va">$value</span>) =&gt; <span class="fu">var_dump</span>(<span class="va">$value</span>)<span class="ot">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="va">$p</span>-&gt;then(<span class="va">$dump</span>)-&gt;<span class="cf">catch</span>(<span class="va">$dump</span>)<span class="ot">;</span></span></code></pre></div>
         <h2 id="arrays">Arrays</h2>
         <p>Both string and integer properties are fully marshalled for
         both PHP and JS arrays.</p>
