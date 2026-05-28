@@ -10,6 +10,7 @@ VRZNO is the first PHP extension built for php-wasm. Once it's compiled with PHP
 ## How is this possible?
 
 VRZNO is a bridge between Javascript and PHP in an extremely nontraditional sense. It lets you pass objects, arrays, callbacks, and classes between PHP & Javascript, as well as scalar values.
+
 ## PHP Functions
 
 ### vrzno_await($promise)
