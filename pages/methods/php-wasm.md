@@ -4,8 +4,9 @@ weight: -1000
 itemtype: schema.org/Class
 microdata:
     name: PhpWasm
-    alternateName: PhpNode
-    alternateName: PhpWeb
+    alternateName:
+        - PhpNode
+        - PhpWeb
 ---
 # Php-Wasm Methods
 
@@ -34,10 +35,12 @@ const php = new PhpWeb({version: '8.4'});
 
 *string*
 
-Optional build suffix appended to the runtime filename.
+Selects a packaged runtime variant. The empty string uses the standard runtime.
+`_sdl` selects the SDL-enabled `PhpWeb` runtime for supported PHP versions.
+`PhpNode` currently supports only the standard empty variant.
 
 ```javascript
-const php = new PhpWeb({version: '8.4', variant: '-debug'});
+const php = new PhpWeb({version: '8.4', variant: '_sdl'});
 ```
 
 ### sharedLibs

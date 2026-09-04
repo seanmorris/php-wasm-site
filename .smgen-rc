@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 TITLE_PREFIX=${TITLE_PREFIX:-"Php-Wasm"}
-# BASE_URL=${BASE_URL:-"https://php-wasm.seanmorr.is"}
+BASE_URL=${BASE_URL:-""}
+export SITEMAP_BASE_URL=${SITEMAP_BASE_URL:-"https://php-wasm.seanmorr.is"}
 STATIC_DIR=${STATIC_DIR:-"./static"}
 SMG_SEARCH=${SMG_SEARCH:-""}
 

@@ -2,6 +2,6 @@
 
 set -euo pipefail
 
-SMGEN_BIN=${SMGEN_BIN:-smgen}
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-exec "${SMGEN_BIN}" build "$@"
+exec "${SCRIPT_DIR}/tools/smgen" build "$@"

@@ -60,13 +60,20 @@ const php = new PhpWeb({persist: {mountPath: '/persist'}});
 
 ### NodeFS (Node.js Only)
 
-To use NodeFS in PhpWeb, pass a `persist` object with `mountPath` & `localPath` keys.
+To use NodeFS in `PhpNode`, pass a `persist` object with `mountPath` and `localPath` keys.
 
 `localPath` will be used as the path to the HOST directory to expose to PHP.
 `mountPath` will be used as the path to the persistent directory within the PHP environment.
 
 ```javascript
-const { PhpNode } = await import('https://cdn.jsdelivr.net/npm/php-wasm/PhpNode.mjs');
+import os from 'node:os';
+import path from 'node:path';
+import { PhpNode } from 'php-wasm/PhpNode.mjs';
 
-const php = new PhpNode({persist: {mountPath: '/persist', localPath: '~/your-files'}});
+const php = new PhpNode({
+    persist: {
+        mountPath: '/persist',
+        localPath: path.join(os.homedir(), 'your-files'),
+    },
+});
 ```

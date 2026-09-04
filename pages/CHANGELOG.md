@@ -1,3 +1,6 @@
+---
+title: CHANGELOG
+---
 # php-wasm
 
 Changes

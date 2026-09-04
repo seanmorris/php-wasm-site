@@ -1,3 +1,6 @@
+---
+title: Transactions
+---
 # Transactions
 
 **Note: This feature is available for Web and Worker environments only!**

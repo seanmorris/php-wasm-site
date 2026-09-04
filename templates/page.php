@@ -3,6 +3,29 @@
 $frontmatter = $frontmatter ?? yaml_parse(`yq --front-matter=extract $argv[1] 2>/dev/null || echo ""`) ?? [];
 $leftBarLink = $frontmatter['leftBarLink'] ?? TRUE;
 $leftBarShow = $frontmatter['leftBarShow'] ?? TRUE;
+$itemtype = $frontmatter['itemtype'] ?? NULL;
+$microdata = $frontmatter['microdata'] ?? [];
+$microdata = is_array($microdata) ? $microdata : [];
+$microdataHtml = '';
+
+if($itemtype && !preg_match('/^[a-z][a-z0-9+.-]*:\/\//i', $itemtype))
+{
+	$itemtype = 'https://' . ltrim($itemtype, '/');
+}
+
+ksort($microdata, SORT_STRING);
+
+foreach($microdata as $property => $values)
+{
+	$propertyHtml = htmlspecialchars((string) $property, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+
+	foreach(is_array($values) ? $values : [$values] as $value)
+	{
+		$value = is_bool($value) ? ($value ? 'true' : 'false') : (string) $value;
+		$value = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+		$microdataHtml .= "\t\t\t\t\t\t\t\t<meta itemprop = \"{$propertyHtml}\" content = \"{$value}\" />\n";
+	}
+}
 ?><!DOCTYPE HTML>
 <html lang = "en">
 <head>
@@ -129,11 +152,8 @@ $endif$
 				<nav class = "main"><?php renderNavBar(); ?></nav>
 			<?php endif; ?>
 			<div class = "page-content">
-				<article $if(itemtype)$ itemscope itemtype = "https://${itemtype}" $endif$>
-				$for(microdata/pairs)$
-				<meta itemprop = "${microdata.key}" content = "${microdata.value}" />
-				$endfor$
-				$body$
+				<article<?php if($itemtype): ?> itemscope itemtype = "<?=htmlspecialchars($itemtype, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');?>"<?php endif; ?>>
+<?=$microdataHtml;?>								$body$
 				</article>
 				$if(toc)$
 				<nav class = "table-of-contents">
@@ -166,7 +186,7 @@ $endif$
 		<p class ="strong">About</p>
 		<p>&copy; 2024 - <?=date('Y');?> Sean Morris | <a href="/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap" width = "80" height = "15" alt = "xml sitemap badge"></a>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" width = "80" height = "15" alt = "xml sitemap badge"></a>
 	</footer>
 <script>
 	window.dataLayer = window.dataLayer || [];

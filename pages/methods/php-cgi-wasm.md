@@ -3,8 +3,9 @@ pagetitle: Php-Cgi-Wasm Methods
 itemtype: schema.org/Class
 microdata:
     name: PhpCgiWasm
-    alternateName: PhpCgiNode
-    alternateName: PhpCgiWorker
+    alternateName:
+        - PhpCgiNode
+        - PhpCgiWorker
 ---
 # Php-Cgi-Wasm Methods
 
