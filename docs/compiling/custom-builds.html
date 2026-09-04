@@ -433,11 +433,12 @@
 					LICENSE				</a>
 			</li></ul></nav>
 						<div class = "page-content">
-				<article >
+				<article>
 								<h1 id="custom-builds-with-php-wasm-builder">Custom Builds with
         php-wasm-builder</h1>
         <p>The <code>php-wasm-builder</code> <em>package</em> is the set
-        of source files needed to build php-wasm &amp; php-cgi-wasm.</p>
+        of source files needed to build php-wasm, php-cgi-wasm,
+        php-cli-wasm, &amp; php-dbg-wasm.</p>
         <p>The <code>php-wasm-builder</code> <em>command</em> is a
         wrapper script for the build process that allows the user to
         easily configure the underlying build process &amp; drop the
@@ -451,7 +452,7 @@
         <p><strong><em>Requires:</em></strong></p>
         <ul>
         <li>Docker</li>
-        <li>Docker Compose</li>
+        <li>Docker Compose v2 (<code>docker compose</code>)</li>
         <li>Coreutils</li>
         <li>Wget</li>
         <li>Make</li>
@@ -469,11 +470,46 @@
         <h2 id="php-wasm-builder-commands">php-wasm-builder
         commands</h2>
         <h3 id="build">build</h3>
-        <p>Use this to build custom version of php-wasm. It’s
-        recommended to build this to an empty directory using a
-        <code>.php-wasm-rc</code> file.</p>
+        <p>Use this to build a custom version of <code>php-wasm</code>,
+        <code>php-cgi-wasm</code>, <code>php-cli-wasm</code>, or
+        <code>php-dbg-wasm</code>. It’s recommended to build this into
+        an empty directory using a <code>.php-wasm-rc</code> file.</p>
         <div class="sourceCode" id="cb4"><pre
         class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder build</span></code></pre></div>
+        <p>The optional selectors can be provided in any order:</p>
+        <table>
+        <thead>
+        <tr class="header">
+        <th>Selector</th>
+        <th>Values</th>
+        <th>Default</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="odd">
+        <td>Environment</td>
+        <td><code>web</code>, <code>node</code>, <code>worker</code>,
+        <code>webview</code></td>
+        <td><code>web</code></td>
+        </tr>
+        <tr class="even">
+        <td>Module format</td>
+        <td><code>js</code>, <code>mjs</code></td>
+        <td><code>js</code></td>
+        </tr>
+        <tr class="odd">
+        <td>Package</td>
+        <td><code>base</code>, <code>cgi</code>, <code>cli</code>,
+        <code>dbg</code></td>
+        <td><code>base</code></td>
+        </tr>
+        </tbody>
+        </table>
+        <p><code>base</code>, <code>cgi</code>, <code>cli</code>, and
+        <code>dbg</code> build <code>php-wasm</code>,
+        <code>php-cgi-wasm</code>, <code>php-cli-wasm</code>, and
+        <code>php-dbg-wasm</code>, respectively. Unknown or conflicting
+        selectors fail before Make starts.</p>
         <h3 id="image">image</h3>
         <p>This will build the docker container used to build
         php-wasm.</p>
@@ -520,19 +556,33 @@
         <div class="sourceCode" id="cb12"><pre
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/my-project</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node</span></code></pre></div>
-        <h2 id="esm-modules">ESM Modules:</h2>
-        <p>Build ESM modules with:</p>
+        <p>Worker and webview targets use the same selector format:</p>
         <div class="sourceCode" id="cb13"><pre
-        class="sourceCode sh"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web mjs</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node mjs</span></code></pre></div>
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build worker mjs</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build webview mjs</span></code></pre></div>
+        <h2 id="esm-modules">ESM Modules</h2>
+        <p>Build ESM modules with:</p>
+        <div class="sourceCode" id="cb14"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web mjs</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node mjs</span></code></pre></div>
         <p>The current builder script defaults to <code>js</code> output
         unless you pass <code>mjs</code>.</p>
-        <h2 id="cgi-modules">CGI Modules:</h2>
+        <h2 id="cgi-modules">CGI Modules</h2>
         <p>Build CGI modules with:</p>
-        <div class="sourceCode" id="cb14"><pre
-        class="sourceCode sh"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web cgi mjs</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node cgi mjs</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build worker cgi mjs</span></code></pre></div>
+        <div class="sourceCode" id="cb15"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web cgi mjs</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node cgi mjs</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build worker cgi mjs</span></code></pre></div>
+        <h2 id="cli-modules">CLI Modules</h2>
+        <p>Build <code>php-cli-wasm</code> modules with:</p>
+        <div class="sourceCode" id="cb16"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node cli mjs</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web cli mjs</span></code></pre></div>
+        <h2 id="dbg-modules">DBG Modules</h2>
+        <p>Build <code>php-dbg-wasm</code> modules with:</p>
+        <div class="sourceCode" id="cb17"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node dbg mjs</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web dbg mjs</span></code></pre></div>
         <h2 id="php_dist_dir">PHP_DIST_DIR</h2>
         <p>This will build the package inside of the current directory
         (or in <code>PHP_DIST_DIR</code>, <em>see <a
@@ -560,8 +610,10 @@
      </ul></li>
      <li><a href="#build-for-web">Build for web</a></li>
      <li><a href="#build-for-node">Build for node</a></li>
-     <li><a href="#esm-modules">ESM Modules:</a></li>
-     <li><a href="#cgi-modules">CGI Modules:</a></li>
+     <li><a href="#esm-modules">ESM Modules</a></li>
+     <li><a href="#cgi-modules">CGI Modules</a></li>
+     <li><a href="#cli-modules">CLI Modules</a></li>
+     <li><a href="#dbg-modules">DBG Modules</a></li>
      <li><a href="#php_dist_dir">PHP_DIST_DIR</a></li>
      </ul></li>
      </ul>
@@ -591,7 +643,7 @@
 		<p class ="strong">About</p>
 		<p>&copy; 2024 - 2026 Sean Morris | <a href="/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap" width = "80" height = "15" alt = "xml sitemap badge"></a>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" width = "80" height = "15" alt = "xml sitemap badge"></a>
 	</footer>
 <script>
 	window.dataLayer = window.dataLayer || [];

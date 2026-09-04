@@ -433,199 +433,203 @@
 					LICENSE				</a>
 			</li></ul></nav>
 						<div class = "page-content">
-				<article >
+				<article>
 								<h1 id="vrzno">Vrzno</h1>
-        <p><em>Vrzno requires PHP 8.0+</em></p>
-        <p>VRZNO is the first PHP extension built for php-wasm. Once
-        it’s compiled with PHP, it can be served to any browser and
-        executed client side. It can also run in Node.js and Cloudflare
-        Workers.</p>
-        <h2 id="how-is-this-possible">How is this possible?</h2>
-        <p>VRZNO is a bridge between Javascript and PHP in an extremely
-        nontraditional sense. It lets you pass objects, arrays,
-        callbacks, and classes between PHP &amp; Javascript, as well as
-        scalar values. ## PHP Functions</p>
-        <h3 id="vrzno_awaitpromise">vrzno_await($promise)</h3>
-        <p>Wait on a Promise-like object to resolve within PHP before
-        proceeding with the script. This will pause execution of PHP in
-        the same way the <code>await</code> keyword does when used in
-        Javascript.</p>
+        <p>Vrzno is the JavaScript bridge extension for
+        <code>php-wasm</code>. It lets PHP work with JavaScript values,
+        objects, arrays, callbacks, classes, promises, and globals as if
+        they were local PHP values.</p>
+        <p>Vrzno 0.2 requires PHP 8.0 or newer compiled for Emscripten’s
+        wasm32 memory model. It supports PHP 8.0 through 8.5 in browser,
+        Node.js, and Cloudflare Worker runtimes; it is not a native
+        desktop or server PHP extension.</p>
+        <p>The PDO connectors that originally lived in Vrzno are
+        separate extensions:</p>
+        <ul>
+        <li><a href="/extensions/pdo-cfd1.html">Cloudflare D1</a></li>
+        <li><a
+        href="/extensions/pdo-pglite.html">PGlite/PostgreSQL</a></li>
+        </ul>
+        <h2 id="quick-start">Quick Start</h2>
+        <p>In <code>php-wasm</code>, Vrzno is normally available by
+        default. Pass JavaScript values to the runtime constructor and
+        retrieve them from PHP with <code>vrzno_env()</code>.</p>
         <div class="sourceCode" id="cb1"><pre
-        class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">$window</span> <span class="op">=</span> <span class="kw">new</span> <span class="cn">V</span>rzno<span class="ot">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">$response</span> <span class="op">=</span> vrzno_await(<span class="va">$window</span>-&gt;fetch(<span class="st">&#39;https://api.weather.gov/gridpoints/TOP/40,74/forecast&#39;</span>))<span class="ot">;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="va">$json</span> <span class="op">=</span> vrzno_await(<span class="va">$response</span>-&gt;json())<span class="ot">;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">var_dump</span>(<span class="va">$json</span>)<span class="ot">;</span></span></code></pre></div>
-        <h3 id="vrzno_importmodule_url">vrzno_import($module_url)</h3>
-        <p>Import a javascript library asynchronously. This is the PHP
-        equivalent of Javascript’s dynamic <code>import()</code>.</p>
-        <p>See a demo: https://codepen.io/SeanMorris227/pen/LYqNNrE</p>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpNode } <span class="im">from</span> <span class="st">&#39;php-wasm/PhpNode.mjs&#39;</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpNode</span>({</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span><span class="op">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">answer</span><span class="op">:</span> <span class="dv">42</span><span class="op">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="vs">    $window = new Vrzno;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="vs">    var_dump(vrzno_env(&#39;answer&#39;));</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="vs">    var_dump($window-&gt;Date-&gt;now() &gt; 0);</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+        <h2 id="core-api">Core API</h2>
+        <h3 id="new-vrzno"><code>new Vrzno</code></h3>
+        <p>Creates a handle to JavaScript’s <code>globalThis</code>. In
+        a browser, that normally means <code>window</code>.</p>
         <div class="sourceCode" id="cb2"><pre
         class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$import</span> <span class="op">=</span> vrzno_import(<span class="st">&#39;https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm&#39;</span>)<span class="ot">;</span></span></code></pre></div>
-        <h3 id="vrzno_envname">vrzno_env($name)</h3>
-        <p>Takes a string, and returns a value passed into the PHP
-        Object’s constructor.</p>
-        <p>For example, if you invoke <code>PhpNode</code> like this in
-        Javascript:</p>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$window</span> <span class="op">=</span> <span class="kw">new</span> <span class="cn">V</span>rzno<span class="ot">;</span></span></code></pre></div>
+        <h3
+        id="vrzno_awaitpromiselike"><code>vrzno_await($promiseLike)</code></h3>
+        <p>Waits for a promise-like JavaScript value to settle and
+        returns its resolved value to PHP.</p>
         <div class="sourceCode" id="cb3"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpNode } <span class="im">from</span> <span class="st">&#39;./PhpNode.mjs&#39;</span><span class="op">;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gi <span class="im">from</span> <span class="st">&#39;node-gtk&#39;</span><span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> Gtk <span class="op">=</span> gi<span class="op">.</span><span class="fu">require</span>(<span class="st">&#39;Gtk&#39;</span><span class="op">,</span> <span class="st">&#39;3.0&#39;</span>)<span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> WebKit2 <span class="op">=</span> gi<span class="op">.</span><span class="fu">require</span>(<span class="st">&#39;WebKit2&#39;</span>)<span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpNode</span>({Gtk<span class="op">,</span> gi<span class="op">,</span> WebKit2})<span class="op">;</span></span></code></pre></div>
-        <p>You can access those values in PHP like so:</p>
+        class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">$window</span> <span class="op">=</span> <span class="kw">new</span> <span class="cn">V</span>rzno<span class="ot">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">$response</span> <span class="op">=</span> vrzno_await(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">$window</span>-&gt;fetch(<span class="st">&#39;https://api.weather.gov/gridpoints/TOP/40,74/forecast&#39;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)<span class="ot">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="va">$json</span> <span class="op">=</span> vrzno_await(<span class="va">$response</span>-&gt;json())<span class="ot">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">var_dump</span>(<span class="va">$json</span>)<span class="ot">;</span></span></code></pre></div>
+        <h3
+        id="vrzno_importmoduleurl"><code>vrzno_import($moduleUrl)</code></h3>
+        <p>Performs a dynamic JavaScript <code>import()</code> and
+        returns the resulting promise or module bridge.</p>
         <div class="sourceCode" id="cb4"><pre
         class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">$gi</span>  <span class="op">=</span> vrzno_env(<span class="st">&#39;gi&#39;</span>)<span class="ot">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">$Gtk</span> <span class="op">=</span> vrzno_env(<span class="st">&#39;Gtk&#39;</span>)<span class="ot">;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="va">$WebKit2</span> <span class="op">=</span> vrzno_env(<span class="st">&#39;WebKit2&#39;</span>)<span class="ot">;</span></span></code></pre></div>
-        <h3 id="vrzno_targetvrzno">vrzno_target($vrzno)</h3>
-        <p>Get the <code>targetId</code> as an integer from a
-        <code>Vrzno</code> object.</p>
-        <h2 id="javascript-object-and-classes">Javascript Object and
-        Classes</h2>
-        <p>Classes and objects are fully marshalled through Vrzno. You
-        can use Javascript classes by bringing them in like any other
-        object, and things should work as normal.</p>
-        <p>For example, we’ll pull in the Javascript <code>Date</code>
-        object and call the static function <code>now()</code> on
-        it:</p>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">$plot</span> <span class="op">=</span> vrzno_await(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    vrzno_import(<span class="st">&#39;https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm&#39;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)<span class="ot">;</span></span></code></pre></div>
+        <h3 id="vrzno_envname"><code>vrzno_env($name)</code></h3>
+        <p>Returns a value attached directly to the runtime constructor
+        options.</p>
         <div class="sourceCode" id="cb5"><pre
-        class="sourceCode php"><code class="sourceCode php"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">$window</span> <span class="op">=</span> <span class="kw">new</span> <span class="cn">V</span>rzno<span class="ot">;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">$Date</span> <span class="op">=</span> <span class="va">$window</span>-&gt;<span class="fu">Date</span><span class="ot">;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">var_dump</span>(<span class="va">$Date</span>-&gt;now())<span class="ot">;</span></span></code></pre></div>
-        <p>Since the <code>Date</code> object is also technically a
-        class in Javascript, we can create a new instance in PHP using
-        the <code>new</code> operator, and call the instance method,
-        <code>toISOString</code>:</p>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpNode</span>({gi<span class="op">,</span> Gtk<span class="op">,</span> WebKit2})<span class="op">;</span></span></code></pre></div>
         <div class="sourceCode" id="cb6"><pre
         class="sourceCode php"><code class="sourceCode php"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">$window</span> <span class="op">=</span> <span class="kw">new</span> <span class="cn">V</span>rzno<span class="ot">;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">$Date</span> <span class="op">=</span> <span class="va">$window</span>-&gt;<span class="fu">Date</span><span class="ot">;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="va">$d</span> <span class="op">=</span> <span class="kw">new</span> <span class="va">$Date</span><span class="ot">;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">var_dump</span>(<span class="va">$d</span><span class="ot">,</span> <span class="va">$d</span>-&gt;toISOString())<span class="ot">;</span></span></code></pre></div>
-        <h3 id="new-vrzno">new Vrzno</h3>
-        <p>Creates a new <code>Vrzno</code> object that holds a
-        reference to Javascript’s <code>globalThis</code> object. In the
-        browser this corresponds to <code>window</code>.</p>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">$gi</span> <span class="op">=</span> vrzno_env(<span class="st">&#39;gi&#39;</span>)<span class="ot">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">$Gtk</span> <span class="op">=</span> vrzno_env(<span class="st">&#39;Gtk&#39;</span>)<span class="ot">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="va">$WebKit2</span> <span class="op">=</span> vrzno_env(<span class="st">&#39;WebKit2&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+        <h3 id="vrzno_sharedname"><code>vrzno_shared($name)</code></h3>
+        <p>Reads a value from the runtime’s shared-value map. Helpers
+        such as <code>php.x</code> and <code>php.r</code> use this
+        registry to move arbitrary JavaScript values into PHP without
+        JSON encoding them first.</p>
+        <h3
+        id="vrzno_targetvalue"><code>vrzno_target($value)</code></h3>
+        <p>Returns the internal numeric target handle for a bridged
+        JavaScript object. This is primarily useful for debugging bridge
+        internals.</p>
+        <h3 id="compatibility-helpers">Compatibility Helpers</h3>
+        <p>The string-based legacy helpers remain available, although
+        the object bridge is preferred:</p>
+        <ul>
+        <li><code>vrzno_eval($code)</code></li>
+        <li><code>vrzno_run($globalFunctionName, $args = [])</code></li>
+        <li><code>vrzno_timeout($milliseconds, $callback)</code></li>
+        </ul>
+        <h2 id="objects-classes-and-callbacks">Objects, Classes, and
+        Callbacks</h2>
+        <p>JavaScript classes and objects cross the bridge directly.
+        Static calls, constructors, property reads, and method calls use
+        normal PHP syntax.</p>
         <div class="sourceCode" id="cb7"><pre
         class="sourceCode php"><code class="sourceCode php"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="va">$window</span> <span class="op">=</span> <span class="kw">new</span> <span class="cn">V</span>rzno<span class="ot">;</span></span></code></pre></div>
-        <h2 id="callbacks">Callbacks</h2>
-        <p>Functions are fully marshalled as well. In this example,
-        we’ll create an anonymous PHP callback that calls the Javascript
-        function <code>window.alert()</code>, and then pass the PHP
-        callback to Javascript’s <code>setTimeout()</code> function,
-        which will call it after 1 second.</p>
-        <p>As you can see, functions from <strong>both</strong>
-        languages are crossing the boundary here:</p>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="va">$window</span> <span class="op">=</span> <span class="kw">new</span> <span class="cn">V</span>rzno<span class="ot">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="va">$Date</span> <span class="op">=</span> <span class="va">$window</span>-&gt;<span class="fu">Date</span><span class="ot">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">var_dump</span>(<span class="va">$Date</span>-&gt;now())<span class="ot">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="va">$date</span> <span class="op">=</span> <span class="kw">new</span> <span class="va">$Date</span><span class="ot">;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">var_dump</span>(<span class="va">$date</span>-&gt;toISOString())<span class="ot">;</span></span></code></pre></div>
+        <p>PHP callables can also be passed to JavaScript:</p>
         <div class="sourceCode" id="cb8"><pre
         class="sourceCode php"><code class="sourceCode php"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="va">$window</span> <span class="op">=</span> <span class="kw">new</span> <span class="cn">V</span>rzno<span class="ot">;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="va">$window</span>-&gt;setTimeout( <span class="kw">fn</span>() =&gt; <span class="va">$window</span>-&gt;alert(<span class="st">&#39;Done!&#39;</span>)<span class="ot">,</span> <span class="dv">1000</span>)<span class="ot">;</span></span></code></pre></div>
-        <p>Since we can create new objects from classes, we can even use
-        this to create Promises:</p>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="va">$window</span>-&gt;setTimeout(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">fn</span>() =&gt; <span class="va">$window</span>-&gt;console-&gt;<span class="fu">log</span>(<span class="st">&#39;Done from PHP&#39;</span>)<span class="ot">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1000</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)<span class="ot">;</span></span></code></pre></div>
+        <p>JavaScript arrays are exposed as array-like iterable values,
+        with indexed and property-style access on the PHP side.</p>
+        <h2 id="value-and-error-semantics">Value and Error
+        Semantics</h2>
+        <ul>
+        <li>JavaScript <code>null</code> and <code>undefined</code> both
+        become PHP <code>null</code>; PHP has no distinct undefined
+        value.</li>
+        <li>PHP <code>null</code> becomes JavaScript <code>null</code>.
+        A missing PHP array key or object property reads as JavaScript
+        <code>undefined</code>.</li>
+        <li><code>property_exists()</code> distinguishes an existing
+        JavaScript property containing <code>null</code> or
+        <code>undefined</code> from a missing property.
+        <code>isset()</code> is false for all three cases.</li>
+        <li>JavaScript 32-bit integers become PHP integers. Other
+        numbers, including <code>NaN</code>, infinities, and larger
+        integers, become PHP floats.</li>
+        <li>JavaScript BigInt and Symbol values cannot be represented in
+        PHP and throw a <code>TypeError</code>.</li>
+        <li>Embedded null bytes are preserved in strings crossing either
+        direction.</li>
+        <li>JavaScript exceptions and rejected promises become catchable
+        PHP <code>RuntimeException</code> instances.</li>
+        <li>A JavaScript proxy that outlives a PHP runtime refresh
+        throws <code>ReferenceError</code> when used.</li>
+        </ul>
+        <p><code>Vrzno</code> instances are live runtime handles, not
+        value objects. They cannot be cloned or serialized. Extract the
+        plain data you need first, for example by casting a bridged
+        object to an array before calling <code>serialize()</code>.</p>
+        <h2 id="http-and-allow_url_fopen">HTTP and
+        <code>allow_url_fopen</code></h2>
+        <p>Vrzno implements <code>http</code> and <code>https</code>
+        stream wrappers using JavaScript <code>fetch()</code>. Normal
+        PHP stream functions can therefore make requests when
+        <code>allow_url_fopen</code> is enabled.</p>
         <div class="sourceCode" id="cb9"><pre
         class="sourceCode php"><code class="sourceCode php"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="va">$window</span> <span class="op">=</span> <span class="kw">new</span> <span class="cn">V</span>rzno<span class="ot">;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="va">$Promise</span> <span class="op">=</span> <span class="va">$window</span>-&gt;<span class="cn">P</span>romise<span class="ot">;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="va">$p</span> <span class="op">=</span> <span class="kw">new</span> <span class="va">$Promise</span>(<span class="kw">function</span>(<span class="va">$accept</span><span class="ot">,</span> <span class="va">$reject</span>) <span class="kw">use</span> (<span class="va">$window</span>) {</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">$window</span>-&gt;setTimeout( <span class="kw">fn</span>() =&gt; <span class="va">$accept</span>(<span class="st">&#39;Pass.&#39;</span>)<span class="ot">,</span> <span class="dv">1000</span>)<span class="ot">;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>})<span class="ot">;</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="va">$dump</span> <span class="op">=</span> <span class="kw">fn</span>(<span class="va">$value</span>) =&gt; <span class="fu">var_dump</span>(<span class="va">$value</span>)<span class="ot">;</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="va">$p</span>-&gt;then(<span class="va">$dump</span>)-&gt;<span class="cf">catch</span>(<span class="va">$dump</span>)<span class="ot">;</span></span></code></pre></div>
-        <h2 id="arrays">Arrays</h2>
-        <p>Both string and integer properties are fully marshalled for
-        both PHP and JS arrays.</p>
-        <h2 id="tostring-__tostring">toString &amp; __toString</h2>
-        <p>The Javascript <code>.toString</code> method and the PHP
-        <code>-&gt;__toString</code> method are proxied to each other to
-        ensure proper stringification in both languages.</p>
-        <h2 id="url-fopen">URL fopen</h2>
-        <p>Vrzno implements a fetch-backend for the <code>http</code>
-        and <code>https</code> stream wrappers, which respects the
-        <code>allow_url_fopen</code> INI directive.</p>
-        <div class="sourceCode" id="cb10"><pre
-        class="sourceCode php"><code class="sourceCode php"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var_dump</span>( <span class="fu">file_get_contents</span>(<span class="st">&#39;https://jsonplaceholder.typicode.com/users&#39;</span>) )<span class="ot">;</span></span></code></pre></div>
-        <p>You can use the <code>stream_context_create</code> like
-        normal to modify the request:</p>
-        <div class="sourceCode" id="cb11"><pre
-        class="sourceCode php"><code class="sourceCode php"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="va">$opts</span> <span class="op">=</span> [<span class="st">&#39;http&#39;</span> =&gt; [</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;method&#39;</span> =&gt; <span class="st">&#39;POST&#39;</span><span class="ot">,</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;content&#39;</span> =&gt; <span class="fu">json_encode</span>([<span class="st">&#39;value&#39;</span> =&gt; <span class="st">&#39;foobar&#39;</span>])</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>]]<span class="ot">;</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="va">$context</span> <span class="op">=</span> <span class="fu">stream_context_create</span>(<span class="va">$opts</span>)<span class="ot">;</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">var_dump</span>(</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">file_get_contents</span>(<span class="st">&#39;https://jsonplaceholder.typicode.com/users&#39;</span><span class="ot">,</span> <span class="kw">false</span><span class="ot">,</span> <span class="va">$context</span>)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)<span class="ot">;</span></span></code></pre></div>
-        <p>Currently, the following context options are implemented:</p>
-        <ul>
-        <li>method</li>
-        <li>content</li>
-        <li>header</li>
-        <li>ignore_errors</li>
-        </ul>
-        <p>More information on HTTP context options can be found
-        here:</p>
-        <p><a href="https://www.php.net/manual/en/context.http.php"
-        class="uri">https://www.php.net/manual/en/context.http.php</a></p>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var_dump</span>(<span class="fu">file_get_contents</span>(<span class="st">&#39;https://jsonplaceholder.typicode.com/users&#39;</span>))<span class="ot">;</span></span></code></pre></div>
+        <p>The supported HTTP context options are <code>method</code>,
+        <code>content</code>, <code>header</code>, and
+        <code>ignore_errors</code>.</p>
         <h2 id="limitations">Limitations</h2>
         <ul>
-        <li><p>The Javascript object model places properties and methods
-        in the same namespace. PHP however uses separate namespaces for
-        properties and methods. This means an object in PHP can have a
-        property <code>$x-&gt;y</code> as well as a method
-        <code>$x-&gt;y()</code>. However, if a Javascript object has a
-        method <code>x.y()</code>, then the property <code>x.y</code>
-        must resolve to the same callback as the method.</p>
-        <p>Currently, when a PHP object is passed into a Javascript
-        execution environment, method names take precedence over
-        property names. This means if a PHP object has both a method
-        <code>$x-&gt;y()</code>, and a property <code>$x-&gt;y</code>,
-        then the property will be inaccessible from Javascript.</p></li>
-        <li><p>PHP Classes are not <strong>yet</strong> accessible from
-        Javascript. i.e. there is no way to pass a class out of PHP and
-        call <code>new</code> on it from Javascript.</p></li>
-        <li><p>Static methods are not yet proxied from PHP.</p></li>
+        <li>JavaScript places properties and methods in one namespace,
+        while PHP keeps them separate. If a PHP object exposes both
+        <code>$x-&gt;y</code> and <code>$x-&gt;y()</code>, the method
+        name currently wins when accessed from JavaScript.</li>
+        <li>PHP classes are not exposed to JavaScript as constructible
+        classes.</li>
+        <li>Static PHP methods are not currently proxied back to
+        JavaScript.</li>
         </ul>
+        <p>See the <a href="https://github.com/seanmorris/vrzno">Vrzno
+        repository</a> for build and integration-test instructions.</p>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>
 					<ul>
      <li><a href="#vrzno">Vrzno</a>
      <ul>
-     <li><a href="#how-is-this-possible">How is this possible?</a>
+     <li><a href="#quick-start">Quick Start</a></li>
+     <li><a href="#core-api">Core API</a>
      <ul>
-     <li><a href="#vrzno_awaitpromise">vrzno_await($promise)</a></li>
+     <li><a href="#new-vrzno"><code>new Vrzno</code></a></li>
      <li><a
-     href="#vrzno_importmodule_url">vrzno_import($module_url)</a></li>
-     <li><a href="#vrzno_envname">vrzno_env($name)</a></li>
-     <li><a href="#vrzno_targetvrzno">vrzno_target($vrzno)</a></li>
+     href="#vrzno_awaitpromiselike"><code>vrzno_await($promiseLike)</code></a></li>
+     <li><a
+     href="#vrzno_importmoduleurl"><code>vrzno_import($moduleUrl)</code></a></li>
+     <li><a href="#vrzno_envname"><code>vrzno_env($name)</code></a></li>
+     <li><a
+     href="#vrzno_sharedname"><code>vrzno_shared($name)</code></a></li>
+     <li><a
+     href="#vrzno_targetvalue"><code>vrzno_target($value)</code></a></li>
+     <li><a href="#compatibility-helpers">Compatibility Helpers</a></li>
      </ul></li>
-     <li><a href="#javascript-object-and-classes">Javascript Object and
-     Classes</a>
-     <ul>
-     <li><a href="#new-vrzno">new Vrzno</a></li>
-     </ul></li>
-     <li><a href="#callbacks">Callbacks</a></li>
-     <li><a href="#arrays">Arrays</a></li>
-     <li><a href="#tostring-__tostring">toString &amp;
-     __toString</a></li>
-     <li><a href="#url-fopen">URL fopen</a></li>
+     <li><a href="#objects-classes-and-callbacks">Objects, Classes, and
+     Callbacks</a></li>
+     <li><a href="#value-and-error-semantics">Value and Error
+     Semantics</a></li>
+     <li><a href="#http-and-allow_url_fopen">HTTP and
+     <code>allow_url_fopen</code></a></li>
      <li><a href="#limitations">Limitations</a></li>
      </ul></li>
      </ul>
@@ -655,7 +659,7 @@
 		<p class ="strong">About</p>
 		<p>&copy; 2024 - 2026 Sean Morris | <a href="/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap" width = "80" height = "15" alt = "xml sitemap badge"></a>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" width = "80" height = "15" alt = "xml sitemap badge"></a>
 	</footer>
 <script>
 	window.dataLayer = window.dataLayer || [];

@@ -433,7 +433,7 @@
 					LICENSE				</a>
 			</li></ul></nav>
 						<div class = "page-content">
-				<article >
+				<article>
 								<h1 id="php-wasm-rc">.php-wasm-rc</h1>
         <p>The <code>.php-wasm-rc</code> file is a configuration file
         that allows you to specify custom build options for php-wasm.
@@ -457,9 +457,17 @@ PHP_CGI_DIST_DIR=./public
 # Build the cgi package&#39;s extensions to a directory other than the current one (RELATIVE path)
 PHP_CGI_ASSET_DIR=./public
 
-# Space separated list of files/directories (ABSOLUTE paths)
-# to be included under the /preload directory in the final build.
-PRELOAD_ASSETS=~/path/to/file/php-scripts ~/other-dir/example.php
+# Build the cli package and its extensions to relative output directories
+PHP_CLI_DIST_DIR=./public
+PHP_CLI_ASSET_DIR=./public
+
+# Build the phpdbg package and its extensions to relative output directories
+PHP_DBG_DIST_DIR=./public
+PHP_DBG_ASSET_DIR=./public
+
+# Space separated list of files/directories to include under /preload.
+# Relative paths are resolved from the current project directory.
+PRELOAD_ASSETS=./php-scripts ~/other-dir/example.php
 
 # Memory to start the instance with, before growth
 INITIAL_MEMORY=2048MB
@@ -486,12 +494,19 @@ WITH_FREETYPE=1</code></pre>
         directory. Individual files &amp; directories will appear in the
         top level, while directories will maintain their internal
         structure.</p>
+        <p>When you use <code>php-wasm-builder</code>, relative entries
+        are resolved from the current project directory. Anchored paths
+        such as <code>/path/to/file.txt</code> and
+        <code>~/path/to/file.txt</code> are left unprefixed so the shell
+        can resolve them normally.</p>
+        <p><code>PRELOAD_ASSETS</code> is a whitespace-delimited Make
+        variable. Paths containing spaces are not supported.</p>
         <p>These files &amp; directories will be available under
         <code>/preload</code> in the final package, packaged into the
         <code>.data</code> file that is built along with the
         <code>.wasm</code> file.</p>
         <div class="sourceCode" id="cb2"><pre
-        class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">PRELOAD_ASSETS</span><span class="op">=</span><span class="st">&#39;/path/to/file.txt /some/directory /path/to/other_file.txt /some/other/directory&#39;</span></span></code></pre></div>
+        class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">PRELOAD_ASSETS</span><span class="op">=</span><span class="st">&#39;./php-scripts /some/directory ~/other-dir/example.php /path/to/other_file.txt&#39;</span></span></code></pre></div>
         <h3 id="php_version">PHP_VERSION</h3>
         <p>8.0|8.1|8.2|8.3|8.4|8.5</p>
         <hr />
@@ -760,7 +775,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
 		<p class ="strong">About</p>
 		<p>&copy; 2024 - 2026 Sean Morris | <a href="/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap" width = "80" height = "15" alt = "xml sitemap badge"></a>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" width = "80" height = "15" alt = "xml sitemap badge"></a>
 	</footer>
 <script>
 	window.dataLayer = window.dataLayer || [];

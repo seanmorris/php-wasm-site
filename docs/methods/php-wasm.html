@@ -433,7 +433,8 @@
 					LICENSE				</a>
 			</li></ul></nav>
 						<div class = "page-content">
-				<article  itemscope itemtype = "https://schema.org/Class" >
+				<article itemscope itemtype = "https://schema.org/Class">
+								<meta itemprop = "alternateName" content = "PhpNode" />
 								<meta itemprop = "alternateName" content = "PhpWeb" />
 								<meta itemprop = "name" content = "PhpWasm" />
 								<h1 id="php-wasm-methods">Php-Wasm Methods</h1>
@@ -458,9 +459,13 @@
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span>})<span class="op">;</span></span></code></pre></div>
         <h3 id="variant">variant</h3>
         <p><em>string</em></p>
-        <p>Optional build suffix appended to the runtime filename.</p>
+        <p>Selects a packaged runtime variant. The empty string uses the
+        standard runtime. <code>_sdl</code> selects the SDL-enabled
+        <code>PhpWeb</code> runtime for supported PHP versions.
+        <code>PhpNode</code> currently supports only the standard empty
+        variant.</p>
         <div class="sourceCode" id="cb2"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span><span class="op">,</span> <span class="dt">variant</span><span class="op">:</span> <span class="st">&#39;-debug&#39;</span>})<span class="op">;</span></span></code></pre></div>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span><span class="op">,</span> <span class="dt">variant</span><span class="op">:</span> <span class="st">&#39;_sdl&#39;</span>})<span class="op">;</span></span></code></pre></div>
         <h3 id="sharedlibs">sharedLibs</h3>
         <p><em>array of strings or objects</em></p>
         <p>Loads shared extensions before boot and writes
@@ -674,7 +679,7 @@
 		<p class ="strong">About</p>
 		<p>&copy; 2024 - 2026 Sean Morris | <a href="/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap" width = "80" height = "15" alt = "xml sitemap badge"></a>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" width = "80" height = "15" alt = "xml sitemap badge"></a>
 	</footer>
 <script>
 	window.dataLayer = window.dataLayer || [];

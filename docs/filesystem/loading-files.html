@@ -433,7 +433,7 @@
 					LICENSE				</a>
 			</li></ul></nav>
 						<div class = "page-content">
-				<article >
+				<article>
 								<h1 id="loading-files">Loading Files</h1>
         <h3 id="loading-single-files">Loading Single Files</h3>
         <p>The constructor method of the php-wasm objects accepts a
@@ -497,17 +497,24 @@
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">persist</span><span class="op">:</span> {<span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span>}})<span class="op">;</span></span></code></pre></div>
         <h3 id="nodefs-node.js-only">NodeFS (Node.js Only)</h3>
-        <p>To use NodeFS in PhpWeb, pass a <code>persist</code> object
-        with <code>mountPath</code> &amp; <code>localPath</code>
-        keys.</p>
+        <p>To use NodeFS in <code>PhpNode</code>, pass a
+        <code>persist</code> object with <code>mountPath</code> and
+        <code>localPath</code> keys.</p>
         <p><code>localPath</code> will be used as the path to the HOST
         directory to expose to PHP. <code>mountPath</code> will be used
         as the path to the persistent directory within the PHP
         environment.</p>
         <div class="sourceCode" id="cb4"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { PhpNode } <span class="op">=</span> <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://cdn.jsdelivr.net/npm/php-wasm/PhpNode.mjs&#39;</span>)<span class="op">;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpNode</span>({<span class="dt">persist</span><span class="op">:</span> {<span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span><span class="op">,</span> <span class="dt">localPath</span><span class="op">:</span> <span class="st">&#39;~/your-files&#39;</span>}})<span class="op">;</span></span></code></pre></div>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os <span class="im">from</span> <span class="st">&#39;node:os&#39;</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> path <span class="im">from</span> <span class="st">&#39;node:path&#39;</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpNode } <span class="im">from</span> <span class="st">&#39;php-wasm/PhpNode.mjs&#39;</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpNode</span>({</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">persist</span><span class="op">:</span> {</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">mountPath</span><span class="op">:</span> <span class="st">&#39;/persist&#39;</span><span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">localPath</span><span class="op">:</span> path<span class="op">.</span><span class="fu">join</span>(os<span class="op">.</span><span class="fu">homedir</span>()<span class="op">,</span> <span class="st">&#39;your-files&#39;</span>)<span class="op">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>
@@ -550,7 +557,7 @@
 		<p class ="strong">About</p>
 		<p>&copy; 2024 - 2026 Sean Morris | <a href="/LICENSE.html">License</a></p>
 		<p>This site is rendered with PHP + Pandoc.</p>
-		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" alt = "sitemap" width = "80" height = "15" alt = "xml sitemap badge"></a>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" width = "80" height = "15" alt = "xml sitemap badge"></a>
 	</footer>
 <script>
 	window.dataLayer = window.dataLayer || [];
