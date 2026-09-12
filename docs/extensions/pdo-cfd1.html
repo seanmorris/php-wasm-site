@@ -379,6 +379,9 @@
 				<a href = "/getting-started/php-in-static-html.html" >
 					PHP in Static HTML				</a>
 			</li><li>
+				<a href = "/getting-started/php-in-cloudflare.html" >
+					PHP in Cloudflare				</a>
+			</li><li>
 				<a href = "/getting-started/cgi-service-worker.html" >
 					PHP-CGI in Service Workers				</a>
 			</li><li>
@@ -435,87 +438,94 @@
 						<div class = "page-content">
 				<article>
 								<h1 id="pdo-cfd1">pdo-cfd1</h1>
-        <p><code>pdo-cfd1</code> is the Cloudflare D1 PDO driver
-        extension for <code>php-wasm</code>. It targets PHP runtimes
-        executing in a Cloudflare Worker-compatible environment and
-        requires PHP 8.1 or newer.</p>
-        <h2 id="runtime-setup">Runtime Setup</h2>
-        <p>Pass Worker D1 bindings into the runtime’s <code>cfd1</code>
-        object. Each object key becomes the name used by a
-        <code>cfd1:</code> PDO DSN.</p>
+        <p><code>pdo-cfd1</code> connects PHP’s PDO interface to actual
+        Cloudflare D1 bindings. The dedicated
+        <strong><code>php-cloud-wasm</code></strong> profile statically
+        includes the supported prepared-query subset for PHP 8.0–8.5,
+        including an explicit PHP 8.0 ABI backport. It does not require
+        a browser/Node extension loader.</p>
+        <p>Start with <a
+        href="/getting-started/php-in-cloudflare.html">PHP in
+        Cloudflare</a> for the complete build, raw Wasm module upload,
+        Pages configuration and deployment guide. An ordinary
+        <code>PhpWorker</code> build is not interchangeable with this
+        Cloudflare profile.</p>
+        <h2 id="runtime-setup">Runtime setup</h2>
+        <p>Import a version-bound entry from the complete package and
+        create the PHP instance inside each Worker request:</p>
         <div class="sourceCode" id="cb1"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpWorker } <span class="im">from</span> <span class="st">&#39;php-wasm/PhpWorker.mjs&#39;</span><span class="op">;</span></span>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpCloudflare } <span class="im">from</span> <span class="st">&#39;./php-cloud-wasm/php8.5-cloudflare.mjs&#39;</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">async</span> <span class="fu">fetch</span>(request<span class="op">,</span> env) {</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWorker</span>({</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span><span class="op">,</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="dt">cfd1</span><span class="op">:</span> {</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                <span class="dt">mainDb</span><span class="op">:</span> env<span class="op">.</span><span class="at">mainDb</span><span class="op">,</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            }<span class="op">,</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        })<span class="op">;</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="vs">            $pdo = new PDO(&#39;cfd1:mainDb&#39;);</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="vs">            var_dump($pdo instanceof PDO);</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="vs">        `</span>)<span class="op">;</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Response</span>(<span class="st">&#39;ok&#39;</span>)<span class="op">;</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
-        <p><code>phpinfo()</code> reports whether the runtime detected
-        the Cloudflare D1 module.</p>
-        <figure>
-        <img
-        src="https://raw.githubusercontent.com/seanmorris/pdo-cfd1/refs/heads/master/phpinfo.png"
-        alt="pdo-cfd1 phpinfo output" />
-        <figcaption aria-hidden="true">pdo-cfd1 phpinfo
-        output</figcaption>
-        </figure>
-        <h2 id="query-d1-through-pdo">Query D1 Through PDO</h2>
-        <p>Use <code>cfd1:&lt;bindingName&gt;</code> as the DSN.
-        Positional prepared-statement parameters are supported.</p>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCloudflare</span>({</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">cfd1</span><span class="op">:</span> { <span class="dt">mainDb</span><span class="op">:</span> env<span class="op">.</span><span class="at">DB</span> }<span class="op">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+        <p>The example assumes a copied package beside your Worker
+        entry. <code>env.DB</code> is the Worker’s configured D1
+        binding; <code>mainDb</code> is the PHP-facing name. The
+        generated entry supplies the matching precompiled Wasm module
+        and runtime factory.</p>
+        <h2 id="query-d1-through-pdo">Query D1 through PDO</h2>
+        <p>Use <code>cfd1:&lt;mapKey&gt;</code> and positional
+        prepared-statement parameters:</p>
         <div class="sourceCode" id="cb2"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">    $pdo = new PDO(&#39;cfd1:mainDb&#39;);</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">    $select = $pdo-&gt;prepare(</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">        &#39;SELECT PageTitle, PageContent FROM WikiPages WHERE PageTitle = ?&#39;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="vs">    );</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="vs">    $select-&gt;execute([&#39;Home&#39;]);</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="vs">    $page = $select-&gt;fetch(PDO::FETCH_ASSOC);</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="vs">    var_dump($page);</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
-        <h2 id="custom-builds">Custom Builds</h2>
-        <p>Enable the extension in <code>.php-wasm-rc</code>:</p>
-        <pre class="make"><code>WITH_PDO_CFD1=1</code></pre>
-        <p><code>PDO_CFD1_DEV_PATH</code> can point to a local
-        <code>pdo-cfd1</code> checkout instead of cloning the upstream
-        repository during the build.</p>
-        <p>Most browser and Node applications do not need this
-        extension. It is intended for runtimes with access to actual
-        Cloudflare D1 bindings.</p>
-        <h2 id="current-limitations">Current Limitations</h2>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">  $pdo = new PDO(&#39;cfd1:mainDb&#39;, null, null, [</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">  ]);</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">  $query = $pdo-&gt;prepare(&#39;SELECT ? AS answer&#39;);</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="vs">  $query-&gt;bindValue(1, 42, PDO::PARAM_INT);</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="vs">  $query-&gt;execute();</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="vs">  echo json_encode($query-&gt;fetch(PDO::FETCH_ASSOC));</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+        <p>This query needs no schema. Capture the runtime’s
+        <code>output</code> event to form the HTTP response, as shown in
+        the setup guide. Use numeric typed <code>bindValue</code> or
+        <code>bindParam</code> when the parameter type matters; values
+        passed through <code>execute([...])</code> follow PDO’s
+        parameter conventions.</p>
+        <h2 id="supported-scope-and-errors">Supported scope and
+        errors</h2>
         <ul>
-        <li>Only positional replacement tokens are supported.</li>
-        <li>Database error propagation remains limited.</li>
+        <li>Positional <code>?</code> prepared queries, numeric
+        <code>bindValue</code> and <code>bindParam</code>.</li>
+        <li>Repeated <code>execute</code>, associative
+        <code>fetch</code>/<code>fetchAll</code>, scalar and NULL
+        parameters.</li>
+        <li>SELECT, INSERT, UPDATE and DELETE; write
+        <code>rowCount()</code> uses D1’s changes count.</li>
+        <li>Missing bindings and failed queries report PDO errors.
+        Exception mode raises <code>PDOException</code>; silent mode
+        exposes <code>errorInfo()</code>.</li>
         </ul>
+        <p>Named or numbered placeholders, transactions, direct PDO
+        <code>exec</code>, <code>quote</code> and
+        <code>lastInsertId</code> are unsupported and fail explicitly.
+        This is not full PDO or D1 API parity. Do not accept arbitrary
+        SQL or binding names from public requests.</p>
+        <p>The Cloudflare build selects the pinned driver source and
+        compatibility patch; simply enabling an extension in an older
+        generic build is not an equivalent runtime. The <a
+        href="https://github.com/seanmorris/php-static/blob/cdcaa8540cd7fcdeb445e65dba35a9882acefa7d/pdo.php">legacy
+        php-static PDO example</a> uses a <code>vrzno:</code> DSN, which
+        must be migrated to the binding map and <code>cfd1:</code> API
+        above.</p>
         <p>See the <a
-        href="https://github.com/seanmorris/pdo-cfd1">pdo-cfd1
-        repository</a> and <a
-        href="https://developers.cloudflare.com/d1/">Cloudflare D1
-        documentation</a>.</p>
+        href="https://github.com/seanmorris/php-wasm/blob/master/packages/pdo-cfd1/README.md">PDO-CFD1
+        integration guide</a>, <a
+        href="https://github.com/seanmorris/pdo-cfd1">upstream
+        driver</a>, and <a
+        href="https://developers.cloudflare.com/pages/functions/bindings/#d1-databases">Cloudflare
+        D1 bindings</a>.</p>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>
 					<ul>
      <li><a href="#pdo-cfd1">pdo-cfd1</a>
      <ul>
-     <li><a href="#runtime-setup">Runtime Setup</a></li>
-     <li><a href="#query-d1-through-pdo">Query D1 Through PDO</a></li>
-     <li><a href="#custom-builds">Custom Builds</a></li>
-     <li><a href="#current-limitations">Current Limitations</a></li>
+     <li><a href="#runtime-setup">Runtime setup</a></li>
+     <li><a href="#query-d1-through-pdo">Query D1 through PDO</a></li>
+     <li><a href="#supported-scope-and-errors">Supported scope and
+     errors</a></li>
      </ul></li>
      </ul>
 					<span class = "wide-only"><a href = "#">top</a></span>

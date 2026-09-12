@@ -1,0 +1,887 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+<head>
+			<title>Php-Wasm | PHP in Cloudflare Workers and Pages</title>
+			<meta charset="utf-8" />
+	<meta name="viewport" content="width=800, user-scalable=yes" />
+	<meta name="title" content="PHP in Cloudflare Workers and Pages">
+	<link rel="sitemap" href="/sitemap.xml" />
+	<link rel="preload" href="/logo-80.webp" as="image" type="image/webp">
+	<link rel="preload" href="/splash-wide.webp" as="image" type="image/webp">
+	<link rel="preconnect" href="https://www.googletagmanager.com" />
+	<link rel="preconnect" href="https://www.google-analytics.com" />
+	<link rel="dns-prefetch" href="https://www.npmjs.com/" />
+	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
+	<link rel="dns-prefetch" href="https://discord.gg/" />
+	<link rel="dns-prefetch" href="https://discord.com/" />
+	<link rel="dns-prefetch" href="https://playground.wordpress.net/" />
+	<link rel="dns-prefetch" href="https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/" />
+	<link rel="dns-prefetch" href="https://github.com/" />
+	<link rel="dns-prefetch" href="https://seanmorris.github.io/" />
+	<style>
+		code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+  pre > code.sourceCode { white-space: pre; position: relative; }
+  pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+  pre > code.sourceCode > span:empty { height: 1.2em; }
+  .sourceCode { overflow: visible; }
+  code.sourceCode > span { color: inherit; text-decoration: inherit; }
+  div.sourceCode { margin: 1em 0; }
+  pre.sourceCode { margin: 0; }
+  @media screen {
+  div.sourceCode { overflow: auto; }
+  }
+  @media print {
+  pre > code.sourceCode { white-space: pre-wrap; }
+  pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+  }
+  pre.numberSource code
+    { counter-reset: source-line 0; }
+  pre.numberSource code > span
+    { position: relative; left: -4em; counter-increment: source-line; }
+  pre.numberSource code > span > a:first-child::before
+    { content: counter(source-line);
+      position: relative; left: -1em; text-align: right; vertical-align: baseline;
+      border: none; display: inline-block;
+      -webkit-touch-callout: none; -webkit-user-select: none;
+      -khtml-user-select: none; -moz-user-select: none;
+      -ms-user-select: none; user-select: none;
+      padding: 0 4px; width: 4em;
+    }
+  pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+  div.sourceCode
+    { color: #cccccc; background-color: #303030; }
+  @media screen {
+  pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+  }
+  code span.al { color: #ffcfaf; } /* Alert */
+  code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+  code span.at { } /* Attribute */
+  code span.bn { color: #dca3a3; } /* BaseN */
+  code span.bu { } /* BuiltIn */
+  code span.cf { color: #f0dfaf; } /* ControlFlow */
+  code span.ch { color: #dca3a3; } /* Char */
+  code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+  code span.co { color: #7f9f7f; } /* Comment */
+  code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+  code span.do { color: #7f9f7f; } /* Documentation */
+  code span.dt { color: #dfdfbf; } /* DataType */
+  code span.dv { color: #dcdccc; } /* DecVal */
+  code span.er { color: #c3bf9f; } /* Error */
+  code span.ex { } /* Extension */
+  code span.fl { color: #c0bed1; } /* Float */
+  code span.fu { color: #efef8f; } /* Function */
+  code span.im { } /* Import */
+  code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+  code span.kw { color: #f0dfaf; } /* Keyword */
+  code span.op { color: #f0efd0; } /* Operator */
+  code span.ot { color: #efef8f; } /* Other */
+  code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+  code span.sc { color: #dca3a3; } /* SpecialChar */
+  code span.ss { color: #cc9393; } /* SpecialString */
+  code span.st { color: #cc9393; } /* String */
+  code span.va { } /* Variable */
+  code span.vs { color: #cc9393; } /* VerbatimString */
+  code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+  .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+	</style>
+	<link rel="stylesheet" href="/style.css" />
+	<link rel="stylesheet" href="/article.css" />
+	<link rel="stylesheet" href="/pandoc.css" />
+	<style>
+	section.heading {
+ 	background-color: #220359;
+ 	background-image: url('/splash-wide.webp');
+ 	background-size: cover;
+ 	background-position: center top;
+ 	padding: 2rem;
+ }
+
+ section.heading nav {
+ 	/* justify-content: space-between; */
+ 	max-width: 1800px;
+ 	margin: auto;
+ }
+
+ section.heading nav .spacer{
+ 	flex: 1;
+ }
+
+ section.heading nav,
+ section.heading nav ul {
+ 	display: flex;
+ 	flex-direction: row;
+ }
+
+ section.heading nav ul {
+ 	align-items: center;
+ 	list-style: none;
+ 	margin: 0;
+ }
+
+ section.heading nav ul li {
+ 	min-height: 80px;
+ 	display: flex;
+ 	align-items: center;
+ }
+
+ section.heading nav ul a {
+ 	padding: 1rem;
+ 	display: inline-block;
+ 	color: inherit;
+ 	text-decoration: inherit;
+ 	font-weight: bold;
+ }
+
+ section.heading nav ul a img {
+ 	display: inline;
+ 	vertical-align: middle;
+ }
+
+ section.heading nav ul {
+ 	align-items: center;
+ 	list-style: none;
+ 	margin: 0;
+ }
+
+ section.heading nav ul li {
+ 	min-height: 80px;
+ 	display: flex;
+ 	align-items: center;
+ }
+
+ section.heading nav ul a {
+ 	padding: 1rem;
+ 	display: inline-block;
+ 	color: inherit;
+ 	text-decoration: inherit;
+ 	font-weight: bold;
+ }
+
+ section.heading nav ul a img {
+ 	display: inline;
+ 	vertical-align: middle;
+ }
+
+ section.heading nav a.cta.button {
+ 	border-width: 1px;
+ 	border-style: solid;
+ 	border-color: white;
+ 	box-shadow: 0 0 0.5rem 0.25rem #3601a9;
+ 	font-style: italic;
+ 	min-width: 5rem;
+ 	display: inline-block;
+ 	padding: 0.75rem;
+ 	padding-left: 0rem;
+ 	padding-right: 0rem;
+ 	transition: box-shadow 0.125s ease-in;
+ 	max-height: 24px;
+ }
+
+ section.heading nav a.cta.button:hover {
+ 	box-shadow: 0 0 0.25rem 0.125rem #8216de;
+ 	transition: box-shadow 0.125s ease-out;
+ }
+
+ section.heading nav,
+ section.heading nav ul {
+ 	display: flex;
+ 	flex-direction: row;
+ }
+
+ section.heading div.hero {
+ 	display: flex;
+ 	flex-direction: column;
+ 	align-items: center;
+ }
+
+ div.hero a.button {
+ 	margin: 2rem;
+ }
+
+ .hero h1 {
+ 	font-family: 'Corbel', sans-serif;
+ 	font-weight: bold;
+ 	font-size: 68pt;
+ 	margin-top: 4rem;
+ 	margin-bottom: 2rem;
+ 	text-align: center;
+ }
+
+ .hero p {
+ 	margin: 1rem;
+ 	max-width: 40rem;
+ 	text-align: center;
+ 	font-weight: bold;
+ }
+
+ .hero a.cta.button {
+ 	background: linear-gradient(0.15turn, #3601a9, #8216de);
+ 	padding: 1.25rem;
+ 	font-weight: bold;
+ }
+
+ .hero a.cta.button:hover {
+ 	background: linear-gradient(0.10turn, #3601a9, #8216de);
+ }
+
+ .sub-hero ul {
+ 	list-style: none;
+ 	padding: 0;
+ }
+
+ .sub-hero ul li:before {
+ 	content: "\B7";
+ 	padding-right: 0.75rem;
+ }
+
+ .hero > iframe {
+ 	width: 100%;
+ 	min-height: 21.5rem;
+ 	margin-top: 2rem;
+ 	box-sizing: border-box;
+ 	border: none;
+ }
+
+
+ iframe.page-demo {
+ 	width: 100%;
+ 	box-sizing: border-box;
+ 	border: none;
+ 	min-height: 80vh;
+ }
+	@font-face {
+ 	font-family: 'Anonymous Pro';
+ 	src: url('/anonymous_pro.woff2') format('woff2'),
+ 		url('/anonymous_pro.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: normal;
+ 	font-display: swap;
+
+ }
+
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('/notosans-regular.woff2') format('woff2'),
+ 		url('/notosans-regular.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: normal;
+ 	font-display: swap;
+ }
+
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('/notosans-italic.woff2') format('woff2'),
+ 		url('/notosans-italic.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: italic;
+ 	font-display: swap;
+ }
+
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('/notosans-bold.woff2') format('woff2'),
+ 		url('/notosans-bold.woff') format('woff');
+ 	font-weight: bold;
+ 	font-style: normal;
+ 	font-display: swap;
+ }
+
+ @font-face {
+ 	font-family: 'Corbel';
+ 	src: url('/corbelb.woff2') format('woff2'),
+ 		url('/corbelb.woff') format('woff');
+ 	font-weight: bold;
+ 	font-style: normal;
+ 	font-display: swap;
+ }
+	</style>
+		<script src = "/main.js"></script>
+		<script src = "/nag-bar.js"></script>
+		<script src = "/nav-state.js"></script>
+		</head>
+<body>
+	<!-- <div class = "nag-bar" id = "nag-bar">
+		<div class = "page-rule">
+			<div class = "row">
+				<div class = "prose">
+					<p><strong>I am giving up my bed for one night.</strong></p>
+
+					<p>My Sleep Out helps youth facing homelessness find safe shelter and loving care at Covenant House. That care includes essential services like education, job training, medical care, mental health and substance use counseling, and legal aid — everything they need to build independent, sustainable futures.</p>
+
+					<p>By supporting my Sleep Out, you are supporting the dreams of young people overcoming homelessness.</p>
+
+					<p>Together, we are working towards a future where every young person has a safe place to sleep.</p>
+
+					<p>Thank you.</p>
+				</div>
+				<div class = "col center">
+					<a href = "https://www.sleepout.org/participants/62915">
+						<span class = "button">DONATE NOW</span>
+					</a>
+					<a href = "https://www.sleepout.org/participants/62915">
+						<img src = "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwww.sleepout.org%2Fapi%2F1.3%2Fparticipants%2F62915%3F_%3D1760039017428&query=%24.sumDonations&prefix=%24&suffix=%20Raised&style=for-the-badge&label=Sleep%20Out%3A%20NYC&link=https%3A%2F%2Fwww.sleepout.org%2Fparticipants%2F62915&color=0677ff">
+					</a>
+				</div>
+			</div>
+			<div class = "close-button" id = "close-nag"></div>
+			<div class = "open-button" id = "open-nag"></div>
+		</div>
+	</div> -->
+	<section class = "heading">
+		<div class = "page-rule">
+			<nav>
+				<div class = "logo">
+					<a href = "/"><img src = "/logo-80.webp" width = "304" height = "82" alt = "php/wasm logo" /></a>
+				</div>
+				<div class = "spacer"></div>
+				<ul class = "links">
+					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
+					<li><a href = "/getting-started/home.html">Docs</a></li>
+					<li><a href = "/contact.html">Contact</a></li>
+					<li>
+						<a href = "https://github.com/seanmorris/php-wasm">Github</a>
+						<a href = "https://github.com/seanmorris/php-wasm"><img src = "/github-icon.png" alt = "Github icon" width = "37" height = "37" ></a>
+					</li>
+				</ul>
+				<a href = "https://github.com/sponsors/seanmorris" class = "cta button">Sponsor</a>
+				<div class = "hamburger-button" id = "burgerButton" data-open = "false">
+					<div class = "burger-bar"></div>
+					<div class = "burger-bar"></div>
+					<div class = "burger-bar"></div>
+				</div>
+			</nav>
+					</div>
+	</section>
+
+	<section class = "below-fold">
+		<div class = "page-rule">
+							<nav class = "main"><ul><details open="true" data-id-path = "0">
+				<summary>Getting Started</summary>
+				<ul><li>
+				<a href = "/getting-started/home.html" >
+					Home				</a>
+			</li><li>
+				<a href = "/getting-started/install-and-include.html" >
+					Install & Import				</a>
+			</li><li>
+				<a href = "/getting-started/php.ini.html" >
+					php.ini				</a>
+			</li><li>
+				<a href = "/getting-started/php-in-js.html" >
+					PHP in Javascript				</a>
+			</li><li>
+				<a href = "/getting-started/php-in-static-html.html" >
+					PHP in Static HTML				</a>
+			</li><li>
+				<a href = "/getting-started/php-in-cloudflare.html" class="active-link">
+					PHP in Cloudflare				</a>
+			</li><li>
+				<a href = "/getting-started/cgi-service-worker.html" >
+					PHP-CGI in Service Workers				</a>
+			</li><li>
+				<a href = "/getting-started/cgi-in-nodeJs.html" >
+					PHP-CGI for Node.js				</a>
+			</li></ul>			</details><details open="true" data-id-path = "1">
+				<summary>Methods</summary>
+				<ul><li>
+				<a href = "/methods/php-wasm.html" >
+					Php Wasm				</a>
+			</li><li>
+				<a href = "/methods/php-cgi-wasm.html" >
+					Php Cgi Wasm				</a>
+			</li></ul>			</details><details open="true" data-id-path = "2">
+				<summary>Extensions</summary>
+				<ul><li>
+				<a href = "/extensions/using-php-extensions.html" >
+					Using PHP Extensions				</a>
+			</li><li>
+				<a href = "/extensions/pdo-cfd1.html" >
+					pdo-cfd1				</a>
+			</li><li>
+				<a href = "/extensions/pdo-pglite.html" >
+					pdo-pglite				</a>
+			</li><li>
+				<a href = "/extensions/vrzno.html" >
+					Vrzno				</a>
+			</li></ul>			</details><details open="true" data-id-path = "3">
+				<summary>Filesystem</summary>
+				<ul><li>
+				<a href = "/filesystem/fs-operations.html" >
+					FS Operations				</a>
+			</li><li>
+				<a href = "/filesystem/loading-files.html" >
+					Loading Files				</a>
+			</li><li>
+				<a href = "/filesystem/transactions.html" >
+					Transactions				</a>
+			</li></ul>			</details><details open="true" data-id-path = "4">
+				<summary>Compiling</summary>
+				<ul><li>
+				<a href = "/compiling/custom-builds.html" >
+					Custom Builds				</a>
+			</li><li>
+				<a href = "/compiling/php-wasm-rc.html" >
+					.php-wasm-rc				</a>
+			</li></ul>			</details><li>
+				<a href = "/CHANGELOG.html" >
+					CHANGELOG				</a>
+			</li><li>
+				<a href = "/LICENSE.html" >
+					LICENSE				</a>
+			</li></ul></nav>
+						<div class = "page-content">
+				<article>
+								<h1 id="php-in-cloudflare-workers-and-pages">PHP in Cloudflare
+        Workers and Pages</h1>
+        <p>Use <strong><code>php-cloud-wasm</code></strong> to run
+        embedded PHP in Cloudflare’s Worker runtime. Its dedicated
+        profile supports PHP 8.0–8.5 and includes Vrzno, ordinary
+        ZIP/deflate, zlib, and the prepared-query subset of PDO-CFD1. It
+        is not the general-purpose <code>php-wasm</code> browser/Node
+        package, the browser Service Worker adapter, or PHP-CGI.</p>
+        <p>This guide uses Pages advanced mode to match the original
+        examples. You write the HTTP handler in JavaScript and
+        explicitly call PHP; uploading a <code>.php</code> file does not
+        make Cloudflare execute it. The same PHP adapter can be used in
+        a Module Worker when its uploader preserves the static Wasm
+        imports.</p>
+        <h2 id="what-the-two-example-repositories-demonstrate">What the
+        two example repositories demonstrate</h2>
+        <p><a
+        href="https://github.com/seanmorris/php-cloud">php-cloud</a> is
+        the execution side: its <a
+        href="https://github.com/seanmorris/php-cloud/blob/0e8fd8f0cef47e4ff99f9471a4e5f7e3bf910b10/functions/%5B%5Bpath%5D%5D.js">Pages
+        function</a> imports a Wasm module, maps requests to a separate
+        static origin, runs fetched PHP, and passes other resources
+        through. Its origin map pairs the deployed Worker with
+        <code>php-static</code> on GitHub Pages, and local ports 8788
+        and 8081.</p>
+        <p><a
+        href="https://github.com/seanmorris/php-static">php-static</a>
+        supplies the application side: PHP scripts, CSS, a wiki, and a
+        <a
+        href="https://github.com/seanmorris/php-static/blob/cdcaa8540cd7fcdeb445e65dba35a9882acefa7d/CloudAutoloader.php">ZIP-based
+        autoloader</a>. That autoloader illustrates fetching package
+        archives through JavaScript, extracting them into PHP’s
+        in-memory filesystem, and loading PHP classes. These are
+        architectural examples, not an unchanged installation recipe for
+        the current package.</p>
+        <p>The examples were checked at the linked revisions on
+        September 12, 2026. Important migration differences are:</p>
+        <table>
+        <colgroup>
+        <col style="width: 50%" />
+        <col style="width: 50%" />
+        </colgroup>
+        <thead>
+        <tr class="header">
+        <th>Legacy examples</th>
+        <th>Current Cloudflare profile</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="odd">
+        <td>Local <code>PhpWeb.mjs</code>, <code>php-web.mjs</code>, and
+        <code>php-web.wasm</code></td>
+        <td>Standalone <code>php-cloud-wasm</code> package and
+        version-bound entry</td>
+        </tr>
+        <tr class="even">
+        <td>Application supplies <code>instantiateWasm</code></td>
+        <td>Generated entry imports its matched hashed Wasm; the adapter
+        owns instantiation</td>
+        </tr>
+        <tr class="odd">
+        <td><code>db</code> plus <code>vrzno:</code> DSNs in the old PDO
+        example</td>
+        <td><code>cfd1: { mainDb: env.DB }</code> and
+        <code>new PDO('cfd1:mainDb', ...)</code></td>
+        </tr>
+        <tr class="even">
+        <td>File-based <code>functions/[[path]].js</code> routing</td>
+        <td>Explicit routing in the advanced-mode Worker below</td>
+        </tr>
+        <tr class="odd">
+        <td>Runtime lookup of public application/package sources</td>
+        <td>Prefer packaged code or pinned, verified sources you
+        control</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>The legacy <a
+        href="https://github.com/seanmorris/php-static/blob/cdcaa8540cd7fcdeb445e65dba35a9882acefa7d/pdo.php">PDO
+        example</a> uses an earlier Vrzno-backed DSN, not the current
+        PDO-CFD1 interface. Do not copy old instantiation hooks,
+        JavaScript string evaluation, or request-to-arbitrary-PHP
+        routing into the new handler.</p>
+        <h2 id="build-or-obtain-the-complete-package">1. Build or obtain
+        the complete package</h2>
+        <p>Use a <code>php-wasm</code> checkout containing
+        <code>packages/php-cloud-wasm</code> and the
+        <code>cloudflare-mjs</code> target. Do not assume an older npm
+        release contains this profile. With Node.js, npm, Make, and
+        Docker available, run from that checkout:</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> ci</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> image ENV_FILE=/dev/null</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> cloudflare-mjs PHP_VERSION=8.5</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> test-cloudflare PHP_VERSION=8.5</span></code></pre></div>
+        <p>The current CLI also accepts
+        <code>php-wasm-builder build cloudflare mjs</code>. Use Make’s
+        explicit <code>PHP_VERSION</code> for the 8.5 example here. This
+        isolated profile does not read <code>.php-wasm-rc</code> or
+        select ordinary <code>LIB_TYPE=static</code> artifacts.</p>
+        <p>The final package contains
+        <code>php8.5-cloudflare.mjs</code>, its low-level runtime, a
+        content-addressed <code>.wasm</code>, helpers, declarations,
+        package metadata, and
+        <code>php8.5-cloudflare.manifest.json</code>. Keep the whole
+        package and manifest together. A tested nightly artifact can
+        replace the build step; select one immutable build containing
+        <strong><code>php-cloud-wasm</code></strong>, not an ordinary
+        worker binary. Build and artifact-only tests need no Cloudflare
+        credentials.</p>
+        <p>For an extracted artifact, run from the builder checkout:</p>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">CLOUDFLARE_ARTIFACT_ROOT</span><span class="op">=</span>/path/to/extracted/packages/php-cloud-wasm <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make</span> test-cloudflare PHP_VERSION=8.5</span></code></pre></div>
+        <p>See the <a
+        href="https://github.com/seanmorris/php-wasm/blob/master/CLOUDFLARE.md">builder’s
+        Cloudflare guide</a> for the package contract and six-version
+        tests. There is no implicit latest-version package entry: choose
+        <code>php8.5-cloudflare.mjs</code> explicitly.</p>
+        <h2 id="stage-raw-worker-modules">2. Stage raw Worker
+        modules</h2>
+        <p>Create a separate <code>php-cloud-demo</code> project beside
+        the <code>php-wasm</code> checkout:</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ../php-cloud-demo</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ../php-cloud-demo</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> init <span class="at">-y</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">--save-dev</span> <span class="at">--save-exact</span> wrangler@4.131.1</span></code></pre></div>
+        <p>Save this as <code>copy-runtime.mjs</code>. It verifies the
+        final manifest and copies only the selected version’s executable
+        modules into an empty stage:</p>
+        <div class="sourceCode" id="cb4"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> fs <span class="im">from</span> <span class="st">&#39;node:fs/promises&#39;</span><span class="op">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> path <span class="im">from</span> <span class="st">&#39;node:path&#39;</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { createHash } <span class="im">from</span> <span class="st">&#39;node:crypto&#39;</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { verifyCloudflare } <span class="im">from</span> <span class="st">&#39;../php-wasm/bin/package-cloudflare.mjs&#39;</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> source <span class="op">=</span> <span class="st">&#39;../php-wasm/packages/php-cloud-wasm&#39;</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> output <span class="op">=</span> <span class="st">&#39;dist/_worker.js/php-cloud-wasm&#39;</span><span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> { manifest } <span class="op">=</span> <span class="cf">await</span> <span class="fu">verifyCloudflare</span>(source<span class="op">,</span> <span class="st">&#39;8.5&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> fs<span class="op">.</span><span class="fu">mkdir</span>(output<span class="op">,</span> { <span class="dt">recursive</span><span class="op">:</span> <span class="kw">true</span> })<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ((<span class="cf">await</span> fs<span class="op">.</span><span class="fu">readdir</span>(output))<span class="op">.</span><span class="at">length</span>) {</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">&#39;Use an empty runtime staging directory&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="kw">const</span> file <span class="kw">of</span> manifest<span class="op">.</span><span class="at">files</span>) {</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span><span class="ss">/</span><span class="sc">\.(</span><span class="ss">mjs</span><span class="sc">|</span><span class="ss">wasm</span><span class="sc">)$</span><span class="ss">/</span><span class="op">.</span><span class="fu">test</span>(file<span class="op">.</span><span class="at">path</span>)) <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bytes <span class="op">=</span> <span class="cf">await</span> fs<span class="op">.</span><span class="fu">readFile</span>(path<span class="op">.</span><span class="fu">join</span>(source<span class="op">,</span> file<span class="op">.</span><span class="at">path</span>))<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> hash <span class="op">=</span> <span class="fu">createHash</span>(<span class="st">&#39;sha256&#39;</span>)<span class="op">.</span><span class="fu">update</span>(bytes)<span class="op">.</span><span class="fu">digest</span>(<span class="st">&#39;hex&#39;</span>)<span class="op">;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (hash <span class="op">!==</span> file<span class="op">.</span><span class="at">sha256</span>) <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">&#39;Changed artifact: &#39;</span> <span class="op">+</span> file<span class="op">.</span><span class="at">path</span>)<span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> fs<span class="op">.</span><span class="fu">writeFile</span>(path<span class="op">.</span><span class="fu">join</span>(output<span class="op">,</span> file<span class="op">.</span><span class="at">path</span>)<span class="op">,</span> bytes<span class="op">,</span> { <span class="dt">flag</span><span class="op">:</span> <span class="st">&#39;wx&#39;</span> })<span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+        <p>Run <code>node copy-runtime.mjs</code>. The layout is:</p>
+        <pre class="text"><code>php-cloud-demo/
+  wrangler.toml
+  dist/
+    index.html
+    _worker.js/
+      index.js
+      php-cloud-wasm/
+        php8.5-cloudflare.mjs
+        php8.5-cloudflare-runtime.mjs
+        &lt;content-hash&gt;.wasm
+        PhpCloudflare.mjs
+        ...manifest-owned helpers...</code></pre>
+        <p>Here <code>_worker.js</code> is a <strong>directory</strong>,
+        not a JavaScript file. Pinned Wrangler uploads this inventory
+        with <code>--no-bundle</code>. The generated runtime has an
+        unused variable <code>import(name)</code> helper that automatic
+        discovery can reject; do not work around that by enabling eval
+        or arbitrary external imports.</p>
+        <p>The version-bound entry already statically imports the
+        factory and Wasm. Upload the <code>.wasm</code> as a compiled
+        Wasm module, not a URL or byte-buffer binding. In Miniflare’s
+        explicit module inventory this type is
+        <code>CompiledWasm</code>; JavaScript files are
+        <code>ESModule</code>. Instantiate PHP inside the request with
+        the precompiled module, not by fetching and compiling bytes
+        during the request. See <a
+        href="https://developers.cloudflare.com/workers/runtime-apis/webassembly/">Cloudflare’s
+        Wasm API</a> and <a
+        href="https://developers.cloudflare.com/workers/testing/miniflare/core/modules/">Miniflare
+        modules</a>.</p>
+        <h2 id="write-a-fixed-php-and-d1-handler">3. Write a fixed PHP
+        and D1 handler</h2>
+        <p>Save this as <code>dist/_worker.js/index.js</code>. It runs
+        one fixed, read-only query at <code>/php</code>, and forwards
+        other paths to Pages static assets:</p>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { PhpCloudflare } <span class="im">from</span> <span class="st">&#39;./php-cloud-wasm/php8.5-cloudflare.mjs&#39;</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> running <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> {</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">async</span> <span class="fu">fetch</span>(request<span class="op">,</span> env) {</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">new</span> <span class="fu">URL</span>(request<span class="op">.</span><span class="at">url</span>)<span class="op">.</span><span class="at">pathname</span> <span class="op">!==</span> <span class="st">&#39;/php&#39;</span>) {</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> env<span class="op">.</span><span class="at">ASSETS</span><span class="op">.</span><span class="fu">fetch</span>(request)<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (request<span class="op">.</span><span class="at">method</span> <span class="op">!==</span> <span class="st">&#39;GET&#39;</span>) {</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Response</span>(<span class="st">&#39;Method not allowed&#39;</span><span class="op">,</span> {</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="dt">status</span><span class="op">:</span> <span class="dv">405</span><span class="op">,</span> <span class="dt">headers</span><span class="op">:</span> { <span class="dt">Allow</span><span class="op">:</span> <span class="st">&#39;GET&#39;</span> }<span class="op">,</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>      })<span class="op">;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (running) {</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Response</span>(<span class="st">&#39;PHP is busy&#39;</span><span class="op">,</span> {</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">status</span><span class="op">:</span> <span class="dv">503</span><span class="op">,</span> <span class="dt">headers</span><span class="op">:</span> { <span class="st">&#39;Retry-After&#39;</span><span class="op">:</span> <span class="st">&#39;1&#39;</span> }<span class="op">,</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>      })<span class="op">;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>    running <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span> {</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpCloudflare</span>({ <span class="dt">cfd1</span><span class="op">:</span> { <span class="dt">mainDb</span><span class="op">:</span> env<span class="op">.</span><span class="at">DB</span> } })<span class="op">;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>      <span class="kw">let</span> output <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>      <span class="kw">let</span> outputBytes <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>      <span class="kw">let</span> failed <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> encoder <span class="op">=</span> <span class="kw">new</span> <span class="fu">TextEncoder</span>()<span class="op">;</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>      php<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;output&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> {</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (failed) <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        <span class="kw">const</span> part <span class="op">=</span> <span class="bu">event</span><span class="op">.</span><span class="at">detail</span><span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        outputBytes <span class="op">+=</span> encoder<span class="op">.</span><span class="fu">encode</span>(part)<span class="op">.</span><span class="at">byteLength</span><span class="op">;</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (outputBytes <span class="op">&gt;</span> <span class="dv">64</span> <span class="op">*</span> <span class="dv">1024</span>) { failed <span class="op">=</span> <span class="kw">true</span><span class="op">;</span> <span class="cf">return</span><span class="op">;</span> }</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        output <span class="op">+=</span> part<span class="op">;</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>      })<span class="op">;</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>      php<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;error&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> { failed <span class="op">=</span> <span class="kw">true</span><span class="op">;</span> })<span class="op">;</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> exit <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="vs">        $pdo = new PDO(&#39;cfd1:mainDb&#39;, null, null, [</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="vs">          PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION,</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="vs">        ]);</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="vs">        $query = $pdo-&gt;prepare(&#39;SELECT ? AS answer&#39;);</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="vs">        $query-&gt;bindValue(1, 42, PDO::PARAM_INT);</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="vs">        $query-&gt;execute();</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="vs">        $row = $query-&gt;fetch(PDO::FETCH_ASSOC);</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="vs">        echo json_encode([&#39;php&#39; =&gt; PHP_VERSION, &#39;answer&#39; =&gt; (int)$row[&#39;answer&#39;]]);</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="vs">      `</span>)<span class="op">;</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (exit <span class="op">!==</span> <span class="dv">0</span> <span class="op">||</span> failed) <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">&#39;PHP execution failed or output limit exceeded&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Response</span>(output<span class="op">,</span> {</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>        <span class="dt">headers</span><span class="op">:</span> { <span class="st">&#39;Content-Type&#39;</span><span class="op">:</span> <span class="st">&#39;application/json&#39;</span><span class="op">,</span> <span class="st">&#39;Cache-Control&#39;</span><span class="op">:</span> <span class="st">&#39;no-store&#39;</span> }<span class="op">,</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>      })<span class="op">;</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">catch</span> (error) {</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">&#39;PHP request failed&#39;</span><span class="op">,</span> error)<span class="op">;</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Response</span>(<span class="st">&#39;PHP request failed&#39;</span><span class="op">,</span> { <span class="dt">status</span><span class="op">:</span> <span class="dv">500</span> })<span class="op">;</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">finally</span> {</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>      running <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+        <p>Add a small static <code>dist/index.html</code>, for example
+        a page linking to <code>/php</code>. Advanced mode replaces the
+        <code>functions/</code> router and must explicitly forward
+        static requests; <code>env.ASSETS.fetch()</code> handles that
+        here. <a
+        href="https://developers.cloudflare.com/pages/functions/advanced-mode/">Pages
+        advanced-mode documentation</a>.</p>
+        <p><code>DB</code> is the Cloudflare binding;
+        <code>mainDb</code> is the key PHP sees in its
+        <code>cfd1:</code> DSN. No database schema is needed.
+        Instantiate PHP per request so D1 handles, PHP globals, shared
+        values and filesystem contents are not reused across visitors.
+        The guard admits one PHP request per isolate; it is not a global
+        queue or a guarantee of production memory capacity.</p>
+        <p>The handler accepts no PHP source, SQL text, archive URL, or
+        binding name from clients. If you add input, validate it and use
+        bound PDO parameters or Vrzno shared values, not PHP-source
+        concatenation. The example caps captured output at 64 KiB and
+        returns a generic error if PHP exits unsuccessfully or writes to
+        stderr; application-specific error handling may refine that
+        policy.</p>
+        <h2 id="configure-d1-test-locally-and-deploy">4. Configure D1,
+        test locally, and deploy</h2>
+        <p>Create a D1 database using your own authenticated Cloudflare
+        account:</p>
+        <div class="sourceCode" id="cb7"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> wrangler login</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> wrangler d1 create php-cloud-demo</span></code></pre></div>
+        <p>Put the returned database UUID into
+        <code>wrangler.toml</code>:</p>
+        <div class="sourceCode" id="cb8"><pre
+        class="sourceCode toml"><code class="sourceCode toml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">&quot;php-cloud-demo&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="dt">compatibility_date</span> <span class="op">=</span> <span class="st">&quot;2024-12-01&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">pages_build_output_dir</span> <span class="op">=</span> <span class="st">&quot;./dist&quot;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="dt">limits</span><span class="kw">]</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dt">cpu_ms</span> <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span><span class="dt">d1_databases</span><span class="kw">]]</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="dt">binding</span> <span class="op">=</span> <span class="st">&quot;DB&quot;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="dt">database_name</span> <span class="op">=</span> <span class="st">&quot;php-cloud-demo&quot;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="dt">database_id</span> <span class="op">=</span> <span class="st">&quot;REPLACE_WITH_YOUR_DATABASE_UUID&quot;</span></span></code></pre></div>
+        <p>Database IDs identify resources; API tokens are credentials.
+        Keep tokens out of source files and use Wrangler authentication
+        or your deployment secret store. Pages supports configured D1
+        bindings and local D1 with <code>pages dev</code>. <a
+        href="https://developers.cloudflare.com/pages/functions/bindings/#d1-databases">Pages
+        D1 binding documentation</a>.</p>
+        <p>Start the local Worker and test it from another terminal:</p>
+        <div class="sourceCode" id="cb9"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> wrangler pages dev dist <span class="at">--d1</span> DB <span class="at">--port</span> 8788</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">--fail</span> http://localhost:8788/php</span></code></pre></div>
+        <p>For local development, pinned Wrangler generates a Pages
+        wrapper that needs bundling, and <code>--d1 DB</code> explicitly
+        supplies the local binding. Using
+        <code>pages dev --no-bundle</code> can fail on Wrangler’s
+        generated wrapper before PHP starts. This development workaround
+        does not change the staged files: production deployment below
+        uses <code>--no-bundle</code> to preserve their original module
+        inventory. The project’s direct Miniflare artifact tests
+        separately validate those unchanged JavaScript and compiled Wasm
+        modules.</p>
+        <p>Expect JSON containing PHP <code>8.5.x</code> and
+        <code>"answer":42</code>. Local D1 is separate from your
+        production database. The runtime’s artifact suite also tests
+        local-D1 CRUD, missing bindings, errors and recovery.</p>
+        <p>After local verification, create a Pages project and deploy
+        an explicit preview:</p>
+        <div class="sourceCode" id="cb10"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> wrangler pages project create php-cloud-demo <span class="at">--production-branch</span> main</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> wrangler pages deploy dist <span class="at">--project-name</span> php-cloud-demo <span class="at">--branch</span> preview <span class="at">--no-bundle</span></span></code></pre></div>
+        <p>Check <code>/php</code> on the preview URL before promoting
+        the same files with <code>--branch main</code>. Confirm your
+        account plan and Pages/Workers bundle, CPU and memory limits
+        first; the project’s nightly PHP demo targets Paid Workers.
+        These commands deploy your own project, not the example
+        repositories or the php-wasm nightly service. Local success
+        alone does not establish live capacity.</p>
+        <h2 id="loading-an-application-like-php-static">Loading an
+        application like php-static</h2>
+        <p>The <code>php-static</code> repository deliberately hosts PHP
+        as downloadable source. You can adapt that separation, but use a
+        fixed allowlist of entrypoints and an immutable revision you
+        control. Never publish credentials inside PHP on a static host
+        or turn a request pathname into an unrestricted remote-code
+        loader.</p>
+        <p>For a small application, ship its PHP with your Worker and
+        load it with <code>php.writeFile()</code>, then
+        <code>await php.run('&lt;?php require ...;');</code>. For an
+        archive, fetch a pinned, trusted ZIP inside the request, verify
+        its digest, bound its compressed and extracted sizes, write it
+        into PHP’s filesystem, and use <code>ZipArchive</code> to
+        extract and <code>require</code> a fixed entrypoint. The builder
+        guide includes an <a
+        href="https://github.com/seanmorris/php-wasm/blob/master/CLOUDFLARE.md#worker-usage">archive-loading
+        example</a>. Do not reproduce the old autoloader’s mutable
+        latest-package selection as a production dependency policy;
+        resolve dependencies and integrity data beforehand.</p>
+        <h2 id="compression-and-runtime-constraints">Compression and
+        runtime constraints</h2>
+        <ul>
+        <li><strong>Brotli/gzip are download transports.</strong> A
+        nightly server may serve a sidecar behind the original
+        <code>.wasm</code> URL with matching
+        <code>Content-Encoding</code>, the original MIME type, and
+        <code>Vary: Accept-Encoding</code>. Decode downloads before
+        checking manifest hashes. Upload raw <code>.wasm</code> to the
+        Worker, never a compressed sidecar disguised as a compiled
+        module.</li>
+        <li><strong>PHP eval is not JavaScript eval.</strong> PHP
+        <code>eval()</code> and Vrzno’s asynchronous calls work;
+        JavaScript string evaluation such as <code>vrzno_eval</code> is
+        unavailable. No eval permission is needed for the supported
+        adapter.</li>
+        <li><strong>PDO-CFD1 is a subset.</strong> Positional
+        <code>?</code>, numeric
+        <code>bindValue</code>/<code>bindParam</code>, repeated
+        <code>execute</code>, associative fetches, and
+        SELECT/INSERT/UPDATE/DELETE work. Named/numbered placeholders,
+        transactions, direct PDO <code>exec</code>, <code>quote</code>
+        and <code>lastInsertId</code> are unsupported. See <a
+        href="/extensions/pdo-cfd1.html">PDO-CFD1</a>.</li>
+        <li><strong>The filesystem is instance-local.</strong> There is
+        no browser persistence, dynamic/shared native extension loading,
+        CGI adapter, or ordinary PHP server process. ZIP support
+        excludes encrypted AES archives.</li>
+        <li><strong>Memory is per instance, but the limit is per
+        isolate.</strong> PHP starts with 64 MiB of Wasm memory and can
+        grow to 96 MiB. The isolate’s 128 MB allowance also covers
+        JavaScript and concurrent requests. Even two initial PHP
+        memories exhaust it before overhead; bound concurrency and test
+        real workloads. <a
+        href="https://developers.cloudflare.com/workers/platform/limits/#memory">Workers
+        memory limits</a>.</li>
+        </ul>
+        <p>For a deployment dynamic module-specifier error, check the
+        explicit inventory and <code>--no-bundle</code>; local
+        <code>pages dev</code> uses the workaround above. For a Wasm
+        trap or mismatched artifact, verify the whole manifest rather
+        than swapping binaries. For D1 errors, check the Worker binding,
+        the <code>cfd1</code> map key, and the PDO DSN separately.</p>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#php-in-cloudflare-workers-and-pages">PHP in
+     Cloudflare Workers and Pages</a>
+     <ul>
+     <li><a href="#what-the-two-example-repositories-demonstrate">What
+     the two example repositories demonstrate</a></li>
+     <li><a href="#build-or-obtain-the-complete-package">1. Build or
+     obtain the complete package</a></li>
+     <li><a href="#stage-raw-worker-modules">2. Stage raw Worker
+     modules</a></li>
+     <li><a href="#write-a-fixed-php-and-d1-handler">3. Write a fixed
+     PHP and D1 handler</a></li>
+     <li><a href="#configure-d1-test-locally-and-deploy">4. Configure
+     D1, test locally, and deploy</a></li>
+     <li><a href="#loading-an-application-like-php-static">Loading an
+     application like php-static</a></li>
+     <li><a href="#compression-and-runtime-constraints">Compression and
+     runtime constraints</a></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
+	</section>
+
+	<footer class="footer">
+		<p class ="strong larger">PHP WASM</p>
+
+		<p class ="strong">Resources</p>
+		<ul>
+			<li><a href="https://github.com/seanmorris/php-wasm/issues">Issue Tracker</a></li>
+			<li><a href="https://github.com/seanmorris/php-wasm/discussions">GitHub Discussions</a></li>
+		</ul>
+
+		<p class ="strong">Contact</p>
+		<ul>
+			<li><a href = "https://github.com/sponsors/seanmorris">Sponsor</a></li>
+			<li><a href="https://github.com/seanmorris/php-wasm">Github</a></li>
+			<li><a href="https://discord.com/invite/j8VZzju7gJ">Discord</a></li>
+			<li><a href="https://www.npmjs.com/package/php-wasm">npmjs</a></li>
+		</ul>
+
+		<p class ="strong">About</p>
+		<p>&copy; 2024 - 2026 Sean Morris | <a href="/LICENSE.html">License</a></p>
+		<p>This site is rendered with PHP + Pandoc.</p>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" width = "80" height = "15" alt = "xml sitemap badge"></a>
+	</footer>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-ZX6DJE9JCG');
+	const gascript = document.createElement('script');
+	gascript.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=G-ZX6DJE9JCG');
+	setTimeout(() => document.head.appendChild(gascript), 0);
+</script>
+</body>
+</html>

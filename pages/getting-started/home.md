@@ -23,6 +23,8 @@ If you'd like to spin up a webserver right in your browser, see [PHP-CGI In Serv
 
 If you'd like to serve websites with Node.js, see [PHP-CGI In Node.js](/getting-started/cgi-in-nodeJs.html).
 
+To run PHP at the edge with Cloudflare Workers or Pages and D1, see [PHP in Cloudflare](/getting-started/php-in-cloudflare.html).
+
 ## Demo
 
 <iframe class="video" src="https://www.youtube.com/embed/rQ-_KMgUtFg?si=mPylUsIqa1FTwSjP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
