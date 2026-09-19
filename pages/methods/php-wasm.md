@@ -207,7 +207,7 @@ All `PhpBase` implementations also expose the queued helper methods below:
 - `php.inputString(string)`
 - `php.input(bytes)`
 - `php.analyzePath(path)`
-- `php.readdir(path)`
+- `php.readdir(path, options?)`
 - `php.readFile(path, options)`
 - `php.stat(path)`
 - `php.mkdir(path)`
@@ -217,3 +217,9 @@ All `PhpBase` implementations also expose the queued helper methods below:
 - `php.unlink(path)`
 
 These methods run through the same queueing and transaction logic as `run`, `exec`, `r`, and `x`.
+
+`readdir` returns `string[]` by default. With `{withFileTypes: true}`, it returns
+`Array<{name: string, isFolder: boolean}>`. Both forms include `.` and `..`;
+classification follows links and metadata errors reject the call. See
+[Filesystem Operations](/filesystem/fs-operations.html#php.readdir) and
+[Transactions](/filesystem/transactions.html) for persistence behavior.

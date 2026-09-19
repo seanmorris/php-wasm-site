@@ -446,62 +446,83 @@
         <div class="sourceCode" id="cb1"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">analyzePath</span>(path)<span class="op">;</span></span></code></pre></div>
         <h3 id="php.readdir">php.readdir</h3>
-        <p>Get a list of files and folders in a directory.</p>
+        <p>Get entry names as <code>string[]</code>:</p>
         <div class="sourceCode" id="cb2"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">readdir</span>(path)<span class="op">;</span></span></code></pre></div>
+        <p>Pass <code>{withFileTypes: true}</code> to return
+        serializable entry types:</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> entries <span class="op">=</span> <span class="cf">await</span> php<span class="op">.</span><span class="fu">readdir</span>(path<span class="op">,</span> {<span class="dt">withFileTypes</span><span class="op">:</span> <span class="kw">true</span>})<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Each entry is {name: string, isFolder: boolean}.</span></span></code></pre></div>
+        <p>Both forms preserve filesystem order and include
+        <code>.</code> and <code>..</code>. Types follow symbolic links,
+        as <code>analyzePath</code> does. Listing and metadata errors,
+        including dangling links, reject the operation. Omitted options
+        or <code>withFileTypes: false</code> keep the name-only result.
+        Embedded, CLI, CGI, debugger, and Cloudflare wrappers support
+        this option, with matching TypeScript overloads.</p>
+        <p>Browser CGI resolves the whole typed listing inside one
+        read-only transaction, with one storage refresh and no flush.
+        This avoids a separate <code>analyzePath</code> request for
+        every entry. See <a
+        href="/filesystem/transactions.html">Transactions</a>.</p>
         <h3 id="php.readfile">php.readFile</h3>
         <p>Get the contents of a file as a <code>Uint8Array</code> by
         default, or optionally as utf-8.</p>
-        <div class="sourceCode" id="cb3"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">readFile</span>(path)<span class="op">;</span></span></code></pre></div>
         <div class="sourceCode" id="cb4"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">readFile</span>(path<span class="op">,</span> {<span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span>})<span class="op">;</span></span></code></pre></div>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">readFile</span>(path)<span class="op">;</span></span></code></pre></div>
+        <div class="sourceCode" id="cb5"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">readFile</span>(path<span class="op">,</span> {<span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span>})<span class="op">;</span></span></code></pre></div>
         <h3 id="php.stat">php.stat</h3>
         <p>Get information about a file or directory.</p>
-        <div class="sourceCode" id="cb5"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">stat</span>(path)<span class="op">;</span></span></code></pre></div>
+        <div class="sourceCode" id="cb6"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">stat</span>(path)<span class="op">;</span></span></code></pre></div>
         <h3 id="php.mkdir">php.mkdir</h3>
         <p>Create a directory.</p>
-        <div class="sourceCode" id="cb6"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">mkdir</span>(path)<span class="op">;</span></span></code></pre></div>
+        <div class="sourceCode" id="cb7"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">mkdir</span>(path)<span class="op">;</span></span></code></pre></div>
         <h3 id="php.rmdir">php.rmdir</h3>
         <p>Delete a directory (must be empty).</p>
-        <div class="sourceCode" id="cb7"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">rmdir</span>(path)<span class="op">;</span></span></code></pre></div>
+        <div class="sourceCode" id="cb8"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">rmdir</span>(path)<span class="op">;</span></span></code></pre></div>
         <h3 id="php.unlink">php.unlink</h3>
         <p>Delete a file.</p>
-        <div class="sourceCode" id="cb8"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">unlink</span>(path)<span class="op">;</span></span></code></pre></div>
+        <div class="sourceCode" id="cb9"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">unlink</span>(path)<span class="op">;</span></span></code></pre></div>
         <h3 id="php.rename">php.rename</h3>
         <p>Rename a file or directory.</p>
-        <div class="sourceCode" id="cb9"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">rename</span>(path<span class="op">,</span> newPath)<span class="op">;</span></span></code></pre></div>
+        <div class="sourceCode" id="cb10"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">rename</span>(path<span class="op">,</span> newPath)<span class="op">;</span></span></code></pre></div>
         <h3 id="php.writefile">php.writeFile</h3>
         <p>Create a new file. Content should be supplied as a
         <code>Uint8Array</code>, or optionally as a string of text.</p>
-        <div class="sourceCode" id="cb10"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">writeFile</span>(path<span class="op">,</span> data)<span class="op">;</span></span></code></pre></div>
         <div class="sourceCode" id="cb11"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">writeFile</span>(path<span class="op">,</span> data<span class="op">,</span> {<span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span>})<span class="op">;</span></span></code></pre></div>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">writeFile</span>(path<span class="op">,</span> data)<span class="op">;</span></span></code></pre></div>
+        <div class="sourceCode" id="cb12"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">writeFile</span>(path<span class="op">,</span> data<span class="op">,</span> {<span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span>})<span class="op">;</span></span></code></pre></div>
         <h2 id="accessing-the-filesystem-of-a-service-worker">Accessing
         the FileSystem of a Service Worker</h2>
-        <p><strong><em>Note:</em></strong> If you’re using php-web in
-        conjunction with php-cgi-worker to work on the filesystem,
-        you’ll need to <code>refresh</code> the filesystem in the
-        worker. You can do that with the <code>quickbus</code> client
-        from the Service Worker guide.</p>
-        <div class="sourceCode" id="cb12"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Write a file</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> bus<span class="op">.</span><span class="fu">writeFile</span>(<span class="st">&#39;/path/to/your/file&#39;</span><span class="op">,</span> <span class="st">&#39;contents&#39;</span><span class="op">,</span> {<span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span>})<span class="op">;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Check the path</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> bus<span class="op">.</span><span class="fu">analyzePath</span>(<span class="st">&#39;/path/to/your/file&#39;</span>)<span class="op">;</span></span></code></pre></div>
-        <p>If you modify the filesystem outside of the service worker,
-        you can refresh its filesystem with a call to
-        <code>refresh</code>.</p>
+        <p>Use the <code>quickbus</code> client from the <a
+        href="/getting-started/cgi-service-worker.html#quickbus">Service
+        Worker guide</a>. Browser CGI filesystem methods refresh
+        persisted storage automatically with
+        <code>autoTransaction</code> enabled. Await the writer’s
+        persistence before reading from another runtime.</p>
         <div class="sourceCode" id="cb13"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Tell the worker that the FS has been updated</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> bus<span class="op">.</span><span class="fu">refresh</span>()<span class="op">;</span></span></code></pre></div>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Write a file</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> bus<span class="op">.</span><span class="fu">writeFile</span>(<span class="st">&#39;/path/to/your/file&#39;</span><span class="op">,</span> <span class="st">&#39;contents&#39;</span><span class="op">,</span> {<span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf8&#39;</span>})<span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Check the path</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> bus<span class="op">.</span><span class="fu">analyzePath</span>(<span class="st">&#39;/path/to/your/file&#39;</span>)<span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Get names and types in one request.</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> entries <span class="op">=</span> <span class="cf">await</span> bus<span class="op">.</span><span class="fu">readdir</span>(<span class="st">&#39;/path/to/your&#39;</span><span class="op">,</span> {<span class="dt">withFileTypes</span><span class="op">:</span> <span class="kw">true</span>})<span class="op">;</span></span></code></pre></div>
+        <p><code>refresh()</code> recreates the PHP runtime, discarding
+        temporary files and in-memory PHP state. Use it when you need a
+        fresh runtime, rather than before each read.</p>
+        <div class="sourceCode" id="cb14"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Recreate the runtime; only persisted files survive.</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> bus<span class="op">.</span><span class="fu">refresh</span>()<span class="op">;</span></span></code></pre></div>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>

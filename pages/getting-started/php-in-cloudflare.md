@@ -7,7 +7,7 @@ weight: -650
 
 Use **`php-cloud-wasm`** to run embedded PHP in Cloudflare's Worker runtime.
 Its dedicated profile supports PHP 8.0–8.5 and includes Vrzno, ordinary ZIP/deflate,
-zlib, and the prepared-query subset of PDO-CFD1. It is not the general-purpose
+zlib, and PDO-CFD1 with native parameters, binary values, and atomic batches. It is not the general-purpose
 `php-wasm` browser/Node package, the browser Service Worker adapter, or PHP-CGI.
 
 This guide uses Pages advanced mode to match the original examples. You write
@@ -56,13 +56,17 @@ With Node.js, npm, Make, and Docker available, run from that checkout:
 ```sh
 npm ci
 make image ENV_FILE=/dev/null
-make cloudflare-mjs PHP_VERSION=8.5
+make cloudflare-mjs ENV_FILE=profiles/cloudflare.mak PHP_VERSION=8.5
 make test-cloudflare PHP_VERSION=8.5
 ```
 
 The current CLI also accepts `php-wasm-builder build cloudflare mjs`.
-Use Make's explicit `PHP_VERSION` for the 8.5 example here. This isolated profile
-does not read `.php-wasm-rc` or select ordinary `LIB_TYPE=static` artifacts.
+Use Make's explicit `PHP_VERSION` for the 8.5 example here. The target uses
+`profiles/cloudflare.mak` by default and accepts another configuration through
+`ENV_FILE`. The CLI honors `.php-wasm-rc`; include the Cloudflare profile there
+when customizing it. Builds use the ordinary Make/Docker Compose recipes and
+reuse unchanged native inputs in a configuration-specific build workspace.
+Ordinary `LIB_TYPE=static` artifacts do not select this profile.
 
 The final package contains `php8.5-cloudflare.mjs`, its low-level runtime, a
 content-addressed `.wasm`, helpers, declarations, package metadata, and
@@ -194,8 +198,7 @@ export default {
           PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         ]);
         $query = $pdo->prepare('SELECT ? AS answer');
-        $query->bindValue(1, 42, PDO::PARAM_INT);
-        $query->execute();
+        $query->execute([42]);
         $row = $query->fetch(PDO::FETCH_ASSOC);
         echo json_encode(['php' => PHP_VERSION, 'answer' => (int)$row['answer']]);
       `);
@@ -244,6 +247,7 @@ Put the returned database UUID into `wrangler.toml`:
 ```toml
 name = "php-cloud-demo"
 compatibility_date = "2024-12-01"
+compatibility_flags = ["enable_weak_ref"]
 pages_build_output_dir = "./dist"
 
 [limits]
@@ -254,6 +258,9 @@ binding = "DB"
 database_name = "php-cloud-demo"
 database_id = "REPLACE_WITH_YOUR_DATABASE_UUID"
 ```
+
+Vrzno requires `WeakRef` and `FinalizationRegistry`; the flag enables weak
+references with this retained compatibility date.
 
 Database IDs identify resources; API tokens are credentials. Keep tokens out
 of source files and use Wrangler authentication or your deployment secret store.
@@ -318,10 +325,12 @@ production dependency policy; resolve dependencies and integrity data beforehand
 - **PHP eval is not JavaScript eval.** PHP `eval()` and Vrzno's asynchronous calls
   work; JavaScript string evaluation such as `vrzno_eval` is unavailable. No eval
   permission is needed for the supported adapter.
-- **PDO-CFD1 is a subset.** Positional `?`, numeric `bindValue`/`bindParam`,
-  repeated `execute`, associative fetches, and SELECT/INSERT/UPDATE/DELETE work.
-  Named/numbered placeholders, transactions, direct PDO `exec`, `quote` and
-  `lastInsertId` are unsupported. See [PDO-CFD1](/extensions/pdo-cfd1.html).
+- **PDO-CFD1 supports ordinary execution and atomic batches.** Bare `?`, numbered
+  `?NNN`, and named `:name` parameters, `execute([...])`, `exec()`, `quote()`,
+  `lastInsertId()`, binary values, buffered scroll cursors and observed column
+  metadata are supported. `cfd1Batch()` uses already bound statements; ordinary
+  execution does not require explicit binding. Open transactions and streaming
+  cursors remain unsupported. See [PDO-CFD1](/extensions/pdo-cfd1.html).
 - **The filesystem is instance-local.** There is no browser persistence,
   dynamic/shared native extension loading, CGI adapter, or ordinary PHP server
   process. ZIP support excludes encrypted AES archives.

@@ -32,15 +32,12 @@ To run PHP at the edge with Cloudflare Workers or Pages and D1, see [PHP in Clou
 
 ## Nightly Builds
 
-The latest successful nightly artifact build published from GitHub Actions is the `Build Artifacts` workflow run on `develop` from **February 24, 2026**:
-
-- Run `#92`
-- GitHub Actions run ID `22360005357`
-- PHP `8.0`, `8.1`, `8.2`, `8.3`, `8.4`, and `8.5`
-- `static`, `shared`, and `dynamic` library builds
-- Discord: nightly builds are announced in `#nightly-builds`
-
-<https://github.com/seanmorris/php-wasm/actions/runs/22360005357>
+Find successful builds on `develop` in the
+[Build Artifacts workflow](https://github.com/seanmorris/php-wasm/actions/workflows/build.yaml?query=branch%3Adevelop+conclusion%3Asuccess).
+Choose a run and keep its matching JavaScript/Wasm assets together. The ordinary
+matrix covers PHP 8.0–8.5 with static, shared, and dynamic libraries; Cloudflare
+uses its dedicated package and profile. Nightly announcements are posted in
+Discord's `#nightly-builds` channel.
 
 For historical release notes, see the [CHANGELOG](/CHANGELOG.html).
 

@@ -442,9 +442,10 @@
         <p>Use <strong><code>php-cloud-wasm</code></strong> to run
         embedded PHP in Cloudflare’s Worker runtime. Its dedicated
         profile supports PHP 8.0–8.5 and includes Vrzno, ordinary
-        ZIP/deflate, zlib, and the prepared-query subset of PDO-CFD1. It
-        is not the general-purpose <code>php-wasm</code> browser/Node
-        package, the browser Service Worker adapter, or PHP-CGI.</p>
+        ZIP/deflate, zlib, and PDO-CFD1 with native parameters, binary
+        values, and atomic batches. It is not the general-purpose
+        <code>php-wasm</code> browser/Node package, the browser Service
+        Worker adapter, or PHP-CGI.</p>
         <p>This guide uses Pages advanced mode to match the original
         examples. You write the HTTP handler in JavaScript and
         explicitly call PHP; uploading a <code>.php</code> file does not
@@ -530,13 +531,19 @@
         <div class="sourceCode" id="cb1"><pre
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> ci</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> image ENV_FILE=/dev/null</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> cloudflare-mjs PHP_VERSION=8.5</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> cloudflare-mjs ENV_FILE=profiles/cloudflare.mak PHP_VERSION=8.5</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> test-cloudflare PHP_VERSION=8.5</span></code></pre></div>
         <p>The current CLI also accepts
         <code>php-wasm-builder build cloudflare mjs</code>. Use Make’s
-        explicit <code>PHP_VERSION</code> for the 8.5 example here. This
-        isolated profile does not read <code>.php-wasm-rc</code> or
-        select ordinary <code>LIB_TYPE=static</code> artifacts.</p>
+        explicit <code>PHP_VERSION</code> for the 8.5 example here. The
+        target uses <code>profiles/cloudflare.mak</code> by default and
+        accepts another configuration through <code>ENV_FILE</code>. The
+        CLI honors <code>.php-wasm-rc</code>; include the Cloudflare
+        profile there when customizing it. Builds use the ordinary
+        Make/Docker Compose recipes and reuse unchanged native inputs in
+        a configuration-specific build workspace. Ordinary
+        <code>LIB_TYPE=static</code> artifacts do not select this
+        profile.</p>
         <p>The final package contains
         <code>php8.5-cloudflare.mjs</code>, its low-level runtime, a
         content-addressed <code>.wasm</code>, helpers, declarations,
@@ -665,23 +672,22 @@
 <span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="vs">          PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION,</span></span>
 <span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="vs">        ]);</span></span>
 <span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="vs">        $query = $pdo-&gt;prepare(&#39;SELECT ? AS answer&#39;);</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="vs">        $query-&gt;bindValue(1, 42, PDO::PARAM_INT);</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="vs">        $query-&gt;execute();</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="vs">        $row = $query-&gt;fetch(PDO::FETCH_ASSOC);</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="vs">        echo json_encode([&#39;php&#39; =&gt; PHP_VERSION, &#39;answer&#39; =&gt; (int)$row[&#39;answer&#39;]]);</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="vs">      `</span>)<span class="op">;</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (exit <span class="op">!==</span> <span class="dv">0</span> <span class="op">||</span> failed) <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">&#39;PHP execution failed or output limit exceeded&#39;</span>)<span class="op">;</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Response</span>(output<span class="op">,</span> {</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>        <span class="dt">headers</span><span class="op">:</span> { <span class="st">&#39;Content-Type&#39;</span><span class="op">:</span> <span class="st">&#39;application/json&#39;</span><span class="op">,</span> <span class="st">&#39;Cache-Control&#39;</span><span class="op">:</span> <span class="st">&#39;no-store&#39;</span> }<span class="op">,</span></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>      })<span class="op">;</span></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">catch</span> (error) {</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">&#39;PHP request failed&#39;</span><span class="op">,</span> error)<span class="op">;</span></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Response</span>(<span class="st">&#39;PHP request failed&#39;</span><span class="op">,</span> { <span class="dt">status</span><span class="op">:</span> <span class="dv">500</span> })<span class="op">;</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">finally</span> {</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>      running <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="vs">        $query-&gt;execute([42]);</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="vs">        $row = $query-&gt;fetch(PDO::FETCH_ASSOC);</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="vs">        echo json_encode([&#39;php&#39; =&gt; PHP_VERSION, &#39;answer&#39; =&gt; (int)$row[&#39;answer&#39;]]);</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="vs">      `</span>)<span class="op">;</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (exit <span class="op">!==</span> <span class="dv">0</span> <span class="op">||</span> failed) <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="st">&#39;PHP execution failed or output limit exceeded&#39;</span>)<span class="op">;</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Response</span>(output<span class="op">,</span> {</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>        <span class="dt">headers</span><span class="op">:</span> { <span class="st">&#39;Content-Type&#39;</span><span class="op">:</span> <span class="st">&#39;application/json&#39;</span><span class="op">,</span> <span class="st">&#39;Cache-Control&#39;</span><span class="op">:</span> <span class="st">&#39;no-store&#39;</span> }<span class="op">,</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>      })<span class="op">;</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">catch</span> (error) {</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="st">&#39;PHP request failed&#39;</span><span class="op">,</span> error)<span class="op">;</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="kw">new</span> <span class="fu">Response</span>(<span class="st">&#39;PHP request failed&#39;</span><span class="op">,</span> { <span class="dt">status</span><span class="op">:</span> <span class="dv">500</span> })<span class="op">;</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">finally</span> {</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>      running <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
         <p>Add a small static <code>dist/index.html</code>, for example
         a page linking to <code>/php</code>. Advanced mode replaces the
         <code>functions/</code> router and must explicitly forward
@@ -715,15 +721,19 @@
         <div class="sourceCode" id="cb8"><pre
         class="sourceCode toml"><code class="sourceCode toml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">name</span> <span class="op">=</span> <span class="st">&quot;php-cloud-demo&quot;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="dt">compatibility_date</span> <span class="op">=</span> <span class="st">&quot;2024-12-01&quot;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">pages_build_output_dir</span> <span class="op">=</span> <span class="st">&quot;./dist&quot;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="dt">limits</span><span class="kw">]</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dt">cpu_ms</span> <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span><span class="dt">d1_databases</span><span class="kw">]]</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="dt">binding</span> <span class="op">=</span> <span class="st">&quot;DB&quot;</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="dt">database_name</span> <span class="op">=</span> <span class="st">&quot;php-cloud-demo&quot;</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="dt">database_id</span> <span class="op">=</span> <span class="st">&quot;REPLACE_WITH_YOUR_DATABASE_UUID&quot;</span></span></code></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">compatibility_flags</span> <span class="op">=</span> <span class="op">[</span><span class="st">&quot;enable_weak_ref&quot;</span><span class="op">]</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dt">pages_build_output_dir</span> <span class="op">=</span> <span class="st">&quot;./dist&quot;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="dt">limits</span><span class="kw">]</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="dt">cpu_ms</span> <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span><span class="dt">d1_databases</span><span class="kw">]]</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="dt">binding</span> <span class="op">=</span> <span class="st">&quot;DB&quot;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="dt">database_name</span> <span class="op">=</span> <span class="st">&quot;php-cloud-demo&quot;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="dt">database_id</span> <span class="op">=</span> <span class="st">&quot;REPLACE_WITH_YOUR_DATABASE_UUID&quot;</span></span></code></pre></div>
+        <p>Vrzno requires <code>WeakRef</code> and
+        <code>FinalizationRegistry</code>; the flag enables weak
+        references with this retained compatibility date.</p>
         <p>Database IDs identify resources; API tokens are credentials.
         Keep tokens out of source files and use Wrangler authentication
         or your deployment secret store. Pages supports configured D1
@@ -796,13 +806,16 @@
         JavaScript string evaluation such as <code>vrzno_eval</code> is
         unavailable. No eval permission is needed for the supported
         adapter.</li>
-        <li><strong>PDO-CFD1 is a subset.</strong> Positional
-        <code>?</code>, numeric
-        <code>bindValue</code>/<code>bindParam</code>, repeated
-        <code>execute</code>, associative fetches, and
-        SELECT/INSERT/UPDATE/DELETE work. Named/numbered placeholders,
-        transactions, direct PDO <code>exec</code>, <code>quote</code>
-        and <code>lastInsertId</code> are unsupported. See <a
+        <li><strong>PDO-CFD1 supports ordinary execution and atomic
+        batches.</strong> Bare <code>?</code>, numbered
+        <code>?NNN</code>, and named <code>:name</code> parameters,
+        <code>execute([...])</code>, <code>exec()</code>,
+        <code>quote()</code>, <code>lastInsertId()</code>, binary
+        values, buffered scroll cursors and observed column metadata are
+        supported. <code>cfd1Batch()</code> uses already bound
+        statements; ordinary execution does not require explicit
+        binding. Open transactions and streaming cursors remain
+        unsupported. See <a
         href="/extensions/pdo-cfd1.html">PDO-CFD1</a>.</li>
         <li><strong>The filesystem is instance-local.</strong> There is
         no browser persistence, dynamic/shared native extension loading,

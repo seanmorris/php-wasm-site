@@ -614,7 +614,7 @@
         <li><code>php.inputString(string)</code></li>
         <li><code>php.input(bytes)</code></li>
         <li><code>php.analyzePath(path)</code></li>
-        <li><code>php.readdir(path)</code></li>
+        <li><code>php.readdir(path, options?)</code></li>
         <li><code>php.readFile(path, options)</code></li>
         <li><code>php.stat(path)</code></li>
         <li><code>php.mkdir(path)</code></li>
@@ -626,6 +626,16 @@
         <p>These methods run through the same queueing and transaction
         logic as <code>run</code>, <code>exec</code>, <code>r</code>,
         and <code>x</code>.</p>
+        <p><code>readdir</code> returns <code>string[]</code> by
+        default. With <code>{withFileTypes: true}</code>, it returns
+        <code>Array&lt;{name: string, isFolder: boolean}&gt;</code>.
+        Both forms include <code>.</code> and <code>..</code>;
+        classification follows links and metadata errors reject the
+        call. See <a
+        href="/filesystem/fs-operations.html#php.readdir">Filesystem
+        Operations</a> and <a
+        href="/filesystem/transactions.html">Transactions</a> for
+        persistence behavior.</p>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>

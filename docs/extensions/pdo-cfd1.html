@@ -441,9 +441,9 @@
         <p><code>pdo-cfd1</code> connects PHP’s PDO interface to actual
         Cloudflare D1 bindings. The dedicated
         <strong><code>php-cloud-wasm</code></strong> profile statically
-        includes the supported prepared-query subset for PHP 8.0–8.5,
-        including an explicit PHP 8.0 ABI backport. It does not require
-        a browser/Node extension loader.</p>
+        includes the driver for PHP 8.0–8.5, including the upstream PHP
+        8.0 PDO callback adapters. It does not require a browser/Node
+        extension loader.</p>
         <p>Start with <a
         href="/getting-started/php-in-cloudflare.html">PHP in
         Cloudflare</a> for the complete build, raw Wasm module upload,
@@ -465,46 +465,83 @@
         generated entry supplies the matching precompiled Wasm module
         and runtime factory.</p>
         <h2 id="query-d1-through-pdo">Query D1 through PDO</h2>
-        <p>Use <code>cfd1:&lt;mapKey&gt;</code> and positional
-        prepared-statement parameters:</p>
+        <p>Use <code>cfd1:&lt;mapKey&gt;</code> and prepared-statement
+        parameters:</p>
         <div class="sourceCode" id="cb2"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="vs">  $pdo = new PDO(&#39;cfd1:mainDb&#39;, null, null, [</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="vs">    PDO::ATTR_ERRMODE =&gt; PDO::ERRMODE_EXCEPTION,</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="vs">  ]);</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="vs">  $query = $pdo-&gt;prepare(&#39;SELECT ? AS answer&#39;);</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="vs">  $query-&gt;bindValue(1, 42, PDO::PARAM_INT);</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="vs">  $query-&gt;execute();</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="vs">  echo json_encode($query-&gt;fetch(PDO::FETCH_ASSOC));</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="vs">  $query-&gt;execute([42]);</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="vs">  echo json_encode($query-&gt;fetch(PDO::FETCH_ASSOC));</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
         <p>This query needs no schema. Capture the runtime’s
         <code>output</code> event to form the HTTP response, as shown in
-        the setup guide. Use numeric typed <code>bindValue</code> or
-        <code>bindParam</code> when the parameter type matters; values
-        passed through <code>execute([...])</code> follow PDO’s
-        parameter conventions.</p>
+        the setup guide. Ordinary <code>execute([...])</code> does not
+        require explicit binding and uses PDO’s default
+        <code>PDO::PARAM_STR</code> convention. Use typed
+        <code>bindValue</code> or <code>bindParam</code> when integer,
+        boolean, NULL, or BLOB types matter. Numeric binding positions
+        start at 1; numeric execute-array keys start at 0. Named
+        parameters accept names with or without the leading colon.</p>
         <h2 id="supported-scope-and-errors">Supported scope and
         errors</h2>
         <ul>
-        <li>Positional <code>?</code> prepared queries, numeric
-        <code>bindValue</code> and <code>bindParam</code>.</li>
-        <li>Repeated <code>execute</code>, associative
-        <code>fetch</code>/<code>fetchAll</code>, scalar and NULL
-        parameters.</li>
-        <li>SELECT, INSERT, UPDATE and DELETE; write
-        <code>rowCount()</code> uses D1’s changes count.</li>
+        <li>Bare <code>?</code>, numbered <code>?NNN</code>, and
+        PDO-style <code>:name</code> parameters. Repeated names reuse
+        one value; do not mix named and positional parameters in a
+        statement.</li>
+        <li><code>query()</code>, <code>exec()</code>, repeated
+        <code>execute()</code>, normal PDO fetch modes, and cursor
+        reuse. Write <code>rowCount()</code> uses D1’s changes count,
+        not the SELECT result size.</li>
+        <li><code>quote()</code> for text and BLOB literals, and
+        per-connection <code>lastInsertId()</code>. Insert IDs outside
+        JavaScript’s safe integer range cannot be reported exactly; use
+        an explicit text-valued <code>RETURNING</code> query when
+        needed.</li>
+        <li>Binary strings and readable streams through
+        <code>PDO::PARAM_LOB</code>, with binary strings returned for
+        BLOB results. Empty BLOBs remain distinct from NULL.</li>
+        <li>Buffered scroll cursors selected with
+        <code>PDO::CURSOR_SCROLL</code>, and
+        <code>getColumnMeta()</code> based on observed result values. D1
+        does not supply table origins or declared schema metadata
+        through this result interface.</li>
         <li>Missing bindings and failed queries report PDO errors.
-        Exception mode raises <code>PDOException</code>; silent mode
-        exposes <code>errorInfo()</code>.</li>
+        Exception mode raises <code>PDOException</code>; warning and
+        silent modes return <code>false</code> with error details.</li>
         </ul>
-        <p>Named or numbered placeholders, transactions, direct PDO
-        <code>exec</code>, <code>quote</code> and
-        <code>lastInsertId</code> are unsupported and fail explicitly.
-        This is not full PDO or D1 API parity. Do not accept arbitrary
-        SQL or binding names from public requests.</p>
-        <p>The Cloudflare build selects the pinned driver source and
-        compatibility patch; simply enabling an extension in an older
-        generic build is not an equivalent runtime. The <a
+        <h2 id="atomic-batches">Atomic batches</h2>
+        <p><code>cfd1Batch()</code> submits distinct prepared statements
+        from the same PDO connection as one atomic D1 batch. Bind
+        parameters before submitting them:</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">$insert</span> <span class="op">=</span> <span class="va">$pdo</span>-&gt;prepare(<span class="st">&#39;INSERT INTO users (name) VALUES (:name)&#39;</span>)<span class="ot">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">$insert</span>-&gt;bindValue(<span class="st">&#39;name&#39;</span><span class="ot">,</span> <span class="st">&#39;Alice&#39;</span>)<span class="ot">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">$select</span> <span class="op">=</span> <span class="va">$pdo</span>-&gt;prepare(<span class="st">&#39;SELECT name FROM users ORDER BY name&#39;</span>)<span class="ot">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">$pdo</span>-&gt;cfd1Batch([<span class="va">$insert</span><span class="ot">,</span> <span class="va">$select</span>])<span class="ot">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="va">$users</span> <span class="op">=</span> <span class="va">$select</span>-&gt;fetchAll(<span class="bu">PDO</span>::<span class="cn">FETCH_ASSOC</span>)<span class="ot">;</span></span></code></pre></div>
+        <p>The example assumes a <code>users</code> table with a
+        <code>name</code> column. Each statement receives its own
+        results and affected-row count. Validation occurs before
+        submission; database statement failures roll back the batch.
+        Transport failures are not retried automatically because the
+        commit outcome may be unknown. Do not call
+        <code>execute()</code> just to populate batch bindings: it
+        executes that statement immediately.</p>
+        <p>Open PDO transactions, persistent connections, output
+        parameters, streaming cursors, multiple result sets, and
+        <code>@name</code> / <code>$name</code> placeholders remain
+        unsupported. A batch is a predetermined group; PHP cannot read
+        intermediate results and choose additional statements inside it.
+        See the integration guide below for parameter limits, cursor
+        behavior, metadata and error details.</p>
+        <p>The Cloudflare build imports the pinned upstream driver
+        directly, without an ad-hoc compatibility patch. Custom builds
+        can select <code>PDO_CFD1_REF</code> or a local
+        <code>PDO_CFD1_DEV_PATH</code>. The <a
         href="https://github.com/seanmorris/php-static/blob/cdcaa8540cd7fcdeb445e65dba35a9882acefa7d/pdo.php">legacy
         php-static PDO example</a> uses a <code>vrzno:</code> DSN, which
         must be migrated to the binding map and <code>cfd1:</code> API
@@ -526,6 +563,7 @@
      <li><a href="#query-d1-through-pdo">Query D1 through PDO</a></li>
      <li><a href="#supported-scope-and-errors">Supported scope and
      errors</a></li>
+     <li><a href="#atomic-batches">Atomic batches</a></li>
      </ul></li>
      </ul>
 					<span class = "wide-only"><a href = "#">top</a></span>

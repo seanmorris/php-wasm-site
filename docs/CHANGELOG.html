@@ -377,6 +377,91 @@
 				<article>
 								<h1 id="php-wasm">php-wasm</h1>
         <p>Changes</p>
+        <h2 id="unreleased">Unreleased</h2>
+        <ul>
+        <li>Added typed directory listings with
+        <code>readdir(path, {withFileTypes: true})</code> across runtime
+        wrappers and declarations. Browser CGI reads refresh storage
+        without flushing, and writes still wait for persistence. The VS
+        Code bridge forwards listing options so updated File Bus hosts
+        can expand and search directories without per-entry RPCs.</li>
+        <li>Expanded the lightweight editor’s file handling with
+        explicit Save, untitled documents, file/folder operations,
+        transfers, recovery, and conflict checks. Empty workspaces
+        retain a saveable untitled document. Removed the redundant
+        standalone Waitline link from the home-page extras.</li>
+        <li>Expanded PDO-CFD1 with named/numbered parameters, direct
+        execution, quoting, insert IDs, binary values, buffered scroll
+        cursors, and result metadata. Atomic <code>cfd1Batch()</code>
+        reuses bound PDO statements; ordinary
+        <code>execute([...])</code> remains available without explicit
+        binding.</li>
+        <li>Cloudflare builds now use the ordinary Make/Docker Compose
+        flow and a selectable configuration file. The CLI honors
+        <code>.php-wasm-rc</code>; shared build workspaces preserve
+        incremental native state across unchanged builds and isolate
+        different configurations. Packaging leaves the raw
+        JavaScript/Wasm pair intact.</li>
+        <li>Consolidated the PGlite, CFD1, Vrzno, and Waitline source
+        importers and their regression fixtures. Each package command
+        passes its policy to one shared importer in the builder
+        workspace; refs, input policies, manifests, and build behavior
+        are preserved. CI covers checkout, installed builder, Cloudflare
+        snapshot, and Docker ownership layouts, including CFD1. See the
+        <a
+        href="https://github.com/seanmorris/php-wasm/blob/develop/bin/README.md">importer
+        maintenance notes</a>.</li>
+        <li>Import the PHP 8.0–8.5 PDO-CFD1 driver directly from its
+        upstream commit. The driver fixes and unit tests now live in
+        PDO-CFD1; php-wasm no longer applies or ships a compatibility
+        patch. Existing imported-source manifests migrate to the direct
+        source on the next build.</li>
+        <li>Corrected runtime declarations and package exports for Deno,
+        TypeScript Bundler/NodeNext resolution, and CommonJS. Existing
+        wrapper import paths remain supported; CommonJS entrypoints now
+        select matching <code>.d.cts</code> declarations. Constructor
+        values come from the wrapper modules, while <code>public</code>
+        exposes types.</li>
+        <li>TypeScript consumers should await <code>tokenize()</code>
+        for its serialized string result, use the metadata returned by
+        <code>mkdir()</code>, and expect unsigned <code>HEAPU8</code>
+        bytes. <code>readFile()</code> now distinguishes UTF-8 text from
+        binary bytes; <code>writeFile()</code> accepts strings and
+        ArrayBuffer views, matching Emscripten FS.</li>
+        <li>CLI <code>run()</code> accepts optional string flags. Node
+        CLI can resolve to <code>undefined</code> for runtime errors
+        without an exit status; browser CLI rejects those errors.
+        Embedded <code>run()</code> requires PHP source. Browser refresh
+        methods return <code>Promise&lt;void&gt;</code>, embedded
+        refresh returns a numeric result, and CGI refresh returns its
+        binary. CGI <code>putEnv()</code> returns a number, and CGI
+        wrappers do not inherit <code>EventTarget</code>. Debugger
+        declarations now include <code>isRunning()</code>, synchronous
+        <code>dumpSymbols()</code>, optional symbol tables, file arrays,
+        and structured backtraces.</li>
+        <li>Added <code>npm run test:types</code> with pinned Deno
+        2.5.6, strict isolated npm fixtures, declaration checking, and
+        coverage for all six generated Cloudflare versions. Both CI
+        workflows run these checks before native builds. Regenerate
+        CommonJS declarations and export mappings with
+        <code>npm run generate:types</code>.</li>
+        <li>Artifact packaging now stages every declared wrapper with
+        <code>make runtime-wrappers</code>, independent of the selected
+        native profile. The isolated type fixtures use the same Make
+        target and verify every explicit package export is present in
+        the npm tarball.</li>
+        <li>Dynamic extensions and support libraries now preserve their
+        native frames when PHP callbacks await JavaScript. This fixes
+        crashes when libxml warning handlers perform asynchronous work,
+        such as database logging. Rebuild side modules with the current
+        Make flags.</li>
+        <li>Asyncify import rejections and failed unwinds or rewinds now
+        reach the caller with the original error. Failed instances
+        reject later native calls. CGI returns a non-cacheable HTTP 500
+        and replaces the runtime before queued requests proceed;
+        replacement initialization failures also produce HTTP 500
+        responses.</li>
+        </ul>
         <h2 id="v0.1.0---aiming-for-the-github-stars">v0.1.0 - Aiming
         for the (GitHub) Stars</h2>
         <ul>
@@ -549,6 +634,7 @@
 					<ul>
      <li><a href="#php-wasm">php-wasm</a>
      <ul>
+     <li><a href="#unreleased">Unreleased</a></li>
      <li><a href="#v0.1.0---aiming-for-the-github-stars">v0.1.0 - Aiming
      for the (GitHub) Stars</a></li>
      <li><a href="#v0.0.9---here-there-be-dragons">v0.0.9 - Here there

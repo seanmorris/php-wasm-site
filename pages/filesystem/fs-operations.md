@@ -17,11 +17,28 @@ await php.analyzePath(path);
 
 ### php.readdir
 
-Get a list of files and folders in a directory.
+Get entry names as `string[]`:
 
 ```javascript
 await php.readdir(path);
 ```
+
+Pass `{withFileTypes: true}` to return serializable entry types:
+
+```javascript
+const entries = await php.readdir(path, {withFileTypes: true});
+// Each entry is {name: string, isFolder: boolean}.
+```
+
+Both forms preserve filesystem order and include `.` and `..`. Types follow
+symbolic links, as `analyzePath` does. Listing and metadata errors, including
+dangling links, reject the operation. Omitted options or `withFileTypes: false`
+keep the name-only result. Embedded, CLI, CGI, debugger, and Cloudflare wrappers
+support this option, with matching TypeScript overloads.
+
+Browser CGI resolves the whole typed listing inside one read-only transaction,
+with one storage refresh and no flush. This avoids a separate `analyzePath`
+request for every entry. See [Transactions](/filesystem/transactions.html).
 
 ### php.readFile
 
@@ -89,7 +106,11 @@ await php.writeFile(path, data, {encoding: 'utf8'});
 
 ## Accessing the FileSystem of a Service Worker
 
-***Note:*** If you're using php-web in conjunction with php-cgi-worker to work on the filesystem, you'll need to `refresh` the filesystem in the worker. You can do that with the `quickbus` client from the Service Worker guide.
+Use the `quickbus` client from the
+[Service Worker guide](/getting-started/cgi-service-worker.html#quickbus).
+Browser CGI filesystem methods refresh persisted storage automatically with
+`autoTransaction` enabled. Await the writer's persistence before reading from
+another runtime.
 
 ```javascript
 // Write a file
@@ -97,11 +118,15 @@ await bus.writeFile('/path/to/your/file', 'contents', {encoding: 'utf8'});
 
 // Check the path
 const result = await bus.analyzePath('/path/to/your/file');
+
+// Get names and types in one request.
+const entries = await bus.readdir('/path/to/your', {withFileTypes: true});
 ```
 
-If you modify the filesystem outside of the service worker, you can refresh its filesystem with a call to `refresh`.
+`refresh()` recreates the PHP runtime, discarding temporary files and in-memory
+PHP state. Use it when you need a fresh runtime, rather than before each read.
 
 ```javascript
-// Tell the worker that the FS has been updated
+// Recreate the runtime; only persisted files survive.
 await bus.refresh();
 ```

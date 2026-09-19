@@ -594,9 +594,13 @@
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
         <h3 id="autotransaction">autoTransaction</h3>
         <p><em>boolean</em></p>
-        <p>Defaults to <code>true</code>. Controls whether request
-        handling and filesystem operations automatically wrap themselves
-        in filesystem transactions.</p>
+        <p>Defaults to <code>true</code>. Controls whether queued
+        browser CGI filesystem operations start and commit their own
+        transactions. Read-only calls hydrate storage without flushing;
+        mutating calls wait for persistence. With <code>false</code>,
+        the caller owns transaction boundaries and coordination. HTTP
+        request synchronization is handled separately. See <a
+        href="/filesystem/transactions.html">Transactions</a>.</p>
         <h3 id="maxrequestage">maxRequestAge</h3>
         <p><em>number</em></p>
         <p>Maximum request age in milliseconds. Older requests return
@@ -682,7 +686,7 @@
         <p><code>PhpCgiBase</code> also exposes:</p>
         <ul>
         <li><code>analyzePath(path)</code></li>
-        <li><code>readdir(path)</code></li>
+        <li><code>readdir(path, options?)</code></li>
         <li><code>readFile(path, options)</code></li>
         <li><code>stat(path)</code></li>
         <li><code>mkdir(path)</code></li>
@@ -697,6 +701,20 @@
         <li><code>setEnvs(env)</code></li>
         <li><code>storeInit()</code></li>
         </ul>
+        <p><code>readdir</code> returns <code>string[]</code> by
+        default. With <code>{withFileTypes: true}</code>, it returns
+        <code>Array&lt;{name: string, isFolder: boolean}&gt;</code>.
+        Both forms include <code>.</code> and <code>..</code>;
+        classification follows links and metadata errors reject the
+        call.</p>
+        <p>With automatic browser transactions enabled,
+        <code>analyzePath</code>, <code>readdir</code>,
+        <code>readFile</code>, and <code>stat</code> refresh storage
+        before reading and do not flush it afterward. Mutations wait for
+        persistence before resolving. Concurrent filesystem calls remain
+        separate transactions; a typed directory listing obtains all
+        entry types in one call. See <a
+        href="/filesystem/transactions.html">Transactions</a>.</p>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>
