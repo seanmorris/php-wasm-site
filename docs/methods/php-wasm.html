@@ -407,6 +407,9 @@
 				<a href = "/extensions/pdo-pglite.html" >
 					pdo-pglite				</a>
 			</li><li>
+				<a href = "/extensions/sdl.html" >
+					SDL and OpenGL				</a>
+			</li><li>
 				<a href = "/extensions/vrzno.html" >
 					Vrzno				</a>
 			</li></ul>			</details><details open="true" data-id-path = "3">
@@ -464,11 +467,26 @@
         <p><em>string</em></p>
         <p>Selects a packaged runtime variant. The empty string uses the
         standard runtime. <code>_sdl</code> selects the SDL-enabled
-        <code>PhpWeb</code> runtime for supported PHP versions.
+        <code>PhpWeb</code> runtime for PHP 8.0–8.5.
         <code>PhpNode</code> currently supports only the standard empty
         variant.</p>
         <div class="sourceCode" id="cb2"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span><span class="op">,</span> <span class="dt">variant</span><span class="op">:</span> <span class="st">&#39;_sdl&#39;</span>})<span class="op">;</span></span></code></pre></div>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span><span class="op">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">variant</span><span class="op">:</span> <span class="st">&#39;_sdl&#39;</span><span class="op">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">canvas</span><span class="op">:</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&#39;canvas&#39;</span>)<span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+        <p>Create the canvas first. See <a
+        href="/extensions/sdl.html">SDL and OpenGL</a> for the
+        development add-ons, shared codec dependencies, and example
+        controls.</p>
+        <h3 id="canvas">canvas</h3>
+        <p><em>HTMLCanvasElement</em></p>
+        <p>Pass the canvas used by an SDL-enabled browser runtime. The
+        cube example needs WebGL2 and a focusable canvas
+        (<code>tabindex="0"</code>) for keyboard input. Pass a fresh
+        canvas when replacing the runtime or switching graphics context
+        types.</p>
         <h3 id="sharedlibs">sharedLibs</h3>
         <p><em>array of strings or objects</em></p>
         <p>Loads shared extensions before boot and writes
@@ -648,6 +666,7 @@
      options</a></li>
      <li><a href="#version">version</a></li>
      <li><a href="#variant">variant</a></li>
+     <li><a href="#canvas">canvas</a></li>
      <li><a href="#sharedlibs">sharedLibs</a></li>
      <li><a href="#dynamiclibs">dynamicLibs</a></li>
      <li><a href="#files">files</a></li>

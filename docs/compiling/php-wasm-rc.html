@@ -407,6 +407,9 @@
 				<a href = "/extensions/pdo-pglite.html" >
 					pdo-pglite				</a>
 			</li><li>
+				<a href = "/extensions/sdl.html" >
+					SDL and OpenGL				</a>
+			</li><li>
 				<a href = "/extensions/vrzno.html" >
 					Vrzno				</a>
 			</li></ul>			</details><details open="true" data-id-path = "3">
@@ -578,6 +581,59 @@ WITH_ONIGURUMA # [0, 1, static, shared]
 WITH_OPENSSL   # [0, 1, shared, dynamic]
 WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <hr />
+        <h3 id="sdl-runtime-options">SDL runtime options</h3>
+        <p>The <a href="/extensions/sdl.html">development SDL
+        runtime</a> uses these additional flags:</p>
+        <table>
+        <thead>
+        <tr class="header">
+        <th>Option</th>
+        <th>Values</th>
+        <th>Default</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="odd">
+        <td><code>WITH_SDL</code></td>
+        <td><code>0</code>, <code>1</code>, legacy <code>dynamic</code>
+        alias for <code>1</code></td>
+        <td><code>0</code></td>
+        </tr>
+        <tr class="even">
+        <td><code>WITH_SDL_IMAGE</code></td>
+        <td><code>0</code>, <code>1</code></td>
+        <td>Follows SDL</td>
+        </tr>
+        <tr class="odd">
+        <td><code>WITH_SDL_MIXER</code></td>
+        <td><code>0</code>, <code>1</code></td>
+        <td>Follows SDL</td>
+        </tr>
+        <tr class="even">
+        <td><code>WITH_SDL_TTF</code></td>
+        <td><code>0</code>, <code>1</code></td>
+        <td>Follows SDL</td>
+        </tr>
+        <tr class="odd">
+        <td><code>WITH_OPENGL</code></td>
+        <td><code>0</code>, <code>1</code></td>
+        <td>Follows SDL</td>
+        </tr>
+        </tbody>
+        </table>
+        <p><code>WITH_SDL=1</code> selects the <code>_sdl</code> browser
+        runtime. Add-ons require SDL; they do not produce separate PHP
+        extension side modules. SDL_image needs enabled
+        <code>WITH_LIBPNG</code> and <code>WITH_LIBJPEG</code>; SDL_ttf
+        needs <code>WITH_FREETYPE</code>. These reuse the existing
+        static/shared codec libraries. <code>WITH_ZLIB=0</code> still
+        supplies the native zlib archive when image/font decoding needs
+        it.</p>
+        <p>To retain only core SDL, set all four add-on flags to
+        <code>0</code>. Use the ordinary
+        <code>php-wasm-builder build web mjs</code> command with a
+        builder containing the expansion.</p>
+        <hr />
         <h3 id="with_phar">WITH_PHAR</h3>
         <p>static|<strong>dynamic</strong></p>
         <p>When compiled as a <code>dynamic</code> extension, this will
@@ -733,6 +789,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
      </ul></li>
      <li><a href="#extension-flags">Extension Flags</a>
      <ul>
+     <li><a href="#sdl-runtime-options">SDL runtime options</a></li>
      <li><a href="#with_phar">WITH_PHAR</a></li>
      <li><a href="#with_libxml">WITH_LIBXML</a></li>
      <li><a href="#with_libzip">WITH_LIBZIP</a></li>

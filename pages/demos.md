@@ -34,3 +34,19 @@ has been removed from that menu.
 Use the editor below to write PHP scripts that run right in the page:
 
 <iframe class = "page-demo" src = "https://seanmorris.github.io/php-wasm/embedded-php.html?iframed=1&no-service-worker=1&demo=sdl-sine.php"></iframe>
+
+### SDL Cube and SDL Sine
+
+Development builds add **SDL Cube** alongside **SDL Sine**. The cube uses the
+`sean-icon-32` pixel-art texture without interpolation, a TrueType overlay,
+keyboard controls, MP3 music, and WAV effects. The track is **Unreal Superhero 3**
+by **Kenët and rez**, as credited in its ID3 tags. It requires WebGL2. Click
+**Enable audio**, then focus the canvas: arrows/WASD rotate, Space pauses, R
+resets, M mutes, and Escape stops. **Run** restarts; **Refresh** releases resources.
+The cube fills the preview and adjusts its perspective when it is resized.
+Edited source is shared in the URL's `#code=` fragment, keeping it out of HTTP
+requests; existing `?code=` links still work.
+
+The embedded example above remains the sine demo while the cube expansion is
+unreleased. See [SDL and OpenGL](/extensions/sdl.html) for the current cube
+source, runtime and asset setup, build flags, and error recovery.

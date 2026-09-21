@@ -178,6 +178,27 @@ $ php-wasm-builder build node dbg mjs
 $ php-wasm-builder build web dbg mjs
 ```
 
+## SDL browser runtime
+
+A builder containing the [SDL expansion](/extensions/sdl.html) can select the
+`_sdl` browser runtime through `.php-wasm-rc`:
+
+```make
+WITH_SDL=1
+```
+
+Then use the ordinary build command:
+
+```sh
+php-wasm-builder build web mjs
+```
+
+SDL_image, SDL_mixer, SDL_ttf, and OpenGL default to enabled with SDL. Each can
+be disabled independently with the [SDL runtime options](/compiling/php-wasm-rc.html#sdl-runtime-options).
+The source checkout uses `make web-mjs WITH_SDL=1`; no separate build script or
+`sdl` command selector is needed. Keep the generated JavaScript/Wasm pair and
+its required data and codec assets together.
+
 ## PHP_DIST_DIR
 
 This will build the package inside of the current directory (or in `PHP_DIST_DIR`, *see [.php-wasm-rc](/compiling/php-wasm-rc.html) for more info.*)

@@ -160,6 +160,29 @@ WITH_INTL      # [0, 1, static, shared, dynamic]
 
 ---
 
+### SDL runtime options
+
+The [development SDL runtime](/extensions/sdl.html) uses these additional flags:
+
+| Option | Values | Default |
+| --- | --- | --- |
+| `WITH_SDL` | `0`, `1`, legacy `dynamic` alias for `1` | `0` |
+| `WITH_SDL_IMAGE` | `0`, `1` | Follows SDL |
+| `WITH_SDL_MIXER` | `0`, `1` | Follows SDL |
+| `WITH_SDL_TTF` | `0`, `1` | Follows SDL |
+| `WITH_OPENGL` | `0`, `1` | Follows SDL |
+
+`WITH_SDL=1` selects the `_sdl` browser runtime. Add-ons require SDL; they do
+not produce separate PHP extension side modules. SDL_image needs enabled
+`WITH_LIBPNG` and `WITH_LIBJPEG`; SDL_ttf needs `WITH_FREETYPE`. These reuse the
+existing static/shared codec libraries. `WITH_ZLIB=0` still supplies the native
+zlib archive when image/font decoding needs it.
+
+To retain only core SDL, set all four add-on flags to `0`. Use the ordinary
+`php-wasm-builder build web mjs` command with a builder containing the expansion.
+
+---
+
 ### WITH_PHAR
 
 static|**dynamic**

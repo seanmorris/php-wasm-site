@@ -1,0 +1,784 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+<head>
+			<title>Php-Wasm | SDL and OpenGL</title>
+			<meta charset="utf-8" />
+	<meta name="viewport" content="width=800, user-scalable=yes" />
+	<meta name="title" content="SDL and OpenGL">
+	<link rel="sitemap" href="/sitemap.xml" />
+	<link rel="preload" href="/logo-80.webp" as="image" type="image/webp">
+	<link rel="preload" href="/splash-wide.webp" as="image" type="image/webp">
+	<link rel="preconnect" href="https://www.googletagmanager.com" />
+	<link rel="preconnect" href="https://www.google-analytics.com" />
+	<link rel="dns-prefetch" href="https://www.npmjs.com/" />
+	<link rel="dns-prefetch" href="https://playwithlaravel.com/" />
+	<link rel="dns-prefetch" href="https://discord.gg/" />
+	<link rel="dns-prefetch" href="https://discord.com/" />
+	<link rel="dns-prefetch" href="https://playground.wordpress.net/" />
+	<link rel="dns-prefetch" href="https://drupal-cms-project-9c0022e0ec6f0d7d0acfffa4583f8606955183fe7716.pages.drupalcode.org/" />
+	<link rel="dns-prefetch" href="https://github.com/" />
+	<link rel="dns-prefetch" href="https://seanmorris.github.io/" />
+	<style>
+		code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+  pre > code.sourceCode { white-space: pre; position: relative; }
+  pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+  pre > code.sourceCode > span:empty { height: 1.2em; }
+  .sourceCode { overflow: visible; }
+  code.sourceCode > span { color: inherit; text-decoration: inherit; }
+  div.sourceCode { margin: 1em 0; }
+  pre.sourceCode { margin: 0; }
+  @media screen {
+  div.sourceCode { overflow: auto; }
+  }
+  @media print {
+  pre > code.sourceCode { white-space: pre-wrap; }
+  pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+  }
+  pre.numberSource code
+    { counter-reset: source-line 0; }
+  pre.numberSource code > span
+    { position: relative; left: -4em; counter-increment: source-line; }
+  pre.numberSource code > span > a:first-child::before
+    { content: counter(source-line);
+      position: relative; left: -1em; text-align: right; vertical-align: baseline;
+      border: none; display: inline-block;
+      -webkit-touch-callout: none; -webkit-user-select: none;
+      -khtml-user-select: none; -moz-user-select: none;
+      -ms-user-select: none; user-select: none;
+      padding: 0 4px; width: 4em;
+    }
+  pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+  div.sourceCode
+    { color: #cccccc; background-color: #303030; }
+  @media screen {
+  pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+  }
+  code span.al { color: #ffcfaf; } /* Alert */
+  code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+  code span.at { } /* Attribute */
+  code span.bn { color: #dca3a3; } /* BaseN */
+  code span.bu { } /* BuiltIn */
+  code span.cf { color: #f0dfaf; } /* ControlFlow */
+  code span.ch { color: #dca3a3; } /* Char */
+  code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+  code span.co { color: #7f9f7f; } /* Comment */
+  code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+  code span.do { color: #7f9f7f; } /* Documentation */
+  code span.dt { color: #dfdfbf; } /* DataType */
+  code span.dv { color: #dcdccc; } /* DecVal */
+  code span.er { color: #c3bf9f; } /* Error */
+  code span.ex { } /* Extension */
+  code span.fl { color: #c0bed1; } /* Float */
+  code span.fu { color: #efef8f; } /* Function */
+  code span.im { } /* Import */
+  code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+  code span.kw { color: #f0dfaf; } /* Keyword */
+  code span.op { color: #f0efd0; } /* Operator */
+  code span.ot { color: #efef8f; } /* Other */
+  code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+  code span.sc { color: #dca3a3; } /* SpecialChar */
+  code span.ss { color: #cc9393; } /* SpecialString */
+  code span.st { color: #cc9393; } /* String */
+  code span.va { } /* Variable */
+  code span.vs { color: #cc9393; } /* VerbatimString */
+  code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+  .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+	</style>
+	<link rel="stylesheet" href="/style.css" />
+	<link rel="stylesheet" href="/article.css" />
+	<link rel="stylesheet" href="/pandoc.css" />
+	<style>
+	section.heading {
+ 	background-color: #220359;
+ 	background-image: url('/splash-wide.webp');
+ 	background-size: cover;
+ 	background-position: center top;
+ 	padding: 2rem;
+ }
+
+ section.heading nav {
+ 	/* justify-content: space-between; */
+ 	max-width: 1800px;
+ 	margin: auto;
+ }
+
+ section.heading nav .spacer{
+ 	flex: 1;
+ }
+
+ section.heading nav,
+ section.heading nav ul {
+ 	display: flex;
+ 	flex-direction: row;
+ }
+
+ section.heading nav ul {
+ 	align-items: center;
+ 	list-style: none;
+ 	margin: 0;
+ }
+
+ section.heading nav ul li {
+ 	min-height: 80px;
+ 	display: flex;
+ 	align-items: center;
+ }
+
+ section.heading nav ul a {
+ 	padding: 1rem;
+ 	display: inline-block;
+ 	color: inherit;
+ 	text-decoration: inherit;
+ 	font-weight: bold;
+ }
+
+ section.heading nav ul a img {
+ 	display: inline;
+ 	vertical-align: middle;
+ }
+
+ section.heading nav ul {
+ 	align-items: center;
+ 	list-style: none;
+ 	margin: 0;
+ }
+
+ section.heading nav ul li {
+ 	min-height: 80px;
+ 	display: flex;
+ 	align-items: center;
+ }
+
+ section.heading nav ul a {
+ 	padding: 1rem;
+ 	display: inline-block;
+ 	color: inherit;
+ 	text-decoration: inherit;
+ 	font-weight: bold;
+ }
+
+ section.heading nav ul a img {
+ 	display: inline;
+ 	vertical-align: middle;
+ }
+
+ section.heading nav a.cta.button {
+ 	border-width: 1px;
+ 	border-style: solid;
+ 	border-color: white;
+ 	box-shadow: 0 0 0.5rem 0.25rem #3601a9;
+ 	font-style: italic;
+ 	min-width: 5rem;
+ 	display: inline-block;
+ 	padding: 0.75rem;
+ 	padding-left: 0rem;
+ 	padding-right: 0rem;
+ 	transition: box-shadow 0.125s ease-in;
+ 	max-height: 24px;
+ }
+
+ section.heading nav a.cta.button:hover {
+ 	box-shadow: 0 0 0.25rem 0.125rem #8216de;
+ 	transition: box-shadow 0.125s ease-out;
+ }
+
+ section.heading nav,
+ section.heading nav ul {
+ 	display: flex;
+ 	flex-direction: row;
+ }
+
+ section.heading div.hero {
+ 	display: flex;
+ 	flex-direction: column;
+ 	align-items: center;
+ }
+
+ div.hero a.button {
+ 	margin: 2rem;
+ }
+
+ .hero h1 {
+ 	font-family: 'Corbel', sans-serif;
+ 	font-weight: bold;
+ 	font-size: 68pt;
+ 	margin-top: 4rem;
+ 	margin-bottom: 2rem;
+ 	text-align: center;
+ }
+
+ .hero p {
+ 	margin: 1rem;
+ 	max-width: 40rem;
+ 	text-align: center;
+ 	font-weight: bold;
+ }
+
+ .hero a.cta.button {
+ 	background: linear-gradient(0.15turn, #3601a9, #8216de);
+ 	padding: 1.25rem;
+ 	font-weight: bold;
+ }
+
+ .hero a.cta.button:hover {
+ 	background: linear-gradient(0.10turn, #3601a9, #8216de);
+ }
+
+ .sub-hero ul {
+ 	list-style: none;
+ 	padding: 0;
+ }
+
+ .sub-hero ul li:before {
+ 	content: "\B7";
+ 	padding-right: 0.75rem;
+ }
+
+ .hero > iframe {
+ 	width: 100%;
+ 	min-height: 21.5rem;
+ 	margin-top: 2rem;
+ 	box-sizing: border-box;
+ 	border: none;
+ }
+
+
+ iframe.page-demo {
+ 	width: 100%;
+ 	box-sizing: border-box;
+ 	border: none;
+ 	min-height: 80vh;
+ }
+	@font-face {
+ 	font-family: 'Anonymous Pro';
+ 	src: url('/anonymous_pro.woff2') format('woff2'),
+ 		url('/anonymous_pro.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: normal;
+ 	font-display: swap;
+
+ }
+
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('/notosans-regular.woff2') format('woff2'),
+ 		url('/notosans-regular.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: normal;
+ 	font-display: swap;
+ }
+
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('/notosans-italic.woff2') format('woff2'),
+ 		url('/notosans-italic.woff') format('woff');
+ 	font-weight: normal;
+ 	font-style: italic;
+ 	font-display: swap;
+ }
+
+ @font-face {
+ 	font-family: 'NotoSans';
+ 	src: url('/notosans-bold.woff2') format('woff2'),
+ 		url('/notosans-bold.woff') format('woff');
+ 	font-weight: bold;
+ 	font-style: normal;
+ 	font-display: swap;
+ }
+
+ @font-face {
+ 	font-family: 'Corbel';
+ 	src: url('/corbelb.woff2') format('woff2'),
+ 		url('/corbelb.woff') format('woff');
+ 	font-weight: bold;
+ 	font-style: normal;
+ 	font-display: swap;
+ }
+	</style>
+		<script src = "/main.js"></script>
+		<script src = "/nag-bar.js"></script>
+		<script src = "/nav-state.js"></script>
+		</head>
+<body>
+	<!-- <div class = "nag-bar" id = "nag-bar">
+		<div class = "page-rule">
+			<div class = "row">
+				<div class = "prose">
+					<p><strong>I am giving up my bed for one night.</strong></p>
+
+					<p>My Sleep Out helps youth facing homelessness find safe shelter and loving care at Covenant House. That care includes essential services like education, job training, medical care, mental health and substance use counseling, and legal aid — everything they need to build independent, sustainable futures.</p>
+
+					<p>By supporting my Sleep Out, you are supporting the dreams of young people overcoming homelessness.</p>
+
+					<p>Together, we are working towards a future where every young person has a safe place to sleep.</p>
+
+					<p>Thank you.</p>
+				</div>
+				<div class = "col center">
+					<a href = "https://www.sleepout.org/participants/62915">
+						<span class = "button">DONATE NOW</span>
+					</a>
+					<a href = "https://www.sleepout.org/participants/62915">
+						<img src = "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwww.sleepout.org%2Fapi%2F1.3%2Fparticipants%2F62915%3F_%3D1760039017428&query=%24.sumDonations&prefix=%24&suffix=%20Raised&style=for-the-badge&label=Sleep%20Out%3A%20NYC&link=https%3A%2F%2Fwww.sleepout.org%2Fparticipants%2F62915&color=0677ff">
+					</a>
+				</div>
+			</div>
+			<div class = "close-button" id = "close-nag"></div>
+			<div class = "open-button" id = "open-nag"></div>
+		</div>
+	</div> -->
+	<section class = "heading">
+		<div class = "page-rule">
+			<nav>
+				<div class = "logo">
+					<a href = "/"><img src = "/logo-80.webp" width = "304" height = "82" alt = "php/wasm logo" /></a>
+				</div>
+				<div class = "spacer"></div>
+				<ul class = "links">
+					<li><a href = "/">Home</a></li>
+					<li><a href = "/demos.html">Demo</a></li>
+					<li><a href = "/getting-started/home.html">Docs</a></li>
+					<li><a href = "/contact.html">Contact</a></li>
+					<li>
+						<a href = "https://github.com/seanmorris/php-wasm">Github</a>
+						<a href = "https://github.com/seanmorris/php-wasm"><img src = "/github-icon.png" alt = "Github icon" width = "37" height = "37" ></a>
+					</li>
+				</ul>
+				<a href = "https://github.com/sponsors/seanmorris" class = "cta button">Sponsor</a>
+				<div class = "hamburger-button" id = "burgerButton" data-open = "false">
+					<div class = "burger-bar"></div>
+					<div class = "burger-bar"></div>
+					<div class = "burger-bar"></div>
+				</div>
+			</nav>
+					</div>
+	</section>
+
+	<section class = "below-fold">
+		<div class = "page-rule">
+							<nav class = "main"><ul><details open="true" data-id-path = "0">
+				<summary>Getting Started</summary>
+				<ul><li>
+				<a href = "/getting-started/home.html" >
+					Home				</a>
+			</li><li>
+				<a href = "/getting-started/install-and-include.html" >
+					Install & Import				</a>
+			</li><li>
+				<a href = "/getting-started/php.ini.html" >
+					php.ini				</a>
+			</li><li>
+				<a href = "/getting-started/php-in-js.html" >
+					PHP in Javascript				</a>
+			</li><li>
+				<a href = "/getting-started/php-in-static-html.html" >
+					PHP in Static HTML				</a>
+			</li><li>
+				<a href = "/getting-started/php-in-cloudflare.html" >
+					PHP in Cloudflare				</a>
+			</li><li>
+				<a href = "/getting-started/cgi-service-worker.html" >
+					PHP-CGI in Service Workers				</a>
+			</li><li>
+				<a href = "/getting-started/cgi-in-nodeJs.html" >
+					PHP-CGI for Node.js				</a>
+			</li></ul>			</details><details open="true" data-id-path = "1">
+				<summary>Methods</summary>
+				<ul><li>
+				<a href = "/methods/php-wasm.html" >
+					Php Wasm				</a>
+			</li><li>
+				<a href = "/methods/php-cgi-wasm.html" >
+					Php Cgi Wasm				</a>
+			</li></ul>			</details><details open="true" data-id-path = "2">
+				<summary>Extensions</summary>
+				<ul><li>
+				<a href = "/extensions/using-php-extensions.html" >
+					Using PHP Extensions				</a>
+			</li><li>
+				<a href = "/extensions/pdo-cfd1.html" >
+					pdo-cfd1				</a>
+			</li><li>
+				<a href = "/extensions/pdo-pglite.html" >
+					pdo-pglite				</a>
+			</li><li>
+				<a href = "/extensions/sdl.html" class="active-link">
+					SDL and OpenGL				</a>
+			</li><li>
+				<a href = "/extensions/vrzno.html" >
+					Vrzno				</a>
+			</li></ul>			</details><details open="true" data-id-path = "3">
+				<summary>Filesystem</summary>
+				<ul><li>
+				<a href = "/filesystem/fs-operations.html" >
+					FS Operations				</a>
+			</li><li>
+				<a href = "/filesystem/loading-files.html" >
+					Loading Files				</a>
+			</li><li>
+				<a href = "/filesystem/transactions.html" >
+					Transactions				</a>
+			</li></ul>			</details><details open="true" data-id-path = "4">
+				<summary>Compiling</summary>
+				<ul><li>
+				<a href = "/compiling/custom-builds.html" >
+					Custom Builds				</a>
+			</li><li>
+				<a href = "/compiling/php-wasm-rc.html" >
+					.php-wasm-rc				</a>
+			</li></ul>			</details><li>
+				<a href = "/CHANGELOG.html" >
+					CHANGELOG				</a>
+			</li><li>
+				<a href = "/LICENSE.html" >
+					LICENSE				</a>
+			</li></ul></nav>
+						<div class = "page-content">
+				<article>
+								<h1 id="sdl-and-opengl">SDL and OpenGL</h1>
+        <p>The <code>_sdl</code> browser runtime includes SDL2,
+        SDL_image, SDL_mixer, SDL_ttf, and OpenGL shader bindings. It
+        supports PHP 8.0–8.5 with static, shared, and dynamic library
+        profiles. The SDL PHP extensions are built into this runtime
+        variant; they are not separately loaded PHP side modules. The
+        historical <code>php-wasm-sdl</code> helper remains compatible
+        and returns an empty library list.</p>
+        <p>The add-ons and cube described here are <strong>unreleased
+        development features</strong>. The <a
+        href="https://github.com/seanmorris/php-wasm/commit/f4ae26b5676148f222be5dd65fc65259ba479d06">initial
+        SDL expansion</a> adds the image, font, mixer, and shader APIs.
+        The current cube also needs the subsequent <a
+        href="https://github.com/seanmorris/php-wasm/commit/d075a2c74dcacfd1344c46a8b5279ee917cf37b9">MP3-enabled
+        build</a>. Use its source, assets, and native runtime from the
+        same checkout. Older published runtimes may provide only core
+        SDL.</p>
+        <h2 id="select-the-runtime-and-canvas">Select the runtime and
+        canvas</h2>
+        <p>Create a canvas before constructing <code>PhpWeb</code>. This
+        example assumes a bundler and a static runtime build:</p>
+        <div class="sourceCode" id="cb1"><pre
+        class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;canvas</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;sdl&quot;</span> <span class="er">width</span><span class="ot">=</span><span class="st">&quot;640&quot;</span> <span class="er">height</span><span class="ot">=</span><span class="st">&quot;480&quot;</span> <span class="er">tabindex</span><span class="ot">=</span><span class="st">&quot;0&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">    style=</span><span class="st">&quot;image-rendering: pixelated&quot;</span><span class="kw">&gt;&lt;/canvas&gt;</span></span></code></pre></div>
+        <div class="sourceCode" id="cb2"><pre
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {PhpWeb} <span class="im">from</span> <span class="st">&#39;php-wasm/PhpWeb.mjs&#39;</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span><span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">variant</span><span class="op">:</span> <span class="st">&#39;_sdl&#39;</span><span class="op">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">canvas</span><span class="op">:</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&#39;#sdl&#39;</span>)<span class="op">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;output&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="op">...</span><span class="bu">event</span><span class="op">.</span><span class="at">detail</span>))<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;error&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="op">...</span><span class="bu">event</span><span class="op">.</span><span class="at">detail</span>))<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="vs">    var_dump(function_exists(&#39;SDL_Init&#39;), function_exists(&#39;glCreateShader&#39;));</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+        <p>Always serve the matching JavaScript and Wasm files from the
+        same build, along with its <code>.data</code> file when present.
+        <code>PhpNode</code> does not select the <code>_sdl</code>
+        variant.</p>
+        <p>Shared image/font codecs also need matching
+        <code>libpng.so</code>, <code>libjpeg.so</code>,
+        <code>libfreetype.so</code>, and <code>libz.so</code> assets
+        through <code>sharedLibs</code>/<code>locateFile</code>. These
+        support libraries come from <code>php-wasm-gd</code> and
+        <code>php-wasm-zlib</code>; enabling the PHP GD or zlib
+        extensions is not required. Pass manually supplied support
+        libraries with <code>ini: false</code>. The embedded demo loads
+        these dependencies even when its PHP extension toggles are
+        disabled.</p>
+        <h2 id="run-the-textured-cube">Run the textured cube</h2>
+        <p>In a demo build containing the expansion, select <strong>SDL
+        Cube</strong> in the embedded PHP editor. It renders a rotating
+        perspective cube using <code>sean-icon-32.png</code>, a TrueType
+        text overlay, looping MP3 music, and a WAV sound effect. The
+        track is <strong>Unreal Superhero 3</strong> by <strong>Kenët
+        and rez</strong>, credited from the supplied
+        <code>WOJTEK3.mp3</code> ID3 tags. The texture uses
+        <code>GL_NEAREST</code> without mipmaps, and the canvas uses
+        pixelated scaling. <strong>SDL Sine</strong> remains available
+        as the smaller original example.</p>
+        <p>The cube canvas fills the editor’s preview box. It updates
+        its drawing buffer, viewport, perspective, and text overlay when
+        the box changes size, preserving the cube’s proportions in
+        landscape and portrait layouts. Cleanup disconnects its resize
+        observer.</p>
+        <p>The editor stores PHP source in the URL’s <code>#code=</code>
+        fragment. Copy the complete URL to share or reload edited code.
+        Runtime settings stay in the query string; the source is encoded
+        once and is not sent in HTTP requests. Existing
+        <code>?code=</code> links remain supported and migrate to the
+        fragment. The full link can still be long, but it no longer
+        consumes the server’s request-header limit.</p>
+        <p>The cube requires WebGL2. Click <strong>Enable audio</strong>
+        to satisfy the browser’s user gesture requirement, then focus
+        the canvas for keyboard input:</p>
+        <table>
+        <thead>
+        <tr class="header">
+        <th>Control</th>
+        <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="odd">
+        <td>Arrows / WASD</td>
+        <td>Rotate the cube</td>
+        </tr>
+        <tr class="even">
+        <td>Space</td>
+        <td>Pause or resume rotation</td>
+        </tr>
+        <tr class="odd">
+        <td>R</td>
+        <td>Reset rotation</td>
+        </tr>
+        <tr class="even">
+        <td>M</td>
+        <td>Mute or resume enabled audio</td>
+        </tr>
+        <tr class="odd">
+        <td>Escape</td>
+        <td>Stop the demo</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>Audio pauses when focus leaves the canvas.
+        <strong>Run</strong> restarts a stopped demo;
+        <strong>Refresh</strong> releases its native resources. Graphics
+        context loss pauses rendering, and restoration rebuilds the GL
+        resources.</p>
+        <p>For your own page, use <a
+        href="https://github.com/seanmorris/php-wasm/blob/d075a2c74dcacfd1344c46a8b5279ee917cf37b9/demo-web/public/scripts/sdl-cube.php">sdl-cube.php</a>
+        and its <a
+        href="https://github.com/seanmorris/php-wasm/blob/d075a2c74dcacfd1344c46a8b5279ee917cf37b9/demo-web/src/lib/sdlAssets.js">asset
+        loader</a> from the same checkout as your runtime. Before
+        running the cube, stage these files under
+        <code>/preload/sdl</code> in PHP’s virtual filesystem:</p>
+        <table>
+        <thead>
+        <tr class="header">
+        <th>File</th>
+        <th>Source in the php-wasm checkout</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="odd">
+        <td><code>sean-icon-32.png</code></td>
+        <td><code>demo-web/src/assets/icons/sean-icon-32.png</code></td>
+        </tr>
+        <tr class="even">
+        <td><code>DejaVuSansMono.ttf</code></td>
+        <td><code>demo-web/public/sdl/DejaVuSansMono.ttf</code></td>
+        </tr>
+        <tr class="odd">
+        <td><code>WOJTEK3.mp3</code></td>
+        <td><code>demo-web/public/sdl/WOJTEK3.mp3</code></td>
+        </tr>
+        <tr class="even">
+        <td><code>click.wav</code></td>
+        <td><code>demo-web/public/sdl/click.wav</code></td>
+        </tr>
+        </tbody>
+        </table>
+        <p>The asset loader also retains <code>loop.ogg</code> for code
+        saved in older shared cube links.</p>
+        <p>The demo fetches all assets with HTTP and empty-body checks
+        and a 30-second timeout, then writes them into the idle
+        runtime’s filesystem. A failed fetch reports its filename and
+        can be retried with <strong>Run</strong>. A native audio decode
+        failure presents <strong>Retry audio</strong> while rendering
+        continues. Preserve the font/audio notices in
+        <code>demo-web/public/sdl/LICENSE.txt</code> when copying
+        assets.</p>
+        <h2 id="build-options">Build options</h2>
+        <p>Use the existing Make targets in the php-wasm checkout:</p>
+        <div class="sourceCode" id="cb3"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> web-mjs WITH_SDL=1</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only core SDL:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> web-mjs WITH_SDL=1 <span class="dt">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    WITH_SDL_IMAGE=0 WITH_SDL_MIXER=0 <span class="dt">\</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    WITH_SDL_TTF=0 WITH_OPENGL=0</span></code></pre></div>
+        <p>The same flags can be set in <a
+        href="/compiling/php-wasm-rc.html#sdl-runtime-options"><code>.php-wasm-rc</code></a>
+        for <code>php-wasm-builder build web mjs</code> from a builder
+        containing this expansion.</p>
+        <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
+        <thead>
+        <tr class="header">
+        <th>Flag</th>
+        <th>Default</th>
+        <th>Included support</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="odd">
+        <td><code>WITH_SDL</code></td>
+        <td><code>0</code></td>
+        <td><code>1</code> selects <code>_sdl</code>;
+        <code>dynamic</code> is a legacy alias for <code>1</code></td>
+        </tr>
+        <tr class="even">
+        <td><code>WITH_SDL_IMAGE</code></td>
+        <td>Follows SDL</td>
+        <td>PECL sdl_image 0.4.0 / SDL_image 2.6.0; PNG, JPEG, BMP</td>
+        </tr>
+        <tr class="odd">
+        <td><code>WITH_SDL_MIXER</code></td>
+        <td>Follows SDL</td>
+        <td>PECL sdl_mixer 0.4.0 / SDL_mixer 2.8.0; WAV, Ogg Vorbis,
+        MP3</td>
+        </tr>
+        <tr class="even">
+        <td><code>WITH_SDL_TTF</code></td>
+        <td>Follows SDL</td>
+        <td>PECL sdl_ttf 0.3.0 / SDL_ttf 2.20.2; FreeType without
+        HarfBuzz</td>
+        </tr>
+        <tr class="odd">
+        <td><code>WITH_OPENGL</code></td>
+        <td>Follows SDL</td>
+        <td>PECL opengl 0.9.0 with PHP 8 browser shader bindings</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>Add-on flags accept <code>0</code> or <code>1</code> and
+        require SDL. SDL_image requires enabled <code>WITH_LIBPNG</code>
+        and <code>WITH_LIBJPEG</code>; SDL_ttf requires
+        <code>WITH_FREETYPE</code>. Select <code>static</code> or
+        <code>shared</code> for those codec libraries using the existing
+        build flags. <code>WITH_ZLIB=0</code> disables the PHP extension
+        while retaining the native zlib archive needed by image/font
+        decoding. The build reuses these codec providers without adding
+        duplicate Emscripten ports. MP3 uses SDL_mixer’s bundled
+        <code>minimp3</code> decoder, without another shared library.
+        FLAC, MIDI, tracker decoders, and HarfBuzz are not enabled by
+        this profile.</p>
+        <h2 id="graphics-apis-and-cleanup">Graphics APIs and
+        cleanup</h2>
+        <p>Create an SDL OpenGL ES 3 context before calling the GL
+        bindings. The browser API supports shaders, programs, uniforms,
+        buffers, vertex arrays, textures, framebuffers, drawing, and
+        pixel readback. Desktop immediate-mode functions such as
+        <code>glBegin()</code> are not provided. Use the <a
+        href="https://github.com/seanmorris/php-wasm/blob/d075a2c74dcacfd1344c46a8b5279ee917cf37b9/packages/sdl/opengl/php_webgl.stub.php">supported
+        PHP signatures</a> and <a
+        href="https://github.com/seanmorris/php-wasm/blob/d075a2c74dcacfd1344c46a8b5279ee917cf37b9/packages/sdl/README.md#opengl-shader-api">buffer,
+        texture, and matrix rules</a> when porting desktop code. Invalid
+        sizes and offsets raise exceptions before native memory access;
+        GL driver errors are available through
+        <code>glGetError()</code>.</p>
+        <p>Image, font, and audio loaders return <code>null</code> on
+        native load failures. Check <code>SDL_GetError()</code>. Free
+        surfaces with <code>SDL_FreeSurface()</code>, close fonts with
+        <code>TTF_CloseFont()</code>, and release audio with
+        <code>Mix_FreeChunk()</code> / <code>Mix_FreeMusic()</code>.
+        Freed audio/font objects cannot be reused. Delete GL resources
+        before destroying their context.</p>
+        <p>After halting playback and freeing music/chunks, call
+        <code>Mix_CloseAudio()</code> and <code>Mix_Quit()</code> to
+        close the device and unload initialized decoders. The cube also
+        performs this cleanup when audio setup fails, before offering a
+        retry.</p>
+        <p>Schedule frames with the browser’s
+        <code>requestAnimationFrame</code>. SDL buffer swaps stay
+        synchronous inside Vrzno animation callbacks. Register
+        idempotent cleanup in <code>vrzno_env('onRefresh')</code> to
+        cancel frames, remove listeners, stop audio, and release native
+        resources before PHP request memory resets. The cube also cleans
+        up on rerun, errors, and page exit. Use a fresh canvas when
+        replacing a runtime or switching graphics context types.</p>
+        <h2 id="size-and-test-coverage">Size and test coverage</h2>
+        <p>The initial PHP 8.4.1 static measurement, before MP3 support,
+        adds 119,761 gzip bytes (0.87%) to the combined JavaScript/Wasm
+        payload compared with core SDL. Its ICU data is unchanged. The
+        current demo preloads 3,425,884 raw bytes of font/audio assets,
+        including the original Ogg for older shared links; the icon is
+        reused. See the <a
+        href="https://github.com/seanmorris/php-wasm/blob/f4ae26b5676148f222be5dd65fc65259ba479d06/packages/sdl/benchmarks/2026-09-20.json">measurement
+        record</a> for the build configuration, individual sizes, and
+        local startup/frame timings.</p>
+        <p>The MP3 follow-up adds another 56,876 raw bytes, 24,688 gzip
+        bytes, or 24,473 Brotli bytes to that runtime. MP3 decoding uses
+        the bundled minimp3 implementation; the original 3,063,619-byte
+        track is a separate demo asset. The older Ogg remains available
+        to shared links saved before the music change.</p>
+        <p>Three interleaved local startup comparisons measured median
+        runtime readiness at 946 ms before MP3 and 927 ms after, with no
+        demonstrated startup regression in this small sample. Three
+        180-frame samples with MP3 playing averaged 58.4–59.7 FPS at
+        640×400 under Chromium 152 and SwiftShader. The full follow-up
+        record is <a
+        href="https://github.com/seanmorris/php-wasm/blob/d075a2c74dcacfd1344c46a8b5279ee917cf37b9/packages/sdl/benchmarks/2026-09-21-mp3.json">available
+        in the source checkout</a>.</p>
+        <p>CI covers PHP 8.0–8.5 with all three library profiles.
+        Browser tests exercise textured rendering, text, keyboard input,
+        nonzero audio output after a gesture, rerun/refresh cleanup,
+        context restoration, and checked native bindings.</p>
+				</article>
+								<nav class = "table-of-contents">
+					<span class = "wide-only">on this page:</span>
+					<ul>
+     <li><a href="#sdl-and-opengl">SDL and OpenGL</a>
+     <ul>
+     <li><a href="#select-the-runtime-and-canvas">Select the runtime and
+     canvas</a></li>
+     <li><a href="#run-the-textured-cube">Run the textured cube</a></li>
+     <li><a href="#build-options">Build options</a></li>
+     <li><a href="#graphics-apis-and-cleanup">Graphics APIs and
+     cleanup</a></li>
+     <li><a href="#size-and-test-coverage">Size and test
+     coverage</a></li>
+     </ul></li>
+     </ul>
+					<span class = "wide-only"><a href = "#">top</a></span>
+				</nav>
+							</div>
+		</div>
+	</section>
+
+	<footer class="footer">
+		<p class ="strong larger">PHP WASM</p>
+
+		<p class ="strong">Resources</p>
+		<ul>
+			<li><a href="https://github.com/seanmorris/php-wasm/issues">Issue Tracker</a></li>
+			<li><a href="https://github.com/seanmorris/php-wasm/discussions">GitHub Discussions</a></li>
+		</ul>
+
+		<p class ="strong">Contact</p>
+		<ul>
+			<li><a href = "https://github.com/sponsors/seanmorris">Sponsor</a></li>
+			<li><a href="https://github.com/seanmorris/php-wasm">Github</a></li>
+			<li><a href="https://discord.com/invite/j8VZzju7gJ">Discord</a></li>
+			<li><a href="https://www.npmjs.com/package/php-wasm">npmjs</a></li>
+		</ul>
+
+		<p class ="strong">About</p>
+		<p>&copy; 2024 - 2026 Sean Morris | <a href="/LICENSE.html">License</a></p>
+		<p>This site is rendered with PHP + Pandoc.</p>
+		<a href = "/sitemap.xml" target = "_blank"><img src = "/sitemap-badge.png" width = "80" height = "15" alt = "xml sitemap badge"></a>
+	</footer>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-ZX6DJE9JCG');
+	const gascript = document.createElement('script');
+	gascript.setAttribute('src','https://www.googletagmanager.com/gtag/js?id=G-ZX6DJE9JCG');
+	setTimeout(() => document.head.appendChild(gascript), 0);
+</script>
+</body>
+</html>

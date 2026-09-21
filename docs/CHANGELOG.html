@@ -345,6 +345,9 @@
 				<a href = "/extensions/pdo-pglite.html" >
 					pdo-pglite				</a>
 			</li><li>
+				<a href = "/extensions/sdl.html" >
+					SDL and OpenGL				</a>
+			</li><li>
 				<a href = "/extensions/vrzno.html" >
 					Vrzno				</a>
 			</li></ul>			</details><details open="true" data-id-path = "3">
@@ -379,6 +382,28 @@
         <p>Changes</p>
         <h2 id="unreleased">Unreleased</h2>
         <ul>
+        <li>SDL_mixer now decodes MP3 through its bundled minimp3
+        implementation. The cube plays the supplied <strong>Unreal
+        Superhero 3</strong> by <strong>Kenët and rez</strong> and
+        displays the artist credit from the file’s ID3 tags.</li>
+        <li>Embedded PHP links now store source in the URL fragment,
+        avoiding request-header limits while preserving old query links.
+        The SDL cube fills its preview and adapts its viewport,
+        perspective, and text overlay to resizing without interpolating
+        its pixel-art texture.</li>
+        <li>Expanded the <code>_sdl</code> browser runtime with
+        SDL_image, SDL_mixer, SDL_ttf, and PHP 8 OpenGL shader bindings
+        through the existing Make build. The SDL Cube demo uses the
+        <code>sean-icon-32</code> texture with nearest filtering, text,
+        focused keyboard controls, and audio after a user gesture. Added
+        resource cleanup, context recovery, checked asset loading, and
+        PHP 8.0–8.5 coverage across all three library profiles. See <a
+        href="/extensions/sdl.html">SDL and OpenGL</a> for availability,
+        build flags, supported APIs, and measurements.</li>
+        <li>Made the CGI queue timing tests portable to pinned Deno
+        2.5.6 without changing the 25 ms idle wait or 250 ms processing
+        bound. The fast Deno gate now includes the queue suite before
+        native builds.</li>
         <li>Added typed directory listings with
         <code>readdir(path, {withFileTypes: true})</code> across runtime
         wrappers and declarations. Browser CGI reads refresh storage

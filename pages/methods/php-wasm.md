@@ -36,12 +36,27 @@ const php = new PhpWeb({version: '8.4'});
 *string*
 
 Selects a packaged runtime variant. The empty string uses the standard runtime.
-`_sdl` selects the SDL-enabled `PhpWeb` runtime for supported PHP versions.
+`_sdl` selects the SDL-enabled `PhpWeb` runtime for PHP 8.0–8.5.
 `PhpNode` currently supports only the standard empty variant.
 
 ```javascript
-const php = new PhpWeb({version: '8.4', variant: '_sdl'});
+const php = new PhpWeb({
+    version: '8.4',
+    variant: '_sdl',
+    canvas: document.querySelector('canvas'),
+});
 ```
+
+Create the canvas first. See [SDL and OpenGL](/extensions/sdl.html) for the
+development add-ons, shared codec dependencies, and example controls.
+
+### canvas
+
+*HTMLCanvasElement*
+
+Pass the canvas used by an SDL-enabled browser runtime. The cube example needs
+WebGL2 and a focusable canvas (`tabindex="0"`) for keyboard input. Pass a fresh
+canvas when replacing the runtime or switching graphics context types.
 
 ### sharedLibs
 

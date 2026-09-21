@@ -407,6 +407,9 @@
 				<a href = "/extensions/pdo-pglite.html" >
 					pdo-pglite				</a>
 			</li><li>
+				<a href = "/extensions/sdl.html" >
+					SDL and OpenGL				</a>
+			</li><li>
 				<a href = "/extensions/vrzno.html" >
 					Vrzno				</a>
 			</li></ul>			</details><details open="true" data-id-path = "3">
@@ -586,6 +589,22 @@
         <div class="sourceCode" id="cb17"><pre
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node dbg mjs</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web dbg mjs</span></code></pre></div>
+        <h2 id="sdl-browser-runtime">SDL browser runtime</h2>
+        <p>A builder containing the <a href="/extensions/sdl.html">SDL
+        expansion</a> can select the <code>_sdl</code> browser runtime
+        through <code>.php-wasm-rc</code>:</p>
+        <pre class="make"><code>WITH_SDL=1</code></pre>
+        <p>Then use the ordinary build command:</p>
+        <div class="sourceCode" id="cb19"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php-wasm-builder</span> build web mjs</span></code></pre></div>
+        <p>SDL_image, SDL_mixer, SDL_ttf, and OpenGL default to enabled
+        with SDL. Each can be disabled independently with the <a
+        href="/compiling/php-wasm-rc.html#sdl-runtime-options">SDL
+        runtime options</a>. The source checkout uses
+        <code>make web-mjs WITH_SDL=1</code>; no separate build script
+        or <code>sdl</code> command selector is needed. Keep the
+        generated JavaScript/Wasm pair and its required data and codec
+        assets together.</p>
         <h2 id="php_dist_dir">PHP_DIST_DIR</h2>
         <p>This will build the package inside of the current directory
         (or in <code>PHP_DIST_DIR</code>, <em>see <a
@@ -617,6 +636,7 @@
      <li><a href="#cgi-modules">CGI Modules</a></li>
      <li><a href="#cli-modules">CLI Modules</a></li>
      <li><a href="#dbg-modules">DBG Modules</a></li>
+     <li><a href="#sdl-browser-runtime">SDL browser runtime</a></li>
      <li><a href="#php_dist_dir">PHP_DIST_DIR</a></li>
      </ul></li>
      </ul>

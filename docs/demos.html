@@ -348,6 +348,9 @@
 				<a href = "/extensions/pdo-pglite.html" >
 					pdo-pglite				</a>
 			</li><li>
+				<a href = "/extensions/sdl.html" >
+					SDL and OpenGL				</a>
+			</li><li>
 				<a href = "/extensions/vrzno.html" >
 					Vrzno				</a>
 			</li></ul>			</details><details open="true" data-id-path = "3">
@@ -408,6 +411,26 @@
         the page:</p>
         <iframe class="page-demo" src="https://seanmorris.github.io/php-wasm/embedded-php.html?iframed=1&amp;no-service-worker=1&amp;demo=sdl-sine.php">
         </iframe>
+        <h3 id="sdl-cube-and-sdl-sine">SDL Cube and SDL Sine</h3>
+        <p>Development builds add <strong>SDL Cube</strong> alongside
+        <strong>SDL Sine</strong>. The cube uses the
+        <code>sean-icon-32</code> pixel-art texture without
+        interpolation, a TrueType overlay, keyboard controls, MP3 music,
+        and WAV effects. The track is <strong>Unreal Superhero
+        3</strong> by <strong>Kenët and rez</strong>, as credited in its
+        ID3 tags. It requires WebGL2. Click <strong>Enable
+        audio</strong>, then focus the canvas: arrows/WASD rotate, Space
+        pauses, R resets, M mutes, and Escape stops.
+        <strong>Run</strong> restarts; <strong>Refresh</strong> releases
+        resources. The cube fills the preview and adjusts its
+        perspective when it is resized. Edited source is shared in the
+        URL’s <code>#code=</code> fragment, keeping it out of HTTP
+        requests; existing <code>?code=</code> links still work.</p>
+        <p>The embedded example above remains the sine demo while the
+        cube expansion is unreleased. See <a
+        href="/extensions/sdl.html">SDL and OpenGL</a> for the current
+        cube source, runtime and asset setup, build flags, and error
+        recovery.</p>
 				</article>
 							</div>
 		</div>

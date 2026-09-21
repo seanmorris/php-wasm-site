@@ -235,6 +235,9 @@ The following extensions may be loaded at runtime. This allows the shared extens
 ### sdl
 
 Built into the `_sdl` runtime variant. No separate extension package is required.
+The development runtime adds SDL_image, SDL_mixer, SDL_ttf, and OpenGL shader
+bindings. See [SDL and OpenGL](/extensions/sdl.html) for availability, canvas
+setup, shared codec assets, the textured cube, and build options.
 
 ### zlib
 
