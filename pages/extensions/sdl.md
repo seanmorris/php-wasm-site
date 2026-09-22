@@ -566,6 +566,8 @@ See the source checkout’s `packages/sdl/COVERAGE.md` and
 `packages/sdl/benchmarks/2026-09-22-cleanup{,-size}.json` for the native records;
 `packages/sdl/benchmarks/2026-09-22-ci-regressions.json` records the CI findings
 and allocation-test correction.
+The coverage document also lists the unverified manual device checks for
+physical input, mobile browsers, hardware GPU/audio and the evidence to collect.
 
 ## Size and test coverage
 
