@@ -562,6 +562,11 @@
         <strong>Refresh</strong> releases its native resources. Graphics
         context loss pauses rendering, and restoration rebuilds the GL
         resources.</p>
+        <p>You can test the cube over HTTP on a LAN IP. Web Locks are
+        unavailable on that origin, so the browser wrapper uses a FIFO
+        lock within the current page or worker. Use HTTPS with Web Locks
+        for filesystem coordination across tabs or workers; the fallback
+        only coordinates runtimes in the same JavaScript realm.</p>
         <p>For your own page, use
         <code>demo-web/public/scripts/sdl-cube.php</code> and its asset
         loader, <code>demo-web/src/lib/sdlAssets.js</code>, from the

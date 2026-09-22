@@ -94,6 +94,11 @@ Audio pauses when focus leaves the canvas. **Run** restarts a stopped demo;
 **Refresh** releases its native resources. Graphics context loss pauses
 rendering, and restoration rebuilds the GL resources.
 
+You can test the cube over HTTP on a LAN IP. Web Locks are unavailable on that
+origin, so the browser wrapper uses a FIFO lock within the current page or
+worker. Use HTTPS with Web Locks for filesystem coordination across tabs or
+workers; the fallback only coordinates runtimes in the same JavaScript realm.
+
 For your own page, use `demo-web/public/scripts/sdl-cube.php` and its asset
 loader, `demo-web/src/lib/sdlAssets.js`, from the checkout used to build your
 runtime. The current scroller needs the binding additions described below.
