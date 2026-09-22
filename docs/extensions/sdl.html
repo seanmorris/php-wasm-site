@@ -1299,6 +1299,151 @@
         locking/readback and lifetime checks, UTF-8 metrics/wrapping,
         browser gamepad polling, event payloads, uniform values and
         unsigned timer precision.</p>
+        <h2 id="malformed-assets-and-mixer-input-cleanup">Malformed
+        assets and mixer input cleanup</h2>
+        <p>The four native cases in
+        <code>test/browser/sdl-stress.spec.mjs</code> repeat malformed
+        PNG/JPEG/BMP, TTF, WAV/Ogg/MP3 and filename/RWops input paths,
+        then require valid loading/rendering or playback to recover.
+        They measure SDL allocations, live native bytes and open file
+        descriptors across a warmup and three batches. Expected libpng
+        truncated-header diagnostics are validated explicitly; other
+        stderr and browser errors fail the checks.</p>
+        <p>Two cases reproduce a pinned SDL_mixer failure-path leak
+        before <code>401f6d9</code>. <code>Mix_LoadMusic_RW()</code>
+        returned without closing owned input when format detection,
+        loading or opening failed. The existing package-local SDL2_mixer
+        patch now closes that stream. Borrowed RWops and PHP stream
+        autoclose semantics are preserved. The broad audio case
+        previously grew from 46 to 166 SDL allocations and 14 to 134
+        file descriptors. On the normal PHP 8.4 static Make build, it
+        stays at 36 allocations and four descriptors, then returns to
+        zero SDL allocations on shutdown. The focused RWops case is also
+        flat; PNG/JPEG/BMP and font cases stay flat on both builds.
+        These are finite ownership checks, not decoder fuzzing or
+        general leak-freedom claims. The PNG callback’s unchecked
+        short-read handling remains a separate audit item (VO note
+        75).</p>
+        <p>All four new cases and 32 affected existing audio/stream/cube
+        cases pass on the matching candidate, with no skips or flaky
+        results. Both editor checks, main-module validation, ten
+        Make/package checks and JS style also pass.
+        <code>packages/sdl/benchmarks/2026-09-22-malformed-assets.json</code>
+        preserves before/after evidence.
+        <code>benchmarks/2026-09-22-malformed-size.json</code> records
+        +57 raw bytes, −35 gzip bytes and −2,407 Brotli bytes for the
+        matching pair; JS and ICU are unchanged. Full PHP/profile remote
+        verification of this commit remains pending; running CI on
+        <code>17d386c</code> proves only that preceding source.</p>
+        <h2 id="rendering-and-event-throughput-baseline">Rendering and
+        event throughput baseline</h2>
+        <p>Two idle runs on the matching <code>401f6d9</code> PHP 8.4.1
+        static Make build use internal Chromium/SwiftShader, prepared
+        inputs, four warmups and twelve rotating samples per case.
+        Complete framebuffer comparisons verify the rendering paths, and
+        event tests check every payload and count. These are total
+        milliseconds per batch, including amortized readback after
+        repeated submissions:</p>
+        <table>
+        <thead>
+        <tr class="header">
+        <th>Path</th>
+        <th>Batch</th>
+        <th style="text-align: right;">Total ms, run 1 / 2</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="odd">
+        <td>Ordinary array draws</td>
+        <td>1,024 triangles</td>
+        <td style="text-align: right;">37.422 / 13.453</td>
+        </tr>
+        <tr class="even">
+        <td>Instanced array draw</td>
+        <td>1,024 triangles</td>
+        <td style="text-align: right;">29.703 / 11.703</td>
+        </tr>
+        <tr class="odd">
+        <td>Ordinary indexed draws</td>
+        <td>1,024 triangles</td>
+        <td style="text-align: right;">221.688 / 99.891</td>
+        </tr>
+        <tr class="even">
+        <td>Instanced indexed draw</td>
+        <td>1,024 triangles</td>
+        <td style="text-align: right;">36.000 / 11.219</td>
+        </tr>
+        <tr class="odd">
+        <td>Scalar uniform setters + draw</td>
+        <td>64 vec4 values</td>
+        <td style="text-align: right;">0.172 / 0.164</td>
+        </tr>
+        <tr class="even">
+        <td>Uniform array + draw</td>
+        <td>64 vec4 values</td>
+        <td style="text-align: right;">0.102 / 0.109</td>
+        </tr>
+        <tr class="odd">
+        <td>UBO update + draw</td>
+        <td>1 KiB</td>
+        <td style="text-align: right;">0.098 / 0.094</td>
+        </tr>
+        <tr class="even">
+        <td>Texture image replacement + draw</td>
+        <td>256 × 256 RGBA</td>
+        <td style="text-align: right;">0.250 / 0.367</td>
+        </tr>
+        <tr class="odd">
+        <td>Texture subimage update + draw</td>
+        <td>256 × 256 RGBA</td>
+        <td style="text-align: right;">0.242 / 0.375</td>
+        </tr>
+        <tr class="even">
+        <td>SDL texture update + copy</td>
+        <td>256 × 256 RGBA</td>
+        <td style="text-align: right;">0.219 / 0.219</td>
+        </tr>
+        <tr class="odd">
+        <td>Event push/poll + payload checks</td>
+        <td>32 events</td>
+        <td style="text-align: right;">0.316 / 0.294</td>
+        </tr>
+        <tr class="even">
+        <td>Event push/poll + payload checks</td>
+        <td>1,024 events</td>
+        <td style="text-align: right;">9.938 / 9.719</td>
+        </tr>
+        </tbody>
+        </table>
+        <p>Individual indexed draws have a large submission cost here.
+        The checked binding queries the bound index buffer and its size
+        on each call; instancing amortizes that validation. The source
+        identifies a candidate for investigation, but these measurements
+        do not isolate the cost of each browser operation. Ordinary
+        draws update a per-triangle offset uniform; instanced draws
+        preload offset attributes. Non-indexed instanced submission
+        falls below the SDL clock’s resolution, so the report leaves its
+        call rate unavailable. Draw and texture results vary
+        substantially between runs; retain both and avoid treating them
+        as hardware GPU results or game FPS limits.</p>
+        <p>Native allocation counts and live bytes plateau during the
+        sampled rounds. Graphics cleanup leaves the three known SDL TLS
+        allocations, and event cleanup returns to zero. Prepared PHP
+        inputs remain live until request refresh; reserved heap capacity
+        is distinct from live allocations. This does not prove general
+        leak freedom. Reports include raw samples, frame callback
+        execution intervals, native/V8 memory, machine/load, and exact
+        artifact/fixture hashes:
+        <code>packages/sdl/benchmarks/2026-09-22-throughput-first.json</code>,
+        <code>packages/sdl/benchmarks/2026-09-22-throughput-second.json</code>.
+        Use <code>test/perf/sdl/throughput.mjs</code> as described in
+        <code>test/perf/sdl/README.md</code>. These runs include the
+        mixer cleanup correction. Texture/uniform cases first render the
+        opposite data, so stale state cannot mask a missing update; four
+        driver no-op probes confirm those checks fail. SDL texture
+        measurements use WebGL1, while the direct GL paths use WebGL2.
+        Concurrent mixer throughput and indexed-query profiling remain
+        separate work.</p>
         <h2 id="rwops-and-font-lifetimes">RWops and font lifetimes</h2>
         <p>RWops created by <code>SDL_RWFromFile()</code>,
         <code>SDL_RWFromConstMem()</code>, <code>SDL_RWFromMem()</code>
@@ -1921,6 +2066,10 @@
      cleanup</a></li>
      <li><a href="#size-and-test-coverage">Size and test
      coverage</a></li>
+     <li><a href="#malformed-assets-and-mixer-input-cleanup">Malformed
+     assets and mixer input cleanup</a></li>
+     <li><a href="#rendering-and-event-throughput-baseline">Rendering
+     and event throughput baseline</a></li>
      <li><a href="#rwops-and-font-lifetimes">RWops and font
      lifetimes</a></li>
      <li><a href="#cursors-and-mouse-queries">Cursors and mouse
