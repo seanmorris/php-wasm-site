@@ -285,6 +285,11 @@ SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
 The browser controls gamepad visibility, often requiring a button press first.
 Keep the controller open and call `SDL_GameControllerUpdate()` each frame when
 polling continuously.
+`SDL_GameControllerAddMapping()` changes SDL's mapping database. When creating
+a device-specific entry from the browser's default mapping, close and reopen
+the controller once to select that entry. Subsequent edits to that same entry
+update its open controller handle. Browser gamepads expose their hats as
+buttons; `SDL_JoystickNumHats()` is zero on this backend.
 Opening an unavailable device returns null. Closed handles raise an Error on
 use; closing twice is harmless. `SDL_GameControllerGetJoystick()` acquires a
 separate reference, so closing either handle leaves the other usable. Close
@@ -532,6 +537,26 @@ in `vrzno_env('onRefresh')` to cancel frames, remove listeners, stop audio, and
 release native resources before PHP request memory resets. The cube also cleans
 up on rerun, errors, and page exit. Use a fresh canvas when replacing a runtime
 or switching graphics context types.
+
+## Current verification
+
+The closed-device mixer cleanup passes 211 distinct native Chromium cases,
+38 focused Firefox/WebKit cases and all four editor smoke tests on the normal
+PHP 8.4 static Make build. The API audit now covers font metadata/size changes,
+controller mapping updates, culling/depth/partial-buffer pixels and generated
+mipmaps. Repeated audio shutdown/refresh remains at zero SDL allocations.
+The matching pair adds 61 raw bytes, 52 gzip bytes and 931 Brotli bytes over the
+focus build, with unchanged ICU data.
+
+The cleanup records preserve the three before-fix failures, allocation trace,
+all final test results and artifact/source hashes. Linux Firefox audio tests
+use a software output sink; no physical iPhone, controller, OS IME or hardware
+performance claim is made. Full newest-source PHP/profile CI remains pending.
+The dated verification sections below retain the results and limits of their
+original builds.
+
+See the source checkout’s `packages/sdl/COVERAGE.md` and
+`packages/sdl/benchmarks/2026-09-22-cleanup{,-size}.json` for the complete records.
 
 ## Size and test coverage
 
@@ -888,6 +913,10 @@ or the final `TTF_Quit()`. If SDL_ttf was initialized more than once, intermedia
 quit calls leave fonts usable. Font cloning and serialization are rejected.
 Color getters may execute PHP, so text rendering rechecks font liveness after
 reading them. Metrics stop assigning output parameters on the first exception.
+`TTF_SetFontSize($font, $size)` accepts sizes 1–4096 and updates later metrics
+and rendered glyphs. Family/style queries return nullable strings, face counts
+return integers, and `TTF_FontFaceIsFixedWidth()` returns a native integer flag:
+test it for nonzero rather than comparing it with `1`.
 
 The stream/font corrections pass ten native Chromium regressions on PHP 8.4
 static, including callback and allocation checks. The 39 existing SDL tests and
@@ -989,6 +1018,15 @@ Native driver failures return their ordinary error value with `Mix_GetError()`
 details. Zero-valued frequency, format, channel and buffer-size arguments retain
 SDL_mixer's native default selection. Negative volume and channel-count query
 values retain their native query behavior.
+
+Closing an already closed mixer or halting music without an open device is
+harmless and preserves the existing SDL error. Final close clears the decoder's
+old audio format. Calling `Mix_Init()` while closed loads codec support without
+opening audio or activating decoder lists; `Mix_QuerySpec()` stays zero until
+another successful open. PHP refresh after explicit audio/SDL shutdown leaves
+no counted SDL allocations in the tested paths. Use `Mix_OpenAudioDevice()`
+with `allowedChanges` set to `0` when an exact sample rate/channel layout is
+required; `Mix_OpenAudio()` permits native frequency/channel negotiation.
 
 Channel operations check allocated indices and documented special values.
 Invalid indices and narrowing/length errors raise catchable exceptions;
@@ -1332,8 +1370,9 @@ lock and release, and SDL deltas match the browser's real movement events.
 
 To reproduce these focused checks on Linux, install the repository-pinned
 Playwright Firefox/WebKit browsers and their dependencies, plus `xvfb` and
-`xdotool`. Build/install a matching `_sdl` JS/Wasm pair through Make and start
-the normal harness (`node test/browser/server.mjs`). In another terminal:
+`xdotool`. Audio checks need a working output destination; a PulseAudio null
+sink is sufficient in a container. Build/install a matching `_sdl` JS/Wasm pair
+through Make and start the normal harness (`node test/browser/server.mjs`). In another terminal:
 
 ```sh
 PHP_VERSION=8.4 PHP_VARIANT=_sdl LIB_TYPE=static \

@@ -868,11 +868,17 @@
         <p>The browser controls gamepad visibility, often requiring a
         button press first. Keep the controller open and call
         <code>SDL_GameControllerUpdate()</code> each frame when polling
-        continuously. Opening an unavailable device returns null. Closed
-        handles raise an Error on use; closing twice is harmless.
-        <code>SDL_GameControllerGetJoystick()</code> acquires a separate
-        reference, so closing either handle leaves the other usable.
-        Close that joystick too. Request shutdown and
+        continuously. <code>SDL_GameControllerAddMapping()</code>
+        changes SDL’s mapping database. When creating a device-specific
+        entry from the browser’s default mapping, close and reopen the
+        controller once to select that entry. Subsequent edits to that
+        same entry update its open controller handle. Browser gamepads
+        expose their hats as buttons; <code>SDL_JoystickNumHats()</code>
+        is zero on this backend. Opening an unavailable device returns
+        null. Closed handles raise an Error on use; closing twice is
+        harmless. <code>SDL_GameControllerGetJoystick()</code> acquires
+        a separate reference, so closing either handle leaves the other
+        usable. Close that joystick too. Request shutdown and
         <code>SDL_Quit()</code> release remaining handles.</p>
         <p><code>SDL_UpdateTexture($texture, $rect, $pixels, $pitch)</code>
         accepts packed bytes or a live <code>SDL_Pixels</code> buffer,
@@ -1163,6 +1169,27 @@
         request memory resets. The cube also cleans up on rerun, errors,
         and page exit. Use a fresh canvas when replacing a runtime or
         switching graphics context types.</p>
+        <h2 id="current-verification">Current verification</h2>
+        <p>The closed-device mixer cleanup passes 211 distinct native
+        Chromium cases, 38 focused Firefox/WebKit cases and all four
+        editor smoke tests on the normal PHP 8.4 static Make build. The
+        API audit now covers font metadata/size changes, controller
+        mapping updates, culling/depth/partial-buffer pixels and
+        generated mipmaps. Repeated audio shutdown/refresh remains at
+        zero SDL allocations. The matching pair adds 61 raw bytes, 52
+        gzip bytes and 931 Brotli bytes over the focus build, with
+        unchanged ICU data.</p>
+        <p>The cleanup records preserve the three before-fix failures,
+        allocation trace, all final test results and artifact/source
+        hashes. Linux Firefox audio tests use a software output sink; no
+        physical iPhone, controller, OS IME or hardware performance
+        claim is made. Full newest-source PHP/profile CI remains
+        pending. The dated verification sections below retain the
+        results and limits of their original builds.</p>
+        <p>See the source checkout’s
+        <code>packages/sdl/COVERAGE.md</code> and
+        <code>packages/sdl/benchmarks/2026-09-22-cleanup{,-size}.json</code>
+        for the complete records.</p>
         <h2 id="size-and-test-coverage">Size and test coverage</h2>
         <p>The initial PHP 8.4.1 static measurement, before MP3 support,
         adds 119,761 gzip bytes (0.87%) to the combined JavaScript/Wasm
@@ -1734,7 +1761,13 @@
         cloning and serialization are rejected. Color getters may
         execute PHP, so text rendering rechecks font liveness after
         reading them. Metrics stop assigning output parameters on the
-        first exception.</p>
+        first exception. <code>TTF_SetFontSize($font, $size)</code>
+        accepts sizes 1–4096 and updates later metrics and rendered
+        glyphs. Family/style queries return nullable strings, face
+        counts return integers, and
+        <code>TTF_FontFaceIsFixedWidth()</code> returns a native integer
+        flag: test it for nonzero rather than comparing it with
+        <code>1</code>.</p>
         <p>The stream/font corrections pass ten native Chromium
         regressions on PHP 8.4 static, including callback and allocation
         checks. The 39 existing SDL tests and main-module verification
@@ -1858,6 +1891,19 @@
         retain SDL_mixer’s native default selection. Negative volume and
         channel-count query values retain their native query
         behavior.</p>
+        <p>Closing an already closed mixer or halting music without an
+        open device is harmless and preserves the existing SDL error.
+        Final close clears the decoder’s old audio format. Calling
+        <code>Mix_Init()</code> while closed loads codec support without
+        opening audio or activating decoder lists;
+        <code>Mix_QuerySpec()</code> stays zero until another successful
+        open. PHP refresh after explicit audio/SDL shutdown leaves no
+        counted SDL allocations in the tested paths. Use
+        <code>Mix_OpenAudioDevice()</code> with
+        <code>allowedChanges</code> set to <code>0</code> when an exact
+        sample rate/channel layout is required;
+        <code>Mix_OpenAudio()</code> permits native frequency/channel
+        negotiation.</p>
         <p>Channel operations check allocated indices and documented
         special values. Invalid indices and narrowing/length errors
         raise catchable exceptions; operations requiring an open device
@@ -2274,9 +2320,10 @@
         <p>To reproduce these focused checks on Linux, install the
         repository-pinned Playwright Firefox/WebKit browsers and their
         dependencies, plus <code>xvfb</code> and <code>xdotool</code>.
-        Build/install a matching <code>_sdl</code> JS/Wasm pair through
-        Make and start the normal harness
-        (<code>node test/browser/server.mjs</code>). In another
+        Audio checks need a working output destination; a PulseAudio
+        null sink is sufficient in a container. Build/install a matching
+        <code>_sdl</code> JS/Wasm pair through Make and start the normal
+        harness (<code>node test/browser/server.mjs</code>). In another
         terminal:</p>
         <div class="sourceCode" id="cb7"><pre
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="va">PHP_VERSION</span><span class="op">=</span>8.4 <span class="va">PHP_VARIANT</span><span class="op">=</span>_sdl <span class="va">LIB_TYPE</span><span class="op">=</span>static <span class="dt">\</span></span>
@@ -2306,6 +2353,7 @@
      renderer state</a></li>
      <li><a href="#graphics-apis-and-cleanup">Graphics APIs and
      cleanup</a></li>
+     <li><a href="#current-verification">Current verification</a></li>
      <li><a href="#size-and-test-coverage">Size and test
      coverage</a></li>
      <li><a href="#malformed-assets-and-mixer-input-cleanup">Malformed
