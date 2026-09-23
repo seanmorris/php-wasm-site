@@ -131,11 +131,14 @@ make sdl-mjs \
 ```
 
 The same flags can be set in [`.php-wasm-rc`](/compiling/php-wasm-rc.html#sdl-runtime-options)
-for `php-wasm-builder build web mjs` from a builder containing this expansion.
+for `php-wasm-builder build sdl mjs` from a builder containing this package.
+Both commands produce `packages/php-sdl-wasm` with its matching native runtime,
+required libraries, and preload data. In a source checkout, `SDL_OUTPUT_DIR`
+can override the destination; raw native outputs stay in `.cache/sdl-raw/php<version>`.
 
 | Flag | Default | Included support |
 | --- | --- | --- |
-| `WITH_SDL` | `0` | `1` selects `_sdl`; `dynamic` is a legacy alias for `1` |
+| `WITH_SDL` | `0` normally; enabled by the SDL target | Compiles SDL bindings into the runtime; `dynamic` is a legacy alias for `1` |
 | `WITH_SDL_IMAGE` | Follows SDL | PECL sdl_image 0.4.0 / SDL_image 2.6.0; PNG, JPEG, BMP |
 | `WITH_SDL_MIXER` | Follows SDL | PECL sdl_mixer 0.4.0 / SDL_mixer 2.8.0; WAV, Ogg Vorbis, MP3 |
 | `WITH_SDL_TTF` | Follows SDL | PECL sdl_ttf 0.3.0 / SDL_ttf 2.20.2; FreeType without HarfBuzz |
@@ -150,6 +153,9 @@ adding duplicate Emscripten ports. MP3 uses SDL_mixer's bundled `minimp3` decode
 without another shared library. FLAC, MIDI, tracker decoders, and HarfBuzz are
 not enabled by this profile.
 
+The internal `_sdl` filename/configuration suffix separates native outputs and
+configure caches. JavaScript consumers select SDL through the `PhpSdl` import.
+
 PHP configure caches are separated by full PHP version and effective configure
 arguments under `.cache/php-configure/`. Changing add-on flags reconfigures PHP;
 repeating the same settings preserves the configuration timestamp. `make
@@ -159,8 +165,8 @@ iconv results.
 
 The package's browser integration files in `js/` are Emscripten link inputs.
 Editing one relinks the selected runtime without rerunning PHP configure or
-recompiling unchanged C sources. Use the ordinary Make target and keep its
-JS/Wasm output pair together.
+recompiling unchanged C sources. Use `make sdl-mjs` to refresh the package and
+keep all its generated files together.
 
 After building, verify incremental behavior from the checkout with:
 
@@ -1379,8 +1385,9 @@ lock and release, and SDL deltas match the browser's real movement events.
 To reproduce these focused checks on Linux, install the repository-pinned
 Playwright Firefox/WebKit browsers and their dependencies, plus `xvfb` and
 `xdotool`. Audio checks need a working output destination; a PulseAudio null
-sink is sufficient in a container. Build/install a matching `_sdl` JS/Wasm pair
-through Make and start the normal harness (`node test/browser/server.mjs`). In another terminal:
+sink is sufficient in a container. Build/install the matching `php-sdl-wasm`
+package with `make sdl-mjs` and start the normal harness
+(`node test/browser/server.mjs`). In another terminal:
 
 ```sh
 PHP_VERSION=8.4 PHP_VARIANT=_sdl LIB_TYPE=static \

@@ -617,8 +617,13 @@
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    WITH_SDL_TTF=0 WITH_OPENGL=0</span></code></pre></div>
         <p>The same flags can be set in <a
         href="/compiling/php-wasm-rc.html#sdl-runtime-options"><code>.php-wasm-rc</code></a>
-        for <code>php-wasm-builder build web mjs</code> from a builder
-        containing this expansion.</p>
+        for <code>php-wasm-builder build sdl mjs</code> from a builder
+        containing this package. Both commands produce
+        <code>packages/php-sdl-wasm</code> with its matching native
+        runtime, required libraries, and preload data. In a source
+        checkout, <code>SDL_OUTPUT_DIR</code> can override the
+        destination; raw native outputs stay in
+        <code>.cache/sdl-raw/php&lt;version&gt;</code>.</p>
         <table>
         <colgroup>
         <col style="width: 33%" />
@@ -635,9 +640,9 @@
         <tbody>
         <tr class="odd">
         <td><code>WITH_SDL</code></td>
-        <td><code>0</code></td>
-        <td><code>1</code> selects <code>_sdl</code>;
-        <code>dynamic</code> is a legacy alias for <code>1</code></td>
+        <td><code>0</code> normally; enabled by the SDL target</td>
+        <td>Compiles SDL bindings into the runtime; <code>dynamic</code>
+        is a legacy alias for <code>1</code></td>
         </tr>
         <tr class="even">
         <td><code>WITH_SDL_IMAGE</code></td>
@@ -675,6 +680,9 @@
         <code>minimp3</code> decoder, without another shared library.
         FLAC, MIDI, tracker decoders, and HarfBuzz are not enabled by
         this profile.</p>
+        <p>The internal <code>_sdl</code> filename/configuration suffix
+        separates native outputs and configure caches. JavaScript
+        consumers select SDL through the <code>PhpSdl</code> import.</p>
         <p>PHP configure caches are separated by full PHP version and
         effective configure arguments under
         <code>.cache/php-configure/</code>. Changing add-on flags
@@ -686,8 +694,8 @@
         <p>The package’s browser integration files in <code>js/</code>
         are Emscripten link inputs. Editing one relinks the selected
         runtime without rerunning PHP configure or recompiling unchanged
-        C sources. Use the ordinary Make target and keep its JS/Wasm
-        output pair together.</p>
+        C sources. Use <code>make sdl-mjs</code> to refresh the package
+        and keep all its generated files together.</p>
         <p>After building, verify incremental behavior from the checkout
         with:</p>
         <div class="sourceCode" id="cb4"><pre
@@ -2331,9 +2339,10 @@
         repository-pinned Playwright Firefox/WebKit browsers and their
         dependencies, plus <code>xvfb</code> and <code>xdotool</code>.
         Audio checks need a working output destination; a PulseAudio
-        null sink is sufficient in a container. Build/install a matching
-        <code>_sdl</code> JS/Wasm pair through Make and start the normal
-        harness (<code>node test/browser/server.mjs</code>). In another
+        null sink is sufficient in a container. Build/install the
+        matching <code>php-sdl-wasm</code> package with
+        <code>make sdl-mjs</code> and start the normal harness
+        (<code>node test/browser/server.mjs</code>). In another
         terminal:</p>
         <div class="sourceCode" id="cb7"><pre
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="va">PHP_VERSION</span><span class="op">=</span>8.4 <span class="va">PHP_VARIANT</span><span class="op">=</span>_sdl <span class="va">LIB_TYPE</span><span class="op">=</span>static <span class="dt">\</span></span>

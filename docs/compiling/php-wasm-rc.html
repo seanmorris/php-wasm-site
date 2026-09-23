@@ -582,9 +582,14 @@ WITH_OPENSSL   # [0, 1, shared, dynamic]
 WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <hr />
         <h3 id="sdl-runtime-options">SDL runtime options</h3>
-        <p>The <a href="/extensions/sdl.html">development SDL
+        <p>The standalone <a href="/extensions/sdl.html">php-sdl-wasm
         runtime</a> uses these additional flags:</p>
         <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
         <thead>
         <tr class="header">
         <th>Option</th>
@@ -597,7 +602,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <td><code>WITH_SDL</code></td>
         <td><code>0</code>, <code>1</code>, legacy <code>dynamic</code>
         alias for <code>1</code></td>
-        <td><code>0</code></td>
+        <td><code>0</code> normally; enabled by the SDL target</td>
         </tr>
         <tr class="even">
         <td><code>WITH_SDL_IMAGE</code></td>
@@ -621,18 +626,24 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         </tr>
         </tbody>
         </table>
-        <p><code>WITH_SDL=1</code> selects the <code>_sdl</code> browser
-        runtime. Add-ons require SDL; they do not produce separate PHP
-        extension side modules. SDL_image needs enabled
-        <code>WITH_LIBPNG</code> and <code>WITH_LIBJPEG</code>; SDL_ttf
-        needs <code>WITH_FREETYPE</code>. These reuse the existing
-        static/shared codec libraries. <code>WITH_ZLIB=0</code> still
-        supplies the native zlib archive when image/font decoding needs
-        it.</p>
+        <p><code>php-wasm-builder build sdl mjs</code> enables SDL and
+        packages the standalone browser runtime. The source checkout
+        uses <code>make sdl-mjs</code>. Both targets set
+        <code>WITH_SDL=1</code>; the <code>_sdl</code> suffix only
+        separates internal native outputs and configure caches. Add-ons
+        require SDL and are compiled into the runtime. SDL_image needs
+        enabled <code>WITH_LIBPNG</code> and <code>WITH_LIBJPEG</code>;
+        SDL_ttf needs <code>WITH_FREETYPE</code>. These reuse the
+        existing static/shared codec libraries. <code>WITH_ZLIB=0</code>
+        still supplies the native zlib archive when image/font decoding
+        needs it.</p>
         <p>To retain only core SDL, set all four add-on flags to
-        <code>0</code>. Use the ordinary
-        <code>php-wasm-builder build web mjs</code> command with a
-        builder containing the expansion.</p>
+        <code>0</code> in <code>.php-wasm-rc</code>, then run
+        <code>php-wasm-builder build sdl mjs</code> with a builder
+        containing this development package. The output in
+        <code>packages/php-sdl-wasm</code> includes the required native
+        libraries and preload data; keep those files with the
+        runtime.</p>
         <hr />
         <h3 id="with_phar">WITH_PHAR</h3>
         <p>static|<strong>dynamic</strong></p>

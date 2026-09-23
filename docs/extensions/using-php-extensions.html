@@ -663,12 +663,16 @@
         <p><a
         href="https://www.npmjs.com/package/php-wasm-tidy">https://www.npmjs.com/package/php-wasm-tidy</a></p>
         <h3 id="sdl">sdl</h3>
-        <p>Built into the <code>_sdl</code> runtime variant. No separate
-        extension package is required. The development runtime adds
-        SDL_image, SDL_mixer, SDL_ttf, and OpenGL shader bindings. See
-        <a href="/extensions/sdl.html">SDL and OpenGL</a> for
-        availability, canvas setup, shared codec assets, the textured
-        cube, and build options.</p>
+        <p>SDL bindings are built into the standalone
+        <code>php-sdl-wasm</code> browser runtime. Use
+        <code>PhpSdl</code> from a versioned entry such as
+        <code>php-sdl-wasm/php8.4-sdl.mjs</code>. The package includes
+        its required native libraries and does not depend on
+        <code>php-wasm</code>. The development build adds SDL_image,
+        SDL_mixer, SDL_ttf, and OpenGL shader bindings. See <a
+        href="/extensions/sdl.html">SDL and OpenGL</a> for availability,
+        canvas setup, migration from the former runtime option, the
+        textured cube, and build options.</p>
         <h3 id="zlib">zlib</h3>
         <p><a
         href="https://www.npmjs.com/package/php-wasm-zlib">https://www.npmjs.com/package/php-wasm-zlib</a></p>

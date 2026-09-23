@@ -37,6 +37,13 @@ Use the editor below to write PHP scripts that run right in the page:
 
 ### SDL Cube and SDL Sine
 
+The current demos load `PhpSdl` from the standalone `php-sdl-wasm` package for
+PHP 8.0–8.5. Select **PHP + SDL** in the **Runtime** control, or choose either
+SDL demo to select it automatically. Ordinary PHP uses `php-wasm`; neither
+runtime package depends on the other. Saved links using `variant=_sdl` still
+select SDL, while new links use `runtime=sdl`. For a local source build,
+`make demo-versions` prepares all six SDL runtime versions and the ordinary demo runtimes.
+
 Development builds add **SDL Cube** alongside **SDL Sine**. The cube uses the
 `sean-icon-32` pixel-art texture without interpolation, a TrueType overlay,
 keyboard controls, MP3 music, and WAV effects. The track is **Unreal Superhero 3**

@@ -412,6 +412,16 @@
         <iframe class="page-demo" src="https://seanmorris.github.io/php-wasm/embedded-php.html?iframed=1&amp;no-service-worker=1&amp;demo=sdl-sine.php">
         </iframe>
         <h3 id="sdl-cube-and-sdl-sine">SDL Cube and SDL Sine</h3>
+        <p>The current demos load <code>PhpSdl</code> from the
+        standalone <code>php-sdl-wasm</code> package for PHP 8.0–8.5.
+        Select <strong>PHP + SDL</strong> in the
+        <strong>Runtime</strong> control, or choose either SDL demo to
+        select it automatically. Ordinary PHP uses
+        <code>php-wasm</code>; neither runtime package depends on the
+        other. Saved links using <code>variant=_sdl</code> still select
+        SDL, while new links use <code>runtime=sdl</code>. For a local
+        source build, <code>make demo-versions</code> prepares all six
+        SDL runtime versions and the ordinary demo runtimes.</p>
         <p>Development builds add <strong>SDL Cube</strong> alongside
         <strong>SDL Sine</strong>. The cube uses the
         <code>sean-icon-32</code> pixel-art texture without

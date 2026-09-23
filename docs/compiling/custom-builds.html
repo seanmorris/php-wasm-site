@@ -442,9 +442,10 @@
 				<article>
 								<h1 id="custom-builds-with-php-wasm-builder">Custom Builds with
         php-wasm-builder</h1>
-        <p>The <code>php-wasm-builder</code> <em>package</em> is the set
-        of source files needed to build php-wasm, php-cgi-wasm,
-        php-cli-wasm, &amp; php-dbg-wasm.</p>
+        <p>The <code>php-wasm-builder</code> <em>package</em> contains
+        the source files needed to build php-wasm, php-cgi-wasm,
+        php-cli-wasm, php-dbg-wasm, php-cloud-wasm, and
+        php-sdl-wasm.</p>
         <p>The <code>php-wasm-builder</code> <em>command</em> is a
         wrapper script for the build process that allows the user to
         easily configure the underlying build process &amp; drop the
@@ -476,14 +477,18 @@
         <h2 id="php-wasm-builder-commands">php-wasm-builder
         commands</h2>
         <h3 id="build">build</h3>
-        <p>Use this to build a custom version of <code>php-wasm</code>,
-        <code>php-cgi-wasm</code>, <code>php-cli-wasm</code>, or
-        <code>php-dbg-wasm</code>. It’s recommended to build this into
-        an empty directory using a <code>.php-wasm-rc</code> file.</p>
+        <p>Use this to build a custom runtime package. Build into an
+        empty directory using a <code>.php-wasm-rc</code> file to select
+        its configuration.</p>
         <div class="sourceCode" id="cb4"><pre
         class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder build</span></code></pre></div>
         <p>The optional selectors can be provided in any order:</p>
         <table>
+        <colgroup>
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        <col style="width: 33%" />
+        </colgroup>
         <thead>
         <tr class="header">
         <th>Selector</th>
@@ -495,7 +500,8 @@
         <tr class="odd">
         <td>Environment</td>
         <td><code>web</code>, <code>node</code>, <code>worker</code>,
-        <code>webview</code></td>
+        <code>webview</code>, <code>cloudflare</code>,
+        <code>sdl</code></td>
         <td><code>web</code></td>
         </tr>
         <tr class="even">
@@ -516,6 +522,11 @@
         <code>php-cgi-wasm</code>, <code>php-cli-wasm</code>, and
         <code>php-dbg-wasm</code>, respectively. Unknown or conflicting
         selectors fail before Make starts.</p>
+        <p>The <code>cloudflare</code> and <code>sdl</code> environments
+        build standalone <code>php-cloud-wasm</code> and
+        <code>php-sdl-wasm</code> packages. They support only embedded
+        PHP (<code>base</code>) and ESM (<code>mjs</code>), which are
+        selected by default for these two environments.</p>
         <h3 id="image">image</h3>
         <p>This will build the docker container used to build
         php-wasm.</p>
@@ -571,8 +582,10 @@
         <div class="sourceCode" id="cb14"><pre
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web mjs</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node mjs</span></code></pre></div>
-        <p>The current builder script defaults to <code>js</code> output
-        unless you pass <code>mjs</code>.</p>
+        <p>The ordinary runtime targets default to <code>js</code>
+        output unless you pass <code>mjs</code>. The <code>sdl</code>
+        and <code>cloudflare</code> targets produce ESM only and default
+        to <code>mjs</code>.</p>
         <h2 id="cgi-modules">CGI Modules</h2>
         <p>Build CGI modules with:</p>
         <div class="sourceCode" id="cb15"><pre
@@ -590,26 +603,32 @@
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build node dbg mjs</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web dbg mjs</span></code></pre></div>
         <h2 id="sdl-browser-runtime">SDL browser runtime</h2>
-        <p>A builder containing the <a href="/extensions/sdl.html">SDL
-        expansion</a> can select the <code>_sdl</code> browser runtime
-        through <code>.php-wasm-rc</code>:</p>
-        <pre class="make"><code>WITH_SDL=1</code></pre>
-        <p>Then use the ordinary build command:</p>
-        <div class="sourceCode" id="cb19"><pre
-        class="sourceCode sh"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php-wasm-builder</span> build web mjs</span></code></pre></div>
-        <p>SDL_image, SDL_mixer, SDL_ttf, and OpenGL default to enabled
-        with SDL. Each can be disabled independently with the <a
+        <p>Build the standalone <a
+        href="/extensions/sdl.html">php-sdl-wasm runtime</a> with a
+        builder containing this development package:</p>
+        <div class="sourceCode" id="cb18"><pre
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php-wasm-builder</span> build sdl mjs</span></code></pre></div>
+        <p>This uses the normal Make build and writes the finished
+        package to <code>packages/php-sdl-wasm</code> in your project.
+        Select the PHP version and add-on flags in
+        <code>.php-wasm-rc</code>. SDL_image, SDL_mixer, SDL_ttf, and
+        OpenGL default to enabled; each can be disabled independently
+        with the <a
         href="/compiling/php-wasm-rc.html#sdl-runtime-options">SDL
-        runtime options</a>. The source checkout uses
-        <code>make web-mjs WITH_SDL=1</code>; no separate build script
-        or <code>sdl</code> command selector is needed. Keep the
-        generated JavaScript/Wasm pair and its required data and codec
-        assets together.</p>
+        runtime options</a>.</p>
+        <p>In a source checkout, use <code>make sdl-mjs</code>. It
+        packages the matching JavaScript, Wasm, preload data, and
+        required native libraries together. Use <code>PhpSdl</code> from
+        a versioned entry such as
+        <code>php-sdl-wasm/php8.4-sdl.mjs</code>; neither runtime
+        package depends on the other. Keep all generated package files
+        together.</p>
         <h2 id="php_dist_dir">PHP_DIST_DIR</h2>
-        <p>This will build the package inside of the current directory
-        (or in <code>PHP_DIST_DIR</code>, <em>see <a
-        href="/compiling/php-wasm-rc.html">.php-wasm-rc</a> for more
-        info.</em>)</p>
+        <p>Ordinary runtime targets build inside the current directory,
+        or in <code>PHP_DIST_DIR</code>; see <a
+        href="/compiling/php-wasm-rc.html">.php-wasm-rc</a> for details.
+        The <code>sdl</code> target writes its complete package to
+        <code>packages/php-sdl-wasm</code> as described above.</p>
 				</article>
 								<nav class = "table-of-contents">
 					<span class = "wide-only">on this page:</span>
