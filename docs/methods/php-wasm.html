@@ -463,23 +463,19 @@
         <code>PhpWeb</code> and <code>PhpNode</code>.</p>
         <div class="sourceCode" id="cb1"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span>})<span class="op">;</span></span></code></pre></div>
-        <h3 id="variant">variant</h3>
-        <p><em>string</em></p>
-        <p>Selects a packaged runtime variant. The empty string uses the
-        standard runtime. <code>_sdl</code> selects the SDL-enabled
-        <code>PhpWeb</code> runtime for PHP 8.0–8.5.
-        <code>PhpNode</code> currently supports only the standard empty
-        variant.</p>
+        <h3 id="sdl-runtime-selection">SDL runtime selection</h3>
+        <p>Install <code>php-sdl-wasm</code> and choose a versioned
+        entry for SDL graphics, input and audio. The ordinary
+        <code>php-wasm</code> package stays independent of that build.
+        The previous <code>variant: '_sdl'</code> option is no longer
+        supported.</p>
         <div class="sourceCode" id="cb2"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span><span class="op">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">variant</span><span class="op">:</span> <span class="st">&#39;_sdl&#39;</span><span class="op">,</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">canvas</span><span class="op">:</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&#39;canvas&#39;</span>)<span class="op">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {PhpSdl} <span class="im">from</span> <span class="st">&#39;php-sdl-wasm/php8.4-sdl.mjs&#39;</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpSdl</span>({<span class="dt">canvas</span><span class="op">:</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&#39;canvas&#39;</span>)})<span class="op">;</span></span></code></pre></div>
         <p>Create the canvas first. See <a
-        href="/extensions/sdl.html">SDL and OpenGL</a> for the
-        development add-ons, shared codec dependencies, and example
-        controls.</p>
+        href="/extensions/sdl.html">SDL and OpenGL</a> for the package,
+        build options and example controls.</p>
         <h3 id="canvas">canvas</h3>
         <p><em>HTMLCanvasElement</em></p>
         <p>Pass the canvas used by an SDL-enabled browser runtime. The
@@ -665,7 +661,7 @@
      <li><a href="#common-constructor-options">Common constructor
      options</a></li>
      <li><a href="#version">version</a></li>
-     <li><a href="#variant">variant</a></li>
+     <li><a href="#sdl-runtime-selection">SDL runtime selection</a></li>
      <li><a href="#canvas">canvas</a></li>
      <li><a href="#sharedlibs">sharedLibs</a></li>
      <li><a href="#dynamiclibs">dynamicLibs</a></li>

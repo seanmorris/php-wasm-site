@@ -31,24 +31,20 @@ Selects the PHP runtime version to load. The current defaults in `source/` are `
 const php = new PhpWeb({version: '8.4'});
 ```
 
-### variant
+### SDL runtime selection
 
-*string*
-
-Selects a packaged runtime variant. The empty string uses the standard runtime.
-`_sdl` selects the SDL-enabled `PhpWeb` runtime for PHP 8.0–8.5.
-`PhpNode` currently supports only the standard empty variant.
+Install `php-sdl-wasm` and choose a versioned entry for SDL graphics, input
+and audio. The ordinary `php-wasm` package stays independent of that build.
+The previous `variant: '_sdl'` option is no longer supported.
 
 ```javascript
-const php = new PhpWeb({
-    version: '8.4',
-    variant: '_sdl',
-    canvas: document.querySelector('canvas'),
-});
+import {PhpSdl} from 'php-sdl-wasm/php8.4-sdl.mjs';
+
+const php = new PhpSdl({canvas: document.querySelector('canvas')});
 ```
 
 Create the canvas first. See [SDL and OpenGL](/extensions/sdl.html) for the
-development add-ons, shared codec dependencies, and example controls.
+package, build options and example controls.
 
 ### canvas
 

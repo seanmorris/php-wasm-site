@@ -441,13 +441,13 @@
 						<div class = "page-content">
 				<article>
 								<h1 id="sdl-and-opengl">SDL and OpenGL</h1>
-        <p>The <code>_sdl</code> browser runtime includes SDL2,
-        SDL_image, SDL_mixer, SDL_ttf, and OpenGL shader bindings. It
-        supports PHP 8.0–8.5 with static, shared, and dynamic library
-        profiles. The SDL PHP extensions are built into this runtime
-        variant; they are not separately loaded PHP side modules. The
-        historical <code>php-wasm-sdl</code> helper remains compatible
-        and returns an empty library list.</p>
+        <p>The standalone <code>php-sdl-wasm</code> package includes
+        SDL2, SDL_image, SDL_mixer, SDL_ttf and OpenGL shader bindings.
+        It supports PHP 8.0–8.5 with static, shared and dynamic library
+        profiles. Each versioned entry includes its matching runtime and
+        required native libraries. SDL PHP bindings are built into that
+        runtime. Neither <code>php-sdl-wasm</code> nor
+        <code>php-wasm</code> depends on the other package.</p>
         <p>The add-ons and cube described here are <strong>unreleased
         development features</strong>. The <a
         href="https://github.com/seanmorris/php-wasm/commit/f4ae26b5676148f222be5dd65fc65259ba479d06">initial
@@ -459,40 +459,36 @@
         SDL.</p>
         <h2 id="select-the-runtime-and-canvas">Select the runtime and
         canvas</h2>
-        <p>Create a canvas before constructing <code>PhpWeb</code>. This
-        example assumes a bundler and a static runtime build:</p>
+        <p>Create a canvas before constructing <code>PhpSdl</code>. This
+        example assumes a bundler:</p>
         <div class="sourceCode" id="cb1"><pre
         class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;canvas</span> <span class="er">id</span><span class="ot">=</span><span class="st">&quot;sdl&quot;</span> <span class="er">width</span><span class="ot">=</span><span class="st">&quot;640&quot;</span> <span class="er">height</span><span class="ot">=</span><span class="st">&quot;480&quot;</span> <span class="er">tabindex</span><span class="ot">=</span><span class="st">&quot;0&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">    style=</span><span class="st">&quot;image-rendering: pixelated&quot;</span><span class="kw">&gt;&lt;/canvas&gt;</span></span></code></pre></div>
         <div class="sourceCode" id="cb2"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {PhpWeb} <span class="im">from</span> <span class="st">&#39;php-wasm/PhpWeb.mjs&#39;</span><span class="op">;</span></span>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {PhpSdl} <span class="im">from</span> <span class="st">&#39;php-sdl-wasm/php8.4-sdl.mjs&#39;</span><span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span><span class="op">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">variant</span><span class="op">:</span> <span class="st">&#39;_sdl&#39;</span><span class="op">,</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">canvas</span><span class="op">:</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&#39;#sdl&#39;</span>)<span class="op">,</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;output&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="op">...</span><span class="bu">event</span><span class="op">.</span><span class="at">detail</span>))<span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;error&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="op">...</span><span class="bu">event</span><span class="op">.</span><span class="at">detail</span>))<span class="op">;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="vs">    var_dump(function_exists(&#39;SDL_Init&#39;), function_exists(&#39;glCreateShader&#39;));</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
-        <p>Always serve the matching JavaScript and Wasm files from the
-        same build, along with its <code>.data</code> file when present.
-        <code>PhpNode</code> does not select the <code>_sdl</code>
-        variant.</p>
-        <p>Shared image/font codecs also need matching
-        <code>libpng.so</code>, <code>libjpeg.so</code>,
-        <code>libfreetype.so</code>, and <code>libz.so</code> assets
-        through <code>sharedLibs</code>/<code>locateFile</code>. These
-        support libraries come from <code>php-wasm-gd</code> and
-        <code>php-wasm-zlib</code>; enabling the PHP GD or zlib
-        extensions is not required. Pass manually supplied support
-        libraries with <code>ini: false</code>. The embedded demo loads
-        these dependencies even when its PHP extension toggles are
-        disabled.</p>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpSdl</span>({</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">canvas</span><span class="op">:</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&#39;#sdl&#39;</span>)<span class="op">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;output&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="op">...</span><span class="bu">event</span><span class="op">.</span><span class="at">detail</span>))<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>php<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">&#39;error&#39;</span><span class="op">,</span> <span class="bu">event</span> <span class="kw">=&gt;</span> <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="op">...</span><span class="bu">event</span><span class="op">.</span><span class="at">detail</span>))<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> php<span class="op">.</span><span class="fu">run</span>(<span class="vs">`&lt;?php</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="vs">    var_dump(function_exists(&#39;SDL_Init&#39;), function_exists(&#39;glCreateShader&#39;));</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="vs">`</span>)<span class="op">;</span></span></code></pre></div>
+        <p>Serve all generated package files together. The versioned
+        entry loads any shared codec libraries and preload data required
+        by its build. You do not need separate GD or zlib packages just
+        to start SDL. Additional PHP extensions can still be supplied
+        through <code>sharedLibs</code>.</p>
+        <p>Replace
+        <code>new PhpWeb({version, variant: '_sdl', ...options})</code>
+        with <code>new PhpSdl(options)</code> using the corresponding
+        versioned import. Nonempty <code>variant</code> options now
+        report a migration error. The former <code>php-wasm-sdl</code>
+        shim’s empty <code>getLibs()</code> API is replaced by the
+        dedicated runtime package.</p>
         <h2 id="run-the-textured-cube">Run the textured cube</h2>
         <p>In a demo build containing the expansion, select <strong>SDL
         Cube</strong> in the embedded PHP editor. It renders a rotating
@@ -613,10 +609,10 @@
         <h2 id="build-options">Build options</h2>
         <p>Use the existing Make targets in the php-wasm checkout:</p>
         <div class="sourceCode" id="cb3"><pre
-        class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> web-mjs WITH_SDL=1</span>
+        class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> sdl-mjs</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only core SDL:</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> web-mjs WITH_SDL=1 <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> sdl-mjs <span class="dt">\</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    WITH_SDL_IMAGE=0 WITH_SDL_MIXER=0 <span class="dt">\</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    WITH_SDL_TTF=0 WITH_OPENGL=0</span></code></pre></div>
         <p>The same flags can be set in <a
@@ -1025,8 +1021,8 @@
         <code>SDL_RenderTargetSupported()</code> are also available.
         Status-returning functions retain SDL’s 0/-1 contract; inspect
         <code>SDL_GetError()</code> on failure. See the
-        <code>packages/sdl/core/php_sdl_geometry.stub.php</code> in the
-        source checkout for exact argument and return types.</p>
+        <code>packages/php-sdl-wasm/core/php_sdl_geometry.stub.php</code>
+        in the source checkout for exact argument and return types.</p>
         <p><code>SDL_RenderWindowToLogical($renderer, $windowX, $windowY, &amp;$logicalX, &amp;$logicalY)</code>
         returns floating-point logical coordinates through its two
         outputs.
@@ -1058,12 +1054,12 @@
         renderbuffers, multiple framebuffer outputs, and pixel readback.
         Desktop immediate-mode functions such as <code>glBegin()</code>
         are not provided. Use
-        <code>packages/sdl/opengl/php_webgl.stub.php</code> and the
-        buffer, texture, and matrix rules in
-        <code>packages/sdl/README.md</code> from the same checkout when
-        porting desktop code. Invalid sizes and offsets raise exceptions
-        before native memory access; GL driver errors are available
-        through <code>glGetError()</code>.</p>
+        <code>packages/php-sdl-wasm/opengl/php_webgl.stub.php</code> and
+        the buffer, texture, and matrix rules in
+        <code>packages/php-sdl-wasm/README.md</code> from the same
+        checkout when porting desktop code. Invalid sizes and offsets
+        raise exceptions before native memory access; GL driver errors
+        are available through <code>glGetError()</code>.</p>
         <p>Instanced draws use the same checked buffer-relative offsets
         as ordinary draws. Integer attributes retain their integer
         values. Uniform-buffer range offsets must satisfy
@@ -1111,9 +1107,9 @@
         output-reference behavior as the other GL objects.</p>
         <p>New WebGL2 operations reject a WebGL1 context with a
         catchable PHP error. The source checkout’s
-        <code>packages/sdl/COVERAGE.md</code> tracks native verification
-        and the remaining performance, lifetime and browser behavior
-        work separately.</p>
+        <code>packages/php-sdl-wasm/COVERAGE.md</code> tracks native
+        verification and the remaining performance, lifetime and browser
+        behavior work separately.</p>
         <p>Image, font, and audio loaders return <code>null</code> on
         native load failures. Check <code>SDL_GetError()</code>. Free
         surfaces with <code>SDL_FreeSurface()</code>, close fonts with
@@ -1196,10 +1192,10 @@
         required. The dated verification sections below retain the
         results and limits of their original builds.</p>
         <p>See the source checkout’s
-        <code>packages/sdl/COVERAGE.md</code> and
-        <code>packages/sdl/benchmarks/2026-09-22-cleanup{,-size}.json</code>
+        <code>packages/php-sdl-wasm/COVERAGE.md</code> and
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-22-cleanup{,-size}.json</code>
         for the native records;
-        <code>packages/sdl/benchmarks/2026-09-22-ci-regressions.json</code>
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-22-ci-regressions.json</code>
         records the CI findings and allocation-test correction. The
         coverage document also lists the unverified manual device checks
         for physical input, mobile browsers, hardware GPU/audio and the
@@ -1234,8 +1230,8 @@
         generated glue differs and must stay paired with the matching
         Wasm. Both builds were recompressed with the same Node/zlib
         versions. See
-        <code>packages/sdl/benchmarks/2026-09-21-bindings.json</code> in
-        the matching source checkout for hashes and per-file sizes.
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-bindings.json</code>
+        in the matching source checkout for hashes and per-file sizes.
         These are size measurements; the earlier startup/FPS results do
         not measure these binding additions.</p>
         <p>The first WebGL2 completion group adds a further 103,176 raw
@@ -1243,8 +1239,8 @@
         bytes smaller (0.02%). Combined JS/Wasm totals are 51,750,021
         raw, 13,981,817 gzip and 9,552,310 Brotli bytes; ICU is
         unchanged. See
-        <code>packages/sdl/benchmarks/2026-09-21-webgl2.json</code> in
-        the matching checkout for artifact hashes and compression
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-webgl2.json</code>
+        in the matching checkout for artifact hashes and compression
         settings. These size results do not establish throughput or
         startup performance.</p>
         <p>The 28 SDL geometry/batch/state bindings add 32,400 raw bytes
@@ -1252,8 +1248,8 @@
         Brotli is 6,042 bytes smaller (0.06%). Combined totals are
         51,782,421 raw, 13,989,791 gzip and 9,546,268 Brotli bytes; ICU
         is unchanged. See
-        <code>packages/sdl/benchmarks/2026-09-21-geometry.json</code> in
-        the matching checkout for artifact hashes and compressor
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-geometry.json</code>
+        in the matching checkout for artifact hashes and compressor
         settings. The adjacent <code>measure-size.mjs</code> reproduces
         the comparison from preserved artifact pairs.</p>
         <p>The GL lifetime follow-up adds 1,810 raw bytes (0.0035%),
@@ -1261,7 +1257,7 @@
         the geometry build. Combined JS/Wasm totals are 51,784,231 raw,
         13,992,528 gzip and 9,553,692 Brotli bytes; ICU is identical.
         See
-        <code>packages/sdl/benchmarks/2026-09-21-lifetimes.json</code>
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-lifetimes.json</code>
         for artifact hashes and compression settings. On PHP 8.4 static,
         29 native SDL browser tests, two editor smoke tests and nine
         Make/npm checks pass. C syntax checks pass for PHP 8.0–8.5. The
@@ -1275,9 +1271,9 @@
         is 4,731 bytes smaller (0.050%). Combined totals are 51,794,852
         raw, 13,994,836 gzip and 9,548,961 Brotli bytes. ICU is
         unchanged. See
-        <code>packages/sdl/benchmarks/2026-09-21-buffers.json</code> in
-        the matching checkout. On PHP 8.4 static, 39 distinct native SDL
-        tests, two editor smoke tests, nine Make/npm checks and the
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-buffers.json</code>
+        in the matching checkout. On PHP 8.4 static, 39 distinct native
+        SDL tests, two editor smoke tests, nine Make/npm checks and the
         main-module validator pass. Fresh imports and C syntax checks
         pass for PHP 8.0–8.5. Ten new tests cover conversions, retained
         views, native window-surface invalidation, palette replacement,
@@ -1336,9 +1332,9 @@
         accounting returns zero in this build, so those readings are
         unavailable; neither observation establishes leak freedom. The
         complete records are
-        <code>packages/sdl/benchmarks/2026-09-21-geometry-draw-first.json</code>
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-geometry-draw-first.json</code>
         and
-        <code>packages/sdl/benchmarks/2026-09-21-geometry-draw-second.json</code>
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-geometry-draw-second.json</code>
         in the matching checkout. They include raw samples,
         renderer/machine details, load and artifact hashes. Run
         <code>test/perf/sdl/run.mjs</code> in the checkout to repeat the
@@ -1378,7 +1374,7 @@
         cases pass on the matching candidate, with no skips or flaky
         results. Both editor checks, main-module validation, ten
         Make/package checks and JS style also pass.
-        <code>packages/sdl/benchmarks/2026-09-22-malformed-assets.json</code>
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-22-malformed-assets.json</code>
         preserves before/after evidence.
         <code>benchmarks/2026-09-22-malformed-size.json</code> records
         +57 raw bytes, −35 gzip bytes and −2,407 Brotli bytes for the
@@ -1538,8 +1534,8 @@
         leak freedom. Reports include raw samples, frame callback
         execution intervals, native/V8 memory, machine/load, and exact
         artifact/fixture hashes:
-        <code>packages/sdl/benchmarks/2026-09-22-throughput-first.json</code>,
-        <code>packages/sdl/benchmarks/2026-09-22-throughput-second.json</code>.
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-22-throughput-first.json</code>,
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-22-throughput-second.json</code>.
         Use <code>test/perf/sdl/throughput.mjs</code> as described in
         <code>test/perf/sdl/README.md</code>. These runs include the
         mixer cleanup correction. Texture/uniform cases first render the
@@ -1791,7 +1787,7 @@
         <p>The same build passes both editor smoke tests and all nine
         Make/npm checks. Fresh imports and C syntax checks cover PHP
         8.0–8.5. The size record
-        <code>packages/sdl/benchmarks/2026-09-21-streams.json</code>
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-streams.json</code>
         reports +9,261 raw bytes, +414 gzip bytes and -8,370 Brotli
         bytes over the previous surface/buffer build, with matching
         JS/Wasm hashes and unchanged ICU.</p>
@@ -1802,7 +1798,7 @@
         the first batch. Final SDL_ttf shutdown releases the old
         retained fonts. The fixture and records are
         <code>test/perf/sdl/font-lifetimes.mjs</code> and
-        <code>packages/sdl/benchmarks/2026-09-21-font-lifetimes-{first,second}.json</code>.
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-font-lifetimes-{first,second}.json</code>.
         Reserved heap capacity can remain reusable after frees; it is
         recorded separately from live allocations. This fixture does not
         establish performance or leak freedom for other resource
@@ -1839,7 +1835,7 @@
         treated queries as requests to show. Mouse state outputs honor
         typed references and stop at the first exception.</p>
         <p>SDL’s default event target follows the canvas supplied to
-        <code>PhpWeb</code>, including canvases with custom IDs and
+        <code>PhpSdl</code>, including canvases with custom IDs and
         those inside a shadow root. Its DOM ID is preserved; another
         element named <code>canvas</code> does not redirect mouse
         callbacks.</p>
@@ -1861,7 +1857,7 @@
         complete remote PHP/profile matrix and the remaining mixer,
         input/device, rendering remain open; PHP 8.0 serialization
         verification is recorded below.</p>
-        <p><code>packages/sdl/benchmarks/2026-09-21-cursors.json</code>
+        <p><code>packages/php-sdl-wasm/benchmarks/2026-09-21-cursors.json</code>
         records the matching pair: 51,807,175 raw bytes, 13,996,319 gzip
         bytes and 9,545,914 Brotli bytes. Against the stream/font pair,
         the changes are +3,062 raw, +1,069 gzip and +5,323 Brotli bytes;
@@ -1950,7 +1946,7 @@
         bytes (0.030%) and 12,024 Brotli bytes (0.126%) over the cursor
         pair. Combined JS/Wasm totals are 51,828,452 raw, 14,000,556
         gzip and 9,557,938 Brotli bytes; ICU is unchanged.
-        <code>packages/sdl/benchmarks/2026-09-21-audio.json</code>
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-audio.json</code>
         records the matching hashes and identical compression
         settings.</p>
         <p>Two idle runs of
@@ -1995,9 +1991,9 @@
         assets, not mixing throughput or general leak freedom. Raw
         samples, browser settings and asset/artifact hashes are recorded
         in
-        <code>packages/sdl/benchmarks/2026-09-21-audio-lifetimes-first.json</code>
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-audio-lifetimes-first.json</code>
         and
-        <code>packages/sdl/benchmarks/2026-09-21-audio-lifetimes-second.json</code>.
+        <code>packages/php-sdl-wasm/benchmarks/2026-09-21-audio-lifetimes-second.json</code>.
         To repeat it, start the checkout’s
         <code>test/browser/server.mjs</code> harness and run the fixture
         with <code>PHP_VERSION=8.4 LIB_TYPE=static</code>, the two
@@ -2051,7 +2047,7 @@
         counts return to baseline after each batch and reach zero after
         final video/SDL shutdown. The full PHP/profile CI matrix and
         remaining coverage contract are still pending.</p>
-        <p><code>packages/sdl/benchmarks/2026-09-21-windows.json</code>
+        <p><code>packages/php-sdl-wasm/benchmarks/2026-09-21-windows.json</code>
         records the matching JS/Wasm pair and unchanged ICU. Relative to
         the audio build, the window changes add 660 raw bytes (0.0013%),
         988 gzip bytes (0.0071%) and 2,300 Brotli bytes (0.0241%).

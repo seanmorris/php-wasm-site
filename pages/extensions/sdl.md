@@ -3,11 +3,11 @@ title: SDL and OpenGL
 ---
 # SDL and OpenGL
 
-The `_sdl` browser runtime includes SDL2, SDL_image, SDL_mixer, SDL_ttf, and
-OpenGL shader bindings. It supports PHP 8.0–8.5 with static, shared, and dynamic
-library profiles. The SDL PHP extensions are built into this runtime variant;
-they are not separately loaded PHP side modules. The historical `php-wasm-sdl`
-helper remains compatible and returns an empty library list.
+The standalone `php-sdl-wasm` package includes SDL2, SDL_image, SDL_mixer,
+SDL_ttf and OpenGL shader bindings. It supports PHP 8.0–8.5 with static, shared
+and dynamic library profiles. Each versioned entry includes its matching
+runtime and required native libraries. SDL PHP bindings are built into that
+runtime. Neither `php-sdl-wasm` nor `php-wasm` depends on the other package.
 
 The add-ons and cube described here are **unreleased development features**.
 The [initial SDL expansion](https://github.com/seanmorris/php-wasm/commit/f4ae26b5676148f222be5dd65fc65259ba479d06)
@@ -17,8 +17,7 @@ the same checkout. Older published runtimes may provide only core SDL.
 
 ## Select the runtime and canvas
 
-Create a canvas before constructing `PhpWeb`. This example assumes a bundler
-and a static runtime build:
+Create a canvas before constructing `PhpSdl`. This example assumes a bundler:
 
 ```html
 <canvas id="sdl" width="640" height="480" tabindex="0"
@@ -26,11 +25,9 @@ and a static runtime build:
 ```
 
 ```javascript
-import {PhpWeb} from 'php-wasm/PhpWeb.mjs';
+import {PhpSdl} from 'php-sdl-wasm/php8.4-sdl.mjs';
 
-const php = new PhpWeb({
-    version: '8.4',
-    variant: '_sdl',
+const php = new PhpSdl({
     canvas: document.querySelector('#sdl'),
 });
 
@@ -42,15 +39,15 @@ await php.run(`<?php
 `);
 ```
 
-Always serve the matching JavaScript and Wasm files from the same build, along
-with its `.data` file when present. `PhpNode` does not select the `_sdl` variant.
+Serve all generated package files together. The versioned entry loads any
+shared codec libraries and preload data required by its build. You do not
+need separate GD or zlib packages just to start SDL. Additional PHP extensions
+can still be supplied through `sharedLibs`.
 
-Shared image/font codecs also need matching `libpng.so`, `libjpeg.so`,
-`libfreetype.so`, and `libz.so` assets through `sharedLibs`/`locateFile`. These
-support libraries come from `php-wasm-gd` and `php-wasm-zlib`; enabling the PHP
-GD or zlib extensions is not required. Pass manually supplied support libraries
-with `ini: false`. The embedded demo loads these dependencies even when its PHP
-extension toggles are disabled.
+Replace `new PhpWeb({version, variant: '_sdl', ...options})` with
+`new PhpSdl(options)` using the corresponding versioned import. Nonempty
+`variant` options now report a migration error. The former `php-wasm-sdl`
+shim's empty `getLibs()` API is replaced by the dedicated runtime package.
 
 ## Run the textured cube
 
@@ -125,10 +122,10 @@ font/audio notices in `demo-web/public/sdl/LICENSE.txt` when copying assets.
 Use the existing Make targets in the php-wasm checkout:
 
 ```sh
-make web-mjs WITH_SDL=1
+make sdl-mjs
 
 # Keep only core SDL:
-make web-mjs WITH_SDL=1 \
+make sdl-mjs \
     WITH_SDL_IMAGE=0 WITH_SDL_MIXER=0 \
     WITH_SDL_TTF=0 WITH_OPENGL=0
 ```
@@ -419,7 +416,7 @@ queries return arrays with `name`, `flags`, `num_texture_formats`,
 before selecting a rendering path. Draw-color/blend queries and
 `SDL_RenderTargetSupported()` are also available. Status-returning functions
 retain SDL's 0/-1 contract; inspect `SDL_GetError()` on failure. See the
-`packages/sdl/core/php_sdl_geometry.stub.php` in the source checkout for exact argument and
+`packages/php-sdl-wasm/core/php_sdl_geometry.stub.php` in the source checkout for exact argument and
 return types.
 
 `SDL_RenderWindowToLogical($renderer, $windowX, $windowY, &$logicalX, &$logicalY)`
@@ -448,8 +445,8 @@ API supports shaders, programs, uniforms, buffers, vertex arrays, instancing,
 integer attributes, uniform blocks/reflection, textures, depth/stencil and
 multisample renderbuffers, multiple framebuffer outputs, and pixel readback.
 Desktop immediate-mode functions such
-as `glBegin()` are not provided. Use `packages/sdl/opengl/php_webgl.stub.php`
-and the buffer, texture, and matrix rules in `packages/sdl/README.md` from the
+as `glBegin()` are not provided. Use `packages/php-sdl-wasm/opengl/php_webgl.stub.php`
+and the buffer, texture, and matrix rules in `packages/php-sdl-wasm/README.md` from the
 same checkout when porting desktop code. Invalid sizes and offsets raise exceptions before
 native memory access; GL driver errors are available through `glGetError()`.
 
@@ -492,7 +489,7 @@ unit override its texture's sampling state. Samplers follow the same context
 ownership and checked output-reference behavior as the other GL objects.
 
 New WebGL2 operations reject a WebGL1 context with a catchable PHP error. The
-source checkout's `packages/sdl/COVERAGE.md` tracks native verification and the
+source checkout's `packages/php-sdl-wasm/COVERAGE.md` tracks native verification and the
 remaining performance, lifetime and browser behavior work separately.
 
 Image, font, and audio loaders return `null` on native load failures. Check
@@ -562,9 +559,9 @@ JS/Wasm pair is unchanged. Full CI with this fixture correction remains required
 The dated verification sections below retain the results and limits of their
 original builds.
 
-See the source checkout’s `packages/sdl/COVERAGE.md` and
-`packages/sdl/benchmarks/2026-09-22-cleanup{,-size}.json` for the native records;
-`packages/sdl/benchmarks/2026-09-22-ci-regressions.json` records the CI findings
+See the source checkout’s `packages/php-sdl-wasm/COVERAGE.md` and
+`packages/php-sdl-wasm/benchmarks/2026-09-22-cleanup{,-size}.json` for the native records;
+`packages/php-sdl-wasm/benchmarks/2026-09-22-ci-regressions.json` records the CI findings
 and allocation-test correction.
 The coverage document also lists the unverified manual device checks for
 physical input, mobile browsers, hardware GPU/audio and the evidence to collect.
@@ -595,28 +592,28 @@ The subsequent 91-function binding expansion adds 90,571 raw bytes (0.18%),
 static profile. ICU data is unchanged. The JavaScript's raw length is unchanged,
 but its generated glue differs and must stay paired with the matching Wasm.
 Both builds were recompressed with the same Node/zlib versions. See
-`packages/sdl/benchmarks/2026-09-21-bindings.json` in the matching source checkout
+`packages/php-sdl-wasm/benchmarks/2026-09-21-bindings.json` in the matching source checkout
 for hashes and per-file sizes. These are size measurements; the earlier
 startup/FPS results do not measure these binding additions.
 
 The first WebGL2 completion group adds a further 103,176 raw bytes (0.20%)
 or 18,986 gzip bytes (0.14%). Brotli is 2,013 bytes smaller (0.02%). Combined
 JS/Wasm totals are 51,750,021 raw, 13,981,817 gzip and 9,552,310 Brotli bytes;
-ICU is unchanged. See `packages/sdl/benchmarks/2026-09-21-webgl2.json` in the
+ICU is unchanged. See `packages/php-sdl-wasm/benchmarks/2026-09-21-webgl2.json` in the
 matching checkout for artifact hashes and compression settings. These size
 results do not establish throughput or startup performance.
 
 The 28 SDL geometry/batch/state bindings add 32,400 raw bytes (0.06%) or 7,974
 gzip bytes (0.06%) over that WebGL2 group. Brotli is 6,042 bytes smaller (0.06%).
 Combined totals are 51,782,421 raw, 13,989,791 gzip and 9,546,268 Brotli bytes;
-ICU is unchanged. See `packages/sdl/benchmarks/2026-09-21-geometry.json` in the
+ICU is unchanged. See `packages/php-sdl-wasm/benchmarks/2026-09-21-geometry.json` in the
 matching checkout for artifact hashes and compressor settings. The adjacent
 `measure-size.mjs` reproduces the comparison from preserved artifact pairs.
 
 The GL lifetime follow-up adds 1,810 raw bytes (0.0035%), 2,737 gzip bytes
 (0.020%) and 7,424 Brotli bytes (0.078%) over the geometry build. Combined
 JS/Wasm totals are 51,784,231 raw, 13,992,528 gzip and 9,553,692 Brotli bytes;
-ICU is identical. See `packages/sdl/benchmarks/2026-09-21-lifetimes.json` for
+ICU is identical. See `packages/php-sdl-wasm/benchmarks/2026-09-21-lifetimes.json` for
 artifact hashes and compression settings. On PHP 8.4 static, 29 native SDL
 browser tests, two editor smoke tests and nine Make/npm checks pass. C syntax
 checks pass for PHP 8.0–8.5. The seven lifetime tests include browser GPU
@@ -628,7 +625,7 @@ The surface/buffer follow-up adds 10,621 raw bytes (0.021%) and 2,308 gzip
 bytes (0.016%) over the GL lifetime build; Brotli is 4,731 bytes smaller
 (0.050%). Combined totals are 51,794,852 raw, 13,994,836 gzip and 9,548,961
 Brotli bytes. ICU is unchanged. See
-`packages/sdl/benchmarks/2026-09-21-buffers.json` in the matching checkout.
+`packages/php-sdl-wasm/benchmarks/2026-09-21-buffers.json` in the matching checkout.
 On PHP 8.4 static, 39 distinct native SDL tests, two editor smoke tests, nine
 Make/npm checks and the main-module validator pass. Fresh imports and C
 syntax checks pass for PHP 8.0–8.5. Ten new tests cover conversions, retained
@@ -656,8 +653,8 @@ repeated draws; this does not predict game FPS or hardware GPU performance.
 The Wasm heap remained at 128 MiB during these short runs. PHP allocator
 accounting returns zero in this build, so those readings are unavailable;
 neither observation establishes leak freedom. The complete records are
-`packages/sdl/benchmarks/2026-09-21-geometry-draw-first.json` and
-`packages/sdl/benchmarks/2026-09-21-geometry-draw-second.json` in the matching
+`packages/php-sdl-wasm/benchmarks/2026-09-21-geometry-draw-first.json` and
+`packages/php-sdl-wasm/benchmarks/2026-09-21-geometry-draw-second.json` in the matching
 checkout. They include raw samples, renderer/machine details, load and artifact
 hashes. Run `test/perf/sdl/run.mjs` in the checkout to repeat the comparison.
 
@@ -691,7 +688,7 @@ below (VO note 75).
 All four new cases and 32 affected existing audio/stream/cube cases pass on the
 matching candidate, with no skips or flaky results. Both editor checks,
 main-module validation, ten Make/package checks and JS style also pass.
-`packages/sdl/benchmarks/2026-09-22-malformed-assets.json` preserves before/after evidence.
+`packages/php-sdl-wasm/benchmarks/2026-09-22-malformed-assets.json` preserves before/after evidence.
 `benchmarks/2026-09-22-malformed-size.json` records +57 raw bytes, −35 gzip
 bytes and −2,407 Brotli bytes for the matching pair; JS and ICU are unchanged.
 Full PHP/profile remote
@@ -791,8 +788,8 @@ returns to zero. Prepared PHP inputs remain live until request refresh; reserved
 heap capacity is distinct from live allocations. This does not prove general
 leak freedom. Reports include raw samples, frame callback execution intervals,
 native/V8 memory, machine/load, and exact artifact/fixture hashes:
-`packages/sdl/benchmarks/2026-09-22-throughput-first.json`,
-`packages/sdl/benchmarks/2026-09-22-throughput-second.json`.
+`packages/php-sdl-wasm/benchmarks/2026-09-22-throughput-first.json`,
+`packages/php-sdl-wasm/benchmarks/2026-09-22-throughput-second.json`.
 Use `test/perf/sdl/throughput.mjs` as described in `test/perf/sdl/README.md`.
 These runs include the mixer cleanup correction. Texture/uniform cases first
 render the opposite data, so stale state cannot mask a missing update; four
@@ -937,7 +934,7 @@ verification is documented below.
 
 The same build passes both editor smoke tests and all nine Make/npm checks.
 Fresh imports and C syntax checks cover PHP 8.0–8.5. The size record
-`packages/sdl/benchmarks/2026-09-21-streams.json` reports +9,261 raw bytes,
+`packages/php-sdl-wasm/benchmarks/2026-09-21-streams.json` reports +9,261 raw bytes,
 +414 gzip bytes and -8,370 Brotli bytes over the previous surface/buffer build,
 with matching JS/Wasm hashes and unchanged ICU.
 
@@ -946,7 +943,7 @@ Two idle-build font-allocation runs agree: dropping 150 PHP font references left
 runtime leaves no SDL allocations, and its 40-byte live-heap increase stays flat
 after the first batch. Final SDL_ttf shutdown releases the old retained fonts.
 The fixture and records are `test/perf/sdl/font-lifetimes.mjs` and
-`packages/sdl/benchmarks/2026-09-21-font-lifetimes-{first,second}.json`.
+`packages/php-sdl-wasm/benchmarks/2026-09-21-font-lifetimes-{first,second}.json`.
 Reserved heap capacity can remain reusable after frees; it is recorded separately
 from live allocations. This fixture does not establish performance or leak
 freedom for other resource types.
@@ -976,7 +973,7 @@ returns the **previous** visibility. This corrects the earlier bool parameter
 and return value, which accidentally treated queries as requests to show.
 Mouse state outputs honor typed references and stop at the first exception.
 
-SDL's default event target follows the canvas supplied to `PhpWeb`, including
+SDL's default event target follows the canvas supplied to `PhpSdl`, including
 canvases with custom IDs and those inside a shadow root. Its DOM ID is preserved;
 another element named `canvas` does not redirect mouse callbacks.
 
@@ -995,7 +992,7 @@ reference counts, pre-video allocation cleanup, repeated request refresh and GC.
 The complete remote PHP/profile matrix and the remaining mixer, input/device,
 rendering remain open; PHP 8.0 serialization verification is recorded below.
 
-`packages/sdl/benchmarks/2026-09-21-cursors.json` records the matching pair:
+`packages/php-sdl-wasm/benchmarks/2026-09-21-cursors.json` records the matching pair:
 51,807,175 raw bytes, 13,996,319 gzip bytes and 9,545,914 Brotli bytes. Against
 the stream/font pair, the changes are +3,062 raw, +1,069 gzip and +5,323 Brotli
 bytes; ICU is unchanged. These are size measurements, not speed claims.
@@ -1066,7 +1063,7 @@ and broader device/stress work remain pending.
 The audio changes add 21,277 raw bytes (0.041%), 4,237 gzip bytes (0.030%)
 and 12,024 Brotli bytes (0.126%) over the cursor pair. Combined JS/Wasm totals
 are 51,828,452 raw, 14,000,556 gzip and 9,557,938 Brotli bytes; ICU is unchanged.
-`packages/sdl/benchmarks/2026-09-21-audio.json` records the matching hashes and identical
+`packages/php-sdl-wasm/benchmarks/2026-09-21-audio.json` records the matching hashes and identical
 compression settings.
 
 Two idle runs of `test/perf/sdl/audio-lifetimes.mjs` measured three batches of
@@ -1082,8 +1079,8 @@ These are native allocator counts and live dlmalloc bytes; reserved/Wasm
 capacity remains reusable and is recorded separately. The fixture measures
 ownership of these assets, not mixing throughput or general leak freedom.
 Raw samples, browser settings and asset/artifact hashes are recorded in
-`packages/sdl/benchmarks/2026-09-21-audio-lifetimes-first.json` and
-`packages/sdl/benchmarks/2026-09-21-audio-lifetimes-second.json`. To repeat it, start the
+`packages/php-sdl-wasm/benchmarks/2026-09-21-audio-lifetimes-first.json` and
+`packages/php-sdl-wasm/benchmarks/2026-09-21-audio-lifetimes-second.json`. To repeat it, start the
 checkout's `test/browser/server.mjs` harness and run the fixture with
 `PHP_VERSION=8.4 LIB_TYPE=static`, the two staged artifact directories and an
 output JSON path.
@@ -1131,7 +1128,7 @@ SDL allocation counts return to baseline after each batch and reach zero after
 final video/SDL shutdown. The full PHP/profile CI matrix and remaining coverage
 contract are still pending.
 
-`packages/sdl/benchmarks/2026-09-21-windows.json` records the matching JS/Wasm pair and
+`packages/php-sdl-wasm/benchmarks/2026-09-21-windows.json` records the matching JS/Wasm pair and
 unchanged ICU. Relative to the audio build, the window changes add 660 raw
 bytes (0.0013%), 988 gzip bytes (0.0071%) and 2,300 Brotli bytes (0.0241%).
 Combined totals are 51,829,112 raw, 14,001,544 gzip and 9,560,238 Brotli bytes,
