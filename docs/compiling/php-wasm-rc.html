@@ -535,7 +535,7 @@ WITH_FREETYPE=1</code></pre>
         Defaults to <code>OPTIMIZE</code>.</p>
         <hr />
         <h3 id="assertions">ASSERTIONS</h3>
-        <p>0|<strong>1</strong></p>
+        <p><strong>0</strong>|1</p>
         <p>Build with/without assertions.</p>
         <hr />
         <h2 id="extension-flags">Extension Flags</h2>
@@ -562,14 +562,14 @@ WITH_VRZNO     # [0, 1] Enabled by default</code></pre>
         <p>The following extension may be compiled as static, shared or
         dynamic:</p>
         <pre><code>WITH_PHAR      # [0, 1, static, dynamic]
-WITH_LIBXML    # [0, 1, static, shared]
+WITH_LIBXML    # [0, 1, static, shared, dynamic]
 WITH_ICONV     # [0, 1, static, shared, dynamic]
 WITH_SQLITE    # [0, 1, static, shared, dynamic]
 
 WITH_LIBZIP    # [0, 1, static, shared, dynamic]
 WITH_ZLIB      # [0, 1, static, shared, dynamic]
 
-WITH_GD        # [0, 1, static, shared, dynamic]
+WITH_GD        # [0, 1, static, dynamic]
 WITH_LIBPNG    # [0, 1, static, shared]
 WITH_FREETYPE  # [0, 1, static, shared]
 WITH_LIBJPEG   # [0, 1, static, shared]
@@ -577,8 +577,8 @@ WITH_LIBJPEG   # [0, 1, static, shared]
 WITH_YAML      # [0, 1, static, shared, dynamic]
 WITH_TIDY      # [0, 1, static, shared, dynamic]
 WITH_MBSTRING  # [0, 1, static, dynamic]
-WITH_ONIGURUMA # [0, 1, static, shared]
-WITH_OPENSSL   # [0, 1, shared, dynamic]
+WITH_ONIGURUMA # [0, 1, static, shared, dynamic]
+WITH_OPENSSL   # [0, 1, static, shared, dynamic]
 WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         <hr />
         <h3 id="sdl-runtime-options">SDL runtime options</h3>
@@ -651,7 +651,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         produce the extension file <code>php8.x-phar.so</code>.</p>
         <hr />
         <h3 id="with_libxml">WITH_LIBXML</h3>
-        <p>static|<strong>shared</strong></p>
+        <p>static|shared|<strong>dynamic</strong></p>
         <p>This actual <code>php-libxml</code> extension must be
         statically compiled, but <code>libxml</code> itself may be
         loaded as a shared library.</p>
@@ -752,7 +752,7 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         loaded.</p>
         <hr />
         <h3 id="with_openssl">WITH_OPENSSL</h3>
-        <p>shared|<strong>dynamic</strong></p>
+        <p>static|shared|<strong>dynamic</strong></p>
         <p>When compiled as a <code>dynamic</code> extension, this will
         produce the extension <code>php8.x-openssl.so</code>.</p>
         <p>When compiled as a <code>dynamic</code> or
