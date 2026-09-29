@@ -33,7 +33,7 @@ has been removed from that menu.
 
 Use the editor below to write PHP scripts that run right in the page:
 
-<iframe class = "page-demo" src = "https://seanmorris.github.io/php-wasm/embedded-php.html?iframed=1&no-service-worker=1&demo=sdl-sine.php"></iframe>
+<iframe class = "page-demo" src = "https://seanmorris.github.io/php-wasm/embedded-php.html?iframed=1&no-service-worker=1&demo=sdl-cube.php"></iframe>
 
 ### SDL Cube and SDL Sine
 
@@ -54,6 +54,6 @@ The cube fills the preview and adjusts its perspective when it is resized.
 Edited source is shared in the URL's `#code=` fragment, keeping it out of HTTP
 requests; existing `?code=` links still work.
 
-The embedded example above runs the sine demo. See
-[SDL and OpenGL](/extensions/sdl.html) for the cube's source, runtime and
-asset setup, build flags, and error recovery.
+The embedded example above runs the cube; choose **SDL Sine** from its
+**Demo** menu for the smaller example. See [SDL and OpenGL](/extensions/sdl.html)
+for the cube's source, runtime and asset setup, build flags, and error recovery.
