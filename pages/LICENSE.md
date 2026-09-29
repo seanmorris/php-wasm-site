@@ -1,6 +1,11 @@
 ---
 title: LICENSE
 ---
+php-wasm is dual licensed under the Apache License, Version 2.0, reproduced
+below, and the
+[GNU General Public License, Version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html).
+You may use it under the terms of either license.
+
 Apache License
 ==============
 
