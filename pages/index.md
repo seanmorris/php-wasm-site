@@ -76,7 +76,7 @@ Extensions can even be loaded from a CDN like jsDelivr or unpkg, since they're w
 
 Write code that runs on the backend, the frontend, the edge and the service worker. You can even include classes directly from Packagist with a cloud-based autoloader.
 
-<p class = "strong">And, of course, its Open Source.</p>
+<p class = "strong">And, of course, it's Open Source.</p>
 
 Php Wasm is published 100% for free under the Apache License, Version 2.0. This means Php Wasm is and always will be 100% free. Php Wasm is committed to maintaining the free and open nature of the web, and all the tools the project is based on.
 

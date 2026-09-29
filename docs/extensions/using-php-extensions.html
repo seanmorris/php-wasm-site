@@ -503,13 +503,13 @@
         Extensions</h2>
         <p>You can also load extensions modules dynamically:</p>
         <div class="sourceCode" id="cb4"><pre
-        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This will load both sqlite.so &amp; php8.x-sqlite.so:</span></span>
+        class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This will load both libsqlite3.so &amp; php8.x-sqlite.so:</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="im">import</span>(<span class="st">&#39;https://unpkg.com/php-wasm-sqlite&#39;</span>)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
-        <p>Unfortunately, this notation is not available for Service
-        Workers, as they do not yet support dynamic
-        <code>imports()</code>. Hopefully this will change soon.</p>
+        <p>This notation is not available in Service Workers, which do
+        not support dynamic <code>import()</code>. Import the extension
+        module statically or pass its asset URLs instead.</p>
         <h2 id="loading-extensions-manually">Loading extensions
         manually</h2>
         <p>If you want to bypass the helper packages, you can provide
@@ -588,8 +588,8 @@
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">ini</span><span class="op">:</span>  <span class="kw">true</span><span class="op">,</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    {   </span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;sqlite.so&#39;</span><span class="op">,</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/sqlite.so&#39;</span><span class="op">,</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;libsqlite3.so&#39;</span><span class="op">,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/libsqlite3.so&#39;</span><span class="op">,</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">ini</span><span class="op">:</span> <span class="kw">false</span> </span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
@@ -608,7 +608,7 @@
         <div class="sourceCode" id="cb10"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">sharedLibs</span><span class="op">:</span> [</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/php8.4-sqlite.so&#39;</span><span class="op">,</span> <span class="dt">ini</span><span class="op">:</span> <span class="kw">true</span>  }<span class="op">,</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/sqlite.so&#39;</span><span class="op">,</span>        <span class="dt">ini</span><span class="op">:</span> <span class="kw">false</span> }<span class="op">,</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    { <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;https://unpkg.com/php-wasm-sqlite/libsqlite3.so&#39;</span><span class="op">,</span>    <span class="dt">ini</span><span class="op">:</span> <span class="kw">false</span> }<span class="op">,</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>]})<span class="op">;</span></span></code></pre></div>
         <h2 id="extension-list">Extension List</h2>
         <p>The following extensions may be loaded at runtime. This

@@ -990,10 +990,7 @@
         state. Samplers follow the same context ownership and checked
         output-reference behavior as the other GL objects.</p>
         <p>New WebGL2 operations reject a WebGL1 context with a
-        catchable PHP error. The source checkout’s
-        <code>packages/php-sdl-wasm/COVERAGE.md</code> tracks native
-        verification and the remaining performance, lifetime and browser
-        behavior work separately.</p>
+        catchable PHP error.</p>
         <p>Image, font, and audio loaders return <code>null</code> on
         native load failures. Check <code>SDL_GetError()</code>. Free
         surfaces with <code>SDL_FreeSurface()</code>, close fonts with

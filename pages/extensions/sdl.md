@@ -425,9 +425,7 @@ Sampler generation, binding, integer/float setters and deletion let a texture
 unit override its texture's sampling state. Samplers follow the same context
 ownership and checked output-reference behavior as the other GL objects.
 
-New WebGL2 operations reject a WebGL1 context with a catchable PHP error. The
-source checkout's `packages/php-sdl-wasm/COVERAGE.md` tracks native verification and the
-remaining performance, lifetime and browser behavior work separately.
+New WebGL2 operations reject a WebGL1 context with a catchable PHP error.
 
 Image, font, and audio loaders return `null` on native load failures. Check
 `SDL_GetError()`. Free surfaces with `SDL_FreeSurface()`, close fonts with

@@ -64,7 +64,7 @@ Loads shared extensions before boot and writes `extension=...` lines for any ite
 const php = new PhpWeb({
   sharedLibs: [
     { url: 'https://unpkg.com/php-wasm-sqlite/php8.4-sqlite.so', ini: true },
-    { url: 'https://unpkg.com/php-wasm-sqlite/sqlite.so', ini: false },
+    { url: 'https://unpkg.com/php-wasm-sqlite/libsqlite3.so', ini: false },
   ]
 });
 ```

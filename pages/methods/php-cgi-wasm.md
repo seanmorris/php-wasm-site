@@ -40,7 +40,7 @@ const php = new PhpCgiWorker({version: '8.4'});
 const php = new PhpCgiWorker({
     sharedLibs: [
         { url: 'https://unpkg.com/php-wasm-sqlite/php8.4-sqlite.so', ini: true  },
-        { url: 'https://unpkg.com/php-wasm-sqlite/sqlite.so',        ini: false },
+        { url: 'https://unpkg.com/php-wasm-sqlite/libsqlite3.so',    ini: false },
     ]
 });
 ```

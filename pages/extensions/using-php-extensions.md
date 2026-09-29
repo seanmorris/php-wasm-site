@@ -53,13 +53,13 @@ Static builds are the exception for `intl`: they can bundle `icudt72l.dat` direc
 You can also load extensions modules dynamically:
 
 ```javascript
-// This will load both sqlite.so & php8.x-sqlite.so:
+// This will load both libsqlite3.so & php8.x-sqlite.so:
 const php = new PhpWeb({sharedLibs: [
 	await import('https://unpkg.com/php-wasm-sqlite')
 ]});
 ```
 
-Unfortunately, this notation is not available for Service Workers, as they do not yet support dynamic `imports()`. Hopefully this will change soon.
+This notation is not available in Service Workers, which do not support dynamic `import()`. Import the extension module statically or pass its asset URLs instead.
 
 ## Loading extensions manually
 
@@ -138,8 +138,8 @@ const php = new PhpWeb({sharedLibs: [
 		ini:  true,
 	},
 	{	
-		name: 'sqlite.so',
-		url: 'https://unpkg.com/php-wasm-sqlite/sqlite.so',
+		name: 'libsqlite3.so',
+		url: 'https://unpkg.com/php-wasm-sqlite/libsqlite3.so',
 		ini: false 
 	}
 ]});
@@ -160,7 +160,7 @@ Some extensions require supporting libraries. You can provide URLs for those as 
 ```javascript
 const php = new PhpWeb({sharedLibs: [
 	{ url: 'https://unpkg.com/php-wasm-sqlite/php8.4-sqlite.so', ini: true  },
-	{ url: 'https://unpkg.com/php-wasm-sqlite/sqlite.so',        ini: false },
+	{ url: 'https://unpkg.com/php-wasm-sqlite/libsqlite3.so',    ini: false },
 ]});
 ```
 
