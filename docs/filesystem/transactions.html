@@ -446,6 +446,12 @@
         <p>With persistence enabled, browser runtimes synchronize their
         mounted IDBFS storage while holding the
         <code>php-wasm-fs-lock</code> Web Lock.</p>
+        <p>When Web Locks are unavailable, such as on a plain HTTP
+        origin reached by a LAN IP address, browser runtimes fall back
+        to a FIFO lock within the current page or worker. That fallback
+        coordinates runtimes in the same JavaScript realm only. Use
+        HTTPS, where Web Locks are available, when tabs or workers share
+        persistent storage.</p>
         <h2 id="browser-cgi">Browser CGI</h2>
         <p>Queued filesystem calls share a transaction. After the queue
         becomes idle, the wrapper waits up to 25 ms for more work.

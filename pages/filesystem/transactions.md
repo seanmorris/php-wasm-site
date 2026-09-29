@@ -8,6 +8,12 @@ title: Transactions
 With persistence enabled, browser runtimes synchronize their mounted IDBFS
 storage while holding the `php-wasm-fs-lock` Web Lock.
 
+When Web Locks are unavailable, such as on a plain HTTP origin reached by a
+LAN IP address, browser runtimes fall back to a FIFO lock within the current
+page or worker. That fallback coordinates runtimes in the same JavaScript realm
+only. Use HTTPS, where Web Locks are available, when tabs or workers share
+persistent storage.
+
 ## Browser CGI
 
 Queued filesystem calls share a transaction. After the queue becomes idle,

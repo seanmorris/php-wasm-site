@@ -237,8 +237,8 @@ The following extensions may be loaded at runtime. This allows the shared extens
 SDL bindings are built into the standalone `php-sdl-wasm` browser runtime.
 Use `PhpSdl` from a versioned entry such as `php-sdl-wasm/php8.4-sdl.mjs`.
 The package includes its required native libraries and does not depend on
-`php-wasm`. The development build adds SDL_image, SDL_mixer, SDL_ttf, and OpenGL
-shader bindings. See [SDL and OpenGL](/extensions/sdl.html) for availability,
+`php-wasm`. It includes SDL_image, SDL_mixer, SDL_ttf, and OpenGL shader
+bindings. See [SDL and OpenGL](/extensions/sdl.html) for availability,
 canvas setup, migration from the former runtime option, the textured cube,
 and build options.
 
