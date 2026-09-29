@@ -5,7 +5,7 @@ title: CHANGELOG
 
 Changes
 
-## Unreleased
+## v0.2.0
 
 * SDL_mixer now decodes MP3 through its bundled minimp3 implementation. The cube plays the supplied **Unreal Superhero 3** by **Kenët and rez** and displays the artist credit from the file's ID3 tags.
 * Embedded PHP links now store source in the URL fragment, avoiding request-header limits while preserving old query links. The SDL cube fills its preview and adapts its viewport, perspective, and text overlay to resizing without interpolating its pixel-art texture.

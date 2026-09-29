@@ -87,7 +87,7 @@ const php = new PhpNode({version: '8.5'});
 
 Core Node runtimes support both ESM and CommonJS.
 
-For `0.1.0`, use the published entrypoints across the runtime packages.
+For `0.2.0`, use the published entrypoints across the runtime packages.
 
 - `php-wasm/PhpNode`
 - `php-cgi-wasm/PhpCgiNode`
