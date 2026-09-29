@@ -74,7 +74,10 @@ PRELOAD_ASSETS='./php-scripts /some/directory ~/other-dir/example.php /path/to/o
 
 ### PHP_VERSION
 
-8.0|8.1|8.2|8.3|8.4|8.5
+8.0|8.1|8.2|8.3|**8.4**|8.5
+
+PHP 8.0 builds must also set `WITH_PDO_PGLITE=0`, because PDO-PGlite requires
+PHP 8.1 or newer.
 
 ---
 
