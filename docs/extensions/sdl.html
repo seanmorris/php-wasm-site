@@ -495,11 +495,11 @@
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    WITH_SDL_TTF=0 WITH_OPENGL=0</span></code></pre></div>
         <p>The same flags can be set in <a
         href="/compiling/php-wasm-rc.html#sdl-runtime-options"><code>.php-wasm-rc</code></a>
-        for <code>php-wasm-builder build sdl mjs</code> from a builder
-        containing this package. Both commands produce
-        <code>packages/php-sdl-wasm</code> with its matching native
-        runtime, required libraries, and preload data. In a source
-        checkout, <code>SDL_OUTPUT_DIR</code> can override the
+        for <code>php-wasm-builder build sdl mjs</code>
+        (<code>php-wasm-builder</code> 0.2.0 or later). Both commands
+        produce <code>packages/php-sdl-wasm</code> with its matching
+        native runtime, required libraries, and preload data. In a
+        source checkout, <code>SDL_OUTPUT_DIR</code> can override the
         destination; raw native outputs stay in
         <code>.cache/sdl-raw/php&lt;version&gt;</code>.</p>
         <table>

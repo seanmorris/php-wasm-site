@@ -89,8 +89,6 @@ npx php-wasm-builder copy-assets
 
 While `copy-assets` moves existing shared libraries, the `build-assets` command compiles them first, then moves them to PHP_ASSET_DIR.
 
-You can use this with `.php-wasm-rc` to copy assets even if you're not using a custom build.
-
 ```bash
 npx php-wasm-builder build-assets
 ```
@@ -187,8 +185,8 @@ $ php-wasm-builder build web dbg mjs
 
 ## SDL browser runtime
 
-Build the standalone [php-sdl-wasm runtime](/extensions/sdl.html) with a builder
-containing this development package:
+Build the standalone [php-sdl-wasm runtime](/extensions/sdl.html) with
+`php-wasm-builder` 0.2.0 or later:
 
 ```sh
 php-wasm-builder build sdl mjs

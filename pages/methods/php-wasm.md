@@ -15,9 +15,11 @@ microdata:
 The concrete `php-wasm` classes all extend the same base runtime API:
 
 - `PhpWeb`
+- `PhpWorker`
+- `PhpWebview`
 - `PhpNode`
 
-Both accept the same core options bucket, with different defaults for binary loading and filesystem persistence depending on environment.
+They accept the same core options bucket, with different defaults for binary loading and filesystem persistence depending on environment.
 
 ### Common constructor options
 
@@ -25,7 +27,9 @@ Both accept the same core options bucket, with different defaults for binary loa
 
 *string*
 
-Selects the PHP runtime version to load. The current defaults in `source/` are `8.4` for `PhpWeb` and `PhpNode`.
+Selects the PHP runtime version to load. Defaults to `8.4`. `PhpNode` instead
+uses the `PHP_VERSION` environment variable when it names a supported version
+(`8.0`–`8.5`).
 
 ```javascript
 const php = new PhpWeb({version: '8.4'});

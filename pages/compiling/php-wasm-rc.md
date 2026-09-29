@@ -181,9 +181,9 @@ existing static/shared codec libraries. `WITH_ZLIB=0` still supplies the native
 zlib archive when image/font decoding needs it.
 
 To retain only core SDL, set all four add-on flags to `0` in `.php-wasm-rc`, then
-run `php-wasm-builder build sdl mjs` with a builder containing this development
-package. The output in `packages/php-sdl-wasm` includes the required native
-libraries and preload data; keep those files with the runtime.
+run `php-wasm-builder build sdl mjs` with `php-wasm-builder` 0.2.0 or later.
+The output in `packages/php-sdl-wasm` includes the required native libraries
+and preload data; keep those files with the runtime.
 
 ---
 

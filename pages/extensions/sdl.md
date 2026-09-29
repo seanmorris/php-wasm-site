@@ -61,7 +61,7 @@ make sdl-mjs \
 ```
 
 The same flags can be set in [`.php-wasm-rc`](/compiling/php-wasm-rc.html#sdl-runtime-options)
-for `php-wasm-builder build sdl mjs` from a builder containing this package.
+for `php-wasm-builder build sdl mjs` (`php-wasm-builder` 0.2.0 or later).
 Both commands produce `packages/php-sdl-wasm` with its matching native runtime,
 required libraries, and preload data. In a source checkout, `SDL_OUTPUT_DIR`
 can override the destination; raw native outputs stay in `.cache/sdl-raw/php<version>`.

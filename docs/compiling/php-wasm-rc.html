@@ -639,8 +639,8 @@ WITH_INTL      # [0, 1, static, shared, dynamic]</code></pre>
         needs it.</p>
         <p>To retain only core SDL, set all four add-on flags to
         <code>0</code> in <code>.php-wasm-rc</code>, then run
-        <code>php-wasm-builder build sdl mjs</code> with a builder
-        containing this development package. The output in
+        <code>php-wasm-builder build sdl mjs</code> with
+        <code>php-wasm-builder</code> 0.2.0 or later. The output in
         <code>packages/php-sdl-wasm</code> includes the required native
         libraries and preload data; keep those files with the
         runtime.</p>

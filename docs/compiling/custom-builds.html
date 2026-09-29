@@ -544,8 +544,6 @@
         <p>While <code>copy-assets</code> moves existing shared
         libraries, the <code>build-assets</code> command compiles them
         first, then moves them to PHP_ASSET_DIR.</p>
-        <p>You can use this with <code>.php-wasm-rc</code> to copy
-        assets even if you’re not using a custom build.</p>
         <div class="sourceCode" id="cb7"><pre
         class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npx</span> php-wasm-builder build-assets</span></code></pre></div>
         <h3 id="clean">clean</h3>
@@ -604,8 +602,8 @@
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> php-wasm-builder build web dbg mjs</span></code></pre></div>
         <h2 id="sdl-browser-runtime">SDL browser runtime</h2>
         <p>Build the standalone <a
-        href="/extensions/sdl.html">php-sdl-wasm runtime</a> with a
-        builder containing this development package:</p>
+        href="/extensions/sdl.html">php-sdl-wasm runtime</a> with
+        <code>php-wasm-builder</code> 0.2.0 or later:</p>
         <div class="sourceCode" id="cb18"><pre
         class="sourceCode sh"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">php-wasm-builder</span> build sdl mjs</span></code></pre></div>
         <p>This uses the normal Make build and writes the finished

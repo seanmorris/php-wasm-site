@@ -449,18 +449,21 @@
         same base runtime API:</p>
         <ul>
         <li><code>PhpWeb</code></li>
+        <li><code>PhpWorker</code></li>
+        <li><code>PhpWebview</code></li>
         <li><code>PhpNode</code></li>
         </ul>
-        <p>Both accept the same core options bucket, with different
+        <p>They accept the same core options bucket, with different
         defaults for binary loading and filesystem persistence depending
         on environment.</p>
         <h3 id="common-constructor-options">Common constructor
         options</h3>
         <h3 id="version">version</h3>
         <p><em>string</em></p>
-        <p>Selects the PHP runtime version to load. The current defaults
-        in <code>source/</code> are <code>8.4</code> for
-        <code>PhpWeb</code> and <code>PhpNode</code>.</p>
+        <p>Selects the PHP runtime version to load. Defaults to
+        <code>8.4</code>. <code>PhpNode</code> instead uses the
+        <code>PHP_VERSION</code> environment variable when it names a
+        supported version (<code>8.0</code>–<code>8.5</code>).</p>
         <div class="sourceCode" id="cb1"><pre
         class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> php <span class="op">=</span> <span class="kw">new</span> <span class="fu">PhpWeb</span>({<span class="dt">version</span><span class="op">:</span> <span class="st">&#39;8.4&#39;</span>})<span class="op">;</span></span></code></pre></div>
         <h3 id="sdl-runtime-selection">SDL runtime selection</h3>
