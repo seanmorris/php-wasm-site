@@ -10,17 +10,35 @@ storage while holding the `php-wasm-fs-lock` Web Lock.
 
 ## Browser CGI
 
-Each queued filesystem call gets its own transaction. Storage is refreshed
-before the operation. `analyzePath`, `readdir`, `readFile`, and `stat` are
-read-only and do not flush afterward. Mutations wait for persistence before
-their promises resolve or the service worker sends its reply. A persistence
-failure rejects the call, and subsequent operations can still run.
+Queued filesystem calls share a transaction. After the queue becomes idle,
+the wrapper waits up to 25 ms for more work. Storage is refreshed once per
+batch. A batch containing only `analyzePath`, `readdir`, `readFile`, or `stat`
+does not flush; any mutation makes the batch writable. Every call waits for
+the shared commit before its promise resolves or the service worker replies.
+A commit failure rejects every call in the batch. A callback failure still
+allows possible partial writes to be committed and later calls to run.
+The wait keeps the wrapper transaction open, not an IndexedDB transaction.
+IDBFS opens its own database transactions while hydrating or flushing.
 
-Concurrent calls remain separate transactions, including calls started with
-`Promise.all`. For a directory's names and types, request
-`readdir(path, {withFileTypes: true})`: all metadata is read inside that one
-transaction, with one refresh and no flush. File Bus uses this option for VS Code
+Calls submitted together, including through `Promise.all`, can share a batch.
+Sequentially awaited calls create separate batches. Batches commit after 64
+operations or a 250 ms processing window, checked between operations, so
+sustained traffic cannot defer acknowledgments indefinitely. A single slow
+callback is not interrupted. HTTP CGI requests use a separate path and still
+flush after each successful PHP request.
+
+For a directory's names and types, request `readdir(path, {withFileTypes: true})`:
+all metadata is read in one operation. File Bus uses this option for VS Code
 directory expansion and recursive file search when the host supports it.
+
+Browser CGI tracks PHP and filesystem API mutations and commits only changed
+IDBFS records. This includes file contents, metadata, renamed directory trees
+and deletions. A clean mount needs no write transaction. The database format
+stays compatible with existing storage and older IDBFS readers. Hydration still
+reconciles remote changes and uses a direct local-node walk; nested mounts use
+ordinary reconciliation. Failed commits keep their pending changes and retry
+them before a later hydration can replace local state. Symlinks restore their
+own metadata without following or changing their targets.
 
 ## Embedded browser runtimes
 

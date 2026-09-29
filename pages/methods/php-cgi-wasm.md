@@ -216,8 +216,10 @@ const php = new PhpCgiWorker({
 *boolean*
 
 Defaults to `true`. Controls whether queued browser CGI filesystem operations
-start and commit their own transactions. Read-only calls hydrate storage without
-flushing; mutating calls wait for persistence. With `false`, the caller owns
+share automatically managed transactions. The queue waits up to 25 ms after
+becoming idle for more work. Entirely read-only batches hydrate without
+flushing; any mutation makes the batch writable. All calls wait for the batch
+commit. With `false`, the caller owns
 transaction boundaries and coordination. HTTP request synchronization is handled
 separately. See [Transactions](/filesystem/transactions.html).
 
@@ -346,8 +348,11 @@ This will discard the current PHP instance and spin up a brand new one.
 `Array<{name: string, isFolder: boolean}>`. Both forms include `.` and `..`;
 classification follows links and metadata errors reject the call.
 
-With automatic browser transactions enabled, `analyzePath`, `readdir`, `readFile`,
-and `stat` refresh storage before reading and do not flush it afterward. Mutations
-wait for persistence before resolving. Concurrent filesystem calls remain
-separate transactions; a typed directory listing obtains all entry types in one
-call. See [Transactions](/filesystem/transactions.html).
+With automatic browser transactions enabled, concurrent filesystem calls can
+share one refresh and commit. An entirely read-only batch does not flush;
+all calls wait for the shared commit and reject if it fails. The idle batching
+window is 25 ms. Batches commit after 64 operations or a 250 ms processing
+window, checked between callbacks. Sequentially awaited calls use separate
+batches. A typed directory
+listing obtains all entry types in one call. HTTP request synchronization is
+separate. See [Transactions](/filesystem/transactions.html).

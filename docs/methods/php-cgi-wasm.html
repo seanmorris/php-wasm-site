@@ -598,11 +598,13 @@
         <h3 id="autotransaction">autoTransaction</h3>
         <p><em>boolean</em></p>
         <p>Defaults to <code>true</code>. Controls whether queued
-        browser CGI filesystem operations start and commit their own
-        transactions. Read-only calls hydrate storage without flushing;
-        mutating calls wait for persistence. With <code>false</code>,
-        the caller owns transaction boundaries and coordination. HTTP
-        request synchronization is handled separately. See <a
+        browser CGI filesystem operations share automatically managed
+        transactions. The queue waits up to 25 ms after becoming idle
+        for more work. Entirely read-only batches hydrate without
+        flushing; any mutation makes the batch writable. All calls wait
+        for the batch commit. With <code>false</code>, the caller owns
+        transaction boundaries and coordination. HTTP request
+        synchronization is handled separately. See <a
         href="/filesystem/transactions.html">Transactions</a>.</p>
         <h3 id="maxrequestage">maxRequestAge</h3>
         <p><em>number</em></p>
@@ -710,13 +712,15 @@
         Both forms include <code>.</code> and <code>..</code>;
         classification follows links and metadata errors reject the
         call.</p>
-        <p>With automatic browser transactions enabled,
-        <code>analyzePath</code>, <code>readdir</code>,
-        <code>readFile</code>, and <code>stat</code> refresh storage
-        before reading and do not flush it afterward. Mutations wait for
-        persistence before resolving. Concurrent filesystem calls remain
-        separate transactions; a typed directory listing obtains all
-        entry types in one call. See <a
+        <p>With automatic browser transactions enabled, concurrent
+        filesystem calls can share one refresh and commit. An entirely
+        read-only batch does not flush; all calls wait for the shared
+        commit and reject if it fails. The idle batching window is 25
+        ms. Batches commit after 64 operations or a 250 ms processing
+        window, checked between callbacks. Sequentially awaited calls
+        use separate batches. A typed directory listing obtains all
+        entry types in one call. HTTP request synchronization is
+        separate. See <a
         href="/filesystem/transactions.html">Transactions</a>.</p>
 				</article>
 								<nav class = "table-of-contents">
