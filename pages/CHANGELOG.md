@@ -5,7 +5,7 @@ title: CHANGELOG
 
 Changes
 
-## v0.2.0
+## v0.2.0 - Ramifying Sympodia
 
 * Expanded Bun testing to the shared Node/Deno suites, including extensions, documentation, packaging, CLI PHPT cases, CGI HTTP/cookies, and CommonJS/debugger coverage. CI now checks Bun 1.4.0 across PHP 8.0–8.5, all three library profiles, and raw/compressed artifacts, with fast wrapper and build-helper checks before native builds.
 * Fixed embedded-editor highlighting and false EOF diagnostics for indented PHP heredoc/nowdoc endings followed by expressions. Ace syntax validation remains enabled, including errors after the string.
