@@ -383,6 +383,47 @@
         <h2 id="v0.2.0---ramifying-sympodia">v0.2.0 - Ramifying
         Sympodia</h2>
         <ul>
+        <li>Added two runtime packages for PHP 8.0–8.5, neither of which
+        depends on <code>php-wasm</code>. <code>php-sdl-wasm</code> is a
+        standalone browser runtime with SDL2, SDL_image, SDL_mixer,
+        SDL_ttf and OpenGL shader bindings
+        (<code>import { PhpSdl } from 'php-sdl-wasm/php8.4-sdl.mjs'</code>).
+        <code>php-cloud-wasm</code> runs PHP in Cloudflare Workers with
+        Vrzno, zlib/ZIP and PDO-CFD1 for D1
+        (<code>import { PhpCloudflare } from 'php-cloud-wasm/php8.5-cloudflare.mjs'</code>).
+        See the <a href="/extensions/sdl.html">SDL guide</a> and the <a
+        href="/getting-started/php-in-cloudflare.html">Cloudflare
+        guide</a>.</li>
+        <li><strong>Breaking:</strong> SDL has moved out of
+        <code>php-wasm</code>. The package no longer ships the
+        <code>php8.x_sdl-web.mjs</code> runtimes; a nonempty
+        <code>variant</code> option or <code>data-variant</code>
+        script-tag attribute now throws a migration error. Install
+        <code>php-sdl-wasm</code> and replace
+        <code>new PhpWeb({version, variant: '_sdl', ...options})</code>
+        with <code>new PhpSdl(options)</code> from the matching
+        version’s entry. This package also replaces the
+        <code>php-wasm-sdl</code> extension shim.</li>
+        <li>Relicensed from Apache-2.0 to
+        <code>Apache-2.0 OR GPL-2.0-only</code>. The dual license covers
+        the build scripts and wrapper code in every package; compiled
+        binaries (PHP and the bundled libraries) remain under their
+        original licenses. Each package ships <code>LICENSE</code>,
+        <code>LICENSE-GPL</code> and <code>NOTICE</code>.</li>
+        <li>Added <code>make clean-packages</code>, which removes every
+        generated package file while keeping build caches, and
+        <code>make release-overlay RUN_ID=&lt;id&gt;</code>, which
+        cleans the packages and overlays the output of a successful
+        Build Artifacts run for the current commit before publishing.
+        <code>make clean</code> now also removes stale SDL/Cloudflare
+        runtimes, manifests, compressed sidecars and generated test
+        files.</li>
+        <li>Browser CGI in a Service Worker no longer falls back to a
+        synchronous XMLHttpRequest when the Wasm binary fails to load.
+        Service Workers have no XMLHttpRequest, so the fallback replaced
+        the real failure with “XMLHttpRequest is not defined”; startup
+        now reports Emscripten’s own load error. Dedicated workers keep
+        the fallback.</li>
         <li>Expanded Bun testing to the shared Node/Deno suites,
         including extensions, documentation, packaging, CLI PHPT cases,
         CGI HTTP/cookies, and CommonJS/debugger coverage. CI now checks
