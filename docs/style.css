@@ -260,7 +260,7 @@ footer img {
 		font-size: 58pt;
 	}
 
-	ul.links {
+	section.heading .menu--primary > ul {
 		z-index: 100;
 		position: fixed;
 		top: 0;
@@ -276,16 +276,16 @@ footer img {
 		justify-content: center;
 	}
 
-	body.menu-open ul.links {
+	body.menu-open section.heading .menu--primary > ul {
 		transform: translateX(0%);
 	}
 
-	body:not(.menu-open) ul.links {
+	body:not(.menu-open) section.heading .menu--primary > ul {
 		transform: translateX(-100%);
 		/* display: none; */
 	}
 
-	ul.links li {
+	section.heading .menu--primary > ul li {
 		width: 100%;
 		text-align: center;
 		justify-content: center;
@@ -294,7 +294,7 @@ footer img {
 		padding: 1rem;
 	}
 
-	a.cta.button {
+	a.menu-link--cta {
 		font-size: 1.25rem;
 		line-height: 1.125em;
 	}

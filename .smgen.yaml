@@ -1,0 +1,72 @@
+SEARCH_ENABLED: 0
+
+MENUS:
+  primary:
+    label: Primary navigation
+    renderer: flat
+    links:
+      - id: php-wasm.home
+        href: /
+        title: Home
+        weight: 10
+      - page: demos.md
+        title: Demo
+        weight: 20
+      - page: getting-started/home.md
+        title: Docs
+        weight: 30
+      - page: contact.md
+        title: Contact
+        weight: 40
+      - id: php-wasm.github
+        href: https://github.com/seanmorris/php-wasm
+        title: Github
+        icon: github
+        weight: 50
+  header-actions:
+    label: Header actions
+    renderer: flat
+    links:
+      - id: php-wasm.sponsor
+        href: https://github.com/sponsors/seanmorris
+        title: Sponsor
+        variant: cta
+  footer-resources:
+    label: Resources
+    renderer: flat
+    showLabel: true
+    links:
+      - id: php-wasm.issues
+        href: https://github.com/seanmorris/php-wasm/issues
+        title: Issue Tracker
+        weight: 10
+      - id: php-wasm.discussions
+        href: https://github.com/seanmorris/php-wasm/discussions
+        title: GitHub Discussions
+        weight: 20
+  footer-contact:
+    label: Contact
+    renderer: flat
+    showLabel: true
+    links:
+      - id: php-wasm.footer-sponsor
+        href: https://github.com/sponsors/seanmorris
+        title: Sponsor
+        weight: 10
+      - id: php-wasm.footer-github
+        href: https://github.com/seanmorris/php-wasm
+        title: Github
+        weight: 20
+      - id: php-wasm.discord
+        href: https://discord.com/invite/j8VZzju7gJ
+        title: Discord
+        weight: 30
+      - id: php-wasm.npm
+        href: https://www.npmjs.com/package/php-wasm
+        title: npmjs
+        weight: 40
+MENU_REGIONS:
+  header-links: [primary]
+  header-actions: [header-actions]
+  sidebar: [sidebar]
+  footer: [footer-resources, footer-contact]

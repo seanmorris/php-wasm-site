@@ -1,7 +1,6 @@
 <?php
 
 $frontmatter = $frontmatter ?? yaml_parse(`yq --front-matter=extract $argv[1] 2>/dev/null || echo ""`) ?? [];
-$leftBarLink = $frontmatter['leftBarLink'] ?? TRUE;
 $leftBarShow = $frontmatter['leftBarShow'] ?? TRUE;
 $itemtype = $frontmatter['itemtype'] ?? NULL;
 $microdata = $frontmatter['microdata'] ?? [];
@@ -91,33 +90,6 @@ $endif$
 	<?php endforeach; ?>
 </head>
 <body>
-	<!-- <div class = "nag-bar" id = "nag-bar">
-		<div class = "page-rule">
-			<div class = "row">
-				<div class = "prose">
-					<p><strong>I am giving up my bed for one night.</strong></p>
-
-					<p>My Sleep Out helps youth facing homelessness find safe shelter and loving care at Covenant House. That care includes essential services like education, job training, medical care, mental health and substance use counseling, and legal aid — everything they need to build independent, sustainable futures.</p>
-
-					<p>By supporting my Sleep Out, you are supporting the dreams of young people overcoming homelessness.</p>
-
-					<p>Together, we are working towards a future where every young person has a safe place to sleep.</p>
-
-					<p>Thank you.</p>
-				</div>
-				<div class = "col center">
-					<a href = "https://www.sleepout.org/participants/62915">
-						<span class = "button">DONATE NOW</span>
-					</a>
-					<a href = "https://www.sleepout.org/participants/62915">
-						<img src = "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fwww.sleepout.org%2Fapi%2F1.3%2Fparticipants%2F62915%3F_%3D1760039017428&query=%24.sumDonations&prefix=%24&suffix=%20Raised&style=for-the-badge&label=Sleep%20Out%3A%20NYC&link=https%3A%2F%2Fwww.sleepout.org%2Fparticipants%2F62915&color=0677ff">
-					</a>
-				</div>
-			</div>
-			<div class = "close-button" id = "close-nag"></div>
-			<div class = "open-button" id = "open-nag"></div>
-		</div>
-	</div> -->
 	<section class = "heading">
 		<div class = "page-rule">
 			<nav>
@@ -125,17 +97,8 @@ $endif$
 					<a href = "/"><img src = "/logo-80.webp" width = "304" height = "82" alt = "php/wasm logo" /></a>
 				</div>
 				<div class = "spacer"></div>
-				<ul class = "links">
-					<li><a href = "/">Home</a></li>
-					<li><a href = "/demos.html">Demo</a></li>
-					<li><a href = "/getting-started/home.html">Docs</a></li>
-					<li><a href = "/contact.html">Contact</a></li>
-					<li>
-						<a href = "https://github.com/seanmorris/php-wasm">Github</a>
-						<a href = "https://github.com/seanmorris/php-wasm"><img src = "/github-icon.png" alt = "Github icon" width = "37" height = "37" ></a>
-					</li>
-				</ul>
-				<a href = "https://github.com/sponsors/seanmorris" class = "cta button">Sponsor</a>
+				<?php renderMenuRegion('header-links'); ?>
+				<?php renderMenuRegion('header-actions'); ?>
 				<div class = "hamburger-button" id = "burgerButton" data-open = "false">
 					<div class = "burger-bar"></div>
 					<div class = "burger-bar"></div>
@@ -169,19 +132,7 @@ $endif$
 	<footer class="footer">
 		<p class ="strong larger">PHP WASM</p>
 
-		<p class ="strong">Resources</p>
-		<ul>
-			<li><a href="https://github.com/seanmorris/php-wasm/issues">Issue Tracker</a></li>
-			<li><a href="https://github.com/seanmorris/php-wasm/discussions">GitHub Discussions</a></li>
-		</ul>
-
-		<p class ="strong">Contact</p>
-		<ul>
-			<li><a href = "https://github.com/sponsors/seanmorris">Sponsor</a></li>
-			<li><a href="https://github.com/seanmorris/php-wasm">Github</a></li>
-			<li><a href="https://discord.com/invite/j8VZzju7gJ">Discord</a></li>
-			<li><a href="https://www.npmjs.com/package/php-wasm">npmjs</a></li>
-		</ul>
+		<nav class="footer-menus"><?php renderMenuRegion('footer'); ?></nav>
 
 		<p class ="strong">About</p>
 		<p>&copy; 2024 - <?=date('Y');?> Sean Morris | <a href="/LICENSE.html">License</a></p>

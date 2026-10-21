@@ -27,7 +27,6 @@ END
 
 SCRIPTS=$( cat <<-END
 	/main.js
-	/nag-bar.js
 	/nav-state.js
 END
 )

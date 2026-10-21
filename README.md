@@ -38,3 +38,15 @@ Preview the generated site with:
 ```sh
 ./serve.sh
 ```
+
+Header, sidebar, and footer links are declared as named menus in `.smgen.yaml`.
+The generated markup remains static; only the existing hamburger and sidebar state
+scripts run in the browser.
+
+Run the navigation regression after menu or template changes:
+
+```sh
+./tests/navigation.sh
+```
+
+Set `SMGEN_BIN` when testing against a local SMGen checkout.

@@ -71,7 +71,7 @@ section.below-fold nav ul {
 	padding: 0;
 }
 
-section.below-fold nav.main > ul {
+section.below-fold nav.main > .menu > ul {
 	margin-left: 0 !important;
 }
 
@@ -177,4 +177,18 @@ span.higlight {
 	color: #080e1b;
 	border-radius: 3px;
 	font-weight: bold;
+}
+
+.footer .footer-menus {
+    display: block;
+}
+
+.footer .menu-title {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+}
+
+.footer .menu > ul {
+    margin-top: 0;
 }
